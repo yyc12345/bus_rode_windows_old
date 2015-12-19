@@ -1,0 +1,12 @@
+line-select_stop_point需要外部实现
+line,stop-describe需要外部实现
+systems，ui开启关闭实事资源-获取实事资源需要实现，已注释
+无资源状态各个控件的适应
+用类库解决资源安全合法检测
+
+在外部每次刷新bus_line界面时，，如此做
+        ui_form_line_have_stop_list.ItemsSource = Nothing
+        ui_form_line_subway_list.ItemsSource = Nothing
+刷新语句
+        ui_form_line_have_stop_list.ItemsSource = ui_connet_core_form_line_have_sotp_list
+        ui_form_line_subway_list.ItemsSource = ui_connet_core_form_line_subway_list

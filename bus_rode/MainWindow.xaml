@@ -1,0 +1,2215 @@
+﻿<Window x:Class="MainWindow" x:Name="ui_bus_rode_main_window"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="bus_rode 8" Height="600" Width="800" FontFamily="Microsoft YaHei UI Light" WindowStyle="None" 
+        AllowsTransparency="True" MinHeight="600" MinWidth="800" TextOptions.TextFormattingMode="Display" 
+        Icon="bus_rode_icon.ico" x:FieldModifier="Public">
+    <!-- 要阴影在上面加 BorderThickness="10"-->
+    <Window.Background>
+        <ImageBrush ImageSource="background.jpg" />
+    </Window.Background>
+    <!-- 要阴影取消注释，但是界面会出现一点问题，为了专注性，不加阴影-->
+    <!--<Window.Effect>
+        <DropShadowEffect BlurRadius="10" Color="#FF858484" Direction="90" ShadowDepth="3" />
+    </Window.Effect>-->
+
+    <!--主窗体标题与客户区-->
+    <Grid x:Name="ui_main_user_area">
+        <Grid.RowDefinitions >
+            <!-- 标题-->
+            <RowDefinition Height="30"/>
+            <!-- 客户区-->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 标题-->
+        <Grid Grid.Row="0" MouseDown="window_move">
+            <!-- 背景颜色-->
+            <Grid.Background>
+                <SolidColorBrush x:Name="ui_color_4" Color="#8f0000ff"/>
+            </Grid.Background>
+
+            <!-- 标题栏分区-->
+            <Grid.ColumnDefinitions >
+                <!-- 2个功能按钮-->
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+
+                <!-- 标题文字-->
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+
+                <!-- 时间-->
+                <ColumnDefinition Width=" Auto"/>
+
+                <!-- 消息中心-->
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition x:Name="ui_title_msg_column_1" Width="30"/>
+                <ColumnDefinition x:Name="ui_title_msg_column_2" Width="Auto"/>
+                <ColumnDefinition x:Name="ui_title_msg_column_3" Width="15"/>
+
+                <!-- 最小化 最大化 关闭-->
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" x:Name="ui_title_back_btn">
+                <Grid.Background >
+                    <SolidColorBrush x:Name="ui_title_back_btn_color" Color="#b48f8f8f"/>
+                </Grid.Background>
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Grid.Background >
+                        <ImageBrush ImageSource="photo\left.png" />
+                    </Grid.Background>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" x:Name="ui_title_menu_btn">
+                <Grid.Background>
+                    <SolidColorBrush x:Name="ui_title_menu_btn_color" Color="#b48f8f8f"/>
+                </Grid.Background>
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Grid.Background >
+                        <ImageBrush ImageSource="photo\menu.png" />
+                    </Grid.Background>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height=" *"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="ui_window_title" Grid.Column="1" Grid.Row="1" Text="bus_rode" FontSize="15" Foreground="white"/>
+            </Grid>
+
+            <Grid Grid.Column="5">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height=" *"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="ui_title_time" Grid.Column="1" Grid.Row="1" Text="00:00" FontSize="15" Foreground="white"/>
+            </Grid>
+
+            <Grid Grid.Column="7" MouseDown="ui_function_message">
+                <Grid.Background>
+                    <ImageBrush ImageSource="photo\message.png"/>
+                </Grid.Background>
+            </Grid>
+
+            <Grid Grid.Column="8">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height=" *"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="ui_title_msg_count" Grid.Column="1" Grid.Row="1" Text="0" FontSize="15" Foreground="white"/>
+            </Grid>
+
+            <Grid Grid.Column="10" MouseDown="window_behind">
+                <Grid.Background>
+                    <ImageBrush ImageSource="photo\behind.png"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Column="11" x:Name="ui_title_max_btn">
+                <Grid.Background>
+                    <ImageBrush ImageSource="photo\max.png"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Column="12" MouseDown="window_exit">
+                <Grid.Background>
+                    <ImageBrush ImageSource="photo\close.png"/>
+                </Grid.Background>
+            </Grid>
+
+        </Grid>
+
+        <!-- 客户区-->
+        <Canvas Grid.Row="1" Background="#5f000000" x:Name="ui_user_area">
+
+            <!-- 开始界面-->
+            <Grid x:Name="ui_form_start" Width="800" Height="570" Canvas.Top="0" Canvas.Left="0">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- 不发行版本标示-->
+                <Grid Grid.Column="5" Grid.ColumnSpan="4" Grid.Row="3">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="ui_form_start_secreat_text" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" TextAlignment="Center"/>
+                </Grid>
+
+                <!-- 线路-->
+                <TextBlock Grid.Row="2" Grid.Column="1" Foreground="White" FontSize="25" Text="线路" TextAlignment="Center"/>
+                <Grid Grid.Row="1" Grid.Column="1" x:Name="ui_form_start_btn_1_goto">
+
+                    <Ellipse Stroke="white" Margin="25,25,25,25">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="ui_color_5_1" Color="#6f0000ff"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <Ellipse Margin="25,25,25,25" x:Name="ui_form_start_btn_1">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="ui_color_5_2" Color="#6f0000ff"/>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+
+                    <Grid Margin="25,25,25,25">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="photo\line.png"/>
+                        </Grid.Background>
+                    </Grid>
+
+                    <!-- 动画-->
+                    <Grid.Triggers >
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard >
+                                <Storyboard >
+                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_1" Storyboard.TargetProperty="Margin"
+                                                     From="25,25,25,25" To="0,0,0,0" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard >
+                                <Storyboard >
+                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_1" Storyboard.TargetProperty="Margin"
+                                                     From="0,0,0,0" To="25,25,25,25" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                </Grid>
+                <!-- 车站-->
+                <TextBlock Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="25" Text="车站" TextAlignment="Center"/>
+                <Grid Grid.Row="1" Grid.Column="3" x:Name="ui_form_start_btn_2_goto">
+
+                    <Ellipse Stroke="white" Margin="25,25,25,25">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="ui_color_6_1" Color="#6f0000ff"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <Ellipse Margin="25,25,25,25" x:Name="ui_form_start_btn_2">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="ui_color_6_2" Color="#6f0000ff"/>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+
+                    <Grid Margin="25,25,25,25">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="photo\stop.png"/>
+                        </Grid.Background>
+                    </Grid>
+
+                    <!-- 动画-->
+                    <Grid.Triggers >
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard >
+                                <Storyboard >
+                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_2" Storyboard.TargetProperty="Margin"
+                                                     From="25,25,25,25" To="0,0,0,0" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard >
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_2" Storyboard.TargetProperty="Margin"
+                                                     From="0,0,0,0" To="25,25,25,25" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                </Grid>
+                <!-- 设置-->
+                <TextBlock Grid.Row="2" Grid.Column="5" Foreground="White" FontSize="25" Text="设置" TextAlignment="Center"/>
+                <Grid Grid.Row="1" Grid.Column="5" x:Name="ui_form_start_btn_3_goto">
+
+                    <Ellipse Stroke="white" Margin="25,25,25,25">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="ui_color_7_1" Color="#6f0000ff"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <Ellipse Margin="25,25,25,25" x:Name="ui_form_start_btn_3">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="ui_color_7_2" Color="#6f0000ff"/>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+
+                    <Grid Margin="25,25,25,25">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="photo\contorl.png"/>
+                        </Grid.Background>
+                    </Grid>
+
+                    <!-- 动画-->
+                    <Grid.Triggers >
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard >
+                                <Storyboard >
+                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_3" Storyboard.TargetProperty="Margin"
+                                                     From="25,25,25,25" To="0,0,0,0" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard >
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_3" Storyboard.TargetProperty="Margin"
+                                                     From="0,0,0,0" To="25,25,25,25" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                </Grid>
+                <!-- 关于-->
+                <TextBlock Grid.Row="2" Grid.Column="7" Foreground="White" FontSize="25" Text="关于" TextAlignment="Center"/>
+                <Grid Grid.Row="1" Grid.Column="7" x:Name="ui_form_start_btn_4_goto">
+
+                    <Ellipse Stroke="white" Margin="25,25,25,25">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="ui_color_8_1" Color="#6f0000ff"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <Ellipse Margin="25,25,25,25" x:Name="ui_form_start_btn_4">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="ui_color_8_2" Color="#6f0000ff"/>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+
+                    <Grid Margin="25,25,25,25">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="photo\about.png"/>
+                        </Grid.Background>
+                    </Grid>
+
+                    <!-- 动画-->
+                    <Grid.Triggers >
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard >
+                                <Storyboard >
+                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_4" Storyboard.TargetProperty="Margin"
+                                                     From="25,25,25,25" To="0,0,0,0" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard >
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_4" Storyboard.TargetProperty="Margin"
+                                                     From="0,0,0,0" To="25,25,25,25" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                </Grid>
+
+            </Grid>
+
+
+            <!-- 线路界面-->
+            <Grid x:Name="ui_form_line" Width="800" Height="570" Canvas.Top="0" Canvas.Left="-800">
+
+                <Grid.RowDefinitions >
+                    <!-- 空白-->
+                    <RowDefinition Height="20"/>
+                    <!-- 车辆描述-->
+                    <RowDefinition Height="*"/>
+                    <!-- 空白-->
+                    <RowDefinition Height="20"/>
+
+                    <!-- 切换上下行-->
+                    <RowDefinition Height="30"/>
+                    <!-- 空白-->
+                    <RowDefinition Height="5"/>
+                    <!-- 线路中的站台列表-->
+                    <RowDefinition Height="100"/>
+                    <!-- 空白-->
+                    <RowDefinition Height="10"/>
+
+                    <!-- 地铁线路中每一个站点中的出口列表-->
+                    <RowDefinition Height="100"/>
+
+                    <!-- 空白-->
+                    <RowDefinition Height="20"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="ui_form_line_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="没有描述" x:FieldModifier="public"/>
+
+                <!-- 切换上下行-->
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition x:Name="ui_form_line_form_re_mid_bus_width" Width="0"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 上行-->
+                    <Grid Grid.Column="1" MouseDown="ui_form_line_select_up_line_fx">
+                        <Grid.Background >
+                            <SolidColorBrush x:Name="ui_form_line_select_up_line" Color="#8f0000ff"/>
+                        </Grid.Background>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="上行线路"/>
+                        <Rectangle Fill="#00000000" Stroke="White" Grid.RowSpan="3" StrokeThickness="2"/>
+
+                    </Grid>
+
+                    <!-- 下行-->
+                    <Grid Grid.Column="2" MouseDown="ui_form_line_select_down_line_fx">
+                        <Grid.Background >
+                            <SolidColorBrush x:Name="ui_form_line_select_down_line" Color="#00000000"/>
+                        </Grid.Background>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="下行线路"/>
+                        <Rectangle Fill="#00000000" Stroke="White" Grid.RowSpan="3" StrokeThickness="2"/>
+
+                    </Grid>
+
+                    <!-- 刷新-->
+                    <Grid Grid.Column="4">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Column="0" Grid.RowSpan="3">
+                            <Grid.Background >
+                                <ImageBrush ImageSource="photo\re.png"/>
+                            </Grid.Background>
+                        </Grid>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" Background="#00000000" FontSize="15" Text="正在刷新实时车辆数据"/>
+
+                    </Grid>
+
+                </Grid>
+
+                <!-- 车辆含有站台列表 -->
+                <!-- 底部的覆盖线-->
+                <Grid Grid.Column="1" Grid.Row="5">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="11"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="8"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="1" Background="White" />
+                </Grid>
+                <!-- 真正的列表-->
+                <ListBox x:Name="ui_form_line_have_stop_list" ItemTemplate ="{StaticResource ui_temp_form_line_have_stop_list}" Grid.Column="1" Grid.Row="5" Background="#00000000" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+
+                <!-- 地铁线路出口列表 -->
+                <ListBox x:Name="ui_form_line_subway_list" ItemTemplate="{StaticResource ui_temp_form_line_subway_list}" Grid.Column="1" Grid.Row="7" Background="#00000000" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+
+            </Grid>
+
+            <!-- 线路界面的控制界面-->
+            <Grid x:Name="ui_form_line_contorl" Width="300" Height="570" Canvas.Top="0" Canvas.Left="-300">
+                <!-- 背景颜色-->
+                <Grid.Background>
+                    <SolidColorBrush x:Name="ui_color_1" Color="#8f0000ff"/>
+                </Grid.Background>
+
+                <Grid.RowDefinitions >
+
+                    <!-- 标题分页-->
+                    <RowDefinition Height="50"/>
+                    <!-- 选中时的下滑条-->
+                    <RowDefinition Height="2"/>
+
+                    <RowDefinition Height="10"/>
+                    <!-- 内容区-->
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width=" 20"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width=" 20"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 模板-->
+                <Grid Grid.Column="1" Grid.Row="0" MouseDown="ui_function_line_contorl_left_btn">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width=" auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height=" *"/>
+                        <RowDefinition Height=" auto"/>
+                        <RowDefinition Height=" *"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="线路列表"/>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="0" MouseDown="ui_function_line_contorl_right_btn">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width=" auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height=" *"/>
+                        <RowDefinition Height=" auto"/>
+                        <RowDefinition Height=" *"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="搜索站台"/>
+                </Grid>
+
+                <Grid x:Name="ui_form_line_contorl_left_grid" Grid.Column="1" Grid.Row="1">
+                    <Grid.Background >
+                        <SolidColorBrush x:Name="ui_form_line_contorl_left_grid_color" Color="#ffffffff"/>
+                    </Grid.Background>
+                </Grid>
+                <Grid x:Name="ui_form_line_contorl_right_grid" Grid.Column="2" Grid.Row="1">
+                    <Grid.Background >
+                        <SolidColorBrush x:Name="ui_form_line_contorl_right_grid_color" Color="#00000000"/>
+                    </Grid.Background>
+                </Grid>
+
+                <!-- 承载面板 高=控制窗体高-75 默认495-->
+                <Canvas Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3">
+
+                    <!-- 线路列表-->
+                    <Grid x:Name="ui_form_line_contorl_left_form" Canvas.Top="0" Canvas.Left="0" Width="260" Height="495">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid >
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height=" *"/>
+                                    <RowDefinition Height=" auto"/>
+                                    <RowDefinition Height=" *"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBox Grid.Row="1" x:Name="ui_form_line_contorl_left_form_textbox" Background="#00000000" Foreground="white" FontSize="15" BorderThickness="0,0,0,1" BorderBrush="white"/>
+                            </Grid>
+
+                            <Grid Grid.Column="2" MouseDown="ui_line_contorl_left_function">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\search.png"/>
+                                </Grid.Background>
+                                <Ellipse Fill="#00000000" Stroke="white"/>
+                            </Grid>
+                        </Grid>
+
+                        <!-- 线路列表-->
+                        <ListBox x:Name="ui_form_line_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_line_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0"/>
+
+
+                    </Grid>
+
+                    <!-- 搜索站台-->
+                    <Grid x:Name="ui_form_line_contorl_right_form" Canvas.Top="0" Canvas.Left="-280" Width="260" Height="495">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid >
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height=" *"/>
+                                    <RowDefinition Height=" auto"/>
+                                    <RowDefinition Height=" *"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBox Grid.Row="1" x:Name="ui_form_line_contorl_right_form_textbox" Background="#00000000" Foreground="white" FontSize="15" BorderThickness="0,0,0,1" BorderBrush="white"/>
+                            </Grid>
+
+
+                            <Grid Grid.Column="2" MouseDown="ui_form_line_contorl_right_function">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\search.png"/>
+                                </Grid.Background>
+                                <Ellipse Fill=" #00000000" Stroke="White" />
+                            </Grid>
+                        </Grid>
+
+                        <!-- 搜索站台列表-->
+                        <ListBox x:Name="ui_form_line_stop_search_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_line_search_stop_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0"/>
+
+
+                    </Grid>
+
+                </Canvas>
+
+            </Grid>
+
+
+            <!-- 车站界面-->
+            <Grid x:Name="ui_form_stop" Width="800" Height="570" Canvas.Top="0" Canvas.Left="-800">
+
+                <Grid.RowDefinitions >
+                    <!-- 空白-->
+                    <RowDefinition Height="40"/>
+                    <!-- 车辆描述-->
+                    <RowDefinition Height="*"/>
+                    <!-- 空白-->
+                    <RowDefinition Height="20"/>
+                    <!-- 下部显示区-->
+                    <RowDefinition Height="2*"/>
+
+                    <!-- 空白-->
+                    <RowDefinition Height="20"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="ui_form_stop_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="没有描述" x:FieldModifier="public"/>
+
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+
+                        <!-- 文字区-->
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- 站点-->
+                    <Ellipse Grid.Column="2" Grid.Row="1" Fill="white"/>
+
+                    <!-- 连线-->
+                    <Grid Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1" Background="white"/>
+                    </Grid>
+
+                    <!-- 中央站台文字-->
+                    <Grid Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width=" auto"/>
+                            <ColumnDefinition Width=" *"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="ui_form_stop_middle_stop_name" Foreground="white" FontSize="15" Text="没有站台名" Grid.Column="1"/>
+                    </Grid>
+
+                    <!-- 左侧列表-->
+                    <ListBox x:Name="ui_form_stop_left_cross_line_list" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Background="#00000000" ItemTemplate="{StaticResource ui_temp_form_stop_cross_line_list}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0,0,3,0" BorderBrush="White" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                    <!-- 右侧列表-->
+                    <ListBox x:Name="ui_form_stop_right_cross_line_list" Grid.Column="4" Grid.Row="0" Grid.RowSpan="4" Background="#00000000" ItemTemplate="{StaticResource ui_temp_form_stop_cross_line_list}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="3,0,0,0" BorderBrush="White" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                </Grid>
+
+            </Grid>
+
+            <!-- 车站界面的控制界面-->
+            <Grid x:Name="ui_form_stop_contorl" Width="300" Height="570" Canvas.Top="0" Canvas.Left="-300">
+                <!-- 背景颜色-->
+                <Grid.Background>
+                    <SolidColorBrush x:Name="ui_color_2" Color="#8f0000ff"/>
+                </Grid.Background>
+
+                <Grid.RowDefinitions >
+
+                    <!-- 标题分页-->
+                    <RowDefinition Height="50"/>
+                    <!-- 选中时的下滑条-->
+                    <RowDefinition Height="2"/>
+
+                    <RowDefinition Height="10"/>
+                    <!-- 内容区-->
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width=" 20"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width=" 20"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 模板-->
+                <Grid Grid.Column="1" Grid.Row="0" MouseDown="ui_function_stop_contorl_left_btn">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width=" auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height=" *"/>
+                        <RowDefinition Height=" auto"/>
+                        <RowDefinition Height=" *"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="站台列表"/>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="0" MouseDown="ui_function_stop_contorl_right_btn">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width=" auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height=" *"/>
+                        <RowDefinition Height=" auto"/>
+                        <RowDefinition Height=" *"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="换乘规划"/>
+                </Grid>
+
+                <Grid x:Name="ui_form_stop_contorl_left_grid" Grid.Column="1" Grid.Row="1">
+                    <Grid.Background >
+                        <SolidColorBrush x:Name="ui_form_stop_contorl_left_grid_color" Color="#ffffffff"/>
+                    </Grid.Background>
+                </Grid>
+                <Grid x:Name="ui_form_stop_contorl_right_grid" Grid.Column="2" Grid.Row="1">
+                    <Grid.Background >
+                        <SolidColorBrush x:Name="ui_form_stop_contorl_right_grid_color" Color="#00000000"/>
+                    </Grid.Background>
+                </Grid>
+
+                <!-- 承载面板 高=控制窗体高-75 默认495-->
+                <Canvas Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3">
+
+                    <!-- 站台列表-->
+                    <Grid x:Name="ui_form_stop_contorl_left_form" Canvas.Top="0" Canvas.Left="0" Width="260" Height="495">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid >
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height=" *"/>
+                                    <RowDefinition Height=" auto"/>
+                                    <RowDefinition Height=" *"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBox Grid.Row="1" x:Name="ui_form_stop_contorl_left_form_textbox" Background="#00000000" Foreground="white" FontSize="15" BorderThickness="0,0,0,1" BorderBrush="white"/>
+                            </Grid>
+
+
+                            <Grid Grid.Column="2" MouseDown="ui_stop_contorl_left_function">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\search.png"/>
+                                </Grid.Background>
+                                <Ellipse Fill=" #00000000" Stroke="White" />
+                            </Grid>
+                        </Grid>
+
+                        <!-- 太多显示不了的提示-->
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width=" *"/>
+                                <ColumnDefinition Width=" auto"/>
+                                <ColumnDefinition Width=" *"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height=" *"/>
+                                <RowDefinition Height=" auto"/>
+                                <RowDefinition Height=" *"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel x:Name="ui_form_stop_contorl_full_list" Grid.Column="1" Grid.Row="1">
+                                <TextBlock Foreground="white" FontSize="15" Text="站台数目过多不能显示" TextAlignment="Center"/>
+                                <TextBlock Foreground="white" FontSize="15" Text="请在搜索框内输入文字查找站台" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- 站台列表-->
+                        <ListBox x:Name="ui_form_stop_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_stop_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0"/>
+
+
+                    </Grid>
+
+                    <!-- 换乘规划-->
+                    <Grid x:Name="ui_form_stop_contorl_right_form" Canvas.Top="0" Canvas.Left="-280" Width="260" Height="495">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- 查询按钮-->
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width=" *"/>
+                                <ColumnDefinition Width=" *"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- 本地-->
+                            <Grid Grid.Column="0" MouseDown="ui_form_stop_short_line_search_function">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width=" 30"/>
+                                    <ColumnDefinition Width=" *"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- 图标-->
+                                <Grid Grid.Column="0">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="photo\search.png"/>
+                                    </Grid.Background>
+
+                                    <Ellipse Fill=" #00000000" Stroke="White" />
+                                </Grid>
+                                <!-- 文字-->
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width=" *"/>
+                                        <ColumnDefinition Width=" auto"/>
+                                        <ColumnDefinition Width=" *"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" auto"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Foreground="White" FontSize=" 15" Grid.Column="1" Grid.Row="1" Text="本地规划"/>
+                                </Grid>
+                            </Grid>
+
+                            <!-- 联网-->
+                            <Grid Grid.Column="1" MouseDown="ui_form_stop_short_line_search_web_function">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width=" 30"/>
+                                    <ColumnDefinition Width=" *"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- 图标-->
+                                <Grid Grid.Column="0">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="photo\network.png"/>
+                                    </Grid.Background>
+
+                                    <Ellipse Fill=" #00000000" Stroke="White" />
+                                </Grid>
+                                <!-- 文字-->
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width=" *"/>
+                                        <ColumnDefinition Width=" auto"/>
+                                        <ColumnDefinition Width=" *"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" auto"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Foreground="White" FontSize=" 15" Grid.Column="1" Grid.Row="1" Text="联网规划"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
+                        <!-- 两个确认出发，终到站的文本-->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid >
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height=" auto"/>
+                                    <RowDefinition Height=" *"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="出发站" Background="#00000000" Foreground="white" FontSize="15" Grid.Row="1"/>
+                            </Grid>
+
+                            <Grid Grid.Column="2">
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height=" auto"/>
+                                    <RowDefinition Height=" *"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBox Grid.Row="1" x:Name="ui_form_stop_contorl_right_form_textbox_1" Background="#00000000" Foreground="white" FontSize="15" BorderThickness="0,0,0,1" BorderBrush="white"/>
+                            </Grid>
+
+
+                            <Grid x:Name="ui_form_stop_contorl_add_start_stop" Grid.Column="4">
+                                <Grid.Background >
+                                    <ImageBrush ImageSource="photo\add.png"/>
+                                </Grid.Background>
+                                <Ellipse Fill="#00000000" Stroke="White" />
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid >
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height=" auto"/>
+                                    <RowDefinition Height=" *"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="到达站" Background="#00000000" Foreground="white" FontSize="15" Grid.Row="1"/>
+                            </Grid>
+
+                            <Grid  Grid.Column="2">
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height=" auto"/>
+                                    <RowDefinition Height=" *"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBox Grid.Row="1" x:Name="ui_form_stop_contorl_right_form_textbox_2" Background="#00000000" Foreground="white" FontSize="15" BorderThickness="0,0,0,1" BorderBrush="white"/>
+                            </Grid>
+
+                            <Grid x:Name="ui_form_stop_contorl_add_end_stop" Grid.Column="4">
+                                <Grid.Background >
+                                    <ImageBrush ImageSource="photo\add.png"/>
+                                </Grid.Background>
+                                <Ellipse Fill="#00000000" Stroke="White" />
+                            </Grid>
+                        </Grid>
+
+                        <!-- 结果反馈处-->
+                        <Grid Grid.Row="6">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height=" 30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height=" *"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- 左右翻页按钮-->
+                            <Grid x:Name="ui_form_stop_contorl_left_page" Grid.Column="0" Grid.Row="0" Opacity="0">
+                                <Grid.Background >
+                                    <ImageBrush ImageSource="photo\left.png"/>
+                                </Grid.Background>
+
+                                <Ellipse Fill="#00000000" Stroke="White" />
+                            </Grid>
+                            <Grid x:Name="ui_form_stop_contorl_right_page" Grid.Column="2" Grid.Row="0" Opacity="0">
+                                <Grid.Background >
+                                    <ImageBrush ImageSource="photo\right.png"/>
+                                </Grid.Background>
+
+                                <Ellipse Fill="#00000000" Stroke="White" />
+                            </Grid>
+
+                            <!-- 页面数字-->
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width=" *"/>
+                                    <ColumnDefinition Width=" auto"/>
+                                    <ColumnDefinition Width=" *"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height=" auto"/>
+                                    <RowDefinition Height=" *"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock x:Name="ui_form_stop_contorl_page" Foreground=" white" FontSize="15" Grid.Column="1" Grid.Row="1" Text=""/>
+                            </Grid>
+
+                            <!-- 每一步的乘车描述-->
+                            <TextBlock x:Name="ui_form_stop_contorl_step_describe" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="第一次使用本地的 换乘规划 可能需要一些时间，请耐心等待" Foreground="white" FontSize="15" TextWrapping="Wrap"/>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Canvas>
+
+            </Grid>
+
+
+            <!-- 设置界面-->
+            <Grid x:Name="ui_form_contorl" Width="800" Height="570" Canvas.Top="0" Canvas.Left="-800">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height=" *"/>
+                    <RowDefinition Height=" 40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width=" 100"/>
+                </Grid.ColumnDefinitions>
+
+                <TabControl Grid.Column="1" Grid.Row="1" Background="#00000000" BorderThickness="0">
+
+                    <TabItem Header="常规" IsSelected="True">
+
+                        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- 讲述人-->
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="讲述人" Grid.Row="1">
+                            <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="讲述人"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 开关-->
+                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Canvas x:Name="ui_form_contorl_check_background_2" Grid.Row="1">
+                                            <Canvas.Background >
+                                                <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2" Color="#ff8f8f8f"/>
+                                            </Canvas.Background>
+                                            <Grid x:Name="ui_form_contorl_check_btn_2" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Background="white"/>
+                                        </Canvas>
+                                    </Grid>
+                                </Grid>
+
+                                <!-- 重启程序-->
+                                <Grid Grid.Row="2" MouseDown="ui_contorl_list_5_function">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="重新启动应用程序" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="重新启动应用程序"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="重启解决一些偶然性问题" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="重启解决一些偶然性问题"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 右按钮-->
+                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="重新启动"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                            </Grid>
+                        </ScrollViewer>
+
+                    </TabItem>
+
+                    <TabItem Header="实时">
+                        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- 车辆跟踪-->
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="车辆跟踪" Grid.Row="1">
+                            <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="对处在运营状态的车次到达站次显示在线路图上" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="对处在运营状态的车次到达站次显示在线路图上"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 开关-->
+                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Canvas x:Name="ui_form_contorl_check_background" Grid.Row="1">
+                                            <Canvas.Background >
+                                                <SolidColorBrush x:Name="ui_form_contorl_check_background_color" Color="#ff8f8f8f"/>
+                                            </Canvas.Background>
+                                            <Grid x:Name="ui_form_contorl_check_btn" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Background="white"/>
+                                        </Canvas>
+                                    </Grid>
+                                </Grid>
+
+                                <!-- 车辆跟踪加载的插件-->
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="车辆跟踪插件" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪插件"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 插件路径-->
+                                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width=" *"/>
+                                                <ColumnDefinition Width=" auto"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="车辆跟踪插件路径"/>
+                                        </Grid>
+                                        <TextBox x:Name="ui_form_contorl_mod_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+
+                                    </Grid>
+
+                                    <!-- 浏览按钮 MouseDown="ui_form_contorl_throw_rs_file"-->
+                                    <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_mod_file">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="浏览车辆跟踪插件"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+                                    </Grid>
+
+                                    <!-- 右按钮 MouseDown="ui_contorl_list_2_function"-->
+                                    <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_contorl_list_7_function">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="启用"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                                <!-- 资源信息MouseDown="ui_contorl_list_3_function-->
+                                <Grid Grid.Row="3" MouseDown="ui_contorl_list_8_function">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="插件信息" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="插件信息"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="显示当前车辆跟踪插件的信息" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="显示当前车辆跟踪插件的信息"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 右按钮-->
+                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="查看"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                            </Grid>
+                        </ScrollViewer>
+
+                    </TabItem>
+
+                    <TabItem Header="资源">
+                        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- 替换资源-->
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="替换资源" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="替换资源"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="替换加载的资源，便于切换到其他城市进行指引" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="替换加载的资源，便于切换到其他城市进行指引"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 资源路径-->
+                                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width=" *"/>
+                                                <ColumnDefinition Width=" auto"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="资源路径"/>
+                                        </Grid>
+                                        <TextBox x:Name="ui_form_contorl_resource_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+
+                                    </Grid>
+
+                                    <!-- 浏览按钮-->
+                                    <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_rs_file">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="浏览文件"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+                                    </Grid>
+
+                                    <!-- 右按钮-->
+                                    <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_contorl_list_2_function">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="替换"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                                <!-- 资源信息-->
+                                <Grid Grid.Row="2" MouseDown="ui_contorl_list_3_function">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="资源信息" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="资源信息"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="显示当前资源的信息" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="显示当前资源的信息"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 右按钮-->
+                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="查看"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                            </Grid>
+                        </ScrollViewer>
+
+                    </TabItem>
+
+                    <TabItem Header="个性化">
+                        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- 替换背景-->
+                                <Grid  Grid.Row="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="替换背景" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="替换背景"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="选用一张新的背景图片作为背景" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="选用一张新的背景图片作为背景"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 背景路径-->
+                                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width=" *"/>
+                                                <ColumnDefinition Width=" auto"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="背景路径"/>
+                                        </Grid>
+                                        <TextBox x:Name="ui_form_contorl_background_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                    </Grid>
+
+                                    <!-- 浏览按钮-->
+                                    <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_bk_file">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="浏览文件"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+
+                                    </Grid>
+
+                                    <!-- 右按钮-->
+                                    <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0"  MouseDown="ui_contorl_list_4_function">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="替换"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                                <!-- 更改背景颜色-->
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height=" *"/>
+                                        <RowDefinition Height=" *"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="25" Text="更改配色" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="更改配色"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="输入一组新的颜色值来替换现有颜色" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                            <TextBlock.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid>
+                                                        <TextBlock Foreground="black" FontSize="15" Text="输入一组新的颜色值来替换现有颜色"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </TextBlock.ToolTip>
+                        </TextBlock>
+                                    </Grid>
+
+                                    <!-- 颜色值-->
+                                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+
+
+                                        <!-- R-->
+                                        <Grid Grid.Column="0" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width=" *"/>
+                                                <ColumnDefinition Width=" auto"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="红色值"/>
+                                        </Grid>
+                                        <TextBox x:Name="ui_form_contorl_r_value" Foreground="white" FontSize="15" Grid.Column="0" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                        <!-- G-->
+                                        <Grid Grid.Column="1" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width=" *"/>
+                                                <ColumnDefinition Width=" auto"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="绿色值"/>
+                                        </Grid>
+                                        <TextBox x:Name="ui_form_contorl_g_value" Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                        <!-- B-->
+                                        <Grid Grid.Column="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width=" *"/>
+                                                <ColumnDefinition Width=" auto"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="蓝色值"/>
+                                        </Grid>
+                                        <TextBox x:Name="ui_form_contorl_b_value" Foreground="white" FontSize="15" Grid.Column="2" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                    </Grid>
+
+                                    <!-- 右按钮-->
+                                    <Grid Grid.Column="4" Grid.RowSpan="2" Grid.Row="0"  MouseDown="ui_contorl_list_6_function">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" 30"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width=" 30"/>
+                                            <ColumnDefinition Width=" *"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                            <!-- 提示-->
+                                            <Grid.ToolTip>
+                                                <ToolTip Background="white">
+                                                    <Grid >
+                                                        <TextBlock Foreground="black" FontSize="15" Text="更改颜色"/>
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Grid.ToolTip>
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                            </Grid>
+                        </ScrollViewer>
+
+                    </TabItem>
+
+                </TabControl>
+
+            </Grid>
+
+
+            <!-- 关于界面-->
+            <Grid x:Name="ui_form_about" Width="800" Height="570" Canvas.Top="0" Canvas.Left="-800">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height=" *"/>
+                    <RowDefinition Height=" 40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width=" 100"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="ui_form_about_describe" Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text=" Programmer:Wiliam Tad&#x000A;
+Insider:Tianyue Sun&#x000A;
+Return:Xianlei Bian，Yi Gao，Zechen Li，Junzhe Jiang&#x000A;
+Version:Version 6.5.0.0 Build 6500&#x000A;
+Last update date:15:37 2015/6/29 Monday&#x000A;
+&#x000A;
+User Environment&#x000A;
+.NET Framework Version:Can't read&#x000A;
+Sign up user:Can't read&#x000A;
+OS Version:Can't read&#x000A;
+&#x000A;
+CHMOSGroup Copyright 2012-2015
+"/>
+            </Grid>
+
+            <!-- 消息界面-->
+            <Grid x:Name="ui_form_message" Width="300" Height="570" Canvas.Top="0" Canvas.Left="800">
+                <!-- 背景颜色-->
+                <Grid.Background>
+                    <SolidColorBrush x:Name="ui_color_3" Color="#8f0000ff"/>
+                </Grid.Background>
+
+                <Grid.RowDefinitions >
+
+                    <!-- 标题-->
+                    <RowDefinition Height="30"/>
+                    <!-- 清空消息-->
+                    <RowDefinition Height="30"/>
+                    <!-- 选中时的下滑条-->
+                    <RowDefinition Height="2"/>
+
+                    <RowDefinition Height="10"/>
+                    <!-- 内容区-->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width=" 20"/>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width=" 20"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 标题-->
+                <Grid Grid.Row="0" Grid.Column="1" MouseDown="ui_form_message_function">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width=" auto"/>
+                        <ColumnDefinition Width=" *"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height=" *"/>
+                        <RowDefinition Height=" auto"/>
+                        <RowDefinition Height=" *"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="17" Text="消息中心"/>
+                </Grid>
+                <!-- 清空-->
+                <Grid x:Name="ui_form_message_clear" Grid.Row="1" Grid.Column="1" MouseDown="ui_form_message_function" Opacity="0">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width=" *"/>
+                        <ColumnDefinition Width=" auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height=" *"/>
+                        <RowDefinition Height=" auto"/>
+                        <RowDefinition Height=" *"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="15" Text="清空消息"/>
+                </Grid>
+                <Grid x:Name="ui_form_message_up_line" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="white" Opacity="0"/>
+
+                <Grid x:Name="ui_form_message_no_msg_title" Grid.Row="4" Grid.Column="1">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width=" *"/>
+                        <ColumnDefinition Width=" auto"/>
+                        <ColumnDefinition Width=" *"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height=" *"/>
+                        <RowDefinition Height=" auto"/>
+                        <RowDefinition Height=" *"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="15" Text="没有消息"/>
+                </Grid>
+
+                <ListBox x:Name="ui_form_message_list" Grid.Column="1" Grid.Row="4" ItemTemplate="{StaticResource ui_temp_form_message_list}" Background="#00000000" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
+
+            </Grid>
+        </Canvas>
+
+    </Grid>
+</Window>
