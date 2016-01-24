@@ -189,9 +189,6 @@
     <Resource Include="photo\max.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="photo\add.png" />
   </ItemGroup>
   <ItemGroup>

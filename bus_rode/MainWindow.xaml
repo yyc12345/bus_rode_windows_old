@@ -6,7 +6,7 @@
         Icon="bus_rode_icon.ico" x:FieldModifier="Public">
     <!-- 要阴影在上面加 BorderThickness="10"-->
     <Window.Background>
-        <ImageBrush ImageSource="background.jpg" />
+        <SolidColorBrush Color="#FF2D2D2D"/>
     </Window.Background>
     <!-- 要阴影取消注释，但是界面会出现一点问题，为了专注性，不加阴影-->
     <!--<Window.Effect>
@@ -184,20 +184,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- 不发行版本标示-->
-                <Grid Grid.Column="5" Grid.ColumnSpan="4" Grid.Row="3">
-                    <Grid.ColumnDefinitions >
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="300"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="200"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock x:Name="ui_form_start_secreat_text" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" TextAlignment="Center"/>
-                </Grid>
+                <TextBlock x:Name="ui_form_start_secreat_text" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="9" Width="300" Foreground="white" FontSize="15" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
                 <!-- 线路-->
                 <TextBlock Grid.Row="2" Grid.Column="1" Foreground="White" FontSize="25" Text="线路" TextAlignment="Center"/>
@@ -205,15 +192,8 @@
 
                     <Ellipse Stroke="white" Margin="25,25,25,25">
                         <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_5_1" Color="#6f0000ff"/>
+                            <SolidColorBrush x:Name="ui_color_5" Color="#6f0000ff"/>
                         </Ellipse.Fill>
-                    </Ellipse>
-
-                    <Ellipse Margin="25,25,25,25" x:Name="ui_form_start_btn_1">
-                        <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_5_2" Color="#6f0000ff"/>
-                        </Ellipse.Fill>
-
                     </Ellipse>
 
                     <Grid Margin="25,25,25,25">
@@ -223,24 +203,28 @@
                     </Grid>
 
                     <!-- 动画-->
-                    <Grid.Triggers >
+                    <Grid.Effect >
+                        <DropShadowEffect x:Name="ui_contorl_btn_light_11" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                    </Grid.Effect>
+                    <Grid.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard >
                                 <Storyboard >
-                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_1" Storyboard.TargetProperty="Margin"
-                                                     From="25,25,25,25" To="0,0,0,0" Duration="0:0:0.2"/>
+                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard >
                                 <Storyboard >
-                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_1" Storyboard.TargetProperty="Margin"
-                                                     From="0,0,0,0" To="25,25,25,25" Duration="0:0:0.5"/>
+                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
+
+
                     </Grid.Triggers>
+
                 </Grid>
                 <!-- 车站-->
                 <TextBlock Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="25" Text="车站" TextAlignment="Center"/>
@@ -248,15 +232,8 @@
 
                     <Ellipse Stroke="white" Margin="25,25,25,25">
                         <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_6_1" Color="#6f0000ff"/>
+                            <SolidColorBrush x:Name="ui_color_6" Color="#6f0000ff"/>
                         </Ellipse.Fill>
-                    </Ellipse>
-
-                    <Ellipse Margin="25,25,25,25" x:Name="ui_form_start_btn_2">
-                        <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_6_2" Color="#6f0000ff"/>
-                        </Ellipse.Fill>
-
                     </Ellipse>
 
                     <Grid Margin="25,25,25,25">
@@ -265,25 +242,30 @@
                         </Grid.Background>
                     </Grid>
 
+
                     <!-- 动画-->
-                    <Grid.Triggers >
+                    <Grid.Effect >
+                        <DropShadowEffect x:Name="ui_contorl_btn_light_12" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                    </Grid.Effect>
+                    <Grid.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard >
                                 <Storyboard >
-                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_2" Storyboard.TargetProperty="Margin"
-                                                     From="25,25,25,25" To="0,0,0,0" Duration="0:0:0.2"/>
+                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard >
-                                <Storyboard>
-                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_2" Storyboard.TargetProperty="Margin"
-                                                     From="0,0,0,0" To="25,25,25,25" Duration="0:0:0.5"/>
+                                <Storyboard >
+                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
+
+
                     </Grid.Triggers>
+
                 </Grid>
                 <!-- 设置-->
                 <TextBlock Grid.Row="2" Grid.Column="5" Foreground="White" FontSize="25" Text="设置" TextAlignment="Center"/>
@@ -291,15 +273,8 @@
 
                     <Ellipse Stroke="white" Margin="25,25,25,25">
                         <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_7_1" Color="#6f0000ff"/>
+                            <SolidColorBrush x:Name="ui_color_7" Color="#6f0000ff"/>
                         </Ellipse.Fill>
-                    </Ellipse>
-
-                    <Ellipse Margin="25,25,25,25" x:Name="ui_form_start_btn_3">
-                        <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_7_2" Color="#6f0000ff"/>
-                        </Ellipse.Fill>
-
                     </Ellipse>
 
                     <Grid Margin="25,25,25,25">
@@ -308,25 +283,31 @@
                         </Grid.Background>
                     </Grid>
 
+
                     <!-- 动画-->
-                    <Grid.Triggers >
+                    <Grid.Effect >
+                        <DropShadowEffect x:Name="ui_contorl_btn_light_13" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                    </Grid.Effect>
+                    <Grid.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard >
                                 <Storyboard >
-                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_3" Storyboard.TargetProperty="Margin"
-                                                     From="25,25,25,25" To="0,0,0,0" Duration="0:0:0.2"/>
+                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard >
-                                <Storyboard>
-                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_3" Storyboard.TargetProperty="Margin"
-                                                     From="0,0,0,0" To="25,25,25,25" Duration="0:0:0.5"/>
+                                <Storyboard >
+                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
+
+
                     </Grid.Triggers>
+
+
                 </Grid>
                 <!-- 关于-->
                 <TextBlock Grid.Row="2" Grid.Column="7" Foreground="White" FontSize="25" Text="关于" TextAlignment="Center"/>
@@ -334,15 +315,8 @@
 
                     <Ellipse Stroke="white" Margin="25,25,25,25">
                         <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_8_1" Color="#6f0000ff"/>
+                            <SolidColorBrush x:Name="ui_color_8" Color="#6f0000ff"/>
                         </Ellipse.Fill>
-                    </Ellipse>
-
-                    <Ellipse Margin="25,25,25,25" x:Name="ui_form_start_btn_4">
-                        <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_8_2" Color="#6f0000ff"/>
-                        </Ellipse.Fill>
-
                     </Ellipse>
 
                     <Grid Margin="25,25,25,25">
@@ -351,25 +325,31 @@
                         </Grid.Background>
                     </Grid>
 
+
                     <!-- 动画-->
-                    <Grid.Triggers >
+                    <Grid.Effect >
+                        <DropShadowEffect x:Name="ui_contorl_btn_light_14" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                    </Grid.Effect>
+                    <Grid.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard >
                                 <Storyboard >
-                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_4" Storyboard.TargetProperty="Margin"
-                                                     From="25,25,25,25" To="0,0,0,0" Duration="0:0:0.2"/>
+                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard >
-                                <Storyboard>
-                                    <ThicknessAnimation Storyboard.TargetName="ui_form_start_btn_4" Storyboard.TargetProperty="Margin"
-                                                     From="0,0,0,0" To="25,25,25,25" Duration="0:0:0.5"/>
+                                <Storyboard >
+                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
+
+
                     </Grid.Triggers>
+
+
                 </Grid>
 
             </Grid>
@@ -1167,11 +1147,38 @@
                                         </Grid.RowDefinitions>
 
                                         <Canvas x:Name="ui_form_contorl_check_background_2" Grid.Row="1">
-                                            <Canvas.Background >
-                                                <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2" Color="#ff8f8f8f"/>
-                                            </Canvas.Background>
-                                            <Grid x:Name="ui_form_contorl_check_btn_2" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Background="white"/>
+
+                                            <Grid Height="30" Width="100">
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Stroke="white">
+                                                    <Ellipse.Fill >
+                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_1" Color="#ff8f8f8f"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Stroke="white">
+                                                    <Ellipse.Fill >
+                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_3" Color="#ff8f8f8f"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                
+                                                <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Stroke="white" StrokeDashArray="70 28">
+                                                    <Rectangle.Fill >
+                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_2" Color="#ff8f8f8f"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                                
+                                            </Grid>
+                                            
+                                            <Ellipse x:Name="ui_form_contorl_check_btn_2" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Fill="white"/>
                                         </Canvas>
+                                        
                                     </Grid>
                                 </Grid>
 
@@ -1253,6 +1260,30 @@
                                             </Grid.ToolTip>
                                         </Grid>
 
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_1" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_1" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_1" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            
+                                            
+                                        </Grid.Triggers>
+                                        
+
                                     </Grid>
                                 </Grid>
 
@@ -1329,11 +1360,37 @@
                                         </Grid.RowDefinitions>
 
                                         <Canvas x:Name="ui_form_contorl_check_background" Grid.Row="1">
-                                            <Canvas.Background >
-                                                <SolidColorBrush x:Name="ui_form_contorl_check_background_color" Color="#ff8f8f8f"/>
-                                            </Canvas.Background>
-                                            <Grid x:Name="ui_form_contorl_check_btn" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Background="white"/>
+
+                                            <Grid Height="30" Width="100">
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Stroke="white">
+                                                    <Ellipse.Fill >
+                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_1" Color="#ff8f8f8f"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Stroke="white">
+                                                    <Ellipse.Fill >
+                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_3" Color="#ff8f8f8f"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+
+                                                <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Stroke="white" StrokeDashArray="70 28">
+                                                    <Rectangle.Fill >
+                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2" Color="#ff8f8f8f"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+
+                                            <Ellipse x:Name="ui_form_contorl_check_btn" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Fill="white"/>
                                         </Canvas>
+
                                     </Grid>
                                 </Grid>
 
@@ -1442,6 +1499,32 @@
                                                 </ToolTip>
                                             </Grid.ToolTip>
                                         </Grid>
+
+
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_2" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_2" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_2" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
+
+
                                     </Grid>
 
                                     <!-- 右按钮 MouseDown="ui_contorl_list_2_function"-->
@@ -1473,6 +1556,29 @@
                                                 </ToolTip>
                                             </Grid.ToolTip>
                                         </Grid>
+
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_3" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_3" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_3" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
 
                                     </Grid>
                                 </Grid>
@@ -1554,6 +1660,29 @@
                                                 </ToolTip>
                                             </Grid.ToolTip>
                                         </Grid>
+
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_10" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_10" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_10" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
 
                                     </Grid>
                                 </Grid>
@@ -1678,6 +1807,30 @@
                                                 </ToolTip>
                                             </Grid.ToolTip>
                                         </Grid>
+
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_4" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_4" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_4" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
+
                                     </Grid>
 
                                     <!-- 右按钮-->
@@ -1710,6 +1863,29 @@
                                             </Grid.ToolTip>
                                         </Grid>
 
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_5" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_5" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_5" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
+                                        
                                     </Grid>
                                 </Grid>
 
@@ -1791,6 +1967,29 @@
                                             </Grid.ToolTip>
                                         </Grid>
 
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_6" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_6" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_6" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
+                                        
                                     </Grid>
                                 </Grid>
 
@@ -1914,6 +2113,29 @@
                                             </Grid.ToolTip>
                                         </Grid>
 
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_7" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_7" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_7" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
+
                                     </Grid>
 
                                     <!-- 右按钮-->
@@ -1945,6 +2167,29 @@
                                                 </ToolTip>
                                             </Grid.ToolTip>
                                         </Grid>
+
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_8" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_8" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_8" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
 
                                     </Grid>
                                 </Grid>
@@ -2094,6 +2339,29 @@
                                             </Grid.ToolTip>
                                         </Grid>
 
+                                        <!-- 动画-->
+                                        <Grid.Effect >
+                                            <DropShadowEffect x:Name="ui_contorl_btn_light_9" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                        </Grid.Effect>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_9" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard >
+                                                    <Storyboard >
+                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_9" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+
+                                        </Grid.Triggers>
+                                        
                                     </Grid>
                                 </Grid>
 
@@ -2120,19 +2388,17 @@
                     <ColumnDefinition Width=" 100"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="ui_form_about_describe" Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text=" Programmer:Wiliam Tad&#x000A;
-Insider:Tianyue Sun&#x000A;
-Return:Xianlei Bian，Yi Gao，Zechen Li，Junzhe Jiang&#x000A;
-Version:Version 6.5.0.0 Build 6500&#x000A;
-Last update date:15:37 2015/6/29 Monday&#x000A;
-&#x000A;
-User Environment&#x000A;
-.NET Framework Version:Can't read&#x000A;
-Sign up user:Can't read&#x000A;
-OS Version:Can't read&#x000A;
-&#x000A;
-CHMOSGroup Copyright 2012-2015
-"/>
+                <StackPanel Grid.Row="1" Grid.Column="1">
+
+                    <TextBlock x:Name="ui_form_about_describe" Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text=""/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Grid.Row="8" Grid.Column="1" Foreground="White" FontSize="15" Text="开源地址（Github）："/>
+                        <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff0040ff" FontSize="15" Text="https://github.com/yyc12345/bus_rode" MouseDown="ui_form_about_github"/>
+                    </StackPanel>
+
+                </StackPanel>
+
             </Grid>
 
             <!-- 消息界面-->
