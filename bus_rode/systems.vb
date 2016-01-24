@@ -4,7 +4,7 @@
     Public Const app_version As String = "8.0.0.0"
     Public Const app_build As String = "build 8000"
     Public Const app_name As String = "bus_rode Hydrogen"
-    Public Const app_update_date As String = "18:09 2015/11/7"
+    Public Const app_update_date As String = "9:00 2016/2/7"
     Public Const app_build_number As Integer = 8000
 
     Public Const app_use_baidu_ak As String = "GyEb8Gs7DYaCuiKEsb5GIs9N"

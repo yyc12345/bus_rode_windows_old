@@ -90,6 +90,11 @@
     Public short_line_can_page As Boolean = True
 
     ''' <summary>
+    ''' [内核][screen_stop]指示该页面是不是从线路界面跳转过来的，如果是，返回线路界面而不是主界面
+    ''' </summary>
+    Public jump_to_stop_from_line As Boolean = False
+
+    ''' <summary>
     ''' [内核][screen_stop]最短路径解析end_result的函数，放入toword
     ''' </summary>
     ''' <remarks></remarks>

@@ -411,23 +411,23 @@ Public Class MainWindow
 
         ui_color_4.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
 
-        ui_color_5_1.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-        ui_color_6_1.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-        ui_color_7_1.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-        ui_color_8_1.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-        ui_color_5_2.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-        ui_color_6_2.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-        ui_color_7_2.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-        ui_color_8_2.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+        ui_color_5.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+        ui_color_6.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+        ui_color_7.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+        ui_color_8.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
 
         ui_form_line_select_up_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
         ui_form_line_select_down_line.Color = Color.FromArgb(0, 0, 0, 0)
 
         If get_bus_addr = True Then
-            ui_form_contorl_check_background_color.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
         End If
         If talk_man = True Then
-            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_2_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
         End If
 
         ui_form_contorl_r_value.Text = form_color.R
@@ -438,7 +438,8 @@ Public Class MainWindow
         '设置界面文本
         Dim describe As String = ""
         describe = "Programmer : Wiliam Tad" & vbCrLf &
-"Insider : Tianyue Sun" & vbCrLf &
+"Insider : Nothing" & vbCrLf &
+"Previous Insider : Tianyue Sun" & vbCrLf &
 "Return : Xianlei Bian，Yi Gao，Zechen Li，Junzhe Jiang" & vbCrLf &
 "Version : " & app_version & " " & app_build & vbCrLf &
 "Last update date : " & app_update_date & vbCrLf &
@@ -448,13 +449,16 @@ Public Class MainWindow
 "Sign up user : " & Environment.UserName.ToString & vbCrLf &
 "OS Version : " & Environment.OSVersion.ToString & vbCrLf &
 "" & vbCrLf &
-"CHMOSGroup Copyright 2012-2016"
+"CHMOSGroup Copyright 2012-2016" & vbCrLf &
+"" & vbCrLf &
+"感谢您使用bus_rode，bus_rode是一个开源软件，使用MIT开源协议，在下面会有开源地址" & vbCrLf &
+"您可以加入这个工程，帮助我们变得更好，也可以在下面这个地址反馈错我，我们将会将其标记并在将来消除这个问题"
         ui_form_about_describe.Text = describe
 
         describe = ""
         describe = "CHMOSGroup 机密" & vbCrLf &
             "CHMOSGroup Copyright 2012-2016" & vbCrLf &
-            "该版本不应当向外界传播或发布，仅供内部测试，调试使用。将这个版本的程序的源码，界面设计及其他类型的截图，程序副本未经授权向外界传播，公布，发行将会在查明发布者后将其从CHMOS内部强制离职并列入信任黑名单。具体内容参见《CHMOSGroup 协议》" & vbCrLf &
+            "该版本不应当向外界传播或发布，仅供内部测试，调试使用。将这个版本的程序的源码，界面设计及其他类型的截图，程序副本未经授权向外界传播，公布，发行将会在查明发布者后将其从CHMOSGroup内部强制离职并列入信任黑名单。具体内容参见《CHMOSGroup 协议》" & vbCrLf &
             app_name & " " & app_build
         ui_form_start_secreat_text.Text = describe
 
@@ -510,13 +514,13 @@ Public Class MainWindow
             storyboard_action.Children.Clear()
 
             If message_show = True Then
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(window_x - 300, window_x + 300, New Duration(TimeSpan.FromSeconds(0.15)))
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.15)))
             Else
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(window_x + 300, window_x - 300, New Duration(TimeSpan.FromSeconds(0.15)))
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.15)))
             End If
 
             Animation.Storyboard.SetTarget(stb_1, ui_form_message)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
             Dim linshi = New Animation.ExponentialEase()
             linshi.EasingMode = Animation.EasingMode.EaseOut
             stb_1.EasingFunction = linshi
@@ -546,17 +550,17 @@ Public Class MainWindow
             storyboard_action.Stop()
             storyboard_action.Children.Clear()
             '切入新窗口
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-window_x, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
 
             Animation.Storyboard.SetTarget(stb_1, ui_form_line)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
             storyboard_action.Children.Add(stb_1)
             '移动旧窗口
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -window_x, New Duration(TimeSpan.FromSeconds(0.3)))
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
 
             Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
             storyboard_action.Children.Add(stb_1)
 
@@ -587,17 +591,17 @@ Public Class MainWindow
             storyboard_action.Stop()
             storyboard_action.Children.Clear()
             '切入新窗口
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-window_x, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
 
             Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
             storyboard_action.Children.Add(stb_1)
             '移动旧窗口
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -window_x, New Duration(TimeSpan.FromSeconds(0.3)))
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
 
             Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
             storyboard_action.Children.Add(stb_1)
 
@@ -624,17 +628,17 @@ Public Class MainWindow
         storyboard_action.Stop()
         storyboard_action.Children.Clear()
         '切入新窗口
-        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-window_x, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
 
         Animation.Storyboard.SetTarget(stb_1, ui_form_contorl)
-        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
         storyboard_action.Children.Add(stb_1)
         '移动旧窗口
-        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -window_x, New Duration(TimeSpan.FromSeconds(0.3)))
+        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
 
         Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
         storyboard_action.Children.Add(stb_1)
 
@@ -657,17 +661,17 @@ Public Class MainWindow
         storyboard_action.Stop()
         storyboard_action.Children.Clear()
         '切入新窗口
-        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-window_x, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
 
         Animation.Storyboard.SetTarget(stb_1, ui_form_about)
-        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
         storyboard_action.Children.Add(stb_1)
         '移动旧窗口
-        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -window_x, New Duration(TimeSpan.FromSeconds(0.3)))
+        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
 
         Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
         storyboard_action.Children.Add(stb_1)
 
@@ -877,17 +881,25 @@ Public Class MainWindow
 
         '控制界面的开关
         If get_bus_addr = True Then
-            ui_form_contorl_check_background_color.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
             Canvas.SetLeft(ui_form_contorl_check_btn, 70)
         Else
-            ui_form_contorl_check_background_color.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_1.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_3.Color = Color.FromArgb(255, 143, 143, 143)
             Canvas.SetLeft(ui_form_contorl_check_btn, 0)
         End If
         If talk_man = True Then
-            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_2_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
             Canvas.SetLeft(ui_form_contorl_check_btn_2, 70)
         Else
-            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_2_1.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, 143, 143, 143)
             Canvas.SetLeft(ui_form_contorl_check_btn_2, 0)
         End If
     End Sub
@@ -910,25 +922,25 @@ Public Class MainWindow
 
             Case 1
                 '切入新窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-window_x, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
 
                 Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
                 storyboard_action.Children.Add(stb_1)
                 '移动旧窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -window_x, New Duration(TimeSpan.FromSeconds(0.3)))
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
 
                 Animation.Storyboard.SetTarget(stb_1, ui_form_line)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
                 storyboard_action.Children.Add(stb_1)
 
                 If line_contorl = True Then
-                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -300, New Duration(TimeSpan.FromSeconds(0.15)))
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.15)))
 
                     Animation.Storyboard.SetTarget(stb_1, ui_form_line_contorl)
-                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
                     Dim linshi = New Animation.ExponentialEase()
                     linshi.EasingMode = Animation.EasingMode.EaseOut
                     stb_1.EasingFunction = linshi
@@ -943,26 +955,57 @@ Public Class MainWindow
                 End If
 
             Case 2
-                '切入新窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-window_x, 0, New Duration(TimeSpan.FromSeconds(0.3)))
 
-                Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                If jump_to_stop_from_line = True Then
+                    '退回线路界面
 
-                storyboard_action.Children.Add(stb_1)
-                '移动旧窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -window_x, New Duration(TimeSpan.FromSeconds(0.3)))
+                    '切入新窗口
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
 
-                Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Animation.Storyboard.SetTarget(stb_1, ui_form_line)
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
-                storyboard_action.Children.Add(stb_1)
+                    storyboard_action.Children.Add(stb_1)
+                    '移动旧窗口
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+
+                    Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+                    storyboard_action.Children.Add(stb_1)
+
+                    '修改回来
+                    jump_to_stop_from_line = False
+                    '设置界面
+                    screens = 1
+
+                Else
+                    '退回主界面
+
+                    '切入新窗口
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
+
+                    Animation.Storyboard.SetTarget(stb_1, ui_form_start)
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+                    storyboard_action.Children.Add(stb_1)
+                    '移动旧窗口
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+
+                    Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+                    storyboard_action.Children.Add(stb_1)
+
+                    '设置界面
+                    screens = 0
+                End If
 
                 If stop_contorl = True Then
-                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -300, New Duration(TimeSpan.FromSeconds(0.15)))
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.15)))
 
                     Animation.Storyboard.SetTarget(stb_1, ui_form_stop_contorl)
-                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
                     Dim linshi = New Animation.ExponentialEase()
                     linshi.EasingMode = Animation.EasingMode.EaseOut
                     stb_1.EasingFunction = linshi
@@ -971,23 +1014,22 @@ Public Class MainWindow
                 End If
 
                 '设置界面
-                screens = 0
                 If stop_contorl = True Then
                     stop_contorl = False
                 End If
             Case 3
                 '切入新窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-window_x, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
 
                 Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
                 storyboard_action.Children.Add(stb_1)
                 '移动旧窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -window_x, New Duration(TimeSpan.FromSeconds(0.3)))
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
 
                 Animation.Storyboard.SetTarget(stb_1, ui_form_contorl)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
                 storyboard_action.Children.Add(stb_1)
 
@@ -996,17 +1038,17 @@ Public Class MainWindow
 
             Case 4
                 '切入新窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-window_x, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
 
                 Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
                 storyboard_action.Children.Add(stb_1)
                 '移动旧窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -window_x, New Duration(TimeSpan.FromSeconds(0.3)))
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
 
                 Animation.Storyboard.SetTarget(stb_1, ui_form_about)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
 
                 storyboard_action.Children.Add(stb_1)
 
@@ -1043,10 +1085,10 @@ Public Class MainWindow
 
                 If line_contorl = True Then
                     '收回
-                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -300, New Duration(TimeSpan.FromSeconds(0.15)))
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.15)))
 
                     Animation.Storyboard.SetTarget(stb_1, ui_form_line_contorl)
-                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
                     Dim linshi = New Animation.ExponentialEase()
                     linshi.EasingMode = Animation.EasingMode.EaseOut
                     stb_1.EasingFunction = linshi
@@ -1054,10 +1096,10 @@ Public Class MainWindow
                     storyboard_action.Children.Add(stb_1)
                 Else
                     '展开
-                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-300, 0, New Duration(TimeSpan.FromSeconds(0.15)))
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.15)))
 
                     Animation.Storyboard.SetTarget(stb_1, ui_form_line_contorl)
-                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
                     Dim linshi = New Animation.ExponentialEase()
                     linshi.EasingMode = Animation.EasingMode.EaseOut
                     stb_1.EasingFunction = linshi
@@ -1072,10 +1114,10 @@ Public Class MainWindow
 
                 If stop_contorl = True Then
                     '收回
-                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, -300, New Duration(TimeSpan.FromSeconds(0.15)))
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.15)))
 
                     Animation.Storyboard.SetTarget(stb_1, ui_form_stop_contorl)
-                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
                     Dim linshi = New Animation.ExponentialEase()
                     linshi.EasingMode = Animation.EasingMode.EaseOut
                     stb_1.EasingFunction = linshi
@@ -1083,10 +1125,10 @@ Public Class MainWindow
                     storyboard_action.Children.Add(stb_1)
                 Else
                     '展开
-                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(-300, 0, New Duration(TimeSpan.FromSeconds(0.15)))
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.15)))
 
                     Animation.Storyboard.SetTarget(stb_1, ui_form_stop_contorl)
-                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
                     Dim linshi = New Animation.ExponentialEase()
                     linshi.EasingMode = Animation.EasingMode.EaseOut
                     stb_1.EasingFunction = linshi
@@ -1690,14 +1732,10 @@ Public Class MainWindow
 
                         ui_color_4.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
 
-                        ui_color_5_1.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_6_1.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_7_1.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_8_1.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_5_2.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_6_2.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_7_2.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_8_2.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+                        ui_color_5.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+                        ui_color_6.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+                        ui_color_7.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+                        ui_color_8.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
 
                         If up_or_down_line = True Then
                             '上行
@@ -1710,10 +1748,14 @@ Public Class MainWindow
                         End If
 
                         If get_bus_addr = True Then
-                            ui_form_contorl_check_background_color.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
                         End If
                         If talk_man = True Then
-                            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_2_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
                         End If
 
                         '保存设置
@@ -2449,8 +2491,102 @@ Public Class MainWindow
         ScrollViewer.SetVerticalScrollBarVisibility(ui_form_stop_right_cross_line_list, ScrollBarVisibility.Hidden)
     End Sub
 
+
 #End Region
 
 
+    ''' <summary>
+    ''' [系统][ui]线路-经过站台列表跳转到站台界面的函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_line_have_stop_list_jump_to_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_line_have_stop_list.MouseDoubleClick
 
+        If ui_form_line_have_stop_list.SelectedIndex <> -1 Then
+
+            '寻找当前站点
+            Dim word As String = ""
+            If up_or_down_line = True Then
+                '上行
+                word = ui_connet_core_form_line_have_sotp_list_up.Item(ui_form_line_have_stop_list.SelectedIndex).ui_stop_name
+            Else
+                '下行
+                word = ui_connet_core_form_line_have_sotp_list_down.Item(ui_form_line_have_stop_list.SelectedIndex).ui_stop_name
+            End If
+
+            '确认索引
+            Dim linshi_1 As Integer = return_check_stop_list_nopage(word)
+            If linshi_1 <> -1 Then
+                now_stop = linshi_1
+                refsh_stop()
+                jump_to_stop_from_line = True
+
+                '设置文本
+                ui_form_stop_describe.Text = cross_stop
+                ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
+
+                ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
+                ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+
+                '**************************动画跳转
+                Dim stb_1
+                storyboard_action.Stop()
+                storyboard_action.Children.Clear()
+
+                '切入新窗口
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
+
+                Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+                storyboard_action.Children.Add(stb_1)
+                '移动旧窗口
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+
+                Animation.Storyboard.SetTarget(stb_1, ui_form_line)
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+                storyboard_action.Children.Add(stb_1)
+
+                '控制面板
+                If line_contorl = True Then
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.15)))
+
+                    Animation.Storyboard.SetTarget(stb_1, ui_form_line_contorl)
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+                    Dim linshi = New Animation.ExponentialEase()
+                    linshi.EasingMode = Animation.EasingMode.EaseOut
+                    stb_1.EasingFunction = linshi
+
+                    storyboard_action.Children.Add(stb_1)
+                End If
+
+                '设置界面
+                screens = 2
+                line_contorl = False
+
+                '****************************开始跳转
+                storyboard_action.Begin()
+
+                '刷新
+                re_window()
+
+            Else
+                '发生错误，退出
+                Environment.Exit(9)
+            End If
+
+
+        End If
+
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]关于界面前往github的按钮
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_about_github(sender As Object, e As MouseButtonEventArgs)
+        System.Diagnostics.Process.Start("https://github.com/yyc12345/bus_rode")
+    End Sub
 End Class
