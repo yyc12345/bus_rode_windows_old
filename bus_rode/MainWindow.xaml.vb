@@ -2517,6 +2517,10 @@ Public Class MainWindow
             '确认索引
             Dim linshi_1 As Integer = return_check_stop_list_nopage(word)
             If linshi_1 <> -1 Then
+                '清除旧的
+                ui_form_stop_left_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_right_cross_line_list.ItemsSource = Nothing
+
                 now_stop = linshi_1
                 refsh_stop()
                 jump_to_stop_from_line = True
