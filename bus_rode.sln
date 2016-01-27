@@ -11,6 +11,16 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "bus_rode_add", "bus_rode_ad
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "bus_rode_check", "bus_rode_check\bus_rode_check.vbproj", "{C033972A-1115-42E0-9EC3-E801B135B227}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "bus_rode_develop", "bus_rode_develop\bus_rode_develop.vbproj", "{6E0F3BDB-D311-4FDB-8937-EAD27B448BB0}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "bus_rode_compression_ui", "bus_rode_compression_ui\bus_rode_compression_ui.vbproj", "{2D741CB0-418C-4D37-B524-3CB2CED0AE3A}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "bus_rode_develop_tools", "bus_rode_develop_tools\bus_rode_develop_tools.vbproj", "{1176A6E6-55C8-42DA-9468-CCD54D4C2A88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bus_rode_dll_smaple_csharp", "bus_rode_dll_smaple_csharp\bus_rode_dll_smaple_csharp.csproj", "{F2F59065-3487-4105-95CA-241ECBC516C5}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "bus_rode_dll_smaple", "bus_rode_dll_smaple\bus_rode_dll_smaple.vbproj", "{7496E5B0-6654-4326-9318-8487DCA12A9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +43,26 @@ Global
 		{C033972A-1115-42E0-9EC3-E801B135B227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C033972A-1115-42E0-9EC3-E801B135B227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C033972A-1115-42E0-9EC3-E801B135B227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E0F3BDB-D311-4FDB-8937-EAD27B448BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E0F3BDB-D311-4FDB-8937-EAD27B448BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E0F3BDB-D311-4FDB-8937-EAD27B448BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E0F3BDB-D311-4FDB-8937-EAD27B448BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D741CB0-418C-4D37-B524-3CB2CED0AE3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D741CB0-418C-4D37-B524-3CB2CED0AE3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D741CB0-418C-4D37-B524-3CB2CED0AE3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D741CB0-418C-4D37-B524-3CB2CED0AE3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1176A6E6-55C8-42DA-9468-CCD54D4C2A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1176A6E6-55C8-42DA-9468-CCD54D4C2A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1176A6E6-55C8-42DA-9468-CCD54D4C2A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1176A6E6-55C8-42DA-9468-CCD54D4C2A88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F59065-3487-4105-95CA-241ECBC516C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F59065-3487-4105-95CA-241ECBC516C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F59065-3487-4105-95CA-241ECBC516C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F59065-3487-4105-95CA-241ECBC516C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7496E5B0-6654-4326-9318-8487DCA12A9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7496E5B0-6654-4326-9318-8487DCA12A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7496E5B0-6654-4326-9318-8487DCA12A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7496E5B0-6654-4326-9318-8487DCA12A9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
