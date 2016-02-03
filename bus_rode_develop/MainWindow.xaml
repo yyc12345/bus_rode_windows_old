@@ -1,0 +1,42 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bus_rode_develop"
+        mc:Ignorable="d"
+        Title="bus_rode资源开发器" Height="600" Width="800" Icon="bus_rode_icon_orange.ico">
+    <Grid>
+        
+        <!-- 菜单-->
+        <Menu x:Name="menu" Height="auto" VerticalAlignment="Top">
+
+            <MenuItem Header="工程" FontSize="12">
+
+                <MenuItem Header="新建工程" FontSize="12"/>
+                <MenuItem Header="打开工程" FontSize="12"/>
+                <MenuItem Header="保存工程" FontSize="12"/>
+                <MenuItem Header="关闭工程" FontSize="12"/>
+                <Separator/>
+                <MenuItem Header="退出" FontSize="12"/>
+
+            </MenuItem>
+            <MenuItem Header="预设" FontSize="12">
+
+                <MenuItem Header="设置相关预设" FontSize="12"/>
+
+            </MenuItem>
+            <MenuItem Header="编译" FontSize="12">
+
+                <MenuItem Header="生成全部" FontSize="12"/>
+                <Separator/>
+                <MenuItem Header="打包资源" FontSize="12"/>
+
+            </MenuItem>
+            <MenuItem Header="关于" FontSize="12"/>
+
+        </Menu>
+              
+
+    </Grid>
+</Window>
