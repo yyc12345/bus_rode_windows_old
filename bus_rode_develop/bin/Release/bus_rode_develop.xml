@@ -6,6 +6,117 @@ bus_rode_develop
 </name>
 </assembly>
 <members>
+<member name="M:bus_rode_develop.window_communication.SendMessage(System.Int32,System.Int32,System.Int32,System.Int32)">
+ <summary>
+ [系统][ui]向指定窗口的消息循环队列中发送消息
+ </summary>
+ <param name="hwnd">指定窗口的句柄</param>
+ <param name="wMsg">发送内容</param>
+ <param name="wParam">附加1</param>
+ <param name="lParam">附加2</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:bus_rode_develop.window_communication.ReleaseCapture">
+ <summary>
+ [系统][ui]取消鼠标按下状态
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_title">
+ <summary>
+ window_dialogs窗口的标题
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_message">
+ <summary>
+ window_dialogs窗口的具体内容
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_left_btn_text">
+ <summary>
+ window_dialogs窗口左侧按钮文本
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_right_btn_text">
+ <summary>
+ window_dialogs窗口右侧按钮文本
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_select_btn">
+ <summary>
+ window_dialogs窗口选择的按钮，0表示左侧，1表示右侧
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_btn_count">
+ <summary>
+ window_dialogs窗口显示几个按钮，允许数值1-2，写1只显示原左侧按钮
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_msg_state">
+ <summary>
+ window_dialogs窗口显示模式 0=信息 1=警告 2=错误，默认0信息，该值决定对话框标题的颜色
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_show_inputbox">
+ <summary>
+ window_dialogs窗口是否需要接受输入的数据
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_dialogs_input_text">
+ <summary>
+ window_dialogs窗口输入的文本，如果有的话
+ </summary>
+</member>
+<member name="M:bus_rode_develop.window_communication.window_dialogs_clear">
+ <summary>
+ 清理window_dialogs的各项内容
+ </summary>
+</member>
+<member name="T:bus_rode_develop.Window_dialogs">
+<summary>
+Window_dialogs
+</summary>
+</member>
+<member name="M:bus_rode_develop.Window_dialogs.window_open(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 初始化窗口
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.Window_dialogs.window_move(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ 窗口移动
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.Window_dialogs.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:bus_rode_develop.Window_new_project">
+<summary>
+Window_new_project
+</summary>
+</member>
+<member name="M:bus_rode_develop.Window_new_project.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:bus_rode_develop.Window_before_set">
+<summary>
+Window_before_set
+</summary>
+</member>
+<member name="M:bus_rode_develop.Window_before_set.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
 <member name="T:bus_rode_develop.Application">
 <summary>
 Application

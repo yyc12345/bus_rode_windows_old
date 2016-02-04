@@ -23,9 +23,9 @@
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
-                    <Ellipse Fill="#ffffffff" Grid.Column="0" Grid.ColumnSpan="2" StrokeThickness="0"/>
-                    <Rectangle x:Name="rectangle" Grid.Column="1" Grid.ColumnSpan="3" Fill="#ffffffff" SnapsToDevicePixels="True" Height="10" StrokeThickness="0"/>
-                    <Ellipse Fill="#ffffffff" Grid.Column="3" Grid.ColumnSpan="2" StrokeThickness="0"/>
+                    <Ellipse Fill="#ff7f7f7f" Grid.Column="0" Grid.ColumnSpan="2" StrokeThickness="0"/>
+                    <Rectangle x:Name="rectangle" Grid.Column="1" Grid.ColumnSpan="3" Fill="#ff7f7f7f" SnapsToDevicePixels="True" Height="10" StrokeThickness="0"/>
+                    <Ellipse Fill="#ff7f7f7f" Grid.Column="3" Grid.ColumnSpan="2" StrokeThickness="0"/>
                 </Grid>
                 <!--<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="0"/>-->
                 <!--<RepeatButton x:Name="PART_LineDownButton" Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="2">
@@ -257,9 +257,9 @@
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="5"/>
                     </Grid.RowDefinitions>
-                    <Ellipse Fill="#ffffffff" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="0"/>
-                    <Rectangle x:Name="rectangle" Grid.Row="1" Grid.RowSpan="3" Fill="#ffffffff" SnapsToDevicePixels="True" Width="10" StrokeThickness="0"/>
-                    <Ellipse Fill="#ffffffff" Grid.Row="3" Grid.RowSpan="2" StrokeThickness="0"/>
+                    <Ellipse Fill="#ff7f7f7f" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="0"/>
+                    <Rectangle x:Name="rectangle" Grid.Row="1" Grid.RowSpan="3" Fill="#ff7f7f7f" SnapsToDevicePixels="True" Width="10" StrokeThickness="0"/>
+                    <Ellipse Fill="#ff7f7f7f" Grid.Row="3" Grid.RowSpan="2" StrokeThickness="0"/>
                 </Grid>
                 <!--<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="#3f7f7f7f" Grid.Row="0"/>-->
                 <!--<RepeatButton x:Name="PART_LineDownButton" Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="2">

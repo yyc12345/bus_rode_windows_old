@@ -36,7 +36,713 @@
             <MenuItem Header="关于" FontSize="12"/>
 
         </Menu>
-              
+        
+        <!-- 工作区-->
+        <TabControl BorderThickness="0,1,0,0" Background="#00000000" Margin="0,30,0,0">
 
+            <TabItem Header="线路" Style="{DynamicResource ui_temp_tabitem}">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 车列表-->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="1" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="添加" Foreground="White"/>
+                        <Button Grid.Row="3" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="删除" Foreground="White"/>
+                        <Button Grid.Row="5" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="重命名" Foreground="White"/>
+
+                        <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0,5,0">
+                            <TextBox Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <!-- 车辆表-->
+                        <ListBox BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+
+                    </Grid>
+
+                    <!-- 输入列表-->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Background="#ff3cb371" Template="{DynamicResource ButtonControlTemplate_green}" Content="保存修改" Foreground="White" />
+                            <Grid Grid.Column="2">
+                                <Grid.Background >
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="#ff1e90ff" Offset="0"/>
+                                        <GradientStop Color="#00000000" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+
+                                <TextBlock Foreground="White" Text="  信息编辑" VerticalAlignment="Center"/>
+                            </Grid>
+                            
+                        </Grid>
+
+                        <TabControl BorderThickness="0,1,0,0" Margin="0,5,0,0" Grid.Row="2">
+                            
+                            <TabItem Header="基本属性" Style="{DynamicResource ui_temp_tabitem}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="线路名  " VerticalAlignment="Center"/>
+                                        <TextBox Background="#00000000" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
+                                    </Grid>
+                                    
+                                    <Grid Grid.Row="3">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="类别  " VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
+
+                                    </Grid>
+
+                                    <Grid Grid.Row="5">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="等待该车难易度  " VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
+
+                                    </Grid>
+
+                                    <Grid Grid.Row="7">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="首班车  " VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text=" 时 " VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Column="3" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="4" Text=" 分 " VerticalAlignment="Center"/>
+                                        
+                                    </Grid>
+
+                                    <Grid Grid.Row="9">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="末班车  " VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text=" 时 " VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Column="3" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="4" Text=" 分 " VerticalAlignment="Center"/>
+
+                                    </Grid>
+
+                                    <TextBlock Foreground="red" Grid.Row="11" Text="注：按照首末班车表填写，夜班车也按照晚上为首班车，白天为末班车&#x000A;
+24小时运营车辆，请将首班车填为0:00，末班车填为23:59&#x000A;
+不运营车辆，请将首班车与末班车填为相同的时间"/>
+
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="描述" Style="{DynamicResource ui_temp_tabitem}">
+                                <Grid>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                                    </Grid>
+                                    <Grid Grid.Row="3">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                                    </Grid>
+                                    <Grid Grid.Row="5">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                                    </Grid>
+                                    <Grid Grid.Row="7">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                                    </Grid>
+                                    <Grid Grid.Row="9">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="叙述5" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                                    </Grid>
+
+                                    <Button Grid.Row="11" Width="150" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="使用默认设置" Foreground="White" HorizontalAlignment="Left">
+                                        <Button.ToolTip>
+                                            <Grid>
+                                                <TextBlock Text="默认设置可在 预设 中设置"/>
+                                            </Grid>
+                                        </Button.ToolTip>
+                                    </Button>
+                                            
+                                    <TextBlock Foreground="red" Grid.Row="13" Text="建议您对于每一个车辆都使用相同格式的叙述内容"/>
+
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="站点" Style="{DynamicResource ui_temp_tabitem}">
+                                <Grid>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock Text="功能：（对当前选中的线路上下行生效）" VerticalAlignment="Center"/>
+                                        <Button Width="150" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="从txt导入" Foreground="White"/>
+                                        <Button Width="150" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="清空" Foreground="White"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="3" HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock Text="替换：  将" VerticalAlignment="Center"/>
+                                        <TextBox Background="#00000000" Width="50"/>
+                                        <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="替换为回车" Foreground="White"/>
+                                        <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="替换为其他字符" Foreground="White"/>
+
+                                        <CheckBox Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于上行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center"/>
+                                        <CheckBox Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于下行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center"/>
+
+                                    </StackPanel>
+
+                                    <TextBlock Foreground="red" Grid.Row="5" Text="一行一个站台名，使用回车分割多个站台，不要输入空行"/>
+
+                                    <TabControl Background="#00000000" BorderThickness="0,1,0,0" Grid.Row="7">
+                                        
+                                        <TabItem Header="上行线路" Style="{DynamicResource ui_temp_tabitem}">
+                                            <TextBox BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                        </TabItem>
+
+                                        <TabItem Header="下行线路" Style="{DynamicResource ui_temp_tabitem}">
+                                            <TextBox BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                        </TabItem>
+
+                                    </TabControl>
+                                    
+                                </Grid>
+                            </TabItem>
+
+                        </TabControl>
+                        
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="总站" Style="{DynamicResource ui_temp_tabitem}">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 车列表-->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0,5,0">
+                            <TextBox Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- 车辆表-->
+                        <ListBox BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+
+                    </Grid>
+
+                    <!-- 输入列表-->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Background="#ff3cb371" Template="{DynamicResource ButtonControlTemplate_green}" Content="保存修改" Foreground="White" />
+                            <Grid Grid.Column="2">
+                                <Grid.Background >
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="#ff1e90ff" Offset="0"/>
+                                        <GradientStop Color="#00000000" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+
+                                <TextBlock Foreground="White" Text="  信息编辑" VerticalAlignment="Center"/>
+                            </Grid>
+
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center"/>
+                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                            </Grid>
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center"/>
+                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                            </Grid>
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center"/>
+                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                            </Grid>
+                            <Grid Grid.Row="7">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center"/>
+                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                            </Grid>
+                            <Grid Grid.Row="9">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="叙述5" Grid.Column="0" VerticalAlignment="Center"/>
+                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                            </Grid>
+
+                            <Button Grid.Row="11" Width="150" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="使用默认设置" Foreground="White" HorizontalAlignment="Left">
+                                <Button.ToolTip>
+                                    <Grid>
+                                        <TextBlock Text="默认设置可在 预设 中设置"/>
+                                    </Grid>
+                                </Button.ToolTip>
+                            </Button>
+
+                            <TextBlock Foreground="red" Grid.Row="13" Text="建议您对于每一个总站都使用相同格式的叙述内容"/>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="地铁" Style="{DynamicResource ui_temp_tabitem}">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 站台列表-->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0,5,0">
+                            <TextBox Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- 车辆表-->
+                        <ListBox BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+
+                    </Grid>
+
+
+                    <!-- 输入列表-->
+                    <Grid Grid.Column="3">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 出口列表-->
+                        <Grid Grid.Column="0" Grid.Row="2">
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="3" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="添加" Foreground="White"/>
+                            <Button Grid.Row="5" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="删除" Foreground="White"/>
+                            <Button Grid.Row="7" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="重命名" Foreground="White"/>
+
+                            <TextBlock Text="出口列表：" Margin="5,0,5,0" Grid.Row="1"/>
+
+                            <!-- 车辆表-->
+                            <ListBox BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Background="#ff3cb371" Template="{DynamicResource ButtonControlTemplate_green}" Content="保存修改" Foreground="White" />
+                            <Grid Grid.Column="2">
+                                <Grid.Background >
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="#ff1e90ff" Offset="0"/>
+                                        <GradientStop Color="#00000000" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+
+                                <TextBlock Foreground="White" Text="  信息编辑" VerticalAlignment="Center"/>
+                            </Grid>
+
+                        </Grid>
+
+                        <Grid Grid.Row="3" Grid.Column="1">
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="出口通向" Grid.Column="0" VerticalAlignment="Center"/>
+                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                            </Grid>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="杂项" Style="{DynamicResource ui_temp_tabitem}">
+                
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Background="#ff3cb371" Template="{DynamicResource ButtonControlTemplate_green}" Content="保存修改" Foreground="White" />
+                        <Grid Grid.Column="2">
+                            <Grid.Background >
+                                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                    <GradientStop Color="#ff1e90ff" Offset="0"/>
+                                    <GradientStop Color="#00000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Grid.Background>
+
+                            <TextBlock Foreground="White" Text="  信息编辑" VerticalAlignment="Center"/>
+                        </Grid>
+
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="3">
+                        <StackPanel Orientation="Vertical">
+
+                            <Grid>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="1" Width="200" HorizontalAlignment="Left">
+                                    <Grid.Background >
+                                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                            <GradientStop Color="#ff1e90ff" Offset="0"/>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>
+
+                                    <TextBlock Foreground="White" Text="  readme.txt" VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="资源所属地址（English）" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                    </Grid>
+                                    <Grid Grid.Row="3">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="资源所属地址（Local Language）" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                    </Grid>
+                                    <Grid Grid.Row="5">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Margin="5,0,5,0" Text="国家" Grid.Column="1" VerticalAlignment="Center"/>
+                                        <TextBlock Margin="5,0,5,0" Text="省（州、区）" Grid.Column="2" VerticalAlignment="Center"/>
+                                        <TextBlock Margin="5,0,5,0" Text="城市（县、市）" Grid.Column="3" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <TextBlock Foreground="Red" Grid.Row="7" Text="第一条必须使用英语填写，这关系到模块的加载（模块 的定义详见资源开发手册）&#x000A;
+第二条请使用本地语言填写，这将会涉及到联网最短路径搜索功能（使用本地最短路径服务提供商支持的语言即可）"/>
+
+                                    <Grid Grid.Row="9">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="资源开发者" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                                    </Grid>
+                                    <Grid Grid.Row="11">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="资源开发时间" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+
+                                    </Grid>
+                                    <TextBlock Foreground="Red" Grid.Row="13" Text="开发者可以是人名，也可以是组织名&#x000A;
+开发时间填写最后更新这个资源的时间，不固定格式，最少精确到天"/>
+
+                                </Grid>
+
+
+                            </Grid>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                   
+                </Grid>
+                
+            </TabItem>
+
+
+        </TabControl>
+        
     </Grid>
 </Window>
