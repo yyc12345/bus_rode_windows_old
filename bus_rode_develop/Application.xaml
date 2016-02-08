@@ -629,7 +629,7 @@
                                 <RowDefinition Height="5"/>
                                 <RowDefinition Height="2"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Foreground="black" FontSize="12" Text="{TemplateBinding Header}" TextAlignment="Center">
+                            <TextBlock Foreground="{TemplateBinding Foreground}" FontSize="12" Text="{TemplateBinding Header}" TextAlignment="Center">
                                 <TextBlock.ToolTip >
                                     <Grid >
                                         <TextBlock Foreground="black" FontSize="12" Text="{TemplateBinding Header}"/>
@@ -649,6 +649,12 @@
                 </Trigger>
                 <Trigger Property="IsSelected" Value="False">
                     <Setter Property="Background" Value="#00000000"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="true">
+                    <Setter Property="Foreground" Value="#ff000000"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground" Value="#7f000000"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

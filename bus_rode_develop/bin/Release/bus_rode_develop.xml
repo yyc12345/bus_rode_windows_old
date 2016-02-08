@@ -6,6 +6,67 @@ bus_rode_develop
 </name>
 </assembly>
 <members>
+<member name="F:bus_rode_develop.Develop_Core.work_mode">
+ <summary>
+ 工作模式 0=没有打开文件 1=已经打开文件
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Develop_Core.build_mode">
+ <summary>
+ 编译状态 0=没有编译 1=已经编译
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Develop_Core.project_path">
+ <summary>
+ 指定项目的路径,带\符号
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Develop_Core.desktop">
+ <summary>
+ 预设9个
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Develop_Core.back_station">
+ <summary>
+ 内存中的数据备份-总站(站台序列，0=名称 1-4各个叙述)
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Develop_Core.back_subway">
+ <summary>
+ 内存中的数据备份-地铁(地铁序列，出口文字)
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Develop_Core.back_exit">
+ <summary>
+ 内存中的数据备份-描述出口
+ </summary>
+</member>
+<member name="M:bus_rode_develop.Develop_Core.read_desktop">
+ <summary>
+ 读取预设
+ </summary>
+</member>
+<member name="M:bus_rode_develop.Develop_Core.save_desktop">
+ <summary>
+ 保存预设
+ </summary>
+</member>
+<member name="M:bus_rode_develop.Develop_Core.clear_data">
+ <summary>
+ 清除数据
+ </summary>
+</member>
+<member name="M:bus_rode_develop.Develop_Core.check_build">
+ <summary>
+ 检查工程是否编译
+ </summary>
+ <returns></returns>
+</member>
+<member name="F:bus_rode_develop.systems.app_build">
+ <summary>
+ [系统]-应用的版本号
+ </summary>
+</member>
 <member name="M:bus_rode_develop.window_communication.SendMessage(System.Int32,System.Int32,System.Int32,System.Int32)">
  <summary>
  [系统][ui]向指定窗口的消息循环队列中发送消息
@@ -73,6 +134,54 @@ bus_rode_develop
  清理window_dialogs的各项内容
  </summary>
 </member>
+<member name="M:bus_rode_develop.window_communication.window_dialogs_show(System.String,System.String,System.Byte,System.Byte,System.Boolean,System.String,System.String,System.Windows.Window@)">
+ <summary>
+ 显示一个window_dialogs对话框
+ </summary>
+ <param name="title">标题</param>
+ <param name="message">消息</param>
+ <param name="msg_state">窗口显示模式 0=信息 1=警告 2=错误，默认0信息，该值决定对话框标题的颜色</param>
+ <param name="btn_count">窗口显示几个按钮，允许数值1-2，写1只显示原左侧按钮</param>
+ <param name="show_input">窗口是否需要接受输入的数据</param>
+ <param name="left_btn_text">窗口左侧按钮文本</param>
+ <param name="right_btn_text">窗口右侧按钮文本</param>
+ <param name="owner">传递的主窗体</param>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_new_project_ok_for_create">
+ <summary>
+ window_new_project是否确定了要创建工程
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_new_project_project_name">
+ <summary>
+ window_new_project工程名
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_new_project_project_path">
+ <summary>
+ window_new_project工程存储路径
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_new_project_use_old_file">
+ <summary>
+ window_new_project是否使用已有文件创建工程
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_new_project_bus_path">
+ <summary>
+ window_new_project已有bus.txt路径
+ </summary>
+</member>
+<member name="F:bus_rode_develop.window_communication.window_new_project_have_bus_path">
+ <summary>
+ window_new_project已有have_bus.txt路径
+ </summary>
+</member>
+<member name="M:bus_rode_develop.window_communication.window_new_project_clear">
+ <summary>
+ 清空还原函数
+ </summary>
+</member>
 <member name="T:bus_rode_develop.Window_dialogs">
 <summary>
 Window_dialogs
@@ -101,6 +210,56 @@ InitializeComponent
 <summary>
 Window_new_project
 </summary>
+</member>
+<member name="F:bus_rode_develop.Window_new_project.save_peoject_file">
+ <summary>
+ 保存项目的保存框
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Window_new_project.open_bus_file">
+ <summary>
+ 打开bus.txt的打开框
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Window_new_project.open_have_bus_file">
+ <summary>
+ 打开have_bus.txt的打开框
+ </summary>
+</member>
+<member name="M:bus_rode_develop.Window_new_project.creat_project(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 创建工程
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.Window_new_project.window_open(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 窗口开启
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.Window_new_project.select_project_path(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 选择工程路径
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.Window_new_project.select_bus_path(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 选择bus.txt路径
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.Window_new_project.select_have_bus_path(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 选择have_bus.txt路径
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
 </member>
 <member name="M:bus_rode_develop.Window_new_project.InitializeComponent">
 <summary>
@@ -136,6 +295,63 @@ Application Entry Point.
 <summary>
 MainWindow
 </summary>
+</member>
+<member name="F:bus_rode_develop.MainWindow.open_brsp_file">
+ <summary>
+ 打开工程的打开框
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.app_init(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 应用初始化
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_creat_project(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 创建工程
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_open_project(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 打开工程
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.re_work_area">
+ <summary>
+ 以当前工作模式刷新工作区
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.read_line_name">
+ <summary>
+ 读取线路主文档
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.read_line(System.String)">
+ <summary>
+ 读取线路数据
+ </summary>
+ <param name="name"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.read_more_date">
+ <summary>
+ 读取总站、地铁核心数据
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.create_project">
+ <summary>
+ 创建工程
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.open_project">
+ <summary>
+ 打开工程
+ </summary>
 </member>
 <member name="M:bus_rode_develop.MainWindow.InitializeComponent">
 <summary>

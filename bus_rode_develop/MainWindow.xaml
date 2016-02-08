@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bus_rode_develop"
         mc:Ignorable="d"
-        Title="bus_rode资源开发器" Height="600" Width="800" Icon="bus_rode_icon_orange.ico">
+        Title="bus_rode资源开发器" Height="600" Width="800" Icon="bus_rode_icon_orange.ico" Loaded="app_init">
     <Grid>
         
         <!-- 菜单-->
@@ -13,32 +13,34 @@
 
             <MenuItem Header="工程" FontSize="12">
 
-                <MenuItem Header="新建工程" FontSize="12"/>
-                <MenuItem Header="打开工程" FontSize="12"/>
-                <MenuItem Header="保存工程" FontSize="12"/>
-                <MenuItem Header="关闭工程" FontSize="12"/>
+                <MenuItem x:Name="ui_menu_form_project_form_new" Header="新建工程" FontSize="12"/>
+                <MenuItem x:Name="ui_menu_form_project_form_open" Header="打开工程" FontSize="12"/>
+                <MenuItem x:Name="ui_menu_form_project_form_save" Header="保存工程" FontSize="12"/>
+                <MenuItem x:Name="ui_menu_form_project_form_close" Header="关闭工程" FontSize="12"/>
                 <Separator/>
-                <MenuItem Header="退出" FontSize="12"/>
+                <MenuItem x:Name="ui_menu_form_project_form_exit" Header="退出" FontSize="12"/>
 
             </MenuItem>
             <MenuItem Header="预设" FontSize="12">
 
-                <MenuItem Header="设置相关预设" FontSize="12"/>
+                <MenuItem x:Name="ui_menu_form_setup_form_setup" Header="设置相关预设" FontSize="12"/>
 
             </MenuItem>
-            <MenuItem Header="编译" FontSize="12">
+            <MenuItem x:Name="ui_menu_form_build" Header="编译" FontSize="12">
 
-                <MenuItem Header="生成全部" FontSize="12"/>
+                <MenuItem x:Name="ui_menu_form_build_form_build" Header="生成全部" FontSize="12"/>
                 <Separator/>
-                <MenuItem Header="打包资源" FontSize="12"/>
+                <MenuItem x:Name="ui_menu_form_build_form_packups" Header="打包资源" FontSize="12"/>
 
             </MenuItem>
-            <MenuItem Header="关于" FontSize="12"/>
+            <MenuItem x:Name="ui_menu_form_about" Header="关于" FontSize="12"/>
 
         </Menu>
-        
+
+        <TextBlock x:Name="ui_bk_word" Opacity="0" Foreground="#3f000000" FontSize="25" Text="打开或创建一个bus_rode资源，开始创造奇迹" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
         <!-- 工作区-->
-        <TabControl BorderThickness="0,1,0,0" Background="#00000000" Margin="0,30,0,0">
+        <TabControl Opacity="1" x:Name="ui_work_area" BorderThickness="0,1,0,0" Background="#00000000" Margin="0,30,0,0">
 
             <TabItem Header="线路" Style="{DynamicResource ui_temp_tabitem}">
                 <Grid>
@@ -67,12 +69,12 @@
                         <Button Grid.Row="5" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="重命名" Foreground="White"/>
 
                         <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0,5,0">
-                            <TextBox Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_form_line_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </StackPanel>
                         
                         <!-- 车辆表-->
-                        <ListBox BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                        <ListBox x:Name="ui_form_line_form_line_list" BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
 
                     </Grid>
 
@@ -133,7 +135,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="线路名  " VerticalAlignment="Center"/>
-                                        <TextBox Background="#00000000" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
+                                        <TextBox x:Name="ui_form_line_form_basic_pro_form_line_name" Background="#00000000" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
                                     </Grid>
                                     
                                     <Grid Grid.Row="3">
@@ -143,7 +145,11 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="类别  " VerticalAlignment="Center"/>
-                                        <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="ui_form_line_form_basic_pro_form_genre" Grid.Column="1" VerticalAlignment="Center">
+                                            <ComboBoxItem Content="公交" IsSelected="true"/>
+                                            <ComboBoxItem Content="地铁"/>
+                                        </ComboBox>
+                                                  
 
                                     </Grid>
 
@@ -154,7 +160,13 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="等待该车难易度  " VerticalAlignment="Center"/>
-                                        <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="ui_form_line_form_basic_pro_form_easy" Grid.Column="1" VerticalAlignment="Center">
+                                            <ComboBoxItem Content="0---极难等（30min以上1班）"/>
+                                            <ComboBoxItem Content="1---难等（16-30min 1班）"/>
+                                            <ComboBoxItem Content="2---适中（6-15min 1班）" IsSelected="true"/>
+                                            <ComboBoxItem Content="3---易等（2-5min 1班）"/>
+                                            <ComboBoxItem Content="4---极易等（2min 1班或更多班次）"/>
+                                        </ComboBox>
 
                                     </Grid>
 
@@ -169,9 +181,84 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="首班车  " VerticalAlignment="Center"/>
-                                        <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="ui_form_line_form_basic_pro_form_first_bus_hour" Grid.Column="1" VerticalAlignment="Center">
+                                            <ComboBoxItem Content="0" IsSelected="true"/>
+                                            <ComboBoxItem Content="1"/>
+                                            <ComboBoxItem Content="2"/>
+                                            <ComboBoxItem Content="3"/>
+                                            <ComboBoxItem Content="4"/>
+                                            <ComboBoxItem Content="5"/>
+                                            <ComboBoxItem Content="6"/>
+                                            <ComboBoxItem Content="7"/>
+                                            <ComboBoxItem Content="8"/>
+                                            <ComboBoxItem Content="9"/>
+                                            <ComboBoxItem Content="10"/>
+                                            <ComboBoxItem Content="11"/>
+                                        </ComboBox>
+                                                  
                                         <TextBlock Grid.Column="2" Text=" 时 " VerticalAlignment="Center"/>
-                                        <ComboBox Grid.Column="3" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="ui_form_line_form_basic_pro_form_first_bus_minute" Grid.Column="3" VerticalAlignment="Center">
+                                            <ComboBoxItem Content="0" IsSelected="true"/>
+                                            <ComboBoxItem Content="1"/>
+                                            <ComboBoxItem Content="2"/>
+                                            <ComboBoxItem Content="3"/>
+                                            <ComboBoxItem Content="4"/>
+                                            <ComboBoxItem Content="5"/>
+                                            <ComboBoxItem Content="6"/>
+                                            <ComboBoxItem Content="7"/>
+                                            <ComboBoxItem Content="8"/>
+                                            <ComboBoxItem Content="9"/>
+                                            <ComboBoxItem Content="10"/>
+                                            <ComboBoxItem Content="11"/>
+                                            <ComboBoxItem Content="12"/>
+                                            <ComboBoxItem Content="13"/>
+                                            <ComboBoxItem Content="14"/>
+                                            <ComboBoxItem Content="15"/>
+                                            <ComboBoxItem Content="16"/>
+                                            <ComboBoxItem Content="17"/>
+                                            <ComboBoxItem Content="18"/>
+                                            <ComboBoxItem Content="19"/>
+                                            <ComboBoxItem Content="20"/>
+                                            <ComboBoxItem Content="21"/>
+                                            <ComboBoxItem Content="22"/>
+                                            <ComboBoxItem Content="23"/>
+                                            <ComboBoxItem Content="24"/>
+                                            <ComboBoxItem Content="25"/>
+                                            <ComboBoxItem Content="26"/>
+                                            <ComboBoxItem Content="27"/>
+                                            <ComboBoxItem Content="28"/>
+                                            <ComboBoxItem Content="29"/>
+                                            <ComboBoxItem Content="30"/>
+                                            <ComboBoxItem Content="31"/>
+                                            <ComboBoxItem Content="32"/>
+                                            <ComboBoxItem Content="33"/>
+                                            <ComboBoxItem Content="34"/>
+                                            <ComboBoxItem Content="35"/>
+                                            <ComboBoxItem Content="36"/>
+                                            <ComboBoxItem Content="37"/>
+                                            <ComboBoxItem Content="38"/>
+                                            <ComboBoxItem Content="39"/>
+                                            <ComboBoxItem Content="40"/>
+                                            <ComboBoxItem Content="41"/>
+                                            <ComboBoxItem Content="42"/>
+                                            <ComboBoxItem Content="43"/>
+                                            <ComboBoxItem Content="44"/>
+                                            <ComboBoxItem Content="45"/>
+                                            <ComboBoxItem Content="46"/>
+                                            <ComboBoxItem Content="47"/>
+                                            <ComboBoxItem Content="48"/>
+                                            <ComboBoxItem Content="49"/>
+                                            <ComboBoxItem Content="50"/>
+                                            <ComboBoxItem Content="51"/>
+                                            <ComboBoxItem Content="52"/>
+                                            <ComboBoxItem Content="53"/>
+                                            <ComboBoxItem Content="54"/>
+                                            <ComboBoxItem Content="55"/>
+                                            <ComboBoxItem Content="56"/>
+                                            <ComboBoxItem Content="57"/>
+                                            <ComboBoxItem Content="58"/>
+                                            <ComboBoxItem Content="59"/>
+                                        </ComboBox>
                                         <TextBlock Grid.Column="4" Text=" 分 " VerticalAlignment="Center"/>
                                         
                                     </Grid>
@@ -187,16 +274,91 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="末班车  " VerticalAlignment="Center"/>
-                                        <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="ui_form_line_form_basic_pro_form_last_bus_hour" Grid.Column="1" VerticalAlignment="Center">
+                                            <ComboBoxItem Content="12" IsSelected="true"/>
+                                            <ComboBoxItem Content="13"/>
+                                            <ComboBoxItem Content="14"/>
+                                            <ComboBoxItem Content="15"/>
+                                            <ComboBoxItem Content="16"/>
+                                            <ComboBoxItem Content="17"/>
+                                            <ComboBoxItem Content="18"/>
+                                            <ComboBoxItem Content="19"/>
+                                            <ComboBoxItem Content="20"/>
+                                            <ComboBoxItem Content="21"/>
+                                            <ComboBoxItem Content="22"/>
+                                            <ComboBoxItem Content="23"/>
+                                        </ComboBox>
+                                        
                                         <TextBlock Grid.Column="2" Text=" 时 " VerticalAlignment="Center"/>
-                                        <ComboBox Grid.Column="3" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="ui_form_line_form_basic_pro_form_last_bus_minute" Grid.Column="3" VerticalAlignment="Center">
+                                            <ComboBoxItem Content="0" IsSelected="true"/>
+                                            <ComboBoxItem Content="1"/>
+                                            <ComboBoxItem Content="2"/>
+                                            <ComboBoxItem Content="3"/>
+                                            <ComboBoxItem Content="4"/>
+                                            <ComboBoxItem Content="5"/>
+                                            <ComboBoxItem Content="6"/>
+                                            <ComboBoxItem Content="7"/>
+                                            <ComboBoxItem Content="8"/>
+                                            <ComboBoxItem Content="9"/>
+                                            <ComboBoxItem Content="10"/>
+                                            <ComboBoxItem Content="11"/>
+                                            <ComboBoxItem Content="12"/>
+                                            <ComboBoxItem Content="13"/>
+                                            <ComboBoxItem Content="14"/>
+                                            <ComboBoxItem Content="15"/>
+                                            <ComboBoxItem Content="16"/>
+                                            <ComboBoxItem Content="17"/>
+                                            <ComboBoxItem Content="18"/>
+                                            <ComboBoxItem Content="19"/>
+                                            <ComboBoxItem Content="20"/>
+                                            <ComboBoxItem Content="21"/>
+                                            <ComboBoxItem Content="22"/>
+                                            <ComboBoxItem Content="23"/>
+                                            <ComboBoxItem Content="24"/>
+                                            <ComboBoxItem Content="25"/>
+                                            <ComboBoxItem Content="26"/>
+                                            <ComboBoxItem Content="27"/>
+                                            <ComboBoxItem Content="28"/>
+                                            <ComboBoxItem Content="29"/>
+                                            <ComboBoxItem Content="30"/>
+                                            <ComboBoxItem Content="31"/>
+                                            <ComboBoxItem Content="32"/>
+                                            <ComboBoxItem Content="33"/>
+                                            <ComboBoxItem Content="34"/>
+                                            <ComboBoxItem Content="35"/>
+                                            <ComboBoxItem Content="36"/>
+                                            <ComboBoxItem Content="37"/>
+                                            <ComboBoxItem Content="38"/>
+                                            <ComboBoxItem Content="39"/>
+                                            <ComboBoxItem Content="40"/>
+                                            <ComboBoxItem Content="41"/>
+                                            <ComboBoxItem Content="42"/>
+                                            <ComboBoxItem Content="43"/>
+                                            <ComboBoxItem Content="44"/>
+                                            <ComboBoxItem Content="45"/>
+                                            <ComboBoxItem Content="46"/>
+                                            <ComboBoxItem Content="47"/>
+                                            <ComboBoxItem Content="48"/>
+                                            <ComboBoxItem Content="49"/>
+                                            <ComboBoxItem Content="50"/>
+                                            <ComboBoxItem Content="51"/>
+                                            <ComboBoxItem Content="52"/>
+                                            <ComboBoxItem Content="53"/>
+                                            <ComboBoxItem Content="54"/>
+                                            <ComboBoxItem Content="55"/>
+                                            <ComboBoxItem Content="56"/>
+                                            <ComboBoxItem Content="57"/>
+                                            <ComboBoxItem Content="58"/>
+                                            <ComboBoxItem Content="59"/>
+                                        </ComboBox>
                                         <TextBlock Grid.Column="4" Text=" 分 " VerticalAlignment="Center"/>
 
                                     </Grid>
 
                                     <TextBlock Foreground="red" Grid.Row="11" Text="注：按照首末班车表填写，夜班车也按照晚上为首班车，白天为末班车&#x000A;
 24小时运营车辆，请将首班车填为0:00，末班车填为23:59&#x000A;
-不运营车辆，请将首班车与末班车填为相同的时间"/>
+不运营车辆，请将首班车填为11:59，末班车填为12:00"/>
 
                                 </Grid>
                             </TabItem>
@@ -228,7 +390,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_1" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                                     </Grid>
                                     <Grid Grid.Row="3">
@@ -238,7 +400,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_2" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                                     </Grid>
                                     <Grid Grid.Row="5">
@@ -248,7 +410,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_3" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                                     </Grid>
                                     <Grid Grid.Row="7">
@@ -258,7 +420,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_4" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                                     </Grid>
                                     <Grid Grid.Row="9">
@@ -268,7 +430,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="叙述5" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_5" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                                     </Grid>
 
@@ -306,12 +468,12 @@
 
                                     <StackPanel Grid.Row="3" HorizontalAlignment="Left" Orientation="Horizontal">
                                         <TextBlock Text="替换：  将" VerticalAlignment="Center"/>
-                                        <TextBox Background="#00000000" Width="50"/>
+                                        <TextBox x:Name="ui_form_line_form_stop_form_replace_form_word" Background="#00000000" Width="50"/>
                                         <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="替换为回车" Foreground="White"/>
                                         <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="替换为其他字符" Foreground="White"/>
 
-                                        <CheckBox Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于上行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center"/>
-                                        <CheckBox Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于下行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center"/>
+                                        <CheckBox x:Name="ui_form_line_form_stop_form_replace_form_up_line" Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于上行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center"/>
+                                        <CheckBox x:Name="ui_form_line_form_stop_form_replace_form_down_line" Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于下行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center"/>
 
                                     </StackPanel>
 
@@ -320,11 +482,11 @@
                                     <TabControl Background="#00000000" BorderThickness="0,1,0,0" Grid.Row="7">
                                         
                                         <TabItem Header="上行线路" Style="{DynamicResource ui_temp_tabitem}">
-                                            <TextBox BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                            <TextBox x:Name="ui_form_line_form_stop_form_up_line_word" BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
                                         </TabItem>
 
                                         <TabItem Header="下行线路" Style="{DynamicResource ui_temp_tabitem}">
-                                            <TextBox BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                            <TextBox x:Name="ui_form_line_form_stop_form_down_line_word" BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
                                         </TabItem>
 
                                     </TabControl>
@@ -356,12 +518,12 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0,5,0">
-                            <TextBox Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_form_station_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </StackPanel>
 
                         <!-- 车辆表-->
-                        <ListBox BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                        <ListBox x:Name="ui_form_station_form_station_list" BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
 
                     </Grid>
 
@@ -420,7 +582,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_1" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                             </Grid>
                             <Grid Grid.Row="3">
@@ -430,7 +592,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_2" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                             </Grid>
                             <Grid Grid.Row="5">
@@ -440,7 +602,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_3" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                             </Grid>
                             <Grid Grid.Row="7">
@@ -450,7 +612,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_4" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                             </Grid>
                             <Grid Grid.Row="9">
@@ -460,7 +622,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="叙述5" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_5" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                             </Grid>
 
@@ -481,7 +643,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="地铁" Style="{DynamicResource ui_temp_tabitem}">
+            <TabItem x:Name="ui_form_subway" Header="地铁" Style="{DynamicResource ui_temp_tabitem}">
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="200"/>
@@ -498,12 +660,12 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0,5,0">
-                            <TextBox Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_form_subway_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </StackPanel>
 
                         <!-- 车辆表-->
-                        <ListBox BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                        <ListBox x:Name="ui_form_subway_form_subway_list" BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
 
                     </Grid>
 
@@ -542,7 +704,7 @@
                             <TextBlock Text="出口列表：" Margin="5,0,5,0" Grid.Row="1"/>
 
                             <!-- 车辆表-->
-                            <ListBox BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                            <ListBox x:Name="ui_form_subway_form_exit_list" BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
 
                         </Grid>
 
@@ -581,7 +743,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="出口通向" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBox x:Name="ui_form_subway_form_exit_form_exit_word" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                             </Grid>
 
@@ -671,9 +833,9 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="资源所属地址（English）" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
-                                        <TextBox Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
-                                        <TextBox Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_country" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_state" Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_city" Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
                                     </Grid>
                                     <Grid Grid.Row="3">
                                         <Grid.ColumnDefinitions >
@@ -685,9 +847,9 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="资源所属地址（Local Language）" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
-                                        <TextBox Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
-                                        <TextBox Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_country" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_state" Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_city" Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
                                     </Grid>
                                     <Grid Grid.Row="5">
                                         <Grid.ColumnDefinitions >
@@ -712,7 +874,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="资源开发者" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_developer" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                                     </Grid>
                                     <Grid Grid.Row="11">
@@ -722,7 +884,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="资源开发时间" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_date" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                                     </Grid>
                                     <TextBlock Foreground="Red" Grid.Row="13" Text="开发者可以是人名，也可以是组织名&#x000A;

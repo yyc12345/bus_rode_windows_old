@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bus_rode_develop"
         mc:Ignorable="d"
-        Title="新建工程" Height="300" Width="400" Icon="/bus_rode_develop;component/bus_rode_icon_orange.ico">
+        Title="新建工程" Height="300" Width="400" Icon="/bus_rode_develop;component/bus_rode_icon_orange.ico" Loaded="window_open">
     <Grid>
         <Grid.RowDefinitions >
             <RowDefinition Height="10"/>
@@ -36,7 +36,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="工程名" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+            <TextBox x:Name="ui_project_name" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
             <TextBlock Text="1-50个字符" Grid.Column="2" VerticalAlignment="Center"/>
 
         </Grid>
@@ -48,12 +48,12 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="存储路径" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" IsReadOnly="True" VerticalAlignment="Center"/>
-            <Button Content="..." Background="#ff1e90ff" Grid.Column="2" Width="50" Template="{DynamicResource ButtonControlTemplate_blue}" Foreground="White"/>
+            <TextBox x:Name="ui_project_path" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" IsReadOnly="True" VerticalAlignment="Center"/>
+            <Button Content="..." Background="#ff1e90ff" Grid.Column="2" Width="50" Template="{DynamicResource ButtonControlTemplate_blue}" Foreground="White" Click="select_project_path"/>
 
         </Grid>
 
-        <CheckBox Grid.Row="5" Content="使用已有的bus.txt和have-bus.txt创建工程" Grid.Column="1" Template="{DynamicResource CheckBoxControlTemplate}"/>
+        <CheckBox x:Name="ui_use_old_file" Grid.Row="5" Content="使用已有的bus.txt和have-bus.txt创建工程" Grid.Column="1" Template="{DynamicResource CheckBoxControlTemplate}"/>
 
         <Grid Grid.Column="1" Grid.Row="7">
             <Grid.ColumnDefinitions >
@@ -63,8 +63,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="bus.txt路径" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" IsReadOnly="True" VerticalAlignment="Center"/>
-            <Button Content="..." Background="#ff1e90ff" Grid.Column="2" Width="50" Template="{DynamicResource ButtonControlTemplate_blue}" Foreground="White"/>
+            <TextBox x:Name="ui_bus_path" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" IsReadOnly="True" VerticalAlignment="Center"/>
+            <Button Content="..." Background="#ff1e90ff" Grid.Column="2" Width="50" Template="{DynamicResource ButtonControlTemplate_blue}" Foreground="White" Click="select_bus_path"/>
 
         </Grid>
         <Grid Grid.Column="1" Grid.Row="9">
@@ -75,12 +75,12 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="have-bus.txt路径" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" IsReadOnly="True" VerticalAlignment="Center"/>
-            <Button Content="..." Background="#ff1e90ff" Grid.Column="2" Width="50" Template="{DynamicResource ButtonControlTemplate_blue}" Foreground="White"/>
+            <TextBox x:Name="ui_have_bus_path" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" IsReadOnly="True" VerticalAlignment="Center"/>
+            <Button Content="..." Background="#ff1e90ff" Grid.Column="2" Width="50" Template="{DynamicResource ButtonControlTemplate_blue}" Foreground="White" Click="select_have_bus_path"/>
 
         </Grid>
 
-        <Button Content="新建工程，去创造奇迹！" Background="#ff3cb371" Grid.Column="1" Grid.Row="11" Width="200" Template="{DynamicResource ButtonControlTemplate_green}" Foreground="White"/>
+        <Button Content="新建工程，去创造奇迹！" Background="#ff3cb371" Grid.Column="1" Grid.Row="11" Width="200" Template="{DynamicResource ButtonControlTemplate_green}" Foreground="White" Click="creat_project"/>
 
     </Grid>
 </Window>

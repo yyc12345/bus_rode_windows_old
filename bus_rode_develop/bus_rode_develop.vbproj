@@ -70,6 +70,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Develop_Core.vb" />
+    <Compile Include="window\systems.vb" />
     <Compile Include="window\window_communication.vb" />
     <Compile Include="window\Window_dialogs.xaml.vb">
       <DependentUpon>Window_dialogs.xaml</DependentUpon>
