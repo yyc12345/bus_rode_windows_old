@@ -25,13 +25,18 @@
     ''' </summary>
     Public back_station(500, 4) As String
     ''' <summary>
-    ''' 内存中的数据备份-地铁(地铁序列，出口文字)
+    ''' 地铁(地铁序列，0=出口名 1=出口文字按回车分割)
     ''' </summary>
     Public back_subway(1000, 1) As String
     ''' <summary>
-    ''' 内存中的数据备份-描述出口
+    ''' 描述出口（序号，0=名字 1=叙述）
     ''' </summary>
     Public back_exit(20, 1) As String
+    ''' <summary>
+    ''' 上一个选择的地铁出口序号
+    ''' </summary>
+    Public before_subway_stop As Integer = -1
+
 
 #Region "预设"
 
@@ -100,6 +105,8 @@
                 back_exit(f, g) = ""
             Next
         Next
+
+        before_subway_stop = -1
     End Sub
 
     ''' <summary>

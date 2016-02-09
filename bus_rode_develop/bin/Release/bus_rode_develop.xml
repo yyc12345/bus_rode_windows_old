@@ -33,12 +33,17 @@ bus_rode_develop
 </member>
 <member name="F:bus_rode_develop.Develop_Core.back_subway">
  <summary>
- 内存中的数据备份-地铁(地铁序列，出口文字)
+ 地铁(地铁序列，0=出口名 1=出口文字按回车分割)
  </summary>
 </member>
 <member name="F:bus_rode_develop.Develop_Core.back_exit">
  <summary>
- 内存中的数据备份-描述出口
+ 描述出口（序号，0=名字 1=叙述）
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Develop_Core.before_subway_stop">
+ <summary>
+ 上一个选择的地铁出口序号
  </summary>
 </member>
 <member name="M:bus_rode_develop.Develop_Core.read_desktop">
@@ -271,6 +276,20 @@ InitializeComponent
 Window_before_set
 </summary>
 </member>
+<member name="M:bus_rode_develop.Window_before_set.window_open(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 窗口打开
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.Window_before_set.window_close(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 保存预设
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
 <member name="M:bus_rode_develop.Window_before_set.InitializeComponent">
 <summary>
 InitializeComponent
@@ -301,6 +320,11 @@ MainWindow
  打开工程的打开框
  </summary>
 </member>
+<member name="F:bus_rode_develop.MainWindow.open_txt_file">
+ <summary>
+ 打开txt的打开框
+ </summary>
+</member>
 <member name="M:bus_rode_develop.MainWindow.app_init(System.Object,System.Windows.RoutedEventArgs)">
  <summary>
  应用初始化
@@ -318,6 +342,223 @@ MainWindow
 <member name="M:bus_rode_develop.MainWindow.event_open_project(System.Object,System.Windows.RoutedEventArgs)">
  <summary>
  打开工程
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_save_project(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 保存工程
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_close_project(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 关闭工程
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_exit_project(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 退出
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_setup(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 预设
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_build(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 编译
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_packups(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 打包
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_about(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 关于
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_add(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-添加线路
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_del(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-删除线路
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_rename(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-重命名线路
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_search(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-搜索线路
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_init_line(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+ <summary>
+ 线路-选择新线路
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_save(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-保存线路
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_form_normal_describe_normal(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-标准描述
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_form_stop_enter_txt(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-导入txt
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_form_stop_clear(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-清空
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_form_stop_rewrite_stop(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-反转
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_form_stop_replace_to_enter(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-替换为回车
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_line_form_stop_replace_to_word(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 线路-替换为其他文字
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_station_search(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 总站-搜索
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_station_select_station(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+ <summary>
+ 总站-选择总站
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_station_save(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 总站-保存数据
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_station_normal(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 总站-常规模板
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_subway_search(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 地铁-搜索
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_subway_save(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 地铁-保存
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_subway_select_subway(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+ <summary>
+ 地铁-选择新地铁
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_subway_form_exit_add(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 地铁-出口-添加
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_subway_form_exit_del(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 地铁-出口-删除
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_subway_form_exit_rename(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 地铁-出口-重命名
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_subway_form_exit_select_exit(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+ <summary>
+ 地铁-出口-选择出口
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_form_sundry_form_readme_save(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ readme保存
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
@@ -351,6 +592,51 @@ MainWindow
 <member name="M:bus_rode_develop.MainWindow.open_project">
  <summary>
  打开工程
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.save_project">
+ <summary>
+ 保存工程
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.build_project">
+ <summary>
+ 编译工程
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.packups_project">
+ <summary>
+ 打包工程
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.add_line">
+ <summary>
+ 添加线路
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.del_line">
+ <summary>
+ 删除线路
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.rename_line">
+ <summary>
+ 重命名线路
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.clear_line">
+ <summary>
+ 清空线路界面右侧面板数据
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.save_line">
+ <summary>
+ 保存线路
+ </summary>
+</member>
+<member name="M:bus_rode_develop.MainWindow.save_readme">
+ <summary>
+ 保存readme.txt
  </summary>
 </member>
 <member name="M:bus_rode_develop.MainWindow.InitializeComponent">

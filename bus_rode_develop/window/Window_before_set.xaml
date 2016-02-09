@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bus_rode_develop"
         mc:Ignorable="d"
-        Title="预设" Height="300" Width="400" Icon="/bus_rode_develop;component/bus_rode_icon_orange.ico">
+        Title="预设" Height="300" Width="400" Icon="/bus_rode_develop;component/bus_rode_icon_orange.ico" Loaded="window_open">
     <Grid>
 
         <TabControl Margin="10,10,10,40" Background="#00000000" BorderThickness="0">
@@ -33,7 +33,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_bus_describe_1" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
                     <Grid Grid.Row="3">
@@ -43,7 +43,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_bus_describe_2" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
                     <Grid Grid.Row="5">
@@ -53,7 +53,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_bus_describe_3" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
                     <Grid Grid.Row="7">
@@ -63,7 +63,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_bus_describe_4" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
                     <Grid Grid.Row="9">
@@ -73,7 +73,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述5" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_bus_describe_5" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
 
@@ -101,7 +101,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_station_describe_1" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
                     <Grid Grid.Row="3">
@@ -111,7 +111,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_station_describe_2" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
                     <Grid Grid.Row="5">
@@ -121,7 +121,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_station_describe_3" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
                     <Grid Grid.Row="7">
@@ -131,7 +131,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                        <TextBox x:Name="ui_station_describe_4" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
 
                     </Grid>
 
@@ -140,7 +140,7 @@
 
         </TabControl>
 
-        <Button Margin="10,0,10,10" Height="20" Width="150" Content="保存并关闭" Background="#ff3cb371" Template="{DynamicResource ButtonControlTemplate_green}" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Button Margin="10,0,10,10" Height="20" Width="150" Content="保存并关闭" Background="#ff3cb371" Template="{DynamicResource ButtonControlTemplate_green}" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="window_close"/>
 
     </Grid>
 </Window>
