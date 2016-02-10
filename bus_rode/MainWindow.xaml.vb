@@ -810,7 +810,7 @@ Public Class MainWindow
                 ui_title_back_btn_color.Color = Color.FromArgb(180, 255, 0, 0)
                 ui_title_menu_btn_color.Color = Color.FromArgb(180, 143, 143, 143)
             Case Else
-                MsgBox("bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！", 16, "灾难性错误")
+                window_dialogs_show("灾难性错误", "bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！", 2, 1, False, "确定", "", Application.Current.MainWindow)
                 Environment.Exit(1)
         End Select
 
@@ -1056,7 +1056,7 @@ Public Class MainWindow
                 screens = 0
 
             Case Else
-                MsgBox("bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！", 16, "灾难性错误")
+                window_dialogs_show("灾难性错误", "bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！", 2, 1, False, "确定", "", Application.Current.MainWindow)
                 Environment.Exit(1)
         End Select
 
@@ -1143,7 +1143,8 @@ Public Class MainWindow
             Case 4
 
             Case Else
-                MsgBox("bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！", 16, "灾难性错误")
+                window_dialogs_show("灾难性错误", "bus_rode的核心变量值被篡改， 程序将在点击确定后立即关闭！", 2, 1, False, "确定", "", Application.Current.MainWindow)
+
                 Environment.Exit(1)
         End Select
 
@@ -1669,7 +1670,7 @@ Public Class MainWindow
     ''' <remarks></remarks>
     Private Sub ui_contorl_list_3_function(sender As Object, e As MouseButtonEventArgs)
         If no_resource = False Then
-            MsgBox(System.IO.File.ReadAllText(Environment.CurrentDirectory + "\library\readme.txt", System.Text.Encoding.Default), 64, "资源属性/自述")
+            window_dialogs_show("资源属性/自述", System.IO.File.ReadAllText(Environment.CurrentDirectory + "\library\readme.txt"), 0, 1, False, "确定", "", Application.Current.MainWindow)
         Else
             message_ex_ex("资源", "当前没有安装资源！")
         End If
@@ -1761,26 +1762,26 @@ Public Class MainWindow
                         '保存设置
                         save_user_contorl()
                     Else
-                        MsgBox("数值非法")
+                        window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
                         ui_form_contorl_r_value.Text = form_color.R
                         ui_form_contorl_g_value.Text = form_color.G
                         ui_form_contorl_b_value.Text = form_color.B
                     End If
                 Else
-                    MsgBox("数值非法")
+                    window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
                     ui_form_contorl_r_value.Text = form_color.R
                     ui_form_contorl_g_value.Text = form_color.G
                     ui_form_contorl_b_value.Text = form_color.B
                 End If
             Else
-                MsgBox("数值非法")
+                window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
                 ui_form_contorl_r_value.Text = form_color.R
                 ui_form_contorl_g_value.Text = form_color.G
                 ui_form_contorl_b_value.Text = form_color.B
             End If
         Catch ex As Exception
             '输入文本类型错误
-            MsgBox("数值非法")
+            window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
             ui_form_contorl_r_value.Text = form_color.R
             ui_form_contorl_g_value.Text = form_color.G
             ui_form_contorl_b_value.Text = form_color.B
@@ -2314,12 +2315,12 @@ Public Class MainWindow
                 Dim prop_4 As Reflection.FieldInfo = tp.GetField("DllVersion")
                 out_word = out_word & "插件版本号：" & CType(prop_4.GetValue(instance), String)
 
-                MsgBox(out_word, 64, "插件信息")
+                window_dialogs_show("插件信息", "out_word", 0, 1, False, "确定", "", Application.Current.MainWindow)
             End If
         Catch ex As Exception
-            MsgBox("无法读取插件的相关信息，这可能是由于：" & vbCrLf &
+            window_dialogs_show("错误", "无法读取插件的相关信息，这可能是由于：" & vbCrLf &
                    "1、没有安装插件" & vbCrLf &
-                   "2、插件损坏或者插件不完整没有通过CHMOSGroup的认证", 16, "错误")
+                   "2、插件损坏或者插件不完整没有通过CHMOSGroup的认证", 2, 1, False, "确定", "", Application.Current.MainWindow)
         End Try
 
     End Sub

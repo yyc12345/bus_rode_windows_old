@@ -122,7 +122,7 @@
                 '暂停3S，减少长时间使用
                 System.Threading.Thread.Sleep(3000)
             End If
-            MsgBox("aaa")
+            'MsgBox("aaa")
 
             '*********************************************************************************************************************
             '辨别线路交会
@@ -218,27 +218,27 @@
                 group_list += 1
             Loop
 
-            MsgBox("bbb")
+            'MsgBox("bbb")
 
             If can_calc = True Then
                 '*********************************************************************************************************************
                 '向上索引并填充result
                 search_and_fill_result()
 
-                MsgBox("ccc")
+                'MsgBox("ccc")
 
                 '*********************************************************************************************************************
                 '计算每条线路之间应该怎么换乘
                 fenxi_result()
 
-                MsgBox("ddd")
-                For a = 0 To 16
-                    If end_result(a).Name = "" Then
-                        Exit For
-                    End If
+                'MsgBox("ddd")
+                'For a = 0 To 16
+                '    If end_result(a).Name = "" Then
+                '        Exit For
+                '    End If
 
-                    debug_tostring(end_result(a), "")
-                Next
+                '    debug_tostring(end_result(a), "")
+                'Next
 
                 '转换结果并呈现
                 word_to_gui()

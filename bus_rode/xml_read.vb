@@ -78,6 +78,7 @@ Module xml_read
 
             aaa.pro_title = "方案" & (a + 1)
             aaa.pro_text = "路程：" & scheme_list(a).SelectSingleNode("distance").InnerText & "米 需要时间：" & scheme_list(a).SelectSingleNode("duration").InnerText & "秒"
+            aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
 
             ui_connect_window_select_item_list.Add(aaa)
             aaa = New ui_depend_window_select_item_list
@@ -167,6 +168,7 @@ Module xml_read
 
                 aaa.pro_title = content_list(a).SelectSingleNode("name").InnerText
                 aaa.pro_text = "经度坐标：" & content_list(a).SelectSingleNode("location/lng").InnerText & " 纬度坐标：" & content_list(a).SelectSingleNode("location/lat").InnerText
+                aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
 
                 ui_connect_window_select_item_list.Add(aaa)
                 aaa = New ui_depend_window_select_item_list
@@ -207,6 +209,7 @@ Module xml_read
 
                 bbb.pro_title = content_list(a).SelectSingleNode("name").InnerText
                 bbb.pro_text = "经度坐标：" & content_list(a).SelectSingleNode("location/lng").InnerText & " 纬度坐标：" & content_list(a).SelectSingleNode("location/lat").InnerText
+                bbb.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
 
                 ui_connect_window_select_item_list.Add(bbb)
                 bbb = New ui_depend_window_select_item_list

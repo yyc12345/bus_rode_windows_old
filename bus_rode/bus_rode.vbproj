@@ -99,7 +99,11 @@
     <Compile Include="short_rode.vb" />
     <Compile Include="systems.vb" />
     <Compile Include="ui_depend.vb" />
-    <Compile Include="window_select_item.xaml.vb">
+    <Compile Include="window\window_communication.vb" />
+    <Compile Include="window\Window_dialogs.xaml.vb">
+      <DependentUpon>Window_dialogs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="window\window_select_item.xaml.vb">
       <DependentUpon>window_select_item.xaml</DependentUpon>
     </Compile>
     <Compile Include="xml_read.vb" />
@@ -115,7 +119,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="window_select_item.xaml">
+    <Page Include="window\Window_dialogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="window\window_select_item.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

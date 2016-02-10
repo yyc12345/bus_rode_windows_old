@@ -380,9 +380,9 @@
 
 
 
-        <!-- 滚动条-->       
-        
-          <!-- 滚动条模板-->   
+        <!-- 滚动条-->
+
+        <!-- 滚动条模板-->
         <ControlTemplate x:Key="ScrollBarControlTemplateHorizontal" TargetType="{x:Type ScrollBar}">
             <Grid x:Name="Bg" SnapsToDevicePixels="True" Height ="10">
                 <Grid.ColumnDefinitions>
@@ -398,9 +398,9 @@
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
-                    <Ellipse Fill="#ffffffff" Grid.Column="0" Grid.ColumnSpan="2" StrokeThickness="0"/>
-                    <Rectangle x:Name="rectangle" Grid.Column="1" Grid.ColumnSpan="3" Fill="#ffffffff" SnapsToDevicePixels="True" Height="10" StrokeThickness="0"/>
-                    <Ellipse Fill="#ffffffff" Grid.Column="3" Grid.ColumnSpan="2" StrokeThickness="0"/>
+                    <Ellipse Fill="#ff7f7f7f" Grid.Column="0" Grid.ColumnSpan="2" StrokeThickness="0"/>
+                    <Rectangle x:Name="rectangle" Grid.Column="1" Grid.ColumnSpan="3" Fill="#ff7f7f7f" SnapsToDevicePixels="True" Height="10" StrokeThickness="0"/>
+                    <Ellipse Fill="#ff7f7f7f" Grid.Column="3" Grid.ColumnSpan="2" StrokeThickness="0"/>
                 </Grid>
                 <!--<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="0"/>-->
                 <!--<RepeatButton x:Name="PART_LineDownButton" Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="2">
@@ -625,17 +625,17 @@
                     <RowDefinition Height="1E-05*"/>
                 </Grid.RowDefinitions>
                 <Grid Opacity="0.5">
-                       <Grid.RowDefinitions>
-                            <RowDefinition Height="5"/>
-                            <RowDefinition Height="5"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="5"/>
-                            <RowDefinition Height="5"/>
-                        </Grid.RowDefinitions>
-                    <Ellipse Fill="#ffffffff" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="0"/>
-                    <Rectangle x:Name="rectangle" Grid.Row="1" Grid.RowSpan="3" Fill="#ffffffff" SnapsToDevicePixels="True" Width="10" StrokeThickness="0"/>
-                    <Ellipse Fill="#ffffffff" Grid.Row="3" Grid.RowSpan="2" StrokeThickness="0"/>
-                    </Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="5"/>
+                    </Grid.RowDefinitions>
+                    <Ellipse Fill="#ff7f7f7f" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="0"/>
+                    <Rectangle x:Name="rectangle" Grid.Row="1" Grid.RowSpan="3" Fill="#ff7f7f7f" SnapsToDevicePixels="True" Width="10" StrokeThickness="0"/>
+                    <Ellipse Fill="#ff7f7f7f" Grid.Row="3" Grid.RowSpan="2" StrokeThickness="0"/>
+                </Grid>
                 <!--<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="#3f7f7f7f" Grid.Row="0"/>-->
                 <!--<RepeatButton x:Name="PART_LineDownButton" Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="2">
                     <RepeatButton.Style>
@@ -797,7 +797,7 @@
                                                     <Rectangle x:Name="rectangle" Grid.Row="1" Grid.RowSpan="3" Fill="#FF1e90ff" SnapsToDevicePixels="True" Width="{TemplateBinding Width}" StrokeThickness="0"/>
                                                     <Ellipse Fill="#FF1e90ff" Grid.Row="3" Grid.RowSpan="2" StrokeThickness="0"/>
                                                 </Grid>
-                                                
+
                                                 <!--<ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter Property="Fill" TargetName="rectangle" Value="#FFA6A6A6"/>
@@ -850,10 +850,10 @@
                 </Trigger>
             </ControlTemplate.Triggers>-->
         </ControlTemplate>
-        
-         <!-- 滚动条面板模板-->
-      
-         <ControlTemplate x:Key="ScrollViewerControlTemplate" TargetType="{x:Type ScrollViewer}">
+
+        <!-- 滚动条面板模板-->
+
+        <ControlTemplate x:Key="ScrollViewerControlTemplate" TargetType="{x:Type ScrollViewer}">
             <Grid x:Name="Grid" Background="{TemplateBinding Background}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -869,7 +869,7 @@
                 <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}" Template="{DynamicResource ScrollBarControlTemplateHorizontal}"/>
             </Grid>
         </ControlTemplate>
-        
+
         <!-- 滚动条样式style-->
         <Style TargetType="{x:Type ScrollBar}">
             <Setter Property="Template" Value="{StaticResource ScrollBarControlTemplateHorizontal}"/>
@@ -884,42 +884,146 @@
         </Style>
 
 
-        
-        
+
+
         <!-- 窗口-选择项目的模板-->
         <DataTemplate x:Key="ui_temp_window_select_item_list">
-            <Grid Height="80" Background="#5f6495ed">
+            <Grid Height="80">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="20" Text="{Binding pro_title}">
-                    <TextBlock.ToolTip>
-                        <Grid Background="White">
-                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_title}"/>
-                        </Grid>
-                    </TextBlock.ToolTip>
-                </TextBlock>
+                <!-- 选中圆圈-->
+                <Grid Grid.Row="2" Grid.Column="0" Height="20" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Ellipse Fill="#00000000" Stroke="#ff1e90ff"/>
+                    <Ellipse Fill="{Binding pro_fill}" Stroke="#00000000" Margin="5"/>
+                </Grid>
 
-                <TextBlock Grid.Column="1" Grid.Row="3" Foreground="white" FontSize="15" Text="{Binding pro_text}">
-                    <TextBlock.ToolTip>
-                        <Grid Background="White">
-                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_text}"/>
-                        </Grid>
-                    </TextBlock.ToolTip>
-                </TextBlock>
+
+                <!-- 文本-->
+                <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="1" Foreground="black" FontSize="15" Text="{Binding pro_title}">
+                        <TextBlock.ToolTip>
+                            <Grid Background="White">
+                                <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_title}"/>
+                            </Grid>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+
+                    <TextBlock Grid.Row="3" Foreground="black" FontSize="12" Text="{Binding pro_text}">
+                        <TextBlock.ToolTip>
+                            <Grid Background="White">
+                                <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_text}"/>
+                            </Grid>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+
+
+                </Grid>
 
             </Grid>
         </DataTemplate>
+
+
+
+        <!-- 按钮的各个样式-->
+
+        <ControlTemplate x:Key="ButtonControlTemplate_green" TargetType="{x:Type Button}">
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="#ff3cb371" SnapsToDevicePixels="True">
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                <!--<Border.Effect>
+        <DropShadowEffect BlurRadius="10" Color="#FFffffff" ShadowDepth="0" />
+    </Border.Effect>-->
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDefaulted" Value="True">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#ff1c9351"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#ff007331"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ButtonControlTemplate_blue" TargetType="{x:Type Button}">
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="#ff1e90ff" SnapsToDevicePixels="True">
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                <!--<Border.Effect>
+        <DropShadowEffect BlurRadius="10" Color="#FFffffff" ShadowDepth="0" />
+    </Border.Effect>-->
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDefaulted" Value="True">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#ff0070df"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#ff0050bf"/>
+                </Trigger>
+
+
+                <!--<Trigger Property="IsEnabled" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#ff1e90ff"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="#ff7f7f7f"/>
+                </Trigger>-->
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ButtonControlTemplate_white" TargetType="{x:Type Button}">
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="#ffffffff" SnapsToDevicePixels="True">
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                <!--<Border.Effect>
+        <DropShadowEffect BlurRadius="10" Color="#FFffffff" ShadowDepth="0" />
+    </Border.Effect>-->
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDefaulted" Value="True">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#ffcfcfcf"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#ffafafaf"/>
+                </Trigger>
+
+
+                <!--<Trigger Property="IsEnabled" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#ff1e90ff"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="#ff7f7f7f"/>
+                </Trigger>-->
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
 
 
     </Application.Resources>
