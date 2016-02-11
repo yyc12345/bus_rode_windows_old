@@ -79,7 +79,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Develop_Core.vb" />
-    <Compile Include="window\systems.vb" />
+    <Compile Include="systems.vb" />
     <Compile Include="window\window_communication.vb" />
     <Compile Include="window\Window_dialogs.xaml.vb">
       <DependentUpon>Window_dialogs.xaml</DependentUpon>
@@ -168,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bus_rode_icon_orange.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="start.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

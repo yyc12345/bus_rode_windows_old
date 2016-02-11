@@ -42,6 +42,8 @@
 
         save_desktop()
 
+        Me.Close()
+
     End Sub
 
 End Class

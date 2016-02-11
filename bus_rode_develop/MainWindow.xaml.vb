@@ -86,7 +86,8 @@
     ''' <param name="e"></param>
     Private Sub event_close_project(sender As Object, e As RoutedEventArgs) Handles ui_menu_form_project_form_close.Click
 
-        If MsgBox("确认关闭工程吗？", 32 + 1, "关闭") = 1 Then
+        window_dialogs_show("关闭", "确认关闭工程吗？", 1, 2, False, "确定", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
 
             '先保存
             save_project()
@@ -121,7 +122,8 @@
     ''' <param name="e"></param>
     Private Sub event_exit_project(sender As Object, e As RoutedEventArgs) Handles ui_menu_form_project_form_exit.Click
 
-        If MsgBox("确认退出吗？", 32 + 1, "退出") = 1 Then
+        window_dialogs_show("退出", "确认退出吗？", 1, 2, False, "确定", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
 
             If work_mode = 1 Then
                 '打开了工程，先要保存文件
@@ -206,7 +208,10 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub event_form_line_del(sender As Object, e As RoutedEventArgs)
-        del_line()
+        If ui_form_line_form_line_list.SelectedIndex <> -1 Then
+            del_line()
+        End If
+
     End Sub
     ''' <summary>
     ''' 线路-重命名线路
@@ -214,7 +219,10 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub event_form_line_rename(sender As Object, e As RoutedEventArgs)
-        rename_line()
+        If ui_form_line_form_line_list.SelectedIndex <> -1 Then
+            rename_line()
+        End If
+
     End Sub
     ''' <summary>
     ''' 线路-搜索线路
@@ -227,7 +235,7 @@
             If ui_form_line_form_line_list.Items.Contains(ui_form_line_form_search.Text) = True Then
                 ui_form_line_form_line_list.SelectedIndex = ui_form_line_form_line_list.Items.IndexOf(ui_form_line_form_search.Text)
             Else
-                MsgBox("Can't find this bus name!")
+                window_dialogs_show("错误", "无法找到这个线路名", 2, 1, False, "确定", "", Me)
             End If
         End If
     End Sub
@@ -307,7 +315,8 @@
     ''' <param name="e"></param>
     Private Sub event_form_line_form_stop_clear(sender As Object, e As RoutedEventArgs)
 
-        If MsgBox("确认清空?", 32 + 1, "清空") = 1 Then
+        window_dialogs_show("清空", "确认清空?", 1, 2, False, "确定", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
             If ui_form_line_form_stop_form_up_line_tab.IsSelected = True Then
                 '上行
                 ui_form_line_form_stop_form_up_line_word.Text = ""
@@ -328,13 +337,13 @@
         If ui_form_line_form_stop_form_up_line_tab.IsSelected = True Then
             '上行
             If ui_form_line_form_stop_form_up_line_word.Text = "" Then
-                MsgBox("没有内容可反转", 16, "错误")
+                window_dialogs_show("错误", "没有内容可反转", 2, 1, False, "确定", "", Me)
                 Exit Sub
             End If
         Else
             '下行
             If ui_form_line_form_stop_form_down_line_word.Text = "" Then
-                MsgBox("没有内容可反转", 16, "错误")
+                window_dialogs_show("错误", "没有内容可反转", 2, 1, False, "确定", "", Me)
                 Exit Sub
             End If
         End If
@@ -395,17 +404,22 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub event_form_line_form_stop_replace_to_word(sender As Object, e As RoutedEventArgs)
-        Dim a = InputBox("输入要替换为的字符：")
-        If MsgBox("是否将 " & ui_form_line_form_stop_form_replace_form_word.Text & " 替换为 " & a, MsgBoxStyle.Exclamation + MsgBoxStyle.OkCancel) = MsgBoxResult.Ok Then
 
-            If ui_form_line_form_stop_form_replace_form_up_line.IsChecked = True Then
-                ui_form_line_form_stop_form_up_line_word.Text = Replace(ui_form_line_form_stop_form_up_line_word.Text, ui_form_line_form_stop_form_replace_form_word.Text, a)
-            End If
-            If ui_form_line_form_stop_form_replace_form_down_line.IsChecked = True Then
-                ui_form_line_form_stop_form_down_line_word.Text = Replace(ui_form_line_form_stop_form_down_line_word.Text, ui_form_line_form_stop_form_replace_form_word.Text, a)
-            End If
+        window_dialogs_show("替换字符", "输入要替换为的字符：", 0, 2, True, "确定", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
+            Dim a = window_dialogs_input_text
+            window_dialogs_show("替换字符", "是否将 " & ui_form_line_form_stop_form_replace_form_word.Text & " 替换为 " & a, 1, 2, False, "确定", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
+                If ui_form_line_form_stop_form_replace_form_up_line.IsChecked = True Then
+                    ui_form_line_form_stop_form_up_line_word.Text = Replace(ui_form_line_form_stop_form_up_line_word.Text, ui_form_line_form_stop_form_replace_form_word.Text, a)
+                End If
+                If ui_form_line_form_stop_form_replace_form_down_line.IsChecked = True Then
+                    ui_form_line_form_stop_form_down_line_word.Text = Replace(ui_form_line_form_stop_form_down_line_word.Text, ui_form_line_form_stop_form_replace_form_word.Text, a)
+                End If
 
+            End If
         End If
+
     End Sub
 
 #End Region
@@ -422,7 +436,7 @@
             If ui_form_station_form_station_list.Items.Contains(ui_form_station_form_search.Text) = True Then
                 ui_form_station_form_station_list.SelectedIndex = ui_form_station_form_station_list.Items.IndexOf(ui_form_station_form_search)
             Else
-                MsgBox("Can't find this station name!")
+                window_dialogs_show("错误", "找不到这个车站名", 2, 1, False, "确定", "", Me)
             End If
         End If
     End Sub
@@ -485,7 +499,7 @@
             If ui_form_subway_form_subway_list.Items.Contains(ui_form_subway_form_search.Text) = True Then
                 ui_form_subway_form_subway_list.SelectedIndex = ui_form_subway_form_subway_list.Items.IndexOf(ui_form_subway_form_search.Text)
             Else
-                MsgBox("Can't find this subway name!")
+                window_dialogs_show("错误", "找不到这个地铁站点名", 2, 1, False, "确定", "", Me)
             End If
         End If
     End Sub
@@ -505,7 +519,7 @@
                 Else
                     If back_exit(a, 1) = "" Then
                         '不合格
-                        MsgBox("出口描述不得为空！无法保存", 16, "错误")
+                        window_dialogs_show("错误", "出口描述不得为空！无法保存。请检查所有出口描述保证其描述不为空", 2, 1, False, "确定", "", Me)
                         Exit Sub
                     End If
                 End If
@@ -604,23 +618,32 @@
         Dim word As String = ""
         For a = 0 To 20
             If back_exit(a, 0) = "" Then
-                word = InputBox("输入出口名:")
-                If ui_form_subway_form_exit_list.Items.Contains(word) = True And word = "" Then
-                    MsgBox("This word have added in this list!", 16)
-                Else
-                    If word <> "" Then
-                        back_exit(a, 0) = word
-                        ui_form_subway_form_exit_list.Items.Add(word)
-                        ui_form_subway_form_exit_list.SelectedIndex = ui_form_subway_form_exit_list.Items.IndexOf(word)
+
+                '=================================
+                window_dialogs_show("添加出口", "输入出口名:", 0, 2, True, "确定", "取消", Me)
+                If window_dialogs_select_btn = 0 Then
+
+                    word = window_dialogs_input_text
+                    If ui_form_subway_form_exit_list.Items.Contains(word) = True Then
+                        window_dialogs_show("错误", "这个出口名已经存在了", 2, 1, False, "确定", "", Me)
                     Else
-                        MsgBox("this word is empty!", 16)
+                        If word <> "" Then
+                            back_exit(a, 0) = word
+                            ui_form_subway_form_exit_list.Items.Add(word)
+                            ui_form_subway_form_exit_list.SelectedIndex = ui_form_subway_form_exit_list.Items.IndexOf(word)
+                        Else
+                            window_dialogs_show("错误", "出口名不得为空", 2, 1, False, "确定", "", Me)
+                        End If
+
                     End If
 
                 End If
+                '===================================
                 Exit For
+
             End If
             If a = 20 Then
-                MsgBox("cna't add this word, because list is full!", 16)
+                window_dialogs_show("错误", "无法添加出口了，因为最大出口量20个已经满了", 2, 1, False, "确定", "", Me)
             End If
         Next
 
@@ -633,7 +656,7 @@
     Private Sub event_form_subway_form_exit_del(sender As Object, e As RoutedEventArgs)
 
         If ui_form_subway_form_exit_list.Items.Count = 1 Then
-            MsgBox("you can't delete, you must keep once item in this list!")
+            window_dialogs_show("错误", "不能删除该项，您必须保证有一个出口存在于该列表", 2, 1, False, "确定", "", Me)
         Else
             For a = 0 To 20
                 If back_exit(a, 0) = ui_form_subway_form_exit_list.Items.Item(ui_form_subway_form_exit_list.SelectedIndex) Then
@@ -665,24 +688,30 @@
     ''' <param name="e"></param>
     Private Sub event_form_subway_form_exit_rename(sender As Object, e As RoutedEventArgs)
 
-        Dim word As String = ""
-        word = InputBox("输入新的出口名:")
-        If ui_form_subway_form_exit_list.Items.Contains(word) = True And word = "" Then
-            MsgBox("This word have added in this list!", 16)
-        Else
-            If word <> "" Then
+        window_dialogs_show("重命名出口", "输入新的出口名:", 0, 2, True, "确定", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
 
-                '寻找旧的
-                Dim a As Integer = ui_form_subway_form_exit_list.SelectedIndex
-                back_exit(a, 0) = word
-                ui_form_subway_form_exit_list.Items.RemoveAt(a)
-                ui_form_subway_form_exit_list.Items.Insert(a, word)
+            Dim word As String = window_dialogs_input_text
 
+            If ui_form_subway_form_exit_list.Items.Contains(word) = True Then
+                window_dialogs_show("错误", "该出口名已存在", 2, 1, False, "确定", "", Me)
             Else
-                MsgBox("this word is empty!", 16)
+                If word <> "" Then
+
+                    '寻找旧的
+                    Dim a As Integer = ui_form_subway_form_exit_list.SelectedIndex
+                    back_exit(a, 0) = word
+                    ui_form_subway_form_exit_list.Items.RemoveAt(a)
+                    ui_form_subway_form_exit_list.Items.Insert(a, word)
+
+                Else
+                    window_dialogs_show("错误", "出口名不得为空", 2, 1, False, "确定", "", Me)
+                End If
+
             End If
 
         End If
+
 
     End Sub
     ''' <summary>
@@ -798,7 +827,7 @@
         Do
             word = file.ReadLine
             If word = "ENDDATE" Then
-                MsgBox("灾难性错误", 16)
+                window_dialogs_show("灾难性错误", "灾难性错误，程序即将关闭", 2, 1, False, "确定", "", Me)
                 Environment.Exit(100)
             End If
 
@@ -1252,9 +1281,15 @@
     ''' </summary>
     Public Sub add_line()
 
-        Dim word As String = InputBox("输入名称:")
+        window_dialogs_show("添加线路", "输入线路名称:", 0, 2, True, "确定", "取消", Me)
+
+        If window_dialogs_select_btn = 1 Then
+            Exit Sub
+        End If
+
+        Dim word As String = window_dialogs_input_text
         If ui_form_line_form_line_list.Items.Contains(word) = True Or word = "" Then
-            MsgBox("name is empty or the list have this name!")
+            window_dialogs_show("错误", "名称为空或者已存在该线路", 2, 1, False, "确定", "", Me)
         Else
             ui_form_line_form_line_list.Items.Add(word)
 
@@ -1410,9 +1445,8 @@
 
             ui_form_line_form_line_list.SelectedIndex = -1
 
-
         Else
-            MsgBox("app error,can't find this name in this list!")
+            window_dialogs_show("应用错误", "无法在列表中找到要删除的线路", 2, 1, False, "确定", "", Me)
         End If
 
     End Sub
@@ -1422,7 +1456,12 @@
     ''' </summary>
     Public Sub rename_line()
 
-        Dim word As String = InputBox("输入新名称:")
+        window_dialogs_show("重命名线路", "输入新名称:", 0, 2, True, "确定", "取消", Me)
+        If window_dialogs_select_btn = 1 Then
+            Exit Sub
+        End If
+
+        Dim word As String = window_dialogs_input_text
         If ui_form_line_form_line_list.Items.Contains(word) = False And word <> "" And
             ui_form_line_form_line_list.Items.Item(ui_form_line_form_line_list.SelectedIndex) <> "" Then
 
@@ -1529,7 +1568,7 @@
             ui_form_line_form_line_list.Items.Add(word)
             ui_form_line_form_line_list.SelectedIndex = ui_form_line_form_line_list.Items.IndexOf(word)
         Else
-            MsgBox("List have this name or name is empty!")
+            window_dialogs_show("错误", "列表含有该名称或者该名称为空", 2, 1, False, "确定", "", Me)
         End If
 
     End Sub

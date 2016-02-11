@@ -71,6 +71,7 @@
         window_dialogs_left_btn_text = ""
         window_dialogs_right_btn_text = ""
         window_dialogs_input_text = ""
+        window_dialogs_select_btn = 0
     End Sub
 
     ''' <summary>
