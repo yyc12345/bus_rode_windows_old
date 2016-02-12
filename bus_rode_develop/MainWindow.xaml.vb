@@ -138,6 +138,26 @@
     End Sub
 
     '=======================================================
+    ''' <summary>
+    ''' 更改自动保存
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub event_control_save(sender As Object, e As RoutedEventArgs) Handles ui_menu_form_setup_form_save.Click
+
+    End Sub
+
+    ''' <summary>
+    ''' 更改白天，夜间模式
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub event_control_time(sender As Object, e As RoutedEventArgs) Handles ui_menu_form_setup_form_time.Click
+        '刷新工作区即可，函数在工作区里
+        setting_time = Not (setting_time)
+        save_desktop()
+        re_work_area()
+    End Sub
 
     ''' <summary>
     ''' 预设
@@ -786,6 +806,22 @@
                 ui_form_subway.IsEnabled = True
             End If
         End If
+
+        '刷新界面白天黑夜
+        If setting_time = True Then
+            'day
+            ui_menu_form_setup_form_time.Header = "更改为白天模式"
+            Application.Current.Resources("global_bk_color") = New SolidColorBrush(Color.FromArgb(255, 45, 45, 45))
+            Application.Current.Resources("global_tab_color") = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+            Application.Current.Resources("global_fore_color") = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+        Else
+            'night
+            ui_menu_form_setup_form_time.Header = "更改为夜晚模式"
+            Application.Current.Resources("global_bk_color") = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+            Application.Current.Resources("global_tab_color") = New SolidColorBrush(Color.FromArgb(255, 127, 127, 127))
+            Application.Current.Resources("global_fore_color") = New SolidColorBrush(Color.FromArgb(255, 0, 0, 0))
+        End If
+
 
     End Sub
 
@@ -1720,6 +1756,7 @@
         file.Dispose()
 
     End Sub
+
 
 #End Region
 

@@ -59,6 +59,22 @@
         desktop(7) = file.ReadLine
         desktop(8) = file.ReadLine
 
+        'setting
+        If file.ReadLine = "0" Then
+            '开启
+            setting_save = True
+        Else
+            '关闭
+            setting_save = False
+        End If
+        If file.ReadLine = "0" Then
+            '开启
+            setting_time = True
+        Else
+            '关闭
+            setting_time = False
+        End If
+
         file.Dispose()
     End Sub
 
@@ -77,6 +93,16 @@
         file.WriteLine(desktop(6))
         file.WriteLine(desktop(7))
         file.WriteLine(desktop(8))
+        If setting_save = True Then
+            file.WriteLine("0")
+        Else
+            file.WriteLine("1")
+        End If
+        If setting_time = True Then
+            file.WriteLine("0")
+        Else
+            file.WriteLine("1")
+        End If
 
         file.Dispose()
     End Sub

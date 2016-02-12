@@ -5,6 +5,10 @@
     StartupUri="MainWindow.xaml">
     <Application.Resources>
 
+        <SolidColorBrush x:Key="global_bk_color" Color="#ffffffff"/>
+        <SolidColorBrush x:Key="global_tab_color" Color="#ff7f7f7f"/>
+        <SolidColorBrush x:Key="global_fore_color" Color="#ff000000"/>
+
         <!-- **********************************************************滚动条-->
 
         <!-- 滚动条模板-->
@@ -645,13 +649,13 @@
 
             <Style.Triggers >
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#7f000000"/>
+                    <Setter Property="Background" Value="{DynamicResource global_tab_color}"/>
                 </Trigger>
                 <Trigger Property="IsSelected" Value="False">
                     <Setter Property="Background" Value="#00000000"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="true">
-                    <Setter Property="Foreground" Value="#ff000000"/>
+                    <Setter Property="Foreground" Value="{DynamicResource global_fore_color}"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="false">
                     <Setter Property="Foreground" Value="#7f000000"/>

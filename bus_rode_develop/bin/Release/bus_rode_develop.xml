@@ -72,6 +72,16 @@ bus_rode_develop
  [系统]-应用的版本号
  </summary>
 </member>
+<member name="F:bus_rode_develop.systems.setting_time">
+ <summary>
+ 界面启用模式 true=day false=night
+ </summary>
+</member>
+<member name="F:bus_rode_develop.systems.setting_save">
+ <summary>
+ 界面自动保存 ture=自动 false=手动
+ </summary>
+</member>
 <member name="M:bus_rode_develop.window_communication.SendMessage(System.Int32,System.Int32,System.Int32,System.Int32)">
  <summary>
  [系统][ui]向指定窗口的消息循环队列中发送消息
@@ -363,6 +373,20 @@ MainWindow
 <member name="M:bus_rode_develop.MainWindow.event_exit_project(System.Object,System.Windows.RoutedEventArgs)">
  <summary>
  退出
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_control_save(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 更改自动保存
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode_develop.MainWindow.event_control_time(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 更改白天，夜间模式
  </summary>
  <param name="sender"></param>
  <param name="e"></param>

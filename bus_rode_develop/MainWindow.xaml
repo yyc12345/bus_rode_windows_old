@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:bus_rode_develop"
         mc:Ignorable="d"
         Title="bus_rode资源开发器" Height="600" Width="800" Icon="bus_rode_icon_orange.ico" Loaded="app_init">
-    <Grid>
-        
+    <Grid Background="{DynamicResource global_bk_color}">
+
         <!-- 菜单-->
         <Menu x:Name="menu" Height="auto" VerticalAlignment="Top">
 
@@ -21,8 +21,12 @@
                 <MenuItem x:Name="ui_menu_form_project_form_exit" Header="退出" FontSize="12"/>
 
             </MenuItem>
-            <MenuItem Header="预设" FontSize="12">
+            <MenuItem Header="设置" FontSize="12">
 
+                <MenuItem x:Name="ui_menu_form_setup_form_time" Header="更改为夜间模式" FontSize="12"/>
+                <Separator/>
+                <MenuItem x:Name="ui_menu_form_setup_form_save" Header="打开列表自动保存" FontSize="12"/>
+                <Separator/>
                 <MenuItem x:Name="ui_menu_form_setup_form_setup" Header="设置相关预设" FontSize="12"/>
 
             </MenuItem>
@@ -37,7 +41,7 @@
 
         </Menu>
 
-        <TextBlock x:Name="ui_bk_word" Opacity="0" Foreground="#3f000000" FontSize="25" Text="打开或创建一个bus_rode资源，开始创造奇迹" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="ui_bk_word" Opacity="0" Foreground="{DynamicResource global_tab_color}" FontSize="25" Text="打开或创建一个bus_rode资源，开始创造奇迹" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!-- 工作区-->
         <TabControl Opacity="1" x:Name="ui_work_area" BorderThickness="0,1,0,0" Background="#00000000" Margin="0,30,0,0">
@@ -69,12 +73,12 @@
                         <Button Grid.Row="5" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="重命名" Foreground="White" Click="event_form_line_rename"/>
 
                         <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0,5,0">
-                            <TextBox x:Name="ui_form_line_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_form_line_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                             <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" Click="event_form_line_search"/>
                         </StackPanel>
                         
                         <!-- 车辆表-->
-                        <ListBox x:Name="ui_form_line_form_line_list" BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                        <ListBox x:Name="ui_form_line_form_line_list" BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Foreground="{DynamicResource global_fore_color}"/>
 
                     </Grid>
 
@@ -134,8 +138,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="线路名  " VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_line_form_basic_pro_form_line_name" Background="#00000000" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
+                                        <TextBlock Text="线路名  " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_line_form_basic_pro_form_line_name" Background="#00000000" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True" Foreground="{DynamicResource global_fore_color}"/>
                                     </Grid>
                                     
                                     <Grid Grid.Row="3">
@@ -144,7 +148,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="类别  " VerticalAlignment="Center"/>
+                                        <TextBlock Text="类别  " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                         <ComboBox x:Name="ui_form_line_form_basic_pro_form_genre" Grid.Column="1" VerticalAlignment="Center">
                                             <ComboBoxItem Content="公交" IsSelected="true"/>
                                             <ComboBoxItem Content="地铁"/>
@@ -159,7 +163,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="等待该车难易度  " VerticalAlignment="Center"/>
+                                        <TextBlock Text="等待该车难易度  " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                         <ComboBox x:Name="ui_form_line_form_basic_pro_form_easy" Grid.Column="1" VerticalAlignment="Center">
                                             <ComboBoxItem Content="0---极难等（30min以上1班）"/>
                                             <ComboBoxItem Content="1---难等（16-30min 1班）"/>
@@ -180,7 +184,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="首班车  " VerticalAlignment="Center"/>
+                                        <TextBlock Text="首班车  " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                         <ComboBox x:Name="ui_form_line_form_basic_pro_form_first_bus_hour" Grid.Column="1" VerticalAlignment="Center">
                                             <ComboBoxItem Content="0" IsSelected="true"/>
                                             <ComboBoxItem Content="1"/>
@@ -195,8 +199,8 @@
                                             <ComboBoxItem Content="10"/>
                                             <ComboBoxItem Content="11"/>
                                         </ComboBox>
-                                                  
-                                        <TextBlock Grid.Column="2" Text=" 时 " VerticalAlignment="Center"/>
+
+                                        <TextBlock Grid.Column="2" Text=" 时 " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                         <ComboBox x:Name="ui_form_line_form_basic_pro_form_first_bus_minute" Grid.Column="3" VerticalAlignment="Center">
                                             <ComboBoxItem Content="0" IsSelected="true"/>
                                             <ComboBoxItem Content="1"/>
@@ -259,7 +263,7 @@
                                             <ComboBoxItem Content="58"/>
                                             <ComboBoxItem Content="59"/>
                                         </ComboBox>
-                                        <TextBlock Grid.Column="4" Text=" 分 " VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="4" Text=" 分 " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                         
                                     </Grid>
 
@@ -273,7 +277,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="末班车  " VerticalAlignment="Center"/>
+                                        <TextBlock Text="末班车  " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                         <ComboBox x:Name="ui_form_line_form_basic_pro_form_last_bus_hour" Grid.Column="1" VerticalAlignment="Center">
                                             <ComboBoxItem Content="12" IsSelected="true"/>
                                             <ComboBoxItem Content="13"/>
@@ -288,8 +292,8 @@
                                             <ComboBoxItem Content="22"/>
                                             <ComboBoxItem Content="23"/>
                                         </ComboBox>
-                                        
-                                        <TextBlock Grid.Column="2" Text=" 时 " VerticalAlignment="Center"/>
+
+                                        <TextBlock Grid.Column="2" Text=" 时 " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                         <ComboBox x:Name="ui_form_line_form_basic_pro_form_last_bus_minute" Grid.Column="3" VerticalAlignment="Center">
                                             <ComboBoxItem Content="0" IsSelected="true"/>
                                             <ComboBoxItem Content="1"/>
@@ -352,7 +356,7 @@
                                             <ComboBoxItem Content="58"/>
                                             <ComboBoxItem Content="59"/>
                                         </ComboBox>
-                                        <TextBlock Grid.Column="4" Text=" 分 " VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="4" Text=" 分 " VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </Grid>
 
@@ -389,8 +393,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_1" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_1" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </Grid>
                                     <Grid Grid.Row="3">
@@ -399,8 +403,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_2" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_2" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </Grid>
                                     <Grid Grid.Row="5">
@@ -409,8 +413,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_3" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_3" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </Grid>
                                     <Grid Grid.Row="7">
@@ -419,8 +423,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_4" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_4" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </Grid>
                                     <Grid Grid.Row="9">
@@ -429,8 +433,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="叙述5" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_5" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="叙述5" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_line_form_describe_form_describe_5" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </Grid>
 
@@ -461,20 +465,20 @@
                                     </Grid.RowDefinitions>
 
                                     <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal">
-                                        <TextBlock Text="功能：（对当前选中的上下行生效）" VerticalAlignment="Center"/>
+                                        <TextBlock Text="功能：（对当前选中的上下行生效）" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                         <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="从txt导入" Foreground="White" Click="event_form_line_form_stop_enter_txt"/>
                                         <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="清空" Foreground="White" Click="event_form_line_form_stop_clear"/>
                                         <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="反转线路" Foreground="White" Click="event_form_line_form_stop_rewrite_stop"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="3" HorizontalAlignment="Left" Orientation="Horizontal">
-                                        <TextBlock Text="替换：  将" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_line_form_stop_form_replace_form_word" Background="#00000000" Width="50"/>
+                                        <TextBlock Text="替换：  将" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_line_form_stop_form_replace_form_word" Background="#00000000" Width="50" Foreground="{DynamicResource global_fore_color}"/>
                                         <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="替换为回车" Foreground="White" Click="event_form_line_form_stop_replace_to_enter"/>
                                         <Button Width="100" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="替换为其他字符" Foreground="White" Click="event_form_line_form_stop_replace_to_word"/>
 
-                                        <CheckBox x:Name="ui_form_line_form_stop_form_replace_form_up_line" Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于上行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center"/>
-                                        <CheckBox x:Name="ui_form_line_form_stop_form_replace_form_down_line" Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于下行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center"/>
+                                        <CheckBox x:Name="ui_form_line_form_stop_form_replace_form_up_line" Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于上行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <CheckBox x:Name="ui_form_line_form_stop_form_replace_form_down_line" Margin="5,0,5,0" Background="#ff3cb371" IsChecked="false" Content="作用于下行线路" Template="{DynamicResource CheckBoxControlTemplate}" VerticalContentAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </StackPanel>
 
@@ -483,11 +487,11 @@
                                     <TabControl Background="#00000000" BorderThickness="0,1,0,0" Grid.Row="7">
 
                                         <TabItem x:Name="ui_form_line_form_stop_form_up_line_tab" Header="上行线路" Style="{DynamicResource ui_temp_tabitem}">
-                                            <TextBox x:Name="ui_form_line_form_stop_form_up_line_word" BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                            <TextBox x:Name="ui_form_line_form_stop_form_up_line_word" BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Foreground="{DynamicResource global_fore_color}"/>
                                         </TabItem>
 
                                         <TabItem x:Name="ui_form_line_form_stop_form_down_line_tab" Header="下行线路" Style="{DynamicResource ui_temp_tabitem}">
-                                            <TextBox x:Name="ui_form_line_form_stop_form_down_line_word" BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                            <TextBox x:Name="ui_form_line_form_stop_form_down_line_word" BorderThickness="0" Background="#00000000" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Foreground="{DynamicResource global_fore_color}"/>
                                         </TabItem>
 
                                     </TabControl>
@@ -519,12 +523,12 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0,5,0">
-                            <TextBox x:Name="ui_form_station_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_form_station_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                             <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" Click="event_form_station_search"/>
                         </StackPanel>
 
                         <!-- 车辆表-->
-                        <ListBox x:Name="ui_form_station_form_station_list" BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                        <ListBox x:Name="ui_form_station_form_station_list" BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Foreground="{DynamicResource global_fore_color}"/>
 
                     </Grid>
 
@@ -580,8 +584,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox x:Name="ui_form_station_form_describe_form_describe_1" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBlock Text="叙述1" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_1" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                             </Grid>
                             <Grid Grid.Row="3">
@@ -590,8 +594,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox x:Name="ui_form_station_form_describe_form_describe_2" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBlock Text="叙述2" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_2" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                             </Grid>
                             <Grid Grid.Row="5">
@@ -600,8 +604,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox x:Name="ui_form_station_form_describe_form_describe_3" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBlock Text="叙述3" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_3" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                             </Grid>
                             <Grid Grid.Row="7">
@@ -610,8 +614,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox x:Name="ui_form_station_form_describe_form_describe_4" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBlock Text="叙述4" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                <TextBox x:Name="ui_form_station_form_describe_form_describe_4" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                             </Grid>
 
@@ -649,12 +653,12 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0,5,0">
-                            <TextBox x:Name="ui_form_subway_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_form_subway_form_search" Width="135" Background="#00000000" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                             <Button Grid.Row="5" Margin="5,0,0,0" Width="50" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="搜索" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" Click="event_form_subway_search"/>
                         </StackPanel>
 
                         <!-- 车辆表-->
-                        <ListBox x:Name="ui_form_subway_form_subway_list" BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                        <ListBox x:Name="ui_form_subway_form_subway_list" BorderThickness="0" Background="#00000000" Grid.Row="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Foreground="{DynamicResource global_fore_color}"/>
 
                     </Grid>
 
@@ -690,10 +694,10 @@
                             <Button Grid.Row="5" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="删除" Foreground="White" Click="event_form_subway_form_exit_del"/>
                             <Button Grid.Row="7" Margin="5,0,5,0" Background="#ff1e90ff" Template="{DynamicResource ButtonControlTemplate_blue}" Content="重命名" Foreground="White" Click="event_form_subway_form_exit_rename"/>
 
-                            <TextBlock Text="出口列表：" Margin="5,0,5,0" Grid.Row="1"/>
+                            <TextBlock Text="出口列表：" Margin="5,0,5,0" Grid.Row="1" Foreground="{DynamicResource global_fore_color}"/>
 
                             <!-- 车辆表-->
-                            <ListBox x:Name="ui_form_subway_form_exit_list" BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                            <ListBox x:Name="ui_form_subway_form_exit_list" BorderThickness="0" Background="#00000000" Grid.Row="9" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Foreground="{DynamicResource global_fore_color}"/>
 
                         </Grid>
 
@@ -731,8 +735,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="出口通向" Grid.Column="0" VerticalAlignment="Center"/>
-                                <TextBox x:Name="ui_form_subway_form_exit_form_exit_word" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                <TextBlock Text="出口通向" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                <TextBox x:Name="ui_form_subway_form_exit_form_exit_word" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                             </Grid>
 
@@ -821,10 +825,10 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="资源所属地址（English）" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_country" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
-                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_state" Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
-                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_city" Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="资源所属地址（English）" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_country" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_state" Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_english_path_form_city" Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
                                     </Grid>
                                     <Grid Grid.Row="3">
                                         <Grid.ColumnDefinitions >
@@ -835,10 +839,10 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="资源所属地址（Local Language）" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_country" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
-                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_state" Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
-                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_city" Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="资源所属地址（Local Language）" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_country" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_state" Text="" Grid.Column="2" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_local_path_form_city" Text="" Grid.Column="3" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
                                     </Grid>
                                     <Grid Grid.Row="5">
                                         <Grid.ColumnDefinitions >
@@ -849,9 +853,9 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Margin="5,0,5,0" Text="国家" Grid.Column="1" VerticalAlignment="Center"/>
-                                        <TextBlock Margin="5,0,5,0" Text="省（州、区）" Grid.Column="2" VerticalAlignment="Center"/>
-                                        <TextBlock Margin="5,0,5,0" Text="城市（县、市）" Grid.Column="3" VerticalAlignment="Center"/>
+                                        <TextBlock Margin="5,0,5,0" Text="国家" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBlock Margin="5,0,5,0" Text="省（州、区）" Grid.Column="2" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBlock Margin="5,0,5,0" Text="城市（县、市）" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
                                     </Grid>
                                     <TextBlock Foreground="Red" Grid.Row="7" Text="第一条必须使用英语填写，这关系到模块的加载（模块 的定义详见资源开发手册）&#x000A;
 第二条请使用本地语言填写，这将会涉及到联网最短路径搜索功能（使用本地最短路径服务提供商支持的语言即可）"/>
@@ -862,8 +866,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="资源开发者" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_sundry_form_readme_form_developer" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="资源开发者" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_developer" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </Grid>
                                     <Grid Grid.Row="11">
@@ -872,8 +876,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="资源开发时间" Grid.Column="0" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ui_form_sundry_form_readme_form_date" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50"/>
+                                        <TextBlock Text="资源开发时间" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource global_fore_color}"/>
+                                        <TextBox x:Name="ui_form_sundry_form_readme_form_date" Text="" Grid.Column="1" Background="#00000000" Margin="5,0,5,0" MaxLength="50" Foreground="{DynamicResource global_fore_color}"/>
 
                                     </Grid>
                                     <TextBlock Foreground="Red" Grid.Row="13" Text="开发者可以是人名，也可以是组织名&#x000A;
