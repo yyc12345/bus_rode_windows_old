@@ -32,10 +32,23 @@
     ''' 描述出口（序号，0=名字 1=叙述）
     ''' </summary>
     Public back_exit(20, 1) As String
+
+    '=====================================================自动保存要用的序号
     ''' <summary>
     ''' 上一个选择的地铁出口序号
     ''' </summary>
     Public before_subway_stop As Integer = -1
+    ''' <summary>
+    ''' 上一个选择的总站序号
+    ''' </summary>
+    Public before_station As Integer = -1
+    ''' <summary>
+    ''' 上一个选择的出口序号
+    ''' </summary>
+    Public before_exit As Integer = -1
+
+
+
 
 
 #Region "预设"

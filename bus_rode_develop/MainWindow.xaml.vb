@@ -30,6 +30,14 @@
         open_brsp_file.Filter = "bus_rode资源开发工程文件|*.brsp"
         open_txt_file.Filter = "文本文档|*.txt"
 
+        If setting_save = True Then
+            'auto
+            ui_menu_form_setup_form_save.Header = "关闭列表自动保存"
+        Else
+            'hand
+            ui_menu_form_setup_form_save.Header = "开启列表自动保存"
+        End If
+
     End Sub
 
 
@@ -111,6 +119,10 @@
             '清空输入区
             clear_line()
 
+            before_subway_stop = -1
+            before_station = -1
+            before_exit = -1
+
         End If
 
     End Sub
@@ -144,7 +156,16 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub event_control_save(sender As Object, e As RoutedEventArgs) Handles ui_menu_form_setup_form_save.Click
-
+        '分辨的处理工作在各个函数里，此处更改即可
+        setting_save = Not (setting_save)
+        If setting_save = True Then
+            'auto
+            ui_menu_form_setup_form_save.Header = "关闭列表自动保存"
+        Else
+            'hand
+            ui_menu_form_setup_form_save.Header = "开启列表自动保存"
+        End If
+        save_desktop()
     End Sub
 
     ''' <summary>
@@ -228,6 +249,7 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub event_form_line_del(sender As Object, e As RoutedEventArgs)
+
         If ui_form_line_form_line_list.SelectedIndex <> -1 Then
             del_line()
         End If
@@ -269,7 +291,18 @@
     Private Sub event_form_line_init_line(sender As Object, e As SelectionChangedEventArgs) Handles ui_form_line_form_line_list.SelectionChanged
 
         If ui_form_line_form_line_list.SelectedIndex <> -1 Then
+
+            '确认是否需要自动保存
+            If setting_save = True And ui_form_line_form_basic_pro_form_line_name.Text <> "" Then
+                '因为该函数是依靠textbox写入的，所以列表项更改不影响，直接调用
+                save_line()
+            End If
+
             read_line(ui_form_line_form_line_list.Items.Item(ui_form_line_form_line_list.SelectedIndex))
+
+        Else
+            '-1时清数据
+            clear_line()
         End If
 
     End Sub
@@ -468,6 +501,17 @@
     Private Sub event_form_station_select_station(sender As Object, e As SelectionChangedEventArgs) Handles ui_form_station_form_station_list.SelectionChanged
 
         If ui_form_station_form_station_list.SelectedIndex <> -1 Then
+
+            '确认是否需要自动保存
+            If setting_save = True And before_station <> -1 Then
+                '因为该函数是依靠index写入的，所以需要记录index
+                '保存总站
+                back_station(before_station, 1) = ui_form_station_form_describe_form_describe_1.Text
+                back_station(before_station, 2) = ui_form_station_form_describe_form_describe_2.Text
+                back_station(before_station, 3) = ui_form_station_form_describe_form_describe_3.Text
+                back_station(before_station, 4) = ui_form_station_form_describe_form_describe_4.Text
+            End If
+
             '读取总站
             ui_form_station_form_describe_form_describe_1.Text = back_station(ui_form_station_form_station_list.SelectedIndex, 1)
             ui_form_station_form_describe_form_describe_2.Text = back_station(ui_form_station_form_station_list.SelectedIndex, 2)
@@ -475,6 +519,9 @@
             ui_form_station_form_describe_form_describe_4.Text = back_station(ui_form_station_form_station_list.SelectedIndex, 4)
 
         End If
+
+        '获取序号
+        before_station = ui_form_station_form_station_list.SelectedIndex
 
     End Sub
     ''' <summary>
@@ -573,11 +620,29 @@
     Private Sub event_form_subway_select_subway(sender As Object, e As SelectionChangedEventArgs) Handles ui_form_subway_form_subway_list.SelectionChanged
 
         If ui_form_subway_form_subway_list.SelectedIndex <> -1 Then
+
             '先保存原本打开的地铁
+            '======================================保存地铁信息
+            If setting_save = True And before_subway_stop <> -1 Then
 
-            '保存地铁信息
-            If before_subway_stop <> -1 Then
+                '先检测
+                For a = 0 To 20
+                    If back_exit(a, 0) = "" Then
+                        Exit For
+                    Else
+                        If back_exit(a, 1) = "" Then
+                            '不合格
+                            '如果当前没选中，就弹回去
+                            If before_subway_stop <> ui_form_subway_form_subway_list.SelectedIndex Then
+                                window_dialogs_show("错误", "出口描述不得为空！无法保存。请检查所有出口描述保证其描述不为空", 2, 1, False, "确定", "", Me)
+                                ui_form_subway_form_subway_list.SelectedIndex = before_subway_stop
+                            End If
+                            Exit Sub
+                        End If
+                    End If
+                Next
 
+                '保存地铁信息
                 Dim word As String = ""
 
                 For a = 0 To 20
@@ -590,13 +655,13 @@
                         word = word + back_exit(a, 0) + vbCrLf + back_exit(a, 1)
                     End If
                 Next
-
                 back_subway(before_subway_stop, 1) = word
 
             End If
 
             before_subway_stop = ui_form_subway_form_subway_list.SelectedIndex
-            '在执行打开新的
+
+            '==============================在执行打开新的
 
             Dim word2 As String = back_subway(ui_form_subway_form_subway_list.SelectedIndex, 1)
             Dim word2_arr() As String = word2.Split(vbCrLf)
@@ -649,6 +714,7 @@
                     Else
                         If word <> "" Then
                             back_exit(a, 0) = word
+                            back_exit(a, 1) = "没有描述"
                             ui_form_subway_form_exit_list.Items.Add(word)
                             ui_form_subway_form_exit_list.SelectedIndex = ui_form_subway_form_exit_list.Items.IndexOf(word)
                         Else
@@ -695,8 +761,8 @@
                 End If
             Next
 
+            ui_form_subway_form_exit_list.SelectedIndex = -1
             ui_form_subway_form_exit_list.Items.RemoveAt(ui_form_subway_form_exit_list.SelectedIndex)
-            ui_form_subway_form_exit_list.SelectedIndex = 0
 
         End If
 
@@ -720,9 +786,11 @@
 
                     '寻找旧的
                     Dim a As Integer = ui_form_subway_form_exit_list.SelectedIndex
+                    ui_form_subway_form_exit_list.SelectedIndex = -1
                     back_exit(a, 0) = word
                     ui_form_subway_form_exit_list.Items.RemoveAt(a)
                     ui_form_subway_form_exit_list.Items.Insert(a, word)
+                    ui_form_subway_form_exit_list.SelectedIndex = a
 
                 Else
                     window_dialogs_show("错误", "出口名不得为空", 2, 1, False, "确定", "", Me)
@@ -742,8 +810,19 @@
     Private Sub event_form_subway_form_exit_select_exit(sender As Object, e As SelectionChangedEventArgs) Handles ui_form_subway_form_exit_list.SelectionChanged
 
         If ui_form_subway_form_exit_list.SelectedIndex <> -1 Then
-            back_exit(ui_form_subway_form_exit_list.SelectedIndex, 1) = ui_form_subway_form_exit_form_exit_word.Text
+
+            '这个自动保存不受控制，所以默认直接保存
+            If before_exit <> -1 Then
+                back_exit(before_exit, 1) = ui_form_subway_form_exit_form_exit_word.Text
+            End If
+
+            ui_form_subway_form_exit_form_exit_word.Text = back_exit(ui_form_subway_form_exit_list.SelectedIndex, 1)
+        Else
+            '清空
+            ui_form_subway_form_exit_form_exit_word.Text = ""
         End If
+
+        before_exit = ui_form_subway_form_exit_list.SelectedIndex
 
     End Sub
 
@@ -778,7 +857,7 @@
 
             ui_work_area.IsEnabled = False
             ui_work_area.Opacity = 0
-            ui_bk_word.Opacity = 1
+            ui_bk_word.Opacity = 0.3
 
             ui_menu_form_build.IsEnabled = False
             ui_menu_form_project_form_save.IsEnabled = False
@@ -810,16 +889,17 @@
         '刷新界面白天黑夜
         If setting_time = True Then
             'day
-            ui_menu_form_setup_form_time.Header = "更改为白天模式"
-            Application.Current.Resources("global_bk_color") = New SolidColorBrush(Color.FromArgb(255, 45, 45, 45))
-            Application.Current.Resources("global_tab_color") = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
-            Application.Current.Resources("global_fore_color") = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
-        Else
-            'night
             ui_menu_form_setup_form_time.Header = "更改为夜晚模式"
             Application.Current.Resources("global_bk_color") = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
             Application.Current.Resources("global_tab_color") = New SolidColorBrush(Color.FromArgb(255, 127, 127, 127))
             Application.Current.Resources("global_fore_color") = New SolidColorBrush(Color.FromArgb(255, 0, 0, 0))
+
+        Else
+            'night
+            ui_menu_form_setup_form_time.Header = "更改为白天模式"
+            Application.Current.Resources("global_bk_color") = New SolidColorBrush(Color.FromArgb(255, 45, 45, 45))
+            Application.Current.Resources("global_tab_color") = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+            Application.Current.Resources("global_fore_color") = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
         End If
 
 
@@ -1599,10 +1679,15 @@
             System.IO.File.Delete(project_path + "bus.txt")
             System.IO.File.Move(project_path + "bus.txt.new", project_path + "bus.txt")
 
+            '先清数据，防止误保存
+            clear_line()
 
-            ui_form_line_form_line_list.Items.RemoveAt(ui_form_line_form_line_list.SelectedIndex)
-            ui_form_line_form_line_list.Items.Add(word)
-            ui_form_line_form_line_list.SelectedIndex = ui_form_line_form_line_list.Items.IndexOf(word)
+            '然后修正列表
+            Dim a As Integer = ui_form_line_form_line_list.SelectedIndex
+            ui_form_line_form_line_list.SelectedIndex = -1
+            ui_form_line_form_line_list.Items.RemoveAt(a)
+            ui_form_line_form_line_list.Items.Insert(a, word)
+            ui_form_line_form_line_list.SelectedIndex = a
         Else
             window_dialogs_show("错误", "列表含有该名称或者该名称为空", 2, 1, False, "确定", "", Me)
         End If

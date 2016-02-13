@@ -46,6 +46,16 @@ bus_rode_develop
  上一个选择的地铁出口序号
  </summary>
 </member>
+<member name="F:bus_rode_develop.Develop_Core.before_station">
+ <summary>
+ 上一个选择的总站序号
+ </summary>
+</member>
+<member name="F:bus_rode_develop.Develop_Core.before_exit">
+ <summary>
+ 上一个选择的出口序号
+ </summary>
+</member>
 <member name="M:bus_rode_develop.Develop_Core.read_desktop">
  <summary>
  读取预设
