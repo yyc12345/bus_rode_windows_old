@@ -452,7 +452,8 @@ Public Class MainWindow
 "CHMOSGroup Copyright 2012-2016" & vbCrLf &
 "" & vbCrLf &
 "感谢您使用bus_rode，bus_rode是一个开源软件，使用MIT开源协议，在下面会有开源地址" & vbCrLf &
-"您可以加入这个工程，帮助我们变得更好，也可以在下面这个地址反馈错我，我们将会将其标记并在将来消除这个问题"
+"您可以加入这个工程，帮助我们变得更好，也可以在下面这个地址反馈错我，我们将会将其" & vbCrLf &
+"标记并在将来消除这个问题"
         ui_form_about_describe.Text = describe
 
         describe = ""
