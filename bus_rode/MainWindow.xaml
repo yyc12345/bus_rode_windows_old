@@ -394,8 +394,8 @@
                 <Grid Grid.Column="1" Grid.Row="3">
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition x:Name="ui_form_line_form_no_down_line_width" Width="auto"/>
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition x:Name="ui_form_line_form_re_mid_bus_width" Width="0"/>
                         <ColumnDefinition Width="*"/>
@@ -406,14 +406,13 @@
                         <Grid.Background >
                             <SolidColorBrush x:Name="ui_form_line_select_up_line" Color="#8f0000ff"/>
                         </Grid.Background>
-                        <Grid.RowDefinitions >
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="上行线路"/>
-                        <Rectangle Fill="#00000000" Stroke="White" Grid.RowSpan="3" StrokeThickness="2"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="上行线路"/>
+                            <TextBlock x:Name="ui_form_line_select_up_line_describe" Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="（）"/>
+                        </StackPanel>
+                        
+                        <Rectangle Fill="#00000000" Stroke="White" StrokeThickness="2"/>
 
                     </Grid>
 
@@ -422,13 +421,12 @@
                         <Grid.Background >
                             <SolidColorBrush x:Name="ui_form_line_select_down_line" Color="#00000000"/>
                         </Grid.Background>
-                        <Grid.RowDefinitions >
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="下行线路"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="下行线路"/>
+                            <TextBlock x:Name="ui_form_line_select_down_line_describe" Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="（）"/>
+                        </StackPanel>
+                        
                         <Rectangle Fill="#00000000" Stroke="White" Grid.RowSpan="3" StrokeThickness="2"/>
 
                     </Grid>

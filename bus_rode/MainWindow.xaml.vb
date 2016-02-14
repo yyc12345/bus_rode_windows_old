@@ -378,6 +378,17 @@ Public Class MainWindow
                 '地铁
                 ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：地铁" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
             End If
+            '设置上下行文本，控制操作
+            ui_form_line_select_up_line_describe.Text = "（" & bus_up_line_describe & "）"
+            If bus_down_line_describe = "" Then
+                '没有下行线路，封掉
+                ui_form_line_select_down_line_describe.Text = ""
+                ui_form_line_form_no_down_line_width.Width = New GridLength(0)
+            Else
+                '有，写入
+                ui_form_line_select_down_line_describe.Text = "（" & bus_down_line_describe & "）"
+                ui_form_line_form_no_down_line_width.Width = GridLength.Auto
+            End If
 
             ui_form_stop_describe.Text = cross_stop
             ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
@@ -1463,6 +1474,17 @@ Public Class MainWindow
 
             ui_form_line_select_up_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
             ui_form_line_select_down_line.Color = Color.FromArgb(0, 0, 0, 0)
+            '设置上下行文本，控制操作
+            ui_form_line_select_up_line_describe.Text = "（" & bus_up_line_describe & "）"
+            If bus_down_line_describe = "" Then
+                '没有下行线路，封掉
+                ui_form_line_select_down_line_describe.Text = ""
+                ui_form_line_form_no_down_line_width.Width = New GridLength(0)
+            Else
+                '有，写入
+                ui_form_line_select_down_line_describe.Text = "（" & bus_down_line_describe & "）"
+                ui_form_line_form_no_down_line_width.Width = GridLength.Auto
+            End If
 
             '设置文本
             If bus_or_subway = 0 Then
@@ -1504,6 +1526,17 @@ Public Class MainWindow
 
                     ui_form_line_select_up_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
                     ui_form_line_select_down_line.Color = Color.FromArgb(0, 0, 0, 0)
+                    '设置上下行文本，控制操作
+                    ui_form_line_select_up_line_describe.Text = "（" & bus_up_line_describe & "）"
+                    If bus_down_line_describe = "" Then
+                        '没有下行线路，封掉
+                        ui_form_line_select_down_line_describe.Text = ""
+                        ui_form_line_form_no_down_line_width.Width = New GridLength(0)
+                    Else
+                        '有，写入
+                        ui_form_line_select_down_line_describe.Text = "（" & bus_down_line_describe & "）"
+                        ui_form_line_form_no_down_line_width.Width = GridLength.Auto
+                    End If
 
                     '设置文本
                     If bus_or_subway = 0 Then
@@ -2316,7 +2349,7 @@ Public Class MainWindow
                 Dim prop_4 As Reflection.FieldInfo = tp.GetField("DllVersion")
                 out_word = out_word & "插件版本号：" & CType(prop_4.GetValue(instance), String)
 
-                window_dialogs_show("插件信息", "out_word", 0, 1, False, "确定", "", Application.Current.MainWindow)
+                window_dialogs_show("插件信息", out_word, 0, 1, False, "确定", "", Application.Current.MainWindow)
             End If
         Catch ex As Exception
             window_dialogs_show("错误", "无法读取插件的相关信息，这可能是由于：" & vbCrLf &

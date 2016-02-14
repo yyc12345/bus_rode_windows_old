@@ -93,6 +93,15 @@
     ''' </summary>
     Public read_mid_bus_word As String = ""
 
+    ''' <summary>
+    ''' [内核][screen_line]界面上行线路走向的描述
+    ''' </summary>
+    Public bus_up_line_describe As String = ""
+    ''' <summary>
+    ''' [内核][screen_line]界面下行线路走向的描述
+    ''' </summary>
+    Public bus_down_line_describe As String = ""
+
     '***********************************************************结构************************************************************************************
     ''' <summary>
     ''' [内核][screen_line]mid_bus所用的结构
@@ -195,6 +204,30 @@
         Loop
         file.Dispose()
 
+        '获取起点-重点描述字段
+        bus_up_line_describe = bus_stop_up(0)
+        For a = 0 To 200
+            If bus_stop_up(a) = "" Then
+                bus_up_line_describe = bus_up_line_describe & "-" & bus_stop_up(a - 1)
+                Exit For
+            End If
+        Next
+
+        If bus_stop_down(0) = "" Then
+            '只有单行线路
+            bus_down_line_describe = ""
+        Else
+            bus_down_line_describe = bus_stop_down(0)
+            For a = 0 To 200
+                If bus_stop_down(a) = "" Then
+                    bus_down_line_describe = bus_down_line_describe & "-" & bus_stop_down(a - 1)
+                    Exit For
+                End If
+            Next
+        End If
+
+
+
         '设置地铁相关
         If bus_or_subway = 0 Then
             ui_connet_core_form_line_subway_list.Clear()
@@ -217,6 +250,9 @@
         For test4 = 0 To 5
             bus_msg(test4) = ""
         Next
+
+        bus_up_line_describe = ""
+        bus_down_line_describe = ""
 
     End Sub
 
