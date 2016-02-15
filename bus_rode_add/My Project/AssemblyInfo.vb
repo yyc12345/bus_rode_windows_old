@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' 查看程序集特性的值
 
 <Assembly: AssemblyTitle("bus_rode_add")>
-<Assembly: AssemblyDescription("bus_rode安装资源辅助程序")>
+<Assembly: AssemblyDescription("bus_rode配置文件程序")>
 <Assembly: AssemblyCompany("CHMOSGroup")>
 <Assembly: AssemblyProduct("bus_rode_add")>
 <Assembly: AssemblyCopyright("Copyright © CHMOSGroup 2012-2016")>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' 方法是按如下所示使用“*”:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("3.0.0.0")>
-<Assembly: AssemblyFileVersion("3.0.0.0")>
+<Assembly: AssemblyVersion("4.0.0.0")>
+<Assembly: AssemblyFileVersion("4.0.0.0")>

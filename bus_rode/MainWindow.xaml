@@ -411,7 +411,7 @@
                             <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="上行线路"/>
                             <TextBlock x:Name="ui_form_line_select_up_line_describe" Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="（）"/>
                         </StackPanel>
-                        
+
                         <Rectangle Fill="#00000000" Stroke="White" StrokeThickness="2"/>
 
                     </Grid>
@@ -426,7 +426,7 @@
                             <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="下行线路"/>
                             <TextBlock x:Name="ui_form_line_select_down_line_describe" Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="（）"/>
                         </StackPanel>
-                        
+
                         <Rectangle Fill="#00000000" Stroke="White" Grid.RowSpan="3" StrokeThickness="2"/>
 
                     </Grid>
@@ -1083,207 +1083,210 @@
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
-                                    <RowDefinition Height="120"/>
-                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- 讲述人-->
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="1" Orientation="Vertical">
 
-                                    <Grid>
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="25" Text="讲述人" Grid.Row="1">
-                            <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="讲述人"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="15" Text="帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-
-                                    <!-- 开关-->
-                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Canvas x:Name="ui_form_contorl_check_background_2" Grid.Row="1">
-
-                                            <Grid Height="30" Width="100">
-                                                <Grid.ColumnDefinitions >
-                                                    <ColumnDefinition Width="15"/>
-                                                    <ColumnDefinition Width="15"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="15"/>
-                                                    <ColumnDefinition Width="15"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Stroke="white">
-                                                    <Ellipse.Fill >
-                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_1" Color="#ff8f8f8f"/>
-                                                    </Ellipse.Fill>
-                                                </Ellipse>
-                                                <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Stroke="white">
-                                                    <Ellipse.Fill >
-                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_3" Color="#ff8f8f8f"/>
-                                                    </Ellipse.Fill>
-                                                </Ellipse>
-                                                
-                                                <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Stroke="white" StrokeDashArray="70 28">
-                                                    <Rectangle.Fill >
-                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_2" Color="#ff8f8f8f"/>
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                                
-                                            </Grid>
-                                            
-                                            <Ellipse x:Name="ui_form_contorl_check_btn_2" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Fill="white"/>
-                                        </Canvas>
-                                        
-                                    </Grid>
-                                </Grid>
-
-                                <!-- 重启程序-->
-                                <Grid Grid.Row="2" MouseDown="ui_contorl_list_5_function">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid>
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="25" Text="重新启动应用程序" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="重新启动应用程序"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="15" Text="重启解决一些偶然性问题" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="重启解决一些偶然性问题"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-
-                                    <!-- 右按钮-->
-                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
+                                    <!-- 讲述人-->
+                                    <Grid Height="120">
                                         <Grid.ColumnDefinitions >
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
+                                            <ColumnDefinition Width="100"/>
                                         </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
 
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\right.png"/>
-                                            </Grid.Background>
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
 
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                            <TextBlock Foreground="White" FontSize="25" Text="讲述人" Grid.Row="1">
+                            <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="讲述人"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
 
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="重新启动"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
+                                            <TextBlock Foreground="White" FontSize="15" Text="帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
                                         </Grid>
 
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_1" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_1" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_1" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            
-                                            
-                                        </Grid.Triggers>
-                                        
+                                        <!-- 开关-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
 
+                                            <Canvas x:Name="ui_form_contorl_check_background_2" Grid.Row="1">
+
+                                                <Grid Height="30" Width="100">
+                                                    <Grid.ColumnDefinitions >
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Stroke="white">
+                                                        <Ellipse.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_1" Color="#ff8f8f8f"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                    <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Stroke="white">
+                                                        <Ellipse.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_3" Color="#ff8f8f8f"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+
+                                                    <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Stroke="white" StrokeDashArray="70 28">
+                                                        <Rectangle.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2_2" Color="#ff8f8f8f"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+
+                                                </Grid>
+
+                                                <Ellipse x:Name="ui_form_contorl_check_btn_2" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Fill="white"/>
+                                            </Canvas>
+
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+
+                                    <!-- 重启程序-->
+                                    <Grid Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="重新启动应用程序" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="重新启动应用程序"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="重启解决一些偶然性问题" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="重启解决一些偶然性问题"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+
+                                        <!-- 右按钮-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1" MouseDown="ui_contorl_list_5_function">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="重新启动"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_1" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_1" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_1" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+
+                                        </Grid>
+                                    </Grid>
+
+                                </StackPanel>
 
                             </Grid>
                         </ScrollViewer>
@@ -1295,158 +1298,21 @@
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
-                                    <RowDefinition Height="120"/>
-                                    <RowDefinition Height="120"/>
-                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- 车辆跟踪-->
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
+                                <StackPanel Orientation="Vertical" Grid.Row="1">
 
-                                    <Grid>
+                                    <!-- 车辆跟踪-->
+                                    <Grid Grid.Row="1" Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions >
                                             <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
                                             <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="25" Text="车辆跟踪" Grid.Row="1">
-                            <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="15" Text="对处在运营状态的车次到达站次显示在线路图上" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="对处在运营状态的车次到达站次显示在线路图上"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-
-                                    <!-- 开关-->
-                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Canvas x:Name="ui_form_contorl_check_background" Grid.Row="1">
-
-                                            <Grid Height="30" Width="100">
-                                                <Grid.ColumnDefinitions >
-                                                    <ColumnDefinition Width="15"/>
-                                                    <ColumnDefinition Width="15"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="15"/>
-                                                    <ColumnDefinition Width="15"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Stroke="white">
-                                                    <Ellipse.Fill >
-                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_1" Color="#ff8f8f8f"/>
-                                                    </Ellipse.Fill>
-                                                </Ellipse>
-                                                <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Stroke="white">
-                                                    <Ellipse.Fill >
-                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_3" Color="#ff8f8f8f"/>
-                                                    </Ellipse.Fill>
-                                                </Ellipse>
-
-                                                <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Stroke="white" StrokeDashArray="70 28">
-                                                    <Rectangle.Fill >
-                                                        <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2" Color="#ff8f8f8f"/>
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                            </Grid>
-
-                                            <Ellipse x:Name="ui_form_contorl_check_btn" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Fill="white"/>
-                                        </Canvas>
-
-                                    </Grid>
-                                </Grid>
-
-                                <!-- 车辆跟踪加载的插件-->
-                                <Grid Grid.Row="2">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="50"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid>
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="25" Text="车辆跟踪插件" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪插件"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="15" Text="车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-
-                                    <!-- 插件路径-->
-                                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
 
                                         <Grid>
@@ -1455,235 +1321,479 @@
                                                 <RowDefinition Height="auto"/>
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="车辆跟踪" Grid.Row="1">
+                            <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="对处在运营状态的车次到达站次显示在线路图上" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="对处在运营状态的车次到达站次显示在线路图上"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+
+                                        <!-- 开关-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Canvas x:Name="ui_form_contorl_check_background" Grid.Row="1">
+
+                                                <Grid Height="30" Width="100">
+                                                    <Grid.ColumnDefinitions >
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Stroke="white">
+                                                        <Ellipse.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_1" Color="#ff8f8f8f"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                    <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Stroke="white">
+                                                        <Ellipse.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_3" Color="#ff8f8f8f"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+
+                                                    <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Stroke="white" StrokeDashArray="70 28">
+                                                        <Rectangle.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_2" Color="#ff8f8f8f"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Grid>
+
+                                                <Ellipse x:Name="ui_form_contorl_check_btn" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Fill="white"/>
+                                            </Canvas>
+
+                                        </Grid>
+                                    </Grid>
+
+                                    <!-- 车辆跟踪加载的插件-->
+                                    <Grid Grid.Row="2" Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="车辆跟踪插件" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪插件"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+
+                                        <!-- 插件路径-->
+                                        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid>
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height=" *"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height=" *"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width=" auto"/>
+                                                    <ColumnDefinition Width=" *"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="车辆跟踪插件路径"/>
+                                            </Grid>
+                                            <TextBox x:Name="ui_form_contorl_mod_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+
+                                        </Grid>
+
+                                        <!-- 浏览按钮 MouseDown="ui_form_contorl_throw_rs_file"-->
+                                        <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_mod_file">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions >
-                                                <ColumnDefinition Width=" *"/>
-                                                <ColumnDefinition Width=" auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
                                                 <ColumnDefinition Width=" *"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="车辆跟踪插件路径"/>
+                                            <Grid Grid.Column="1" Grid.Row="1">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\search.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="浏览车辆跟踪插件"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_2" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_2" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_2" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+
                                         </Grid>
-                                        <TextBox x:Name="ui_form_contorl_mod_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                        <!-- 右按钮 MouseDown="ui_contorl_list_2_function"-->
+                                        <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_contorl_list_7_function">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="启用"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_3" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_3" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_3" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
 
 
+                                            </Grid.Triggers>
+
+                                        </Grid>
                                     </Grid>
 
-                                    <!-- 浏览按钮 MouseDown="ui_form_contorl_throw_rs_file"-->
-                                    <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_mod_file">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
+                                    <!-- 车辆跟踪插件删除-->
+                                    <Grid Grid.Row="3" Height="120">
                                         <Grid.ColumnDefinitions >
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
+                                            <ColumnDefinition Width="100"/>
                                         </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\search.png"/>
-                                            </Grid.Background>
-
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
-
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="浏览车辆跟踪插件"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
-                                        </Grid>
-
-
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_2" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_2" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_2" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-
-
-                                        </Grid.Triggers>
-
-
-                                    </Grid>
-
-                                    <!-- 右按钮 MouseDown="ui_contorl_list_2_function"-->
-                                    <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_contorl_list_7_function">
                                         <Grid.RowDefinitions >
                                             <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions >
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\right.png"/>
-                                            </Grid.Background>
-
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
-
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="启用"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
-                                        </Grid>
-
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_3" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_3" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_3" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-
-
-                                        </Grid.Triggers>
-
-                                    </Grid>
-                                </Grid>
-
-                                <!-- 资源信息MouseDown="ui_contorl_list_3_function-->
-                                <Grid Grid.Row="3" MouseDown="ui_contorl_list_8_function">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid>
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
                                             <RowDefinition Height=" *"/>
                                         </Grid.RowDefinitions>
 
-                                        <TextBlock Foreground="White" FontSize="25" Text="插件信息" Grid.Row="1">
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="删除插件" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="插件信息"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="删除插件"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
                         </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
 
-                                        <TextBlock Foreground="White" FontSize="15" Text="显示当前车辆跟踪插件的信息" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="删除当前加载的插件" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="显示当前车辆跟踪插件的信息"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="删除当前加载的插件"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
                         </TextBlock>
-                                    </Grid>
-
-                                    <!-- 右按钮-->
-                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions >
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\right.png"/>
-                                            </Grid.Background>
-
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
-
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="查看"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
                                         </Grid>
 
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_10" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_10" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_10" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
+                                        <!-- 右按钮-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1" MouseDown="ui_contorl_list_1_function">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="删除"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_15" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_15" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_15" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
 
 
-                                        </Grid.Triggers>
+                                            </Grid.Triggers>
 
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+
+                                    <!-- 资源信息MouseDown="ui_contorl_list_3_function-->
+                                    <Grid Grid.Row="3" Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="插件信息" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="插件信息"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="显示当前车辆跟踪插件的信息" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="显示当前车辆跟踪插件的信息"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+
+                                        <!-- 右按钮-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1" MouseDown="ui_contorl_list_8_function">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="查看"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_10" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_10" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_10" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+                                        </Grid>
+                                    </Grid>
+
+                                </StackPanel>
 
                             </Grid>
                         </ScrollViewer>
@@ -1695,66 +1805,23 @@
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
-                                    <RowDefinition Height="120"/>
-                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- 替换资源-->
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="50"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="1" Orientation="Vertical">
 
-                                    <Grid>
+                                    <!-- 替换资源-->
+                                    <Grid Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions >
                                             <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
                                             <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="25" Text="替换资源" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="替换资源"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="15" Text="替换加载的资源，便于切换到其他城市进行指引" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="替换加载的资源，便于切换到其他城市进行指引"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-
-                                    <!-- 资源路径-->
-                                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
 
                                         <Grid>
@@ -1763,233 +1830,383 @@
                                                 <RowDefinition Height="auto"/>
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="替换资源" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="替换资源"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="替换加载的资源，便于切换到其他城市进行指引" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="替换加载的资源，便于切换到其他城市进行指引"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+
+                                        <!-- 资源路径-->
+                                        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid>
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height=" *"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height=" *"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width=" auto"/>
+                                                    <ColumnDefinition Width=" *"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="资源路径"/>
+                                            </Grid>
+                                            <TextBox x:Name="ui_form_contorl_resource_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+
+                                        </Grid>
+
+                                        <!-- 浏览按钮-->
+                                        <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_rs_file">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions >
-                                                <ColumnDefinition Width=" *"/>
-                                                <ColumnDefinition Width=" auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
                                                 <ColumnDefinition Width=" *"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="资源路径"/>
+                                            <Grid Grid.Column="1" Grid.Row="1">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\search.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="浏览文件"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_4" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_4" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_4" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
                                         </Grid>
-                                        <TextBox x:Name="ui_form_contorl_resource_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                        <!-- 右按钮-->
+                                        <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_contorl_list_2_function">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="替换"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_5" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_5" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_5" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
 
 
+                                            </Grid.Triggers>
+
+                                        </Grid>
                                     </Grid>
 
-                                    <!-- 浏览按钮-->
-                                    <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_rs_file">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
+                                    <!-- 删除资源-->
+                                    <Grid Height="120">
                                         <Grid.ColumnDefinitions >
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
+                                            <ColumnDefinition Width="100"/>
                                         </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\search.png"/>
-                                            </Grid.Background>
-
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
-
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="浏览文件"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
-                                        </Grid>
-
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_4" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_4" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_4" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-
-
-                                        </Grid.Triggers>
-
-                                    </Grid>
-
-                                    <!-- 右按钮-->
-                                    <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_contorl_list_2_function">
                                         <Grid.RowDefinitions >
                                             <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions >
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\right.png"/>
-                                            </Grid.Background>
-
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
-
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="替换"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
-                                        </Grid>
-
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_5" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_5" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_5" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-
-
-                                        </Grid.Triggers>
-                                        
-                                    </Grid>
-                                </Grid>
-
-                                <!-- 资源信息-->
-                                <Grid Grid.Row="2" MouseDown="ui_contorl_list_3_function">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid>
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
                                             <RowDefinition Height=" *"/>
                                         </Grid.RowDefinitions>
 
-                                        <TextBlock Foreground="White" FontSize="25" Text="资源信息" Grid.Row="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="删除加载的资源" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="资源信息"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="删除加载的资源"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
                         </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
 
-                                        <TextBlock Foreground="White" FontSize="15" Text="显示当前资源的信息" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="删除当前加载的资源" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="显示当前资源的信息"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="删除当前加载的资源"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
                         </TextBlock>
-                                    </Grid>
-
-                                    <!-- 右按钮-->
-                                    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions >
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\right.png"/>
-                                            </Grid.Background>
-
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
-
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="查看"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
                                         </Grid>
 
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_6" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_6" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_6" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
+                                        <!-- 右按钮-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1" MouseDown="ui_contorl_list_9_function">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="删除"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_16" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_16" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_16" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
 
 
-                                        </Grid.Triggers>
-                                        
+                                            </Grid.Triggers>
+
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+
+                                    <!-- 资源信息-->
+                                    <Grid Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="资源信息" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="资源信息"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="显示当前资源的信息" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="显示当前资源的信息"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+
+                                        <!-- 右按钮-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1" MouseDown="ui_contorl_list_3_function">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="查看"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_6" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_6" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_6" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+                                        </Grid>
+                                    </Grid>
+
+                                </StackPanel>
 
                             </Grid>
                         </ScrollViewer>
@@ -2001,66 +2218,23 @@
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
-                                    <RowDefinition Height="120"/>
-                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- 替换背景-->
-                                <Grid  Grid.Row="1">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="50"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="1" Orientation="Vertical">
 
-                                    <Grid>
+                                    <!-- 替换背景-->
+                                    <Grid Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions >
                                             <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
                                             <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="25" Text="替换背景" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="替换背景"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="15" Text="选用一张新的背景图片作为背景" Grid.Row="1">
-                             <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="选用一张新的背景图片作为背景"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
-                        </TextBlock>
-                                    </Grid>
-
-                                    <!-- 背景路径-->
-                                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
 
                                         <Grid>
@@ -2069,299 +2243,345 @@
                                                 <RowDefinition Height="auto"/>
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions >
-                                                <ColumnDefinition Width=" *"/>
-                                                <ColumnDefinition Width=" auto"/>
-                                                <ColumnDefinition Width=" *"/>
-                                            </Grid.ColumnDefinitions>
 
-                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="背景路径"/>
-                                        </Grid>
-                                        <TextBox x:Name="ui_form_contorl_background_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
-
-                                    </Grid>
-
-                                    <!-- 浏览按钮-->
-                                    <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_bk_file">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions >
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\search.png"/>
-                                            </Grid.Background>
-
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
-
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="浏览文件"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
-                                        </Grid>
-
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_7" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_7" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_7" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-
-
-                                        </Grid.Triggers>
-
-                                    </Grid>
-
-                                    <!-- 右按钮-->
-                                    <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0"  MouseDown="ui_contorl_list_4_function">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions >
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\right.png"/>
-                                            </Grid.Background>
-
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
-
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="替换"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
-                                        </Grid>
-
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_8" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_8" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_8" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-
-
-                                        </Grid.Triggers>
-
-                                    </Grid>
-                                </Grid>
-
-                                <!-- 更改背景颜色-->
-                                <Grid Grid.Row="2">
-                                    <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height=" *"/>
-                                        <RowDefinition Height=" *"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid>
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
-
-                                        <TextBlock Foreground="White" FontSize="25" Text="更改配色" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="替换背景" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="更改配色"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="替换背景"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
                         </TextBlock>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition Height=" *"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height=" *"/>
-                                        </Grid.RowDefinitions>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
 
-                                        <TextBlock Foreground="White" FontSize="15" Text="输入一组新的颜色值来替换现有颜色" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="选用一张新的背景图片作为背景" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
-                                            <TextBlock.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid>
-                                                        <TextBlock Foreground="black" FontSize="15" Text="输入一组新的颜色值来替换现有颜色"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </TextBlock.ToolTip>
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="选用一张新的背景图片作为背景"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
                         </TextBlock>
+                                        </Grid>
+
+                                        <!-- 背景路径-->
+                                        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid>
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height=" *"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height=" *"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width=" auto"/>
+                                                    <ColumnDefinition Width=" *"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="背景路径"/>
+                                            </Grid>
+                                            <TextBox x:Name="ui_form_contorl_background_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                        </Grid>
+
+                                        <!-- 浏览按钮-->
+                                        <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0" MouseDown="ui_form_contorl_throw_bk_file">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\search.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="浏览文件"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_7" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_7" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_7" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+                                        </Grid>
+
+                                        <!-- 右按钮-->
+                                        <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0"  MouseDown="ui_contorl_list_4_function">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="替换"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_8" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_8" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_8" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+                                        </Grid>
                                     </Grid>
 
-                                    <!-- 颜色值-->
-                                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                    <!-- 更改背景颜色-->
+                                    <Grid Height="120">
                                         <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="2*"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions >
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="20"/>
-                                        </Grid.RowDefinitions>
-
-
-                                        <!-- R-->
-                                        <Grid Grid.Column="0" Grid.Row="0">
-                                            <Grid.RowDefinitions >
-                                                <RowDefinition Height=" *"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height=" *"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions >
-                                                <ColumnDefinition Width=" *"/>
-                                                <ColumnDefinition Width=" auto"/>
-                                                <ColumnDefinition Width=" *"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="红色值"/>
-                                        </Grid>
-                                        <TextBox x:Name="ui_form_contorl_r_value" Foreground="white" FontSize="15" Grid.Column="0" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
-
-                                        <!-- G-->
-                                        <Grid Grid.Column="1" Grid.Row="0">
-                                            <Grid.RowDefinitions >
-                                                <RowDefinition Height=" *"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height=" *"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions >
-                                                <ColumnDefinition Width=" *"/>
-                                                <ColumnDefinition Width=" auto"/>
-                                                <ColumnDefinition Width=" *"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="绿色值"/>
-                                        </Grid>
-                                        <TextBox x:Name="ui_form_contorl_g_value" Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
-
-                                        <!-- B-->
-                                        <Grid Grid.Column="2" Grid.Row="0">
-                                            <Grid.RowDefinitions >
-                                                <RowDefinition Height=" *"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height=" *"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions >
-                                                <ColumnDefinition Width=" *"/>
-                                                <ColumnDefinition Width=" auto"/>
-                                                <ColumnDefinition Width=" *"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="蓝色值"/>
-                                        </Grid>
-                                        <TextBox x:Name="ui_form_contorl_b_value" Foreground="white" FontSize="15" Grid.Column="2" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
-
-                                    </Grid>
-
-                                    <!-- 右按钮-->
-                                    <Grid Grid.Column="4" Grid.RowSpan="2" Grid.Row="0"  MouseDown="ui_contorl_list_6_function">
-                                        <Grid.RowDefinitions >
                                             <RowDefinition Height=" *"/>
-                                            <RowDefinition Height=" 30"/>
                                             <RowDefinition Height=" *"/>
                                         </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions >
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width=" 30"/>
-                                            <ColumnDefinition Width=" *"/>
-                                        </Grid.ColumnDefinitions>
 
-                                        <Grid Grid.Column="1" Grid.Row="1">
-                                            <Grid.Background >
-                                                <ImageBrush ImageSource="photo\right.png"/>
-                                            </Grid.Background>
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
 
-                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                            <TextBlock Foreground="White" FontSize="25" Text="更改配色" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="更改配色"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
 
-                                            <!-- 提示-->
-                                            <Grid.ToolTip>
-                                                <ToolTip Background="white">
-                                                    <Grid >
-                                                        <TextBlock Foreground="black" FontSize="15" Text="更改颜色"/>
-                                                    </Grid>
-                                                </ToolTip>
-                                            </Grid.ToolTip>
+                                            <TextBlock Foreground="White" FontSize="15" Text="输入一组新的颜色值来替换现有颜色" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="输入一组新的颜色值来替换现有颜色"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
                                         </Grid>
 
-                                        <!-- 动画-->
-                                        <Grid.Effect >
-                                            <DropShadowEffect x:Name="ui_contorl_btn_light_9" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                                        </Grid.Effect>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_9" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard >
-                                                    <Storyboard >
-                                                        <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_9" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
+                                        <!-- 颜色值-->
+                                        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
 
 
-                                        </Grid.Triggers>
-                                        
+                                            <!-- R-->
+                                            <Grid Grid.Column="0" Grid.Row="0">
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height=" *"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height=" *"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width=" auto"/>
+                                                    <ColumnDefinition Width=" *"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="红色值"/>
+                                            </Grid>
+                                            <TextBox x:Name="ui_form_contorl_r_value" Foreground="white" FontSize="15" Grid.Column="0" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                            <!-- G-->
+                                            <Grid Grid.Column="1" Grid.Row="0">
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height=" *"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height=" *"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width=" auto"/>
+                                                    <ColumnDefinition Width=" *"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="绿色值"/>
+                                            </Grid>
+                                            <TextBox x:Name="ui_form_contorl_g_value" Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                            <!-- B-->
+                                            <Grid Grid.Column="2" Grid.Row="0">
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height=" *"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height=" *"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width=" auto"/>
+                                                    <ColumnDefinition Width=" *"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="蓝色值"/>
+                                            </Grid>
+                                            <TextBox x:Name="ui_form_contorl_b_value" Foreground="white" FontSize="15" Grid.Column="2" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+
+                                        </Grid>
+
+                                        <!-- 右按钮-->
+                                        <Grid Grid.Column="4" Grid.RowSpan="2" Grid.Row="0"  MouseDown="ui_contorl_list_6_function">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="更改颜色"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_9" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_9" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_9" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+
+                                </StackPanel>
 
                             </Grid>
                         </ScrollViewer>
@@ -2473,6 +2693,7 @@
                 <ListBox x:Name="ui_form_message_list" Grid.Column="1" Grid.Row="4" ItemTemplate="{StaticResource ui_temp_form_message_list}" Background="#00000000" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
 
             </Grid>
+            
         </Canvas>
 
     </Grid>

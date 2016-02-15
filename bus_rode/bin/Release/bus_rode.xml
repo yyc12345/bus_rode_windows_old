@@ -249,6 +249,16 @@ bus_rode
  [内核][screen_line]read_mid_bus所需要检测并分析的String表达式
  </summary>
 </member>
+<member name="F:bus_rode.screen_line.bus_up_line_describe">
+ <summary>
+ [内核][screen_line]界面上行线路走向的描述
+ </summary>
+</member>
+<member name="F:bus_rode.screen_line.bus_down_line_describe">
+ <summary>
+ [内核][screen_line]界面下行线路走向的描述
+ </summary>
+</member>
 <member name="T:bus_rode.screen_line.obj_mid_bus">
  <summary>
  [内核][screen_line]mid_bus所用的结构
@@ -856,6 +866,116 @@ bus_rode
  </summary>
  <returns></returns>
 </member>
+<member name="P:bus_rode.ui_depend_window_select_item_list.pro_fill">
+ <summary>
+ 填充画刷，选中的话就填为 #ff1e90ff 未选中填 #00000000
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:bus_rode.window_communication.SendMessage(System.Int32,System.Int32,System.Int32,System.Int32)">
+ <summary>
+ [系统][ui]向指定窗口的消息循环队列中发送消息
+ </summary>
+ <param name="hwnd">指定窗口的句柄</param>
+ <param name="wMsg">发送内容</param>
+ <param name="wParam">附加1</param>
+ <param name="lParam">附加2</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:bus_rode.window_communication.ReleaseCapture">
+ <summary>
+ [系统][ui]取消鼠标按下状态
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_title">
+ <summary>
+ window_dialogs窗口的标题
+ </summary>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_message">
+ <summary>
+ window_dialogs窗口的具体内容
+ </summary>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_left_btn_text">
+ <summary>
+ window_dialogs窗口左侧按钮文本
+ </summary>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_right_btn_text">
+ <summary>
+ window_dialogs窗口右侧按钮文本
+ </summary>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_select_btn">
+ <summary>
+ window_dialogs窗口选择的按钮，0表示左侧，1表示右侧
+ </summary>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_btn_count">
+ <summary>
+ window_dialogs窗口显示几个按钮，允许数值1-2，写1只显示原左侧按钮
+ </summary>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_msg_state">
+ <summary>
+ window_dialogs窗口显示模式 0=信息 1=警告 2=错误，默认0信息，该值决定对话框标题的颜色
+ </summary>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_show_inputbox">
+ <summary>
+ window_dialogs窗口是否需要接受输入的数据
+ </summary>
+</member>
+<member name="F:bus_rode.window_communication.window_dialogs_input_text">
+ <summary>
+ window_dialogs窗口输入的文本，如果有的话
+ </summary>
+</member>
+<member name="M:bus_rode.window_communication.window_dialogs_clear">
+ <summary>
+ 清理window_dialogs的各项内容
+ </summary>
+</member>
+<member name="M:bus_rode.window_communication.window_dialogs_show(System.String,System.String,System.Byte,System.Byte,System.Boolean,System.String,System.String,System.Windows.Window@)">
+ <summary>
+ 显示一个window_dialogs对话框
+ </summary>
+ <param name="title">标题</param>
+ <param name="message">消息</param>
+ <param name="msg_state">窗口显示模式 0=信息 1=警告 2=错误，默认0信息，该值决定对话框标题的颜色</param>
+ <param name="btn_count">窗口显示几个按钮，允许数值1-2，写1只显示原左侧按钮</param>
+ <param name="show_input">窗口是否需要接受输入的数据</param>
+ <param name="left_btn_text">窗口左侧按钮文本</param>
+ <param name="right_btn_text">窗口右侧按钮文本</param>
+ <param name="owner">传递的主窗体</param>
+</member>
+<member name="T:bus_rode.Window_dialogs">
+<summary>
+Window_dialogs
+</summary>
+</member>
+<member name="M:bus_rode.Window_dialogs.window_open(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 初始化窗口
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.Window_dialogs.window_move(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ 窗口移动
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.Window_dialogs.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
 <member name="T:bus_rode.Window_select_item">
 <summary>
 Window_select_item
@@ -875,12 +995,19 @@ Window_select_item
  <param name="sender"></param>
  <param name="e"></param>
 </member>
-<member name="M:bus_rode.Window_select_item.mouse_enter_ok(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+<member name="M:bus_rode.Window_select_item.window_move(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ 窗口移动
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.Window_select_item.mouse_enter_ok(System.Object,System.Windows.RoutedEventArgs)">
  <summary>
  确认
  </summary>
  <param name="sender"></param>
- <param name="e"></param>
+ <param name="e"></param> 
 </member>
 <member name="M:bus_rode.Window_select_item.InitializeComponent">
 <summary>
@@ -1081,6 +1208,12 @@ MainWindow
  <param name="e"></param>
  <remarks></remarks>
 </member>
+<member name="M:bus_rode.MainWindow.re_window">
+ <summary>
+ [系统][ui]刷新窗口的函数
+ </summary>
+ <remarks></remarks>
+</member>
 <member name="M:bus_rode.MainWindow.ui_function_goto_line(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
  [ui]从开始界面前往线路的函数
@@ -1111,12 +1244,6 @@ MainWindow
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
- <remarks></remarks>
-</member>
-<member name="M:bus_rode.MainWindow.re_window">
- <summary>
- [系统][ui]刷新窗口的函数
- </summary>
  <remarks></remarks>
 </member>
 <member name="M:bus_rode.MainWindow.ui_function_back_page(System.Object,System.Windows.Input.MouseButtonEventArgs)">
@@ -1169,11 +1296,18 @@ MainWindow
 </member>
 <member name="M:bus_rode.MainWindow.ui_function_contorl_check_btn(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
- [ui]设置界面中开关滑块
+ [ui]设置界面实时资源开关滑块
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
  <remarks></remarks>
+</member>
+<member name="M:bus_rode.MainWindow.ui_function_contorl_check_btn_2(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]设置面板讲述人按钮移动
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
 </member>
 <member name="M:bus_rode.MainWindow.ui_form_line_select_up_line_fx(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
@@ -1189,6 +1323,14 @@ MainWindow
  <param name="sender"></param>
  <param name="e"></param>
 </member>
+<member name="M:bus_rode.MainWindow.ui_form_message_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]消息界面清空消息
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
 <member name="M:bus_rode.MainWindow.ui_form_line_list_function(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
  <summary>
  [系统][ui]车辆列表选择新项的函数
@@ -1197,13 +1339,20 @@ MainWindow
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="M:bus_rode.MainWindow.ui_form_stop_list_function(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+<member name="M:bus_rode.MainWindow.ui_form_line_have_stop_list_up_function(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
  <summary>
- [系统][ui]站台列表选择新项的函数
+ [系统][ui]线路拥有站台列表-选择新项的函数
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
  <remarks></remarks>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_line_have_stop_list_jump_to_stop(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]线路-经过站台列表跳转到站台界面的函数
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
 </member>
 <member name="M:bus_rode.MainWindow.ui_line_contorl_left_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
@@ -1221,13 +1370,48 @@ MainWindow
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="M:bus_rode.MainWindow.ui_form_line_have_stop_list_up_function(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+<member name="M:bus_rode.MainWindow.ui_form_line_contorl_left_form_textbox_change(System.Object,System.Windows.Controls.TextChangedEventArgs)">
  <summary>
- [系统][ui]线路拥有站台列表-上行选择新项的函数
+ [系统][ui]线路列表搜索字符更改
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_line_contorl_right_form_textbox_change(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+ <summary>
+ [系统][ui]线路列表搜索含有站台字符更改
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_stop_list_function(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+ <summary>
+ [系统][ui]站台列表选择新项的函数
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
  <remarks></remarks>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_stop_left_cross_line_list_jump_to_stop(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]站台-左侧列表跳转到新站点的函数
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_stop_right_cross_line_list_jump_to_stop(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]站台-右侧列表跳转到新站点的函数
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_stop_contorl_left_form_textbox_change(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+ <summary>
+ [系统][ui]站台列表搜索字符更改
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
 </member>
 <member name="M:bus_rode.MainWindow.ui_stop_contorl_left_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
@@ -1237,45 +1421,19 @@ MainWindow
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="M:bus_rode.MainWindow.ui_contorl_list_3_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+<member name="M:bus_rode.MainWindow.ui_form_stop_contorl_add_start_stop_fx(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
- [系统][ui]设置界面获取资源信息
+ [系统][ui]站台设置界面添加起始站台的车次
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
- <remarks></remarks>
 </member>
-<member name="M:bus_rode.MainWindow.ui_contorl_list_5_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+<member name="M:bus_rode.MainWindow.ui_form_stop_contorl_add_end_stop_fx(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
- [系统][ui]设置界面重启
+ [系统][ui]站台设置界面添加终到站台的车次
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
- <remarks></remarks>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_message_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]消息界面清空消息
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
- <remarks></remarks>
-</member>
-<member name="M:bus_rode.MainWindow.ui_contorl_list_6_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]设置面板更换颜色选项
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
- <remarks></remarks>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_contorl_value_change(System.Object,System.Windows.Controls.TextChangedEventArgs)">
- <summary>
- [系统][ui]设置面板颜色textbox数值更改
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
- <remarks></remarks>
 </member>
 <member name="M:bus_rode.MainWindow.ui_form_stop_short_line_search_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
@@ -1307,75 +1465,20 @@ MainWindow
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="M:bus_rode.MainWindow.ui_form_line_contorl_left_form_textbox_change(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+<member name="M:bus_rode.MainWindow.ui_form_stop_short_line_search_web_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
- [系统][ui]线路列表搜索字符更改
+ [系统][ui]联网搜索路径
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
 </member>
-<member name="M:bus_rode.MainWindow.ui_form_stop_contorl_left_form_textbox_change(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+<member name="M:bus_rode.MainWindow.ui_contorl_list_5_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
- [系统][ui]站台列表搜索字符更改
+ [系统][ui]设置界面重启
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_line_contorl_right_form_textbox_change(System.Object,System.Windows.Controls.TextChangedEventArgs)">
- <summary>
- [系统][ui]线路列表搜索含有站台字符更改
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_contorl_list_4_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]设置界面替换背景
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_contorl_list_2_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]设置界面替换资源
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_contorl_throw_rs_file(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]打开 打开资源文件 对话框函数
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_contorl_throw_bk_file(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]打开 打开背景图片 对话框函数
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_stop_contorl_add_start_stop_fx(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]站台设置界面添加起始站台的车次
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_stop_contorl_add_end_stop_fx(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]站台设置界面添加终到站台的车次
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_function_contorl_check_btn_2(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]设置面板讲述人按钮移动
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
+ <remarks></remarks>
 </member>
 <member name="M:bus_rode.MainWindow.ui_form_contorl_throw_mod_file(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
@@ -1398,16 +1501,82 @@ MainWindow
  <param name="sender"></param>
  <param name="e"></param>
 </member>
-<member name="M:bus_rode.MainWindow.app_keyboard(System.Object,System.Windows.Input.KeyEventArgs)">
+<member name="M:bus_rode.MainWindow.ui_contorl_list_1_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
- [系统][ui]窗体按下键盘的相关处理
+ [系统][ui]设置界面删除插件
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
 </member>
-<member name="M:bus_rode.MainWindow.ui_form_stop_short_line_search_web_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+<member name="M:bus_rode.MainWindow.ui_contorl_list_3_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
- [系统][ui]联网搜索路径
+ [系统][ui]设置界面获取资源信息
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_contorl_throw_rs_file(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]打开 打开资源文件 对话框函数
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_contorl_list_2_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]设置界面替换资源
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_contorl_list_9_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]设置界面删除资源
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_contorl_list_6_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]设置面板更换颜色选项
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_contorl_value_change(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+ <summary>
+ [系统][ui]设置面板颜色textbox数值更改
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_contorl_throw_bk_file(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]打开 打开背景图片 对话框函数
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_contorl_list_4_function(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]设置界面替换背景
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.ui_form_about_github(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]关于界面前往github的按钮
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:bus_rode.MainWindow.app_keyboard(System.Object,System.Windows.Input.KeyEventArgs)">
+ <summary>
+ [系统][ui]窗体按下键盘的相关处理
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
@@ -1464,20 +1633,6 @@ MainWindow
 <member name="M:bus_rode.MainWindow.ui_form_stop_right_cross_line_list_mouse_leave(System.Object,System.Windows.Input.MouseEventArgs)">
  <summary>
  [系统][ui]站台-右侧车次列表移出鼠标不显示滚动条
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_line_have_stop_list_jump_to_stop(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]线路-经过站台列表跳转到站台界面的函数
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
-<member name="M:bus_rode.MainWindow.ui_form_about_github(System.Object,System.Windows.Input.MouseButtonEventArgs)">
- <summary>
- [系统][ui]关于界面前往github的按钮
  </summary>
  <param name="sender"></param>
  <param name="e"></param>

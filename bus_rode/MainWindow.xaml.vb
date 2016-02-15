@@ -207,6 +207,8 @@ Public Class MainWindow
 
 #End Region
 
+    '===============================app级函数====================================
+
     ''' <summary>
     ''' [系统]应用初始化的处理
     ''' </summary>
@@ -364,6 +366,9 @@ Public Class MainWindow
             '设置获取实时资源的线程状态
             If System.IO.File.Exists(Environment.CurrentDirectory + "\bus_rode_mod.dll") = True Then
                 connect_dll_get_resources_td.Start()
+            Else
+                get_resource_timer.Stop()
+                connect_dll_get_resources_always_stop = True
             End If
             If get_bus_addr = False Then
                 get_resource_timer.Stop()
@@ -546,156 +551,6 @@ Public Class MainWindow
 
 
     End Sub
-
-#Region "开始到别的面板的移动"
-
-    ''' <summary>
-    ''' [ui]从开始界面前往线路的函数
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_function_goto_line(sender As Object, e As MouseButtonEventArgs) Handles ui_form_start_btn_1_goto.MouseDown
-
-        If no_resource = False Then
-            Dim stb_1
-            storyboard_action.Stop()
-            storyboard_action.Children.Clear()
-            '切入新窗口
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
-
-            Animation.Storyboard.SetTarget(stb_1, ui_form_line)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-            storyboard_action.Children.Add(stb_1)
-            '移动旧窗口
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
-
-            Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-            storyboard_action.Children.Add(stb_1)
-
-            storyboard_action.Begin()
-
-            '设置界面
-            screens = 1
-            '刷新
-            re_window()
-        Else
-            message_ex_ex("资源", "当前没有安装资源！")
-        End If
-
-
-
-    End Sub
-
-    ''' <summary>
-    ''' [ui]从开始界面前往车站的函数
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_function_goto_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_start_btn_2_goto.MouseDown
-
-        If no_resource = False Then
-            Dim stb_1
-            storyboard_action.Stop()
-            storyboard_action.Children.Clear()
-            '切入新窗口
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
-
-            Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-            storyboard_action.Children.Add(stb_1)
-            '移动旧窗口
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
-
-            Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-            storyboard_action.Children.Add(stb_1)
-
-            storyboard_action.Begin()
-
-            '设置界面
-            screens = 2
-            '刷新
-            re_window()
-        Else
-            message_ex_ex("资源", "当前没有安装资源！")
-        End If
-
-    End Sub
-
-    ''' <summary>
-    ''' [ui]从开始界面前往设置的函数
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_function_goto_contorl(sender As Object, e As MouseButtonEventArgs) Handles ui_form_start_btn_3_goto.MouseDown
-        Dim stb_1
-        storyboard_action.Stop()
-        storyboard_action.Children.Clear()
-        '切入新窗口
-        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
-
-        Animation.Storyboard.SetTarget(stb_1, ui_form_contorl)
-        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-        storyboard_action.Children.Add(stb_1)
-        '移动旧窗口
-        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
-
-        Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-        storyboard_action.Children.Add(stb_1)
-
-        storyboard_action.Begin()
-
-        '设置界面
-        screens = 3
-        '刷新
-        re_window()
-    End Sub
-
-    ''' <summary>
-    ''' [ui]从开始界面前往关于的函数
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_function_goto_about(sender As Object, e As MouseButtonEventArgs) Handles ui_form_start_btn_4_goto.MouseDown
-        Dim stb_1
-        storyboard_action.Stop()
-        storyboard_action.Children.Clear()
-        '切入新窗口
-        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
-
-        Animation.Storyboard.SetTarget(stb_1, ui_form_about)
-        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-        storyboard_action.Children.Add(stb_1)
-        '移动旧窗口
-        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
-
-        Animation.Storyboard.SetTarget(stb_1, ui_form_start)
-        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-        storyboard_action.Children.Add(stb_1)
-
-        storyboard_action.Begin()
-
-        '设置界面
-        screens = 4
-        '刷新
-        re_window()
-    End Sub
-
-#End Region
 
     ''' <summary>
     ''' [系统][ui]刷新窗口的函数
@@ -916,8 +771,162 @@ Public Class MainWindow
         End If
     End Sub
 
+    '===============================面板和按钮====================================
+
+#Region "开始到别的面板的移动"
+
+    ''' <summary>
+    ''' [ui]从开始界面前往线路的函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_function_goto_line(sender As Object, e As MouseButtonEventArgs) Handles ui_form_start_btn_1_goto.MouseDown
+
+        If no_resource = False Then
+            Dim stb_1
+            storyboard_action.Stop()
+            storyboard_action.Children.Clear()
+            '切入新窗口
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_line)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+            storyboard_action.Children.Add(stb_1)
+            '移动旧窗口
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_start)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+            storyboard_action.Children.Add(stb_1)
+
+            storyboard_action.Begin()
+
+            '设置界面
+            screens = 1
+            '刷新
+            re_window()
+        Else
+            message_ex_ex("资源", "当前没有安装资源！")
+        End If
+
+
+
+    End Sub
+
+    ''' <summary>
+    ''' [ui]从开始界面前往车站的函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_function_goto_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_start_btn_2_goto.MouseDown
+
+        If no_resource = False Then
+            Dim stb_1
+            storyboard_action.Stop()
+            storyboard_action.Children.Clear()
+            '切入新窗口
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+            storyboard_action.Children.Add(stb_1)
+            '移动旧窗口
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_start)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+            storyboard_action.Children.Add(stb_1)
+
+            storyboard_action.Begin()
+
+            '设置界面
+            screens = 2
+            '刷新
+            re_window()
+        Else
+            message_ex_ex("资源", "当前没有安装资源！")
+        End If
+
+    End Sub
+
+    ''' <summary>
+    ''' [ui]从开始界面前往设置的函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_function_goto_contorl(sender As Object, e As MouseButtonEventArgs) Handles ui_form_start_btn_3_goto.MouseDown
+        Dim stb_1
+        storyboard_action.Stop()
+        storyboard_action.Children.Clear()
+        '切入新窗口
+        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
+
+        Animation.Storyboard.SetTarget(stb_1, ui_form_contorl)
+        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+        storyboard_action.Children.Add(stb_1)
+        '移动旧窗口
+        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+
+        Animation.Storyboard.SetTarget(stb_1, ui_form_start)
+        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+        storyboard_action.Children.Add(stb_1)
+
+        storyboard_action.Begin()
+
+        '设置界面
+        screens = 3
+        '刷新
+        re_window()
+    End Sub
+
+    ''' <summary>
+    ''' [ui]从开始界面前往关于的函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_function_goto_about(sender As Object, e As MouseButtonEventArgs) Handles ui_form_start_btn_4_goto.MouseDown
+        Dim stb_1
+        storyboard_action.Stop()
+        storyboard_action.Children.Clear()
+        '切入新窗口
+        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
+
+        Animation.Storyboard.SetTarget(stb_1, ui_form_about)
+        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+        storyboard_action.Children.Add(stb_1)
+        '移动旧窗口
+        stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+
+        Animation.Storyboard.SetTarget(stb_1, ui_form_start)
+        Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+        storyboard_action.Children.Add(stb_1)
+
+        storyboard_action.Begin()
+
+        '设置界面
+        screens = 4
+        '刷新
+        re_window()
+    End Sub
+
+#End Region
 
 #Region "按钮"
+
+    '===============================全局====================================
+
     ''' <summary>
     ''' [ui]返回按钮
     ''' </summary>
@@ -1167,6 +1176,8 @@ Public Class MainWindow
         re_window()
     End Sub
 
+    '===============================线路控制====================================
+
     ''' <summary>
     ''' [ui]线路控制界面中左边按钮
     ''' </summary>
@@ -1255,6 +1266,8 @@ Public Class MainWindow
             '就是这面，不切换
         End If
     End Sub
+
+    '===============================车站控制====================================
 
     ''' <summary>
     ''' [ui]车站控制界面中左边按钮
@@ -1345,8 +1358,10 @@ Public Class MainWindow
         End If
     End Sub
 
+    '===============================设置====================================
+
     ''' <summary>
-    ''' [ui]设置界面中开关滑块
+    ''' [ui]设置界面实时资源开关滑块
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
@@ -1411,6 +1426,47 @@ Public Class MainWindow
 
     End Sub
 
+    ''' <summary>
+    ''' [系统][ui]设置面板讲述人按钮移动
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_function_contorl_check_btn_2(sender As Object, e As MouseButtonEventArgs) Handles ui_form_contorl_check_btn_2.MouseDown
+        Dim stb_1
+        storyboard_action.Stop()
+        storyboard_action.Children.Clear()
+
+        If talk_man = True Then
+            '关闭
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(70, 0, New Duration(TimeSpan.FromSeconds(0.1)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn_2)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+
+            storyboard_action.Children.Add(stb_1)
+        Else
+            '打开
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 70, New Duration(TimeSpan.FromSeconds(0.1)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn_2)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+
+            storyboard_action.Children.Add(stb_1)
+        End If
+
+        storyboard_action.Begin()
+
+        '设置界面
+        talk_man = Not (talk_man)
+
+        '保存设置
+        save_user_contorl()
+
+        '刷新
+        re_window()
+    End Sub
+
+    '===============================线路====================================
 
     ''' <summary>
     ''' [系统][ui]线路界面选择上行线路的按钮
@@ -1448,7 +1504,29 @@ Public Class MainWindow
         End If
     End Sub
 
+    '===============================消息====================================
+
+    ''' <summary>
+    ''' [系统][ui]消息界面清空消息
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_form_message_function(sender As Object, e As MouseButtonEventArgs)
+        ui_form_message_list.ItemsSource = Nothing
+        ui_connet_core_form_message_list.Clear()
+        ui_title_msg_count.Text = 0
+        ui_form_message_clear.Opacity = 0
+        ui_form_message_up_line.Opacity = 0
+        ui_form_message_no_msg_title.Opacity = 1
+        ui_form_message_list.ItemsSource = ui_connet_core_form_message_list
+    End Sub
+
 #End Region
+
+    '===============================界面====================================
+
+#Region "线路"
 
     ''' <summary>
     ''' [系统][ui]车辆列表选择新项的函数
@@ -1566,6 +1644,257 @@ Public Class MainWindow
     End Sub
 
     ''' <summary>
+    ''' [系统][ui]线路拥有站台列表-选择新项的函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_form_line_have_stop_list_up_function(sender As Object, e As SelectionChangedEventArgs) Handles ui_form_line_have_stop_list.SelectionChanged
+        If ui_form_line_have_stop_list.SelectedIndex <> -1 Then
+            select_stop_point = ui_form_line_have_stop_list.SelectedIndex
+            If bus_or_subway = 1 Then
+                ui_form_line_subway_list.ItemsSource = Nothing
+
+                re_subway_stop()
+
+                ui_form_line_subway_list.ItemsSource = ui_connet_core_form_line_subway_list
+            End If
+        End If
+
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]线路-经过站台列表跳转到站台界面的函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_line_have_stop_list_jump_to_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_line_have_stop_list.MouseDoubleClick
+
+        If ui_form_line_have_stop_list.SelectedIndex <> -1 Then
+
+            '寻找当前站点
+            Dim word As String = ""
+            If up_or_down_line = True Then
+                '上行
+                word = ui_connet_core_form_line_have_sotp_list_up.Item(ui_form_line_have_stop_list.SelectedIndex).ui_stop_name
+            Else
+                '下行
+                word = ui_connet_core_form_line_have_sotp_list_down.Item(ui_form_line_have_stop_list.SelectedIndex).ui_stop_name
+            End If
+
+            '确认索引
+            Dim linshi_1 As Integer = return_check_stop_list_nopage(word)
+            If linshi_1 <> -1 Then
+                '清除旧的
+                ui_form_stop_left_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_right_cross_line_list.ItemsSource = Nothing
+
+                now_stop = linshi_1
+                refsh_stop()
+                jump_to_stop_from_line = True
+
+                '设置文本
+                ui_form_stop_describe.Text = cross_stop
+                ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
+
+                ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
+                ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+
+                '**************************动画跳转
+                Dim stb_1
+                storyboard_action.Stop()
+                storyboard_action.Children.Clear()
+
+                '切入新窗口
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
+
+                Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+                storyboard_action.Children.Add(stb_1)
+                '移动旧窗口
+                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
+
+                Animation.Storyboard.SetTarget(stb_1, ui_form_line)
+                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+
+                storyboard_action.Children.Add(stb_1)
+
+                '控制面板
+                If line_contorl = True Then
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.15)))
+
+                    Animation.Storyboard.SetTarget(stb_1, ui_form_line_contorl)
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
+                    Dim linshi = New Animation.ExponentialEase()
+                    linshi.EasingMode = Animation.EasingMode.EaseOut
+                    stb_1.EasingFunction = linshi
+
+                    storyboard_action.Children.Add(stb_1)
+                End If
+
+                '设置界面
+                screens = 2
+                line_contorl = False
+
+                '****************************开始跳转
+                storyboard_action.Begin()
+
+                '刷新
+                re_window()
+
+            Else
+                '发生错误，退出
+                Environment.Exit(9)
+            End If
+
+
+        End If
+
+    End Sub
+
+#End Region
+
+#Region "线路控制"
+
+    ''' <summary>
+    ''' [系统][ui]线路左侧面板的搜索按钮
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_line_contorl_left_function(sender As Object, e As MouseButtonEventArgs)
+        If ui_form_line_contorl_left_form_textbox.Text <> "" Then
+            Dim a As Integer = return_bus_list(ui_form_line_contorl_left_form_textbox.Text)
+            If a <> -1 Then
+                ui_form_line_list.SelectedIndex = a
+                ui_form_line_contorl_left_form_textbox.Text = ""
+            Else
+                message_ex_ex("搜索", "没有找到车次：" + ui_form_line_contorl_left_form_textbox.Text)
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]线路右侧面板的搜索按钮
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_form_line_contorl_right_function(sender As Object, e As MouseButtonEventArgs)
+        If ui_form_line_contorl_right_form_textbox.Text <> "" Then
+
+            Dim a As Integer = return_bus_stop_list(ui_form_line_contorl_right_form_textbox.Text)
+            If a <> -1 Then
+                select_stop_point = a
+                ui_form_line_contorl_left_form_textbox.Text = ""
+                ui_form_line_have_stop_list.SelectedIndex = a
+
+            Else
+                message_ex_ex("搜索", "没有在该线路中找到站台：" + ui_form_line_contorl_right_form_textbox.Text)
+            End If
+
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]线路列表搜索字符更改
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_line_contorl_left_form_textbox_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_line_contorl_left_form_textbox.TextChanged
+        If ui_form_line_contorl_left_form_textbox.Text = "" Then
+            '强制复原
+            ui_form_line_list.ItemsSource = ui_connet_core_form_line_list
+        Else
+            '搜索并设置
+            ui_form_line_list.ItemsSource = Nothing
+            Dim a As New ui_depend_line_list
+            ui_connet_core_form_line_list_for_search.Clear()
+
+            For test1 = 0 To 1000
+                If have_bus(test1) = "" Then
+                    Exit For
+                End If
+
+                If InStr(have_bus(test1), ui_form_line_contorl_left_form_textbox.Text) = 0 Then
+                    '没找到 
+                    '什么都不做
+                Else
+                    '找到了
+                    a.ui_line_name = have_bus(test1)
+                    ui_connet_core_form_line_list_for_search.Add(a)
+                    a = New ui_depend_line_list
+                End If
+            Next
+
+            ui_form_line_list.ItemsSource = ui_connet_core_form_line_list_for_search
+
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]线路列表搜索含有站台字符更改
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_line_contorl_right_form_textbox_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_line_contorl_right_form_textbox.TextChanged
+        If ui_form_line_contorl_right_form_textbox.Text = "" Then
+            '强制复原
+            ui_form_line_stop_search_list.ItemsSource = Nothing
+            ui_connet_core_form_line_search_stop_list.Clear()
+            ui_form_line_stop_search_list.ItemsSource = ui_connet_core_form_line_search_stop_list
+        Else
+            ui_form_line_stop_search_list.ItemsSource = Nothing
+            Dim a As New ui_depend_line_search_stop_list
+            ui_connet_core_form_line_search_stop_list.Clear()
+
+            For test1 = 0 To 200
+                If bus_stop_up(test1) = "" Then
+                    Exit For
+                End If
+
+                If InStr(bus_stop_up(test1), ui_form_line_contorl_right_form_textbox.Text) = 0 Then
+                    '没找到 
+                    '什么都不做
+                Else
+                    '找到了
+                    a.ui_line_of_stop_name = bus_stop_up(test1)
+                    a.ui_line_of_stop_name_on_where = "上行线路"
+                    ui_connet_core_form_line_search_stop_list.Add(a)
+                    a = New ui_depend_line_search_stop_list
+                End If
+            Next
+
+            a = New ui_depend_line_search_stop_list
+
+            For test1 = 0 To 200
+                If bus_stop_down(test1) = "" Then
+                    Exit For
+                End If
+
+                If InStr(bus_stop_down(test1), ui_form_line_contorl_right_form_textbox.Text) = 0 Then
+                    '没找到 
+                    '什么都不做
+                Else
+                    '找到了
+                    a.ui_line_of_stop_name = bus_stop_down(test1)
+                    a.ui_line_of_stop_name_on_where = "下行线路"
+                    ui_connet_core_form_line_search_stop_list.Add(a)
+                    a = New ui_depend_line_search_stop_list
+                End If
+            Next
+
+            ui_form_line_stop_search_list.ItemsSource = ui_connet_core_form_line_search_stop_list
+        End If
+
+    End Sub
+
+#End Region
+
+#Region "站台"
+
+    ''' <summary>
     ''' [系统][ui]站台列表选择新项的函数
     ''' </summary>
     ''' <param name="sender"></param>
@@ -1619,63 +1948,129 @@ Public Class MainWindow
     End Sub
 
     ''' <summary>
-    ''' [系统][ui]线路左侧面板的搜索按钮
+    ''' [系统][ui]站台-左侧列表跳转到新站点的函数
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_line_contorl_left_function(sender As Object, e As MouseButtonEventArgs)
-        If ui_form_line_contorl_left_form_textbox.Text <> "" Then
-            Dim a As Integer = return_bus_list(ui_form_line_contorl_left_form_textbox.Text)
-            If a <> -1 Then
-                ui_form_line_list.SelectedIndex = a
-                ui_form_line_contorl_left_form_textbox.Text = ""
+    Private Sub ui_form_stop_left_cross_line_list_jump_to_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_left_cross_line_list.MouseDoubleClick
+
+        If ui_form_stop_left_cross_line_list.SelectedIndex <> -1 Then
+
+            '获取名字
+            Dim list_name As String = ui_connet_core_form_stop_left_cross_line_list.Item(ui_form_stop_left_cross_line_list.SelectedIndex).ui_stop_name
+            Dim list As Integer = return_check_stop_list_nopage(list_name)
+
+            If list <> -1 Then
+                '找到项目，切换
+                ui_form_stop_left_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_right_cross_line_list.ItemsSource = Nothing
+
+                now_stop = list
+                refsh_stop()
+
+                '设置文本
+                ui_form_stop_describe.Text = cross_stop
+                ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
+
+                ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
+                ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+
+
+                '还原自动填充
+                ui_form_stop_contorl_left_form_textbox.Text = ""
             Else
-                message_ex_ex("搜索", "没有找到车次：" + ui_form_line_contorl_left_form_textbox.Text)
+                '出现错误
+                Environment.Exit(6)
             End If
+
         End If
+
     End Sub
 
     ''' <summary>
-    ''' [系统][ui]线路右侧面板的搜索按钮
+    ''' [系统][ui]站台-右侧列表跳转到新站点的函数
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_form_line_contorl_right_function(sender As Object, e As MouseButtonEventArgs)
-        If ui_form_line_contorl_right_form_textbox.Text <> "" Then
+    Private Sub ui_form_stop_right_cross_line_list_jump_to_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_right_cross_line_list.MouseDoubleClick
 
-            Dim a As Integer = return_bus_stop_list(ui_form_line_contorl_right_form_textbox.Text)
-            If a <> -1 Then
-                select_stop_point = a
-                ui_form_line_contorl_left_form_textbox.Text = ""
-                ui_form_line_have_stop_list.SelectedIndex = a
+        If ui_form_stop_right_cross_line_list.SelectedIndex <> -1 Then
 
+            '获取名字
+            Dim list_name As String = ui_connet_core_form_stop_right_cross_line_list.Item(ui_form_stop_right_cross_line_list.SelectedIndex).ui_stop_name
+            Dim list As Integer = return_check_stop_list_nopage(list_name)
+
+            If list <> -1 Then
+                '找到项目，切换
+                ui_form_stop_left_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_right_cross_line_list.ItemsSource = Nothing
+
+                now_stop = list
+                refsh_stop()
+
+                '设置文本
+                ui_form_stop_describe.Text = cross_stop
+                ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
+
+                ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
+                ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+
+
+                '还原自动填充
+                ui_form_stop_contorl_left_form_textbox.Text = ""
             Else
-                message_ex_ex("搜索", "没有在该线路中找到站台：" + ui_form_line_contorl_right_form_textbox.Text)
+                '出现错误
+                Environment.Exit(6)
             End If
 
         End If
+
     End Sub
 
+#End Region
+
+#Region "站台控制"
+
     ''' <summary>
-    ''' [系统][ui]线路拥有站台列表-上行选择新项的函数
+    ''' [系统][ui]站台列表搜索字符更改
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_form_line_have_stop_list_up_function(sender As Object, e As SelectionChangedEventArgs) Handles ui_form_line_have_stop_list.SelectionChanged
-        If ui_form_line_have_stop_list.SelectedIndex <> -1 Then
-            select_stop_point = ui_form_line_have_stop_list.SelectedIndex
-            If bus_or_subway = 1 Then
-                ui_form_line_subway_list.ItemsSource = Nothing
-
-                re_subway_stop()
-
-                ui_form_line_subway_list.ItemsSource = ui_connet_core_form_line_subway_list
+    Private Sub ui_form_stop_contorl_left_form_textbox_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_stop_contorl_left_form_textbox.TextChanged
+        If ui_form_stop_contorl_left_form_textbox.Text = "" Then
+            '强制复原
+            If ui_connet_core_form_stop_list.Count > 500 Then
+                '太多了不显示，若显示会炸内存
+                ui_form_stop_list.ItemsSource = Nothing
+                ui_form_stop_contorl_full_list.Opacity = 1
+            Else
+                ui_form_stop_list.ItemsSource = ui_connet_core_form_stop_list
             End If
-        End If
+        Else
+            '搜索并设置
+            ui_form_stop_contorl_full_list.Opacity = 0
+            ui_form_stop_list.ItemsSource = Nothing
+            Dim a As New ui_depend_stop_list
+            ui_connet_core_form_stop_list_for_search.Clear()
 
+            For test1 = 0 To 10000
+                If bus_stop_stop(test1) = "" Then
+                    Exit For
+                End If
+
+                If InStr(bus_stop_stop(test1), ui_form_stop_contorl_left_form_textbox.Text) = 0 Then
+                    '没找到 
+                    '什么都不做
+                Else
+                    '找到了
+                    a.ui_stop_name = bus_stop_stop(test1)
+                    ui_connet_core_form_stop_list_for_search.Add(a)
+                    a = New ui_depend_stop_list
+                End If
+            Next
+
+            ui_form_stop_list.ItemsSource = ui_connet_core_form_stop_list_for_search
+        End If
     End Sub
 
     ''' <summary>
@@ -1696,165 +2091,26 @@ Public Class MainWindow
         End If
     End Sub
 
+    '================================最短路径===================================
+
     ''' <summary>
-    ''' [系统][ui]设置界面获取资源信息
+    ''' [系统][ui]站台设置界面添加起始站台的车次
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_contorl_list_3_function(sender As Object, e As MouseButtonEventArgs)
-        If no_resource = False Then
-            window_dialogs_show("资源属性/自述", System.IO.File.ReadAllText(Environment.CurrentDirectory + "\library\readme.txt"), 0, 1, False, "确定", "", Application.Current.MainWindow)
-        Else
-            message_ex_ex("资源", "当前没有安装资源！")
-        End If
+    Private Sub ui_form_stop_contorl_add_start_stop_fx(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_contorl_add_start_stop.MouseDown
+        ui_form_stop_contorl_right_form_textbox_1.Text = bus_stop_stop(now_stop)
     End Sub
 
     ''' <summary>
-    ''' [系统][ui]设置界面重启
+    ''' [系统][ui]站台设置界面添加终到站台的车次
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_contorl_list_5_function(sender As Object, e As MouseButtonEventArgs)
-        Process.Start(Environment.CurrentDirectory + "\file.bat")
-        Environment.Exit(3)
+    Private Sub ui_form_stop_contorl_add_end_stop_fx(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_contorl_add_end_stop.MouseDown
+        ui_form_stop_contorl_right_form_textbox_2.Text = bus_stop_stop(now_stop)
     End Sub
 
-    ''' <summary>
-    ''' [系统][ui]消息界面清空消息
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_form_message_function(sender As Object, e As MouseButtonEventArgs)
-        ui_form_message_list.ItemsSource = Nothing
-        ui_connet_core_form_message_list.Clear()
-        ui_title_msg_count.Text = 0
-        ui_form_message_clear.Opacity = 0
-        ui_form_message_up_line.Opacity = 0
-        ui_form_message_no_msg_title.Opacity = 1
-        ui_form_message_list.ItemsSource = ui_connet_core_form_message_list
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]设置面板更换颜色选项
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_contorl_list_6_function(sender As Object, e As MouseButtonEventArgs)
-
-        Dim new_color_r As Integer = 0
-        Dim new_color_g As Integer = 0
-        Dim new_color_b As Integer = 0
-        Try
-            new_color_r = Int(ui_form_contorl_r_value.Text)
-            new_color_g = Int(ui_form_contorl_g_value.Text)
-            new_color_b = Int(ui_form_contorl_b_value.Text)
-
-            If 0 <= new_color_r And new_color_r <= 255 Then
-                If 0 <= new_color_g And new_color_g <= 255 Then
-                    If 0 <= new_color_b And new_color_b <= 255 Then
-                        '符合条件
-
-                        form_color = Color.FromRgb(new_color_r, new_color_g, new_color_b)
-
-                        '设置颜色 1-3透明df=223 4透明8f=143 5-8透明6f=111
-                        ui_color_1.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
-                        ui_color_2.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
-                        ui_color_3.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
-
-                        ui_color_4.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
-
-                        ui_color_5.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_6.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_7.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_8.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-
-                        If up_or_down_line = True Then
-                            '上行
-                            ui_form_line_select_up_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
-                            ui_form_line_select_down_line.Color = Color.FromArgb(0, 0, 0, 0)
-                        Else
-                            '下行
-                            ui_form_line_select_up_line.Color = Color.FromArgb(0, 0, 0, 0)
-                            ui_form_line_select_down_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
-                        End If
-
-                        If get_bus_addr = True Then
-                            ui_form_contorl_check_background_color_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                        End If
-                        If talk_man = True Then
-                            ui_form_contorl_check_background_color_2_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                        End If
-
-                        '保存设置
-                        save_user_contorl()
-                    Else
-                        window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
-                        ui_form_contorl_r_value.Text = form_color.R
-                        ui_form_contorl_g_value.Text = form_color.G
-                        ui_form_contorl_b_value.Text = form_color.B
-                    End If
-                Else
-                    window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
-                    ui_form_contorl_r_value.Text = form_color.R
-                    ui_form_contorl_g_value.Text = form_color.G
-                    ui_form_contorl_b_value.Text = form_color.B
-                End If
-            Else
-                window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
-                ui_form_contorl_r_value.Text = form_color.R
-                ui_form_contorl_g_value.Text = form_color.G
-                ui_form_contorl_b_value.Text = form_color.B
-            End If
-        Catch ex As Exception
-            '输入文本类型错误
-            window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
-            ui_form_contorl_r_value.Text = form_color.R
-            ui_form_contorl_g_value.Text = form_color.G
-            ui_form_contorl_b_value.Text = form_color.B
-        End Try
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]设置面板颜色textbox数值更改
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_form_contorl_value_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_contorl_r_value.TextChanged, ui_form_contorl_g_value.TextChanged, ui_form_contorl_b_value.TextChanged
-        Dim new_color_r As Integer = 0
-        Dim new_color_g As Integer = 0
-        Dim new_color_b As Integer = 0
-        Try
-            new_color_r = Int(ui_form_contorl_r_value.Text)
-            new_color_g = Int(ui_form_contorl_g_value.Text)
-            new_color_b = Int(ui_form_contorl_b_value.Text)
-
-            If 0 <= new_color_r And new_color_r <= 255 Then
-                If 0 <= new_color_g And new_color_g <= 255 Then
-                    If 0 <= new_color_b And new_color_b <= 255 Then
-                        '符合条件
-                    Else
-                        'MsgBox("数值非法")
-                    End If
-                Else
-                    'MsgBox("数值非法")
-                End If
-            Else
-                'MsgBox("数值非法")
-            End If
-        Catch ex As Exception
-            '输入文本类型错误
-            'MsgBox("数值非法")
-        End Try
-    End Sub
 
     ''' <summary>
     ''' [系统][ui]车站界面执行最短路径的按钮
@@ -2049,336 +2305,6 @@ Public Class MainWindow
     End Sub
 
     ''' <summary>
-    ''' [系统][ui]线路列表搜索字符更改
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_line_contorl_left_form_textbox_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_line_contorl_left_form_textbox.TextChanged
-        If ui_form_line_contorl_left_form_textbox.Text = "" Then
-            '强制复原
-            ui_form_line_list.ItemsSource = ui_connet_core_form_line_list
-        Else
-            '搜索并设置
-            ui_form_line_list.ItemsSource = Nothing
-            Dim a As New ui_depend_line_list
-            ui_connet_core_form_line_list_for_search.Clear()
-
-            For test1 = 0 To 1000
-                If have_bus(test1) = "" Then
-                    Exit For
-                End If
-
-                If InStr(have_bus(test1), ui_form_line_contorl_left_form_textbox.Text) = 0 Then
-                    '没找到 
-                    '什么都不做
-                Else
-                    '找到了
-                    a.ui_line_name = have_bus(test1)
-                    ui_connet_core_form_line_list_for_search.Add(a)
-                    a = New ui_depend_line_list
-                End If
-            Next
-
-            ui_form_line_list.ItemsSource = ui_connet_core_form_line_list_for_search
-
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]站台列表搜索字符更改
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_stop_contorl_left_form_textbox_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_stop_contorl_left_form_textbox.TextChanged
-        If ui_form_stop_contorl_left_form_textbox.Text = "" Then
-            '强制复原
-            If ui_connet_core_form_stop_list.Count > 500 Then
-                '太多了不显示，若显示会炸内存
-                ui_form_stop_list.ItemsSource = Nothing
-                ui_form_stop_contorl_full_list.Opacity = 1
-            Else
-                ui_form_stop_list.ItemsSource = ui_connet_core_form_stop_list
-            End If
-        Else
-            '搜索并设置
-            ui_form_stop_contorl_full_list.Opacity = 0
-            ui_form_stop_list.ItemsSource = Nothing
-            Dim a As New ui_depend_stop_list
-            ui_connet_core_form_stop_list_for_search.Clear()
-
-            For test1 = 0 To 10000
-                If bus_stop_stop(test1) = "" Then
-                    Exit For
-                End If
-
-                If InStr(bus_stop_stop(test1), ui_form_stop_contorl_left_form_textbox.Text) = 0 Then
-                    '没找到 
-                    '什么都不做
-                Else
-                    '找到了
-                    a.ui_stop_name = bus_stop_stop(test1)
-                    ui_connet_core_form_stop_list_for_search.Add(a)
-                    a = New ui_depend_stop_list
-                End If
-            Next
-
-            ui_form_stop_list.ItemsSource = ui_connet_core_form_stop_list_for_search
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]线路列表搜索含有站台字符更改
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_line_contorl_right_form_textbox_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_line_contorl_right_form_textbox.TextChanged
-        If ui_form_line_contorl_right_form_textbox.Text = "" Then
-            '强制复原
-            ui_form_line_stop_search_list.ItemsSource = Nothing
-            ui_connet_core_form_line_search_stop_list.Clear()
-            ui_form_line_stop_search_list.ItemsSource = ui_connet_core_form_line_search_stop_list
-        Else
-            ui_form_line_stop_search_list.ItemsSource = Nothing
-            Dim a As New ui_depend_line_search_stop_list
-            ui_connet_core_form_line_search_stop_list.Clear()
-
-            For test1 = 0 To 200
-                If bus_stop_up(test1) = "" Then
-                    Exit For
-                End If
-
-                If InStr(bus_stop_up(test1), ui_form_line_contorl_right_form_textbox.Text) = 0 Then
-                    '没找到 
-                    '什么都不做
-                Else
-                    '找到了
-                    a.ui_line_of_stop_name = bus_stop_up(test1)
-                    a.ui_line_of_stop_name_on_where = "上行线路"
-                    ui_connet_core_form_line_search_stop_list.Add(a)
-                    a = New ui_depend_line_search_stop_list
-                End If
-            Next
-
-            a = New ui_depend_line_search_stop_list
-
-            For test1 = 0 To 200
-                If bus_stop_down(test1) = "" Then
-                    Exit For
-                End If
-
-                If InStr(bus_stop_down(test1), ui_form_line_contorl_right_form_textbox.Text) = 0 Then
-                    '没找到 
-                    '什么都不做
-                Else
-                    '找到了
-                    a.ui_line_of_stop_name = bus_stop_down(test1)
-                    a.ui_line_of_stop_name_on_where = "下行线路"
-                    ui_connet_core_form_line_search_stop_list.Add(a)
-                    a = New ui_depend_line_search_stop_list
-                End If
-            Next
-
-            ui_form_line_stop_search_list.ItemsSource = ui_connet_core_form_line_search_stop_list
-        End If
-
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]设置界面替换背景
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_contorl_list_4_function(sender As Object, e As MouseButtonEventArgs)
-        If System.IO.File.Exists(ui_form_contorl_background_path.Text) = True Then
-            System.IO.File.Delete(Environment.CurrentDirectory + "\temp.jpg")
-            System.IO.File.Copy(ui_form_contorl_background_path.Text, Environment.CurrentDirectory + "\temp.jpg")
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "1")
-            Environment.Exit(3)
-        Else
-            message_ex_ex("替换背景", "没有找到背景文件：" + ui_form_contorl_background_path.Text)
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]设置界面替换资源
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_contorl_list_2_function(sender As Object, e As MouseButtonEventArgs)
-        If System.IO.File.Exists(ui_form_contorl_resource_path.Text) = True Then
-            System.IO.File.Delete(Environment.CurrentDirectory + "\temp.brs")
-            System.IO.File.Copy(ui_form_contorl_resource_path.Text, Environment.CurrentDirectory + "\temp.brs")
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "0")
-            Environment.Exit(3)
-        Else
-            message_ex_ex("替换资源", "没有找到资源文件：" + ui_form_contorl_resource_path.Text)
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]打开 打开资源文件 对话框函数
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_contorl_throw_rs_file(sender As Object, e As MouseButtonEventArgs)
-        open_resources_file.ShowDialog()
-        If open_resources_file.FileName <> "" Then
-            ui_form_contorl_resource_path.Text = open_resources_file.FileName
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]打开 打开背景图片 对话框函数
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_contorl_throw_bk_file(sender As Object, e As MouseButtonEventArgs)
-        open_background_file.ShowDialog()
-        If open_background_file.FileName <> "" Then
-            ui_form_contorl_background_path.Text = open_background_file.FileName
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]站台设置界面添加起始站台的车次
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_stop_contorl_add_start_stop_fx(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_contorl_add_start_stop.MouseDown
-        ui_form_stop_contorl_right_form_textbox_1.Text = bus_stop_stop(now_stop)
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]站台设置界面添加终到站台的车次
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_stop_contorl_add_end_stop_fx(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_contorl_add_end_stop.MouseDown
-        ui_form_stop_contorl_right_form_textbox_2.Text = bus_stop_stop(now_stop)
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]设置面板讲述人按钮移动
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_function_contorl_check_btn_2(sender As Object, e As MouseButtonEventArgs) Handles ui_form_contorl_check_btn_2.MouseDown
-        Dim stb_1
-        storyboard_action.Stop()
-        storyboard_action.Children.Clear()
-
-        If talk_man = True Then
-            '关闭
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(70, 0, New Duration(TimeSpan.FromSeconds(0.1)))
-
-            Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn_2)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
-
-            storyboard_action.Children.Add(stb_1)
-        Else
-            '打开
-            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 70, New Duration(TimeSpan.FromSeconds(0.1)))
-
-            Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn_2)
-            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
-
-            storyboard_action.Children.Add(stb_1)
-        End If
-
-        storyboard_action.Begin()
-
-        '设置界面
-        talk_man = Not (talk_man)
-
-        '保存设置
-        save_user_contorl()
-
-        '刷新
-        re_window()
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]设置界面选择插件路径
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_contorl_throw_mod_file(sender As Object, e As MouseButtonEventArgs)
-        open_mod_file.ShowDialog()
-        If open_mod_file.FileName <> "" Then
-            ui_form_contorl_mod_path.Text = open_mod_file.FileName
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]设置界面应用插件
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_contorl_list_7_function(sender As Object, e As MouseButtonEventArgs)
-        If System.IO.File.Exists(ui_form_contorl_mod_path.Text) = True Then
-            System.IO.File.Delete(Environment.CurrentDirectory + "\temp.dll")
-            System.IO.File.Copy(ui_form_contorl_mod_path.Text, Environment.CurrentDirectory + "\temp.dll")
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "2")
-            Environment.Exit(3)
-        Else
-            message_ex_ex("替换资源", "没有找到车辆跟踪插件文件：" + ui_form_contorl_mod_path.Text)
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]设置界面插件信息
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_contorl_list_8_function(sender As Object, e As MouseButtonEventArgs)
-
-        Try
-            Dim ass As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory & "\bus_rode_mod.dll")
-            Dim tp As Type = ass.GetType("bus_rode_dll.main_dll", True)
-            Dim out_word As String = ""
-
-            If tp <> Nothing Then
-                Dim instance As Object = Activator.CreateInstance(tp)
-
-                Dim prop_1 As Reflection.FieldInfo = tp.GetField("DllDependBusRodeVersion")
-                out_word = "插件依赖的bus_rode版本号：" & CType(prop_1.GetValue(instance), String) & vbCrLf
-                Dim prop_2 As Reflection.FieldInfo = tp.GetField("DllWriter")
-                out_word = out_word & "插件作者：" & CType(prop_2.GetValue(instance), String) & vbCrLf
-                Dim prop_3 As Reflection.FieldInfo = tp.GetField("DllRegoin")
-                out_word = out_word & "插件适用的城市：" & CType(prop_3.GetValue(instance), String) & vbCrLf
-                Dim prop_4 As Reflection.FieldInfo = tp.GetField("DllVersion")
-                out_word = out_word & "插件版本号：" & CType(prop_4.GetValue(instance), String)
-
-                window_dialogs_show("插件信息", out_word, 0, 1, False, "确定", "", Application.Current.MainWindow)
-            End If
-        Catch ex As Exception
-            window_dialogs_show("错误", "无法读取插件的相关信息，这可能是由于：" & vbCrLf &
-                   "1、没有安装插件" & vbCrLf &
-                   "2、插件损坏或者插件不完整没有通过CHMOSGroup的认证", 2, 1, False, "确定", "", Application.Current.MainWindow)
-        End Try
-
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]窗体按下键盘的相关处理
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub app_keyboard(sender As Object, e As KeyEventArgs) Handles ui_bus_rode_main_window.KeyDown
-        '启动讲述人
-        If e.Key = Key.F1 And talk_man = True Then
-            If run_talk_flag = True Then
-                '不予执行
-                message_ex_ex("讲述人", "讲述人正在朗读，请等待朗诵完毕再按下F1" + ui_form_contorl_resource_path.Text)
-            Else
-                run_talk_flag = True
-            End If
-
-
-        End If
-    End Sub
-
-    ''' <summary>
     ''' [系统][ui]联网搜索路径
     ''' </summary>
     ''' <param name="sender"></param>
@@ -2443,6 +2369,345 @@ Public Class MainWindow
 
         End If
 
+    End Sub
+
+#End Region
+
+#Region "设置"
+
+    '===============================常规====================================
+
+    ''' <summary>
+    ''' [系统][ui]设置界面重启
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_contorl_list_5_function(sender As Object, e As MouseButtonEventArgs)
+        Process.Start(Environment.CurrentDirectory + "\file.bat")
+        Environment.Exit(3)
+    End Sub
+
+    '===============================实时====================================
+
+    ''' <summary>
+    ''' [系统][ui]设置界面选择插件路径
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_contorl_throw_mod_file(sender As Object, e As MouseButtonEventArgs)
+        open_mod_file.ShowDialog()
+        If open_mod_file.FileName <> "" Then
+            ui_form_contorl_mod_path.Text = open_mod_file.FileName
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]设置界面应用插件
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_contorl_list_7_function(sender As Object, e As MouseButtonEventArgs)
+        If System.IO.File.Exists(ui_form_contorl_mod_path.Text) = True Then
+            System.IO.File.Delete(Environment.CurrentDirectory + "\temp.dll")
+            System.IO.File.Copy(ui_form_contorl_mod_path.Text, Environment.CurrentDirectory + "\temp.dll")
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "2")
+            Environment.Exit(3)
+        Else
+            message_ex_ex("替换资源", "没有找到车辆跟踪插件文件：" + ui_form_contorl_mod_path.Text)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]设置界面插件信息
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_contorl_list_8_function(sender As Object, e As MouseButtonEventArgs)
+
+        Try
+            Dim ass As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory & "\bus_rode_mod.dll")
+            Dim tp As Type = ass.GetType("bus_rode_dll.main_dll", True)
+            Dim out_word As String = ""
+
+            If tp <> Nothing Then
+                Dim instance As Object = Activator.CreateInstance(tp)
+
+                Dim prop_1 As Reflection.FieldInfo = tp.GetField("DllDependBusRodeVersion")
+                out_word = "插件依赖的bus_rode版本号：" & CType(prop_1.GetValue(instance), String) & vbCrLf
+                Dim prop_2 As Reflection.FieldInfo = tp.GetField("DllWriter")
+                out_word = out_word & "插件作者：" & CType(prop_2.GetValue(instance), String) & vbCrLf
+                Dim prop_3 As Reflection.FieldInfo = tp.GetField("DllRegoin")
+                out_word = out_word & "插件适用的城市：" & CType(prop_3.GetValue(instance), String) & vbCrLf
+                Dim prop_4 As Reflection.FieldInfo = tp.GetField("DllVersion")
+                out_word = out_word & "插件版本号：" & CType(prop_4.GetValue(instance), String)
+
+                window_dialogs_show("插件信息", out_word, 0, 1, False, "确定", "", Application.Current.MainWindow)
+            End If
+        Catch ex As Exception
+            window_dialogs_show("错误", "无法读取插件的相关信息，这可能是由于：" & vbCrLf &
+                   "1、没有安装插件" & vbCrLf &
+                   "2、插件损坏或者插件不完整没有通过CHMOSGroup的认证", 2, 1, False, "确定", "", Application.Current.MainWindow)
+        End Try
+
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]设置界面删除插件
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_contorl_list_1_function(sender As Object, e As MouseButtonEventArgs)
+
+        window_dialogs_show("删除插件", "确认删除插件？", 1, 2, False, "确定", "取消", Application.Current.MainWindow)
+
+        If window_dialogs_select_btn = 0 Then
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "3")
+            Environment.Exit(3)
+        End If
+
+    End Sub
+
+    '===============================资源====================================
+
+    ''' <summary>
+    ''' [系统][ui]设置界面获取资源信息
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_contorl_list_3_function(sender As Object, e As MouseButtonEventArgs)
+        If no_resource = False Then
+            window_dialogs_show("资源属性/自述", System.IO.File.ReadAllText(Environment.CurrentDirectory + "\library\readme.txt"), 0, 1, False, "确定", "", Application.Current.MainWindow)
+        Else
+            message_ex_ex("资源", "当前没有安装资源！")
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]打开 打开资源文件 对话框函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_contorl_throw_rs_file(sender As Object, e As MouseButtonEventArgs)
+        open_resources_file.ShowDialog()
+        If open_resources_file.FileName <> "" Then
+            ui_form_contorl_resource_path.Text = open_resources_file.FileName
+        End If
+    End Sub
+    ''' <summary>
+    ''' [系统][ui]设置界面替换资源
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_contorl_list_2_function(sender As Object, e As MouseButtonEventArgs)
+        If System.IO.File.Exists(ui_form_contorl_resource_path.Text) = True Then
+            System.IO.File.Delete(Environment.CurrentDirectory + "\temp.brs")
+            System.IO.File.Copy(ui_form_contorl_resource_path.Text, Environment.CurrentDirectory + "\temp.brs")
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "0")
+            Environment.Exit(3)
+        Else
+            message_ex_ex("替换资源", "没有找到资源文件：" + ui_form_contorl_resource_path.Text)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]设置界面删除资源
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_contorl_list_9_function(sender As Object, e As MouseButtonEventArgs)
+
+        window_dialogs_show("删除资源", "确认删除资源？", 1, 2, False, "确定", "取消", Application.Current.MainWindow)
+
+        If window_dialogs_select_btn = 0 Then
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "4")
+            Environment.Exit(3)
+        End If
+
+    End Sub
+
+    '===============================个性化====================================
+
+    ''' <summary>
+    ''' [系统][ui]设置面板更换颜色选项
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_contorl_list_6_function(sender As Object, e As MouseButtonEventArgs)
+
+        Dim new_color_r As Integer = 0
+        Dim new_color_g As Integer = 0
+        Dim new_color_b As Integer = 0
+        Try
+            new_color_r = Int(ui_form_contorl_r_value.Text)
+            new_color_g = Int(ui_form_contorl_g_value.Text)
+            new_color_b = Int(ui_form_contorl_b_value.Text)
+
+            If 0 <= new_color_r And new_color_r <= 255 Then
+                If 0 <= new_color_g And new_color_g <= 255 Then
+                    If 0 <= new_color_b And new_color_b <= 255 Then
+                        '符合条件
+
+                        form_color = Color.FromRgb(new_color_r, new_color_g, new_color_b)
+
+                        '设置颜色 1-3透明df=223 4透明8f=143 5-8透明6f=111
+                        ui_color_1.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
+                        ui_color_2.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
+                        ui_color_3.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
+
+                        ui_color_4.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
+
+                        ui_color_5.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+                        ui_color_6.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+                        ui_color_7.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+                        ui_color_8.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+
+                        If up_or_down_line = True Then
+                            '上行
+                            ui_form_line_select_up_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
+                            ui_form_line_select_down_line.Color = Color.FromArgb(0, 0, 0, 0)
+                        Else
+                            '下行
+                            ui_form_line_select_up_line.Color = Color.FromArgb(0, 0, 0, 0)
+                            ui_form_line_select_down_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
+                        End If
+
+                        If get_bus_addr = True Then
+                            ui_form_contorl_check_background_color_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                        End If
+                        If talk_man = True Then
+                            ui_form_contorl_check_background_color_2_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                        End If
+
+                        '保存设置
+                        save_user_contorl()
+                    Else
+                        window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                        ui_form_contorl_r_value.Text = form_color.R
+                        ui_form_contorl_g_value.Text = form_color.G
+                        ui_form_contorl_b_value.Text = form_color.B
+                    End If
+                Else
+                    window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                    ui_form_contorl_r_value.Text = form_color.R
+                    ui_form_contorl_g_value.Text = form_color.G
+                    ui_form_contorl_b_value.Text = form_color.B
+                End If
+            Else
+                window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                ui_form_contorl_r_value.Text = form_color.R
+                ui_form_contorl_g_value.Text = form_color.G
+                ui_form_contorl_b_value.Text = form_color.B
+            End If
+        Catch ex As Exception
+            '输入文本类型错误
+            window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
+            ui_form_contorl_r_value.Text = form_color.R
+            ui_form_contorl_g_value.Text = form_color.G
+            ui_form_contorl_b_value.Text = form_color.B
+        End Try
+    End Sub
+    ''' <summary>
+    ''' [系统][ui]设置面板颜色textbox数值更改
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ui_form_contorl_value_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_contorl_r_value.TextChanged, ui_form_contorl_g_value.TextChanged, ui_form_contorl_b_value.TextChanged
+        Dim new_color_r As Integer = 0
+        Dim new_color_g As Integer = 0
+        Dim new_color_b As Integer = 0
+        Try
+            new_color_r = Int(ui_form_contorl_r_value.Text)
+            new_color_g = Int(ui_form_contorl_g_value.Text)
+            new_color_b = Int(ui_form_contorl_b_value.Text)
+
+            If 0 <= new_color_r And new_color_r <= 255 Then
+                If 0 <= new_color_g And new_color_g <= 255 Then
+                    If 0 <= new_color_b And new_color_b <= 255 Then
+                        '符合条件
+                    Else
+                        'MsgBox("数值非法")
+                    End If
+                Else
+                    'MsgBox("数值非法")
+                End If
+            Else
+                'MsgBox("数值非法")
+            End If
+        Catch ex As Exception
+            '输入文本类型错误
+            'MsgBox("数值非法")
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]打开 打开背景图片 对话框函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_contorl_throw_bk_file(sender As Object, e As MouseButtonEventArgs)
+        open_background_file.ShowDialog()
+        If open_background_file.FileName <> "" Then
+            ui_form_contorl_background_path.Text = open_background_file.FileName
+        End If
+    End Sub
+    ''' <summary>
+    ''' [系统][ui]设置界面替换背景
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_contorl_list_4_function(sender As Object, e As MouseButtonEventArgs)
+        If System.IO.File.Exists(ui_form_contorl_background_path.Text) = True Then
+            System.IO.File.Delete(Environment.CurrentDirectory + "\temp.jpg")
+            System.IO.File.Copy(ui_form_contorl_background_path.Text, Environment.CurrentDirectory + "\temp.jpg")
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "1")
+            Environment.Exit(3)
+        Else
+            message_ex_ex("替换背景", "没有找到背景文件：" + ui_form_contorl_background_path.Text)
+        End If
+    End Sub
+
+#End Region
+
+#Region "关于"
+
+    ''' <summary>
+    ''' [系统][ui]关于界面前往github的按钮
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_about_github(sender As Object, e As MouseButtonEventArgs)
+        System.Diagnostics.Process.Start("https://github.com/yyc12345/bus_rode")
+    End Sub
+
+#End Region
+
+    '===============================杂项和优化====================================
+
+    ''' <summary>
+    ''' [系统][ui]窗体按下键盘的相关处理
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub app_keyboard(sender As Object, e As KeyEventArgs) Handles ui_bus_rode_main_window.KeyDown
+        '启动讲述人
+        If e.Key = Key.F1 And talk_man = True Then
+            If run_talk_flag = True Then
+                '不予执行
+                message_ex_ex("讲述人", "讲述人正在朗读，请等待朗诵完毕再按下F1" + ui_form_contorl_resource_path.Text)
+            Else
+                run_talk_flag = True
+            End If
+
+
+        End If
     End Sub
 
 
@@ -2527,105 +2792,9 @@ Public Class MainWindow
     End Sub
 
 
+
 #End Region
 
 
-    ''' <summary>
-    ''' [系统][ui]线路-经过站台列表跳转到站台界面的函数
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_line_have_stop_list_jump_to_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_line_have_stop_list.MouseDoubleClick
 
-        If ui_form_line_have_stop_list.SelectedIndex <> -1 Then
-
-            '寻找当前站点
-            Dim word As String = ""
-            If up_or_down_line = True Then
-                '上行
-                word = ui_connet_core_form_line_have_sotp_list_up.Item(ui_form_line_have_stop_list.SelectedIndex).ui_stop_name
-            Else
-                '下行
-                word = ui_connet_core_form_line_have_sotp_list_down.Item(ui_form_line_have_stop_list.SelectedIndex).ui_stop_name
-            End If
-
-            '确认索引
-            Dim linshi_1 As Integer = return_check_stop_list_nopage(word)
-            If linshi_1 <> -1 Then
-                '清除旧的
-                ui_form_stop_left_cross_line_list.ItemsSource = Nothing
-                ui_form_stop_right_cross_line_list.ItemsSource = Nothing
-
-                now_stop = linshi_1
-                refsh_stop()
-                jump_to_stop_from_line = True
-
-                '设置文本
-                ui_form_stop_describe.Text = cross_stop
-                ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
-
-                ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
-                ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
-
-                '**************************动画跳转
-                Dim stb_1
-                storyboard_action.Stop()
-                storyboard_action.Children.Clear()
-
-                '切入新窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 1, New Duration(TimeSpan.FromSeconds(0.3)))
-
-                Animation.Storyboard.SetTarget(stb_1, ui_form_stop)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-                storyboard_action.Children.Add(stb_1)
-                '移动旧窗口
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.3)))
-
-                Animation.Storyboard.SetTarget(stb_1, ui_form_line)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-
-                storyboard_action.Children.Add(stb_1)
-
-                '控制面板
-                If line_contorl = True Then
-                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(1, 0, New Duration(TimeSpan.FromSeconds(0.15)))
-
-                    Animation.Storyboard.SetTarget(stb_1, ui_form_line_contorl)
-                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("Opacity"))
-                    Dim linshi = New Animation.ExponentialEase()
-                    linshi.EasingMode = Animation.EasingMode.EaseOut
-                    stb_1.EasingFunction = linshi
-
-                    storyboard_action.Children.Add(stb_1)
-                End If
-
-                '设置界面
-                screens = 2
-                line_contorl = False
-
-                '****************************开始跳转
-                storyboard_action.Begin()
-
-                '刷新
-                re_window()
-
-            Else
-                '发生错误，退出
-                Environment.Exit(9)
-            End If
-
-
-        End If
-
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]关于界面前往github的按钮
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_about_github(sender As Object, e As MouseButtonEventArgs)
-        System.Diagnostics.Process.Start("https://github.com/yyc12345/bus_rode")
-    End Sub
 End Class

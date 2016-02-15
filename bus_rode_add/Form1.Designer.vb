@@ -33,7 +33,7 @@ Partial Class Form1
         Me.ProgressBar1.Location = New System.Drawing.Point(12, 127)
         Me.ProgressBar1.MarqueeAnimationSpeed = 5
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(545, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(600, 23)
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
         Me.ProgressBar1.TabIndex = 0
         '
@@ -44,9 +44,9 @@ Partial Class Form1
         Me.Label1.ForeColor = System.Drawing.Color.Blue
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(514, 35)
+        Me.Label1.Size = New System.Drawing.Size(603, 35)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "We are adding resources .Please wait..."
+        Me.Label1.Text = "Some files are being configured. Please wait..."
         '
         'Label2
         '
@@ -61,17 +61,17 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(569, 161)
+        Me.ClientSize = New System.Drawing.Size(624, 161)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.MaximumSize = New System.Drawing.Size(585, 200)
-        Me.MinimumSize = New System.Drawing.Size(585, 200)
+        Me.MaximumSize = New System.Drawing.Size(640, 200)
+        Me.MinimumSize = New System.Drawing.Size(640, 200)
         Me.Name = "Form1"
-        Me.Text = "Add resources"
+        Me.Text = "Configuring files"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
