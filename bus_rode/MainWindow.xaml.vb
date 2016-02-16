@@ -367,8 +367,8 @@ Public Class MainWindow
             If System.IO.File.Exists(Environment.CurrentDirectory + "\bus_rode_mod.dll") = True Then
                 connect_dll_get_resources_td.Start()
             Else
-                get_resource_timer.Stop()
-                connect_dll_get_resources_always_stop = True
+                '没有资源，强制把实时关掉
+                get_bus_addr = False
             End If
             If get_bus_addr = False Then
                 get_resource_timer.Stop()
@@ -445,6 +445,11 @@ Public Class MainWindow
             ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
             ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
         End If
+        If use_new_dialogs = True Then
+            ui_form_contorl_check_background_color_3_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_3_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_3_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+        End If
 
         ui_form_contorl_r_value.Text = form_color.R
         ui_form_contorl_g_value.Text = form_color.G
@@ -504,10 +509,17 @@ Public Class MainWindow
     Public Sub message_ex_ex(ByVal title As String, ByVal text As String)
         If Environment.OSVersion.Version.Major > 6 Or (Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor >= 2) Then
             'win8以上
-            app_desktop_icon.ShowBalloonTip(5000, title, text, System.Windows.Forms.ToolTipIcon.Info)
+            If use_new_dialogs = False Then
+                '旧式的
+                app_desktop_icon.ShowBalloonTip(5000, title, text, System.Windows.Forms.ToolTipIcon.Info)
+            Else
+                '新式的
+                window_dialogs_show(title, text, 1, False, "确认", "", Me)
+            End If
+
         Else
             ui_form_message_list.ItemsSource = Nothing
-            message_ex(title, text)
+            message_ex(title, text, Me)
             ui_form_message_clear.Opacity = 1
             ui_form_message_up_line.Opacity = 1
             ui_form_message_no_msg_title.Opacity = 0
@@ -677,7 +689,7 @@ Public Class MainWindow
                 ui_title_back_btn_color.Color = Color.FromArgb(180, 255, 0, 0)
                 ui_title_menu_btn_color.Color = Color.FromArgb(180, 143, 143, 143)
             Case Else
-                window_dialogs_show("灾难性错误", "bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                message_ex_ex("灾难性错误", "bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！")
                 Environment.Exit(1)
         End Select
 
@@ -768,6 +780,17 @@ Public Class MainWindow
             ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, 143, 143, 143)
             ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, 143, 143, 143)
             Canvas.SetLeft(ui_form_contorl_check_btn_2, 0)
+        End If
+        If use_new_dialogs = True Then
+            ui_form_contorl_check_background_color_3_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_3_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_3_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            Canvas.SetLeft(ui_form_contorl_check_btn_3, 70)
+        Else
+            ui_form_contorl_check_background_color_3_1.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_3_2.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_3_3.Color = Color.FromArgb(255, 143, 143, 143)
+            Canvas.SetLeft(ui_form_contorl_check_btn_3, 0)
         End If
     End Sub
 
@@ -1077,7 +1100,7 @@ Public Class MainWindow
                 screens = 0
 
             Case Else
-                window_dialogs_show("灾难性错误", "bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                message_ex_ex("灾难性错误", "bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！")
                 Environment.Exit(1)
         End Select
 
@@ -1164,7 +1187,7 @@ Public Class MainWindow
             Case 4
 
             Case Else
-                window_dialogs_show("灾难性错误", "bus_rode的核心变量值被篡改， 程序将在点击确定后立即关闭！", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                message_ex_ex("灾难性错误", "bus_rode的核心变量值被篡改， 程序将在点击确定后立即关闭！")
 
                 Environment.Exit(1)
         End Select
@@ -1372,54 +1395,60 @@ Public Class MainWindow
             storyboard_action.Stop()
             storyboard_action.Children.Clear()
 
-            If get_bus_addr = True Then
-                '关闭
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(70, 0, New Duration(TimeSpan.FromSeconds(0.1)))
+            '先检测文件
+            If System.IO.File.Exists(Environment.CurrentDirectory + "\bus_rode_mod.dll") = True Then
+                '文件存在
+                '======================================设置动画
+                If get_bus_addr = True Then
+                    '关闭
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(70, 0, New Duration(TimeSpan.FromSeconds(0.1)))
 
-                Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
-                Dim linshi = New Animation.ExponentialEase()
-                linshi.EasingMode = Animation.EasingMode.EaseOut
-                stb_1.EasingFunction = linshi
+                    Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn)
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Dim linshi = New Animation.ExponentialEase()
+                    linshi.EasingMode = Animation.EasingMode.EaseOut
+                    stb_1.EasingFunction = linshi
 
-                storyboard_action.Children.Add(stb_1)
-            Else
-                '打开
-                stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 70, New Duration(TimeSpan.FromSeconds(0.1)))
+                    storyboard_action.Children.Add(stb_1)
+                Else
+                    '打开
+                    stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 70, New Duration(TimeSpan.FromSeconds(0.1)))
 
-                Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn)
-                Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
-                Dim linshi = New Animation.ExponentialEase()
-                linshi.EasingMode = Animation.EasingMode.EaseOut
-                stb_1.EasingFunction = linshi
+                    Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn)
+                    Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+                    Dim linshi = New Animation.ExponentialEase()
+                    linshi.EasingMode = Animation.EasingMode.EaseOut
+                    stb_1.EasingFunction = linshi
 
-                storyboard_action.Children.Add(stb_1)
-            End If
+                    storyboard_action.Children.Add(stb_1)
 
-            storyboard_action.Begin()
+                End If
 
-            '设置界面
-            get_bus_addr = Not (get_bus_addr)
-            If get_bus_addr = True Then
-                If System.IO.File.Exists(Environment.CurrentDirectory + "\bus_rode_mod.dll") = True Then
-                    '文件存在
+                storyboard_action.Begin()
+
+
+                '============================================设置界面
+                get_bus_addr = Not (get_bus_addr)
+                If get_bus_addr = True Then
                     get_resource_timer.Start()
                     connect_dll_get_resources_always_stop = False
                 Else
-                    message_ex("未找到模块", "未找到指定模块，可能是未安装模块")
+                    get_resource_timer.Stop()
+                    connect_dll_get_resources_always_stop = True
                 End If
+                '清空
+                read_mid_bus_word = ""
+
+                '保存设置
+                save_user_contorl()
+
+                '刷新
+                re_window()
+
             Else
-                get_resource_timer.Stop()
-                connect_dll_get_resources_always_stop = True
+                message_ex_ex("未找到模块", "未找到指定模块，可能是未安装模块")
             End If
-            '清空
-            read_mid_bus_word = ""
 
-            '保存设置
-            save_user_contorl()
-
-            '刷新
-            re_window()
         Else
             message_ex_ex("资源", "当前没有安装资源！")
         End If
@@ -1458,6 +1487,46 @@ Public Class MainWindow
 
         '设置界面
         talk_man = Not (talk_man)
+
+        '保存设置
+        save_user_contorl()
+
+        '刷新
+        re_window()
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]设置面板新对话框按钮移动
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_function_contorl_check_btn_3(sender As Object, e As MouseButtonEventArgs) Handles ui_form_contorl_check_btn_3.MouseDown
+        Dim stb_1
+        storyboard_action.Stop()
+        storyboard_action.Children.Clear()
+
+        If use_new_dialogs = True Then
+            '关闭
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(70, 0, New Duration(TimeSpan.FromSeconds(0.1)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn_3)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+
+            storyboard_action.Children.Add(stb_1)
+        Else
+            '打开
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 70, New Duration(TimeSpan.FromSeconds(0.1)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn_3)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+
+            storyboard_action.Children.Add(stb_1)
+        End If
+
+        storyboard_action.Begin()
+
+        '设置界面
+        use_new_dialogs = Not (use_new_dialogs)
 
         '保存设置
         save_user_contorl()
@@ -2127,7 +2196,7 @@ Public Class MainWindow
         stamp_start_stop = ui_form_stop_contorl_right_form_textbox_1.Text
         stamp_end_stop = ui_form_stop_contorl_right_form_textbox_2.Text
 
-        If ui_form_stop_short_line_check() = True Then
+        If ui_form_stop_short_line_check(False) = True Then
 
             'ui设置
             short_line_can_page = True
@@ -2143,6 +2212,8 @@ Public Class MainWindow
             Do
                 If short_line_can_page = False Then
                     '结束工作开始设置
+                    short_rode_calc_mode = False
+
                     step_number = 0
                     If toword(0, 0) = "" Then
                         '没有可以到的线路
@@ -2188,8 +2259,9 @@ Public Class MainWindow
     ''' <summary>
     ''' [系统][ui]检测最短路径是否可以执行的函数
     ''' </summary>
+    ''' <param name="mode">执行的是联网的还是本地的检查true=联网 false=本地</param>
     ''' <returns></returns>
-    Public Function ui_form_stop_short_line_check()
+    Public Function ui_form_stop_short_line_check(ByVal mode As Boolean)
         Dim yes As Boolean = False
 
         If stamp_start_stop <> "" And stamp_end_stop <> "" Then
@@ -2199,9 +2271,19 @@ Public Class MainWindow
                 If check_stop_list(stamp_start_stop) = False Or check_stop_list(stamp_end_stop) = False Then
                     message_ex_ex("换乘规划站点错误", "没有找到指定车站，请确认车站存在！")
                 Else
+                    '先确认是否是不同类别的
+                    If mode = Nothing Then
+                        '第一次，放行
+                    End If
+
                     If stamp_start_stop = before_stamp_start_stop And stamp_end_stop = before_stamp_end_stop Then
                         '选择项相同,直接保持不变
-                        message_ex_ex("换乘规划", "结果已经计算完成，无需再次计算！")
+                        If (mode = True And short_rode_calc_mode = True) Or (mode = False And short_rode_calc_mode = False) Then
+                            '不能执行
+                            message_ex_ex("换乘规划", "结果已经计算完成，无需再次计算！")
+                        Else
+                            yes = True
+                        End If
                     Else
                         yes = True
                     End If
@@ -2321,7 +2403,7 @@ Public Class MainWindow
             message_ex_ex("没有网络", "联网规划需要有效的网络连接才能进行，没有网络时请使用本地规划")
         Else
 
-            If ui_form_stop_short_line_check() = True Then
+            If ui_form_stop_short_line_check(True) = True Then
 
 
                 '可以执行，先下载文件
@@ -2348,6 +2430,9 @@ Public Class MainWindow
 
                 '确认是否设置ui
                 If toword(0, 0) <> "" Then
+
+                    short_rode_calc_mode = True
+
                     '设置ui
                     ui_form_stop_contorl_page.Text = "步骤1"
 
@@ -2442,12 +2527,12 @@ Public Class MainWindow
                 Dim prop_4 As Reflection.FieldInfo = tp.GetField("DllVersion")
                 out_word = out_word & "插件版本号：" & CType(prop_4.GetValue(instance), String)
 
-                window_dialogs_show("插件信息", out_word, 0, 1, False, "确定", "", Application.Current.MainWindow)
+                message_ex_ex("插件信息", out_word)
             End If
         Catch ex As Exception
-            window_dialogs_show("错误", "无法读取插件的相关信息，这可能是由于：" & vbCrLf &
+            message_ex_ex("错误", "无法读取插件的相关信息，这可能是由于：" & vbCrLf &
                    "1、没有安装插件" & vbCrLf &
-                   "2、插件损坏或者插件不完整没有通过CHMOSGroup的认证", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                   "2、插件损坏或者插件不完整没有通过CHMOSGroup的认证")
         End Try
 
     End Sub
@@ -2459,7 +2544,7 @@ Public Class MainWindow
     ''' <param name="e"></param>
     Private Sub ui_contorl_list_1_function(sender As Object, e As MouseButtonEventArgs)
 
-        window_dialogs_show("删除插件", "确认删除插件？", 1, 2, False, "确定", "取消", Application.Current.MainWindow)
+        window_dialogs_show("删除插件", "确认删除插件？", 2, False, "确定", "取消", Me)
 
         If window_dialogs_select_btn = 0 Then
             Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "3")
@@ -2478,7 +2563,7 @@ Public Class MainWindow
     ''' <remarks></remarks>
     Private Sub ui_contorl_list_3_function(sender As Object, e As MouseButtonEventArgs)
         If no_resource = False Then
-            window_dialogs_show("资源属性/自述", System.IO.File.ReadAllText(Environment.CurrentDirectory + "\library\readme.txt"), 0, 1, False, "确定", "", Application.Current.MainWindow)
+            message_ex_ex("资源属性/自述", System.IO.File.ReadAllText(Environment.CurrentDirectory + "\library\readme.txt"))
         Else
             message_ex_ex("资源", "当前没有安装资源！")
         End If
@@ -2518,7 +2603,7 @@ Public Class MainWindow
     ''' <param name="e"></param>
     Private Sub ui_contorl_list_9_function(sender As Object, e As MouseButtonEventArgs)
 
-        window_dialogs_show("删除资源", "确认删除资源？", 1, 2, False, "确定", "取消", Application.Current.MainWindow)
+        window_dialogs_show("删除资源", "确认删除资源？", 2, False, "确定", "取消", Me)
 
         If window_dialogs_select_btn = 0 Then
             Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "4")
@@ -2584,30 +2669,35 @@ Public Class MainWindow
                             ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
                             ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
                         End If
+                        If use_new_dialogs = True Then
+                            ui_form_contorl_check_background_color_3_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_3_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                            ui_form_contorl_check_background_color_3_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+                        End If
 
                         '保存设置
                         save_user_contorl()
                     Else
-                        window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                        message_ex_ex("数值", "数值非法")
                         ui_form_contorl_r_value.Text = form_color.R
                         ui_form_contorl_g_value.Text = form_color.G
                         ui_form_contorl_b_value.Text = form_color.B
                     End If
                 Else
-                    window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                    message_ex_ex("数值", "数值非法")
                     ui_form_contorl_r_value.Text = form_color.R
                     ui_form_contorl_g_value.Text = form_color.G
                     ui_form_contorl_b_value.Text = form_color.B
                 End If
             Else
-                window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
+                message_ex_ex("数值", "数值非法")
                 ui_form_contorl_r_value.Text = form_color.R
                 ui_form_contorl_g_value.Text = form_color.G
                 ui_form_contorl_b_value.Text = form_color.B
             End If
         Catch ex As Exception
             '输入文本类型错误
-            window_dialogs_show("数值", "数值非法", 2, 1, False, "确定", "", Application.Current.MainWindow)
+            message_ex_ex("数值", "数值非法")
             ui_form_contorl_r_value.Text = form_color.R
             ui_form_contorl_g_value.Text = form_color.G
             ui_form_contorl_b_value.Text = form_color.B
@@ -2790,6 +2880,7 @@ Public Class MainWindow
     Private Sub ui_form_stop_right_cross_line_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_stop_right_cross_line_list.MouseLeave
         ScrollViewer.SetVerticalScrollBarVisibility(ui_form_stop_right_cross_line_list, ScrollBarVisibility.Hidden)
     End Sub
+
 
 
 

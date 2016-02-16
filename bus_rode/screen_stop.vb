@@ -69,6 +69,11 @@
     Public before_stamp_end_stop As String = ""
 
     ''' <summary>
+    ''' [内核][screen_stop]最短路径上一次执行执行的是联网的还是本地的true=联网 false=本地
+    ''' </summary>
+    Public short_rode_calc_mode As Boolean = Nothing
+
+    ''' <summary>
     ''' [内核][screen_stop]最短路径步骤数字
     ''' </summary>
     ''' <remarks></remarks>

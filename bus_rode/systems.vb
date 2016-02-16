@@ -150,13 +150,19 @@
         '用户设置
         Dim file_7 As New System.IO.StreamReader(Environment.CurrentDirectory + "\desktop.txt", System.Text.Encoding.UTF8)
 
-        '不加载这个
+        '不加载这个，相关加载写在add_system里，加载核心内容
         file_7.ReadLine()
 
         If file_7.ReadLine = "0" Then
             talk_man = True
         Else
             talk_man = False
+        End If
+
+        If file_7.ReadLine = "0" Then
+            use_new_dialogs = True
+        Else
+            use_new_dialogs = False
         End If
 
         '加载颜色写在内部
@@ -178,35 +184,43 @@
     ''' <param name="title">消息标题</param>
     ''' <param name="word">消息内容</param>
     ''' <remarks></remarks>
-    Public Sub message_ex(ByVal title As String, ByVal word As String)
-        '计算当前时间
-        Dim time_word As String = ""
-        Dim clock_hour As Integer = Hour(Now)
-        Dim clock_min As Integer = Minute(Now)
-        If clock_hour <= 12 Then
-            If clock_min < 10 Then
-                time_word = clock_hour & ":0" & clock_min & " AM"
+    Public Sub message_ex(ByVal title As String, ByVal word As String, ByRef win As Window)
+
+        If use_new_dialogs = False Then
+            '旧式的
+            '计算当前时间
+            Dim time_word As String = ""
+            Dim clock_hour As Integer = Hour(Now)
+            Dim clock_min As Integer = Minute(Now)
+            If clock_hour <= 12 Then
+                If clock_min < 10 Then
+                    time_word = clock_hour & ":0" & clock_min & " AM"
+                Else
+                    time_word = clock_hour & ":" & clock_min & " AM"
+                End If
             Else
-                time_word = clock_hour & ":" & clock_min & " AM"
+                If clock_min < 10 Then
+                    time_word = clock_hour & ":0" & clock_min & " PM"
+                Else
+                    time_word = clock_hour & ":" & clock_min & " PM"
+                End If
             End If
+
+            '添加ui
+            Dim a As New ui_depend_message_list
+            a.ui_msg_title = title
+            a.ui_msg_text = word
+            a.ui_msg_date = time_word
+
+            ui_connet_core_form_message_list.Add(a)
+
+            '响铃
+            System.Media.SystemSounds.Beep.Play()
         Else
-            If clock_min < 10 Then
-                time_word = clock_hour & ":0" & clock_min & " PM"
-            Else
-                time_word = clock_hour & ":" & clock_min & " PM"
-            End If
+            '新式的
+            window_dialogs_show(title, word, 1, False, "确认", "", win)
         End If
 
-        '添加ui
-        Dim a As New ui_depend_message_list
-        a.ui_msg_title = title
-        a.ui_msg_text = word
-        a.ui_msg_date = time_word
-
-        ui_connet_core_form_message_list.Add(a)
-
-        '响铃
-        System.Media.SystemSounds.Beep.Play()
 
     End Sub
 

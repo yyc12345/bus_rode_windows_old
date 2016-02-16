@@ -27,16 +27,6 @@
         End If
 
         System.Media.SystemSounds.Beep.Play()
-        Select Case window_dialogs_msg_state
-            Case 0
-                ui_title_bk.Color = Color.FromArgb(255, 30, 144, 255)
-            Case 1
-                ui_title_bk.Color = Color.FromArgb(255, 255, 165, 0)
-            Case 2
-                ui_title_bk.Color = Color.FromArgb(255, 220, 20, 60)
-            Case Else
-                ui_title_bk.Color = Color.FromArgb(255, 30, 144, 255)
-        End Select
 
     End Sub
 

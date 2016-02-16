@@ -79,7 +79,7 @@
             ui_connect_window_select_item_list_select_index = ui_window_select_item_list.SelectedIndex
             Me.Close()
         Else
-            window_dialogs_show("错误", "你没有选择任何项", 2, 1, False, "确定", "", Application.Current.MainWindow)
+            window_dialogs_show("错误", "你没有选择任何项", 1, False, "确定", "", Me)
         End If
 
     End Sub

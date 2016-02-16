@@ -3,12 +3,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- listbox项的覆盖阴影-->
+        <!-- 重要===设定listbox item的选中色样式-->
         <Style TargetType="ListBoxItem">
             <Style.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#8f0000ff"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#00000000"/>
+                <!--SelectedItem with focus-->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue" Opacity=".4"/>
+                <!--SelectedItem without focus-->
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White" Opacity=".4"/>
             </Style.Resources>
+
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <!-- 设置触发器 -->
+            <!--<Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#efefef"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="true">
+                    <Setter Property="Background" Value="Coral"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>-->
         </Style>
 
         <!-- *****************************************************************************************************************-->

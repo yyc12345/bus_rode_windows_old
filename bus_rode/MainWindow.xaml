@@ -1181,6 +1181,98 @@
                                         </Grid>
                                     </Grid>
 
+                                    <!-- 新对话框-->
+                                    <Grid Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="新对话框" Grid.Row="1">
+                                                <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="新对话框"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                                            </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="打开以使用新式对话框而不是旧式对话框" Grid.Row="1">
+                                                <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="打开以使用新式对话框而不是旧式对话框"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                                            </TextBlock>
+                                        </Grid>
+
+                                        <!-- 开关-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Canvas x:Name="ui_form_contorl_check_background_3" Grid.Row="1">
+
+                                                <Grid Height="30" Width="100">
+                                                    <Grid.ColumnDefinitions >
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Stroke="white">
+                                                        <Ellipse.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_3_1" Color="#ff8f8f8f"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                    <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Stroke="white">
+                                                        <Ellipse.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_3_3" Color="#ff8f8f8f"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+
+                                                    <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Stroke="white" StrokeDashArray="70 28">
+                                                        <Rectangle.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_3_2" Color="#ff8f8f8f"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+
+                                                </Grid>
+
+                                                <Ellipse x:Name="ui_form_contorl_check_btn_3" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Fill="white"/>
+                                            </Canvas>
+
+                                        </Grid>
+                                    </Grid>
+
                                     <!-- 重启程序-->
                                     <Grid Height="120">
                                         <Grid.ColumnDefinitions >
@@ -2693,7 +2785,7 @@
                 <ListBox x:Name="ui_form_message_list" Grid.Column="1" Grid.Row="4" ItemTemplate="{StaticResource ui_temp_form_message_list}" Background="#00000000" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
 
             </Grid>
-            
+
         </Canvas>
 
     </Grid>

@@ -45,10 +45,6 @@
     ''' window_dialogs窗口显示几个按钮，允许数值1-2，写1只显示原左侧按钮
     ''' </summary>
     Public window_dialogs_btn_count As Byte = 1
-    ''' <summary>
-    ''' window_dialogs窗口显示模式 0=信息 1=警告 2=错误，默认0信息，该值决定对话框标题的颜色
-    ''' </summary>
-    Public window_dialogs_msg_state As Byte = 0
 
     ''' <summary>
     ''' window_dialogs窗口是否需要接受输入的数据
@@ -66,7 +62,6 @@
     Public Sub window_dialogs_clear()
         window_dialogs_title = ""
         window_dialogs_message = ""
-        window_dialogs_msg_state = 0
         window_dialogs_left_btn_text = ""
         window_dialogs_right_btn_text = ""
         window_dialogs_input_text = ""
@@ -77,13 +72,12 @@
     ''' </summary>
     ''' <param name="title">标题</param>
     ''' <param name="message">消息</param>
-    ''' <param name="msg_state">窗口显示模式 0=信息 1=警告 2=错误，默认0信息，该值决定对话框标题的颜色</param>
     ''' <param name="btn_count">窗口显示几个按钮，允许数值1-2，写1只显示原左侧按钮</param>
     ''' <param name="show_input">窗口是否需要接受输入的数据</param>
     ''' <param name="left_btn_text">窗口左侧按钮文本</param>
     ''' <param name="right_btn_text">窗口右侧按钮文本</param>
     ''' <param name="owner">传递的主窗体</param>
-    Public Sub window_dialogs_show(ByVal title As String, ByVal message As String, ByVal msg_state As Byte, ByVal btn_count As Byte,
+    Public Sub window_dialogs_show(ByVal title As String, ByVal message As String, ByVal btn_count As Byte,
                                    ByVal show_input As Boolean, ByVal left_btn_text As String, ByVal right_btn_text As String, ByRef owner As Window)
 
         '<param name="owner">传递的主窗体</param>
@@ -94,7 +88,6 @@
 
         window_dialogs_title = title
         window_dialogs_message = message
-        window_dialogs_msg_state = msg_state
         window_dialogs_btn_count = btn_count
         window_dialogs_show_inputbox = show_input
         window_dialogs_left_btn_text = left_btn_text

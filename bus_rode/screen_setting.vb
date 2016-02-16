@@ -13,6 +13,11 @@
     Public talk_man As Boolean = False
 
     ''' <summary>
+    ''' [内核]是否新对话框
+    ''' </summary>
+    Public use_new_dialogs As Boolean = False
+
+    ''' <summary>
     ''' 指示设置界面组1是否展开
     ''' </summary>
     Public setting_group_1 As Boolean = False
@@ -56,6 +61,12 @@
         End If
 
         If talk_man = True Then
+            file.WriteLine("0")
+        Else
+            file.WriteLine("1")
+        End If
+
+        If use_new_dialogs = True Then
             file.WriteLine("0")
         Else
             file.WriteLine("1")

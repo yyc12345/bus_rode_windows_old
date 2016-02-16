@@ -362,6 +362,11 @@ bus_rode
  </summary>
  <remarks></remarks>
 </member>
+<member name="F:bus_rode.screen_setting.use_new_dialogs">
+ <summary>
+ [内核]是否新对话框
+ </summary>
+</member>
 <member name="F:bus_rode.screen_setting.setting_group_1">
  <summary>
  指示设置界面组1是否展开
@@ -491,6 +496,11 @@ bus_rode
  [内核][screen_stop]最短路径刚刚计算完成时--之前选择的终点
  </summary>
  <remarks></remarks>
+</member>
+<member name="F:bus_rode.screen_stop.short_rode_calc_mode">
+ <summary>
+ [内核][screen_stop]最短路径上一次执行执行的是联网的还是本地的true=联网 false=本地
+ </summary>
 </member>
 <member name="F:bus_rode.screen_stop.step_number">
  <summary>
@@ -661,7 +671,7 @@ bus_rode
  [系统]加载设置
  </summary>
 </member>
-<member name="M:bus_rode.systems.message_ex(System.String,System.String)">
+<member name="M:bus_rode.systems.message_ex(System.String,System.String,System.Windows.Window@)">
  <summary>
  [系统]向消息列表添加一个消息
  </summary>
@@ -919,11 +929,6 @@ bus_rode
  window_dialogs窗口显示几个按钮，允许数值1-2，写1只显示原左侧按钮
  </summary>
 </member>
-<member name="F:bus_rode.window_communication.window_dialogs_msg_state">
- <summary>
- window_dialogs窗口显示模式 0=信息 1=警告 2=错误，默认0信息，该值决定对话框标题的颜色
- </summary>
-</member>
 <member name="F:bus_rode.window_communication.window_dialogs_show_inputbox">
  <summary>
  window_dialogs窗口是否需要接受输入的数据
@@ -939,13 +944,12 @@ bus_rode
  清理window_dialogs的各项内容
  </summary>
 </member>
-<member name="M:bus_rode.window_communication.window_dialogs_show(System.String,System.String,System.Byte,System.Byte,System.Boolean,System.String,System.String,System.Windows.Window@)">
+<member name="M:bus_rode.window_communication.window_dialogs_show(System.String,System.String,System.Byte,System.Boolean,System.String,System.String,System.Windows.Window@)">
  <summary>
  显示一个window_dialogs对话框
  </summary>
  <param name="title">标题</param>
  <param name="message">消息</param>
- <param name="msg_state">窗口显示模式 0=信息 1=警告 2=错误，默认0信息，该值决定对话框标题的颜色</param>
  <param name="btn_count">窗口显示几个按钮，允许数值1-2，写1只显示原左侧按钮</param>
  <param name="show_input">窗口是否需要接受输入的数据</param>
  <param name="left_btn_text">窗口左侧按钮文本</param>
@@ -1309,6 +1313,13 @@ MainWindow
  <param name="sender"></param>
  <param name="e"></param>
 </member>
+<member name="M:bus_rode.MainWindow.ui_function_contorl_check_btn_3(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+ <summary>
+ [系统][ui]设置面板新对话框按钮移动
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
 <member name="M:bus_rode.MainWindow.ui_form_line_select_up_line_fx(System.Object,System.Windows.Input.MouseButtonEventArgs)">
  <summary>
  [系统][ui]线路界面选择上行线路的按钮
@@ -1443,10 +1454,11 @@ MainWindow
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="M:bus_rode.MainWindow.ui_form_stop_short_line_check">
+<member name="M:bus_rode.MainWindow.ui_form_stop_short_line_check(System.Boolean)">
  <summary>
  [系统][ui]检测最短路径是否可以执行的函数
  </summary>
+ <param name="mode">执行的是联网的还是本地的检查true=联网 false=本地</param>
  <returns></returns>
 </member>
 <member name="M:bus_rode.MainWindow.ui_form_stop_short_line_down(System.Object,System.Windows.Input.MouseButtonEventArgs)">
