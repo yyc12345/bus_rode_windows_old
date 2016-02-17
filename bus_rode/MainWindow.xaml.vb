@@ -2791,7 +2791,7 @@ Public Class MainWindow
         If e.Key = Key.F1 And talk_man = True Then
             If run_talk_flag = True Then
                 '不予执行
-                message_ex_ex("讲述人", "讲述人正在朗读，请等待朗诵完毕再按下F1" + ui_form_contorl_resource_path.Text)
+                message_ex_ex("讲述人", "讲述人正在朗读，请等待朗诵完毕再按下F1")
             Else
                 run_talk_flag = True
             End If

@@ -184,33 +184,47 @@
                             talk_man_file(bus_stop_line_last(a, 1) & "开往" + bus_stop_line_last(a, 0))
                         Next
                     Case 3
-                        talk_man_file("共有常规设置，资源设置，个性化设置，3种设置,")
-                        talk_man_file("常规设置下共有2个设置项目，“)
+                        talk_man_file("共有常规设置，实时设置，资源设置，个性化设置，这4种设置,")
+                        '===================================================
+                        talk_man_file("常规设置下共有3个设置项目，“)
                         talk_man_file("设置项1，讲述人，帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读），")
                         If talk_man = True Then
                             talk_man_file("当前讲述人选项是开启的")
                         Else
                             talk_man_file("当前讲述人选项是关闭的")
                         End If
-                        talk_man_file("设置项2，重新启动应用程序，重启解决一些偶然性问题，")
-
-                        talk_man_file("资源设置下共有3个设置项目，")
+                        talk_man_file("设置项2，新对话框，打开以使用新式对话框而不是旧式对话框，")
+                        If use_new_dialogs = True Then
+                            talk_man_file("当前新对话框选项是开启的")
+                        Else
+                            talk_man_file("当前新对话框选项是关闭的")
+                        End If
+                        talk_man_file("设置项3，重新启动应用程序，重启解决一些偶然性问题，")
+                        '===================================================
+                        talk_man_file("实时设置下共有4个设置项目，“)
                         talk_man_file("设置项1，车辆跟踪，对处在运营状态的车次到达站次显示在线路图上，")
                         If get_bus_addr = True Then
                             talk_man_file("当前车辆跟踪选项是开启的")
                         Else
                             talk_man_file("当前车辆跟踪选项是关闭的")
                         End If
-                        talk_man_file("设置项2，替换资源，替换加载的资源，便于切换到其他城市进行指引，")
+                        talk_man_file("设置项2，车辆跟踪插件，车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上，")
+                        talk_man_file("设置项3，资源信息，删除当前加载的插件，")
+                        talk_man_file("设置项4，插件信息，显示当前车辆跟踪插件的信息，")
+                        '===================================================
+                        talk_man_file("资源设置下共有3个设置项目，")
+                        talk_man_file("设置项1，替换资源，替换加载的资源，便于切换到其他城市进行指引，")
+                        talk_man_file("设置项2，删除加载的资源，删除当前加载的资源，")
                         talk_man_file("设置项3，资源信息，显示当前资源的信息，")
-
+                        '===================================================
                         talk_man_file("个性化设置下共有2个设置项目，")
                         talk_man_file("设置项1，替换背景，选用一张新的背景图片作为背景，")
                         talk_man_file("设置项2，更改配色，输入一组新的颜色值来替换现有颜色，")
 
                     Case 4
                         Dim describe As String = "Programmer : Wiliam Tad，" &
-"Insider : Tianyue Sun，" &
+"Insider : Nothing，" &
+"Previous Insider : Tianyue Sun，" &
 "Return : Xianlei Bian，Yi Gao，Zechen Li，Junzhe Jiang，" &
 "Version : " & app_version & " " & app_build & "," &
 "Last update date : " & app_update_date & "," &
@@ -241,4 +255,5 @@
         CreateObject("SAPI.SpVoice").Speak(word)
 
     End Sub
+
 End Module
