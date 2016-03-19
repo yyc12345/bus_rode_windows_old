@@ -16,7 +16,7 @@ Want to know more. Please jump to this repo's wiki
 | Ubuntu          |No                         |N/A                      |Will develop         |N/A            |Might use Qt and Cpp|
 | Android         |No                         |N/A                      |Never develop forever|N/A            |Welcome some organizations or persion to develop it|
 
-***Never support OS which never in this chart***
+***Will not support os which is not in this chart***
 
 ---
 **Project overview**
