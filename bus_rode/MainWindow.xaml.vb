@@ -2182,7 +2182,7 @@ Public Class MainWindow
 
 
     ''' <summary>
-    ''' [系统][ui]车站界面执行最短路径的按钮
+    ''' [系统][ui]车站界面执行最短路径的按钮-本地
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
@@ -2429,6 +2429,8 @@ Public Class MainWindow
                 read_xml_main()
 
                 '确认是否设置ui
+                '数字归零
+                step_number = 0
                 If toword(0, 0) <> "" Then
 
                     short_rode_calc_mode = True
