@@ -1,31 +1,31 @@
 # bus_rode
 
-这是一个简洁的公交车查询工具。
+This is a concise application which can inquiry bus.
 
-详细内容参见本项目wiki
-
----
-**系统支持**
-
-| OS            | 支持与否      | 当前最新Release版本  |状态    | 支持范围 | 备注 |
-| :-------------: |:-------------:| :-------------------:| :-----:| :-----:| :-----:|
-| Windows | 是 | build 8000 | 正常 | Windows 7~10 | 需要使用.NetFramework 4.5 |
-| Windows Mobile |否|N/A|不开发|N/A|N/A|
-| OS X|否|N/A|不开发|N/A|N/A|
-| iOS|否|N/A|不开发|N/A|N/A|
-|Ubuntu|否|N/A|有开发意向|N/A|如果开发可能会使用Qt|
-|Android|否|N/A|永不开发|N/A|此生不写Java，如果有移植想法的人，可以自行开发|
-
-***未写入的OS没有支持想法***
+Want to know more. Please jump to this repo's wiki
 
 ---
-**工程概况**
+**Supported OS**
+
+| OS              | Be supported (Yes or No)  | Lasted Release Version  |State                | OS Version    | Describe |
+| :-------------: |:-------------:            | :-------------------:   | :-----:             | :-----:       | :-----:|
+| Windows         | Yes                       | build 8000              | Normal              | Windows 7~10  | Need .NetFramework 4.5 |
+| Windows Mobile  |No                         |N/A                      |Undevelop (Now)      |N/A            |N/A|
+| OS X            |No                         |N/A                      |Undevelop (Now)      |N/A            |N/A|
+| iOS             |No                         |N/A                      |Undevelop (Now)      |N/A            |N/A|
+| Ubuntu          |No                         |N/A                      |Will develop         |N/A            |Might use Qt and Cpp|
+| Android         |No                         |N/A                      |Never develop forever|N/A            |Welcome some organizations or persion to develop it|
+
+***Will not support os which is not in this chart***
+
+---
+**Project overview**
   
-|OS| Language            | Frame     | IDE  | 备注 |
+|OS| Language            | Frame     | IDE  | Describe |
 |:-------------:| :-------------: |:-------------:| :-----:| :-----:|
-|Windows|Visual Basic .Net|.NetFramework 4.5 and WPF | Visual Studio 2015|无|
+|Windows|Visual Basic .Net|.NetFramework 4.5 and WPF | Visual Studio 2015|Nothing|
 
 ---
-**许可证**
+**License**
 
-[MIT 许可证](https://github.com/yyc12345/bus_rode/blob/master/LICENSE "MIT许可证")
+[MIT License](https://github.com/yyc12345/bus_rode/blob/master/LICENSE "MIT License")
