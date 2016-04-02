@@ -16,7 +16,7 @@ All releasing application have been deleted. It is necessary that rebuild it.*
 * bus\_rode\_add.exe \(Build it in this project called **bus\_rode\_add**. This libary project has included in this solution\)
 
 *TIPS:*  
-*bus\_rode unnormal exit code describe is written in**Exit code describe.txt** which also in release folder*
+*bus\_rode unnormal exit code describe is written in **Exit code describe.txt** which also in release folder*
 
 
 ---

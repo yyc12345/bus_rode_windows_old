@@ -2776,7 +2776,7 @@ Public Class MainWindow
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub ui_form_about_github(sender As Object, e As MouseButtonEventArgs)
-        System.Diagnostics.Process.Start("https://github.com/yyc12345/bus_rode")
+        System.Diagnostics.Process.Start("https://github.com/yyc12345/bus_rode_all")
     End Sub
 
 #End Region

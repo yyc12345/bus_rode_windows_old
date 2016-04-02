@@ -2704,7 +2704,7 @@
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Grid.Row="8" Grid.Column="1" Foreground="White" FontSize="15" Text="开源地址（Github）："/>
-                        <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff0040ff" FontSize="15" Text="https://github.com/yyc12345/bus_rode" MouseDown="ui_form_about_github"/>
+                        <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff0040ff" FontSize="15" Text="https://github.com/yyc12345/bus_rode_all" MouseDown="ui_form_about_github"/>
                     </StackPanel>
 
                 </StackPanel>
