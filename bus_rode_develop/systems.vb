@@ -6,6 +6,11 @@
     Public Const app_build As String = "2000"
 
     ''' <summary>
+    ''' 适用的bus_rode资源版本号
+    ''' </summary>
+    Public Const bus_rode_build As Int64 = 9000
+
+    ''' <summary>
     ''' 界面启用模式 true=day false=night
     ''' </summary>
     Public setting_time As Boolean = True

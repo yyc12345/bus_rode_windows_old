@@ -51,7 +51,7 @@
   <ItemGroup>
     <Reference Include="bus_rode_compression, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bus_rode_compression.dll</HintPath>
+      <HintPath>..\..\bus_rode\bus_rode_compression\bin\Release\bus_rode_compression.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>F:\ICSharpCode.SharpZipLib.dll</HintPath>

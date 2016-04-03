@@ -1378,12 +1378,12 @@
     Public Sub packups_project()
 
         '重新生成一遍，然后打包
-        window_dialogs_show("打包", "我们将先再次编译一遍该工程，然后再打包", 0, 1, False, "确定", "", Me)
+        window_dialogs_show("打包", "我们将先再次编译一遍该工程，然后再打包" & vbCrLf & "该资源将适用于bus_rode版本号：" & bus_rode_build, 0, 1, False, "确定", "", Me)
 
         build_project()
 
         System.IO.File.Delete(project_path + "release.brs")
-        bus_rode_compression.bus_rode_compression.Compress(Mid(project_path, 1, project_path.Length - 1), project_path + "release.brs")
+        bus_rode_compression.bus_rode_compression.Compress(project_path + "release.brs", project_path, bus_rode_build)
         window_dialogs_show("打包", "打包完毕", 0, 1, False, "确定", "", Me)
 
     End Sub

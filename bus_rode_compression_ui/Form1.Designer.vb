@@ -46,6 +46,9 @@ Partial Class Form1
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -53,7 +56,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(246, 133)
+        Me.Button1.Location = New System.Drawing.Point(443, 133)
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(87, 33)
@@ -75,9 +78,9 @@ Partial Class Form1
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(51, 104)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(43, 17)
+        Me.Label2.Size = New System.Drawing.Size(79, 17)
         Me.Label2.TabIndex = 2
-        Me.Label2.Text = "gz file"
+        Me.Label2.Text = "package file"
         '
         'RadioButton1
         '
@@ -105,18 +108,18 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(100, 70)
+        Me.TextBox1.Location = New System.Drawing.Point(136, 70)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(394, 23)
+        Me.TextBox1.Size = New System.Drawing.Size(358, 23)
         Me.TextBox1.TabIndex = 5
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(100, 101)
+        Me.TextBox2.Location = New System.Drawing.Point(136, 101)
         Me.TextBox2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(394, 23)
+        Me.TextBox2.Size = New System.Drawing.Size(358, 23)
         Me.TextBox2.TabIndex = 6
         '
         'Label3
@@ -124,9 +127,9 @@ Partial Class Form1
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(108, 14)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(375, 34)
+        Me.Label3.Size = New System.Drawing.Size(363, 34)
         Me.Label3.TabIndex = 7
-        Me.Label3.Text = "选择compression则需要在floder中填写输入文件的目录，无需添加\" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "选择decompression则需要在floder中填写输出目录，需要添加\"
+        Me.Label3.Text = "选择compression则需要在floder中填写输入文件的目录，需添加\" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "选择decompression则需要在floder中填写输出目录，要添加\"
         '
         'TabControl1
         '
@@ -140,6 +143,9 @@ Partial Class Form1
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Button7)
+        Me.TabPage1.Controls.Add(Me.Label7)
+        Me.TabPage1.Controls.Add(Me.TextBox5)
         Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Controls.Add(Me.Button2)
         Me.TabPage1.Controls.Add(Me.TextBox1)
@@ -276,6 +282,31 @@ Partial Class Form1
         '
         Me.SaveFileDialog1.Filter = "任意文件|*.*"
         '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(136, 133)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(100, 23)
+        Me.TextBox5.TabIndex = 10
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(51, 136)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(50, 17)
+        Me.Label7.TabIndex = 11
+        Me.Label7.Text = "version"
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(298, 138)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(122, 23)
+        Me.Button7.TabIndex = 12
+        Me.Button7.Text = "Touch Version"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
@@ -321,4 +352,7 @@ Partial Class Form1
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Button6 As Button
+    Friend WithEvents Label7 As Label
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents Button7 As Button
 End Class

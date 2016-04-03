@@ -2498,7 +2498,8 @@ Public Class MainWindow
         If System.IO.File.Exists(ui_form_contorl_mod_path.Text) = True Then
             System.IO.File.Delete(Environment.CurrentDirectory + "\temp.dll")
             System.IO.File.Copy(ui_form_contorl_mod_path.Text, Environment.CurrentDirectory + "\temp.dll")
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "2")
+            Dim command As String = app_build_number * 10 + 2
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command)
             Environment.Exit(3)
         Else
             message_ex_ex("替换资源", "没有找到车辆跟踪插件文件：" + ui_form_contorl_mod_path.Text)
@@ -2549,7 +2550,8 @@ Public Class MainWindow
         window_dialogs_show("删除插件", "确认删除插件？", 2, False, "确定", "取消", Me)
 
         If window_dialogs_select_btn = 0 Then
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "3")
+            Dim command As String = app_build_number * 10 + 3
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command)
             Environment.Exit(3)
         End If
 
@@ -2591,7 +2593,8 @@ Public Class MainWindow
         If System.IO.File.Exists(ui_form_contorl_resource_path.Text) = True Then
             System.IO.File.Delete(Environment.CurrentDirectory + "\temp.brs")
             System.IO.File.Copy(ui_form_contorl_resource_path.Text, Environment.CurrentDirectory + "\temp.brs")
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "0")
+            Dim command As String = app_build_number * 10 + 0
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command)
             Environment.Exit(3)
         Else
             message_ex_ex("替换资源", "没有找到资源文件：" + ui_form_contorl_resource_path.Text)
@@ -2608,7 +2611,8 @@ Public Class MainWindow
         window_dialogs_show("删除资源", "确认删除资源？", 2, False, "确定", "取消", Me)
 
         If window_dialogs_select_btn = 0 Then
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "4")
+            Dim command As String = app_build_number * 10 + 4
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command)
             Environment.Exit(3)
         End If
 
@@ -2759,7 +2763,8 @@ Public Class MainWindow
         If System.IO.File.Exists(ui_form_contorl_background_path.Text) = True Then
             System.IO.File.Delete(Environment.CurrentDirectory + "\temp.jpg")
             System.IO.File.Copy(ui_form_contorl_background_path.Text, Environment.CurrentDirectory + "\temp.jpg")
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", "1")
+            Dim command As String = app_build_number * 10 + 1
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command )
             Environment.Exit(3)
         Else
             message_ex_ex("替换背景", "没有找到背景文件：" + ui_form_contorl_background_path.Text)

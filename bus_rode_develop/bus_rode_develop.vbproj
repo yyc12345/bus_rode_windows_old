@@ -51,7 +51,7 @@
     <ApplicationIcon>bus_rode_icon_orange.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="bus_rode_compression, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="bus_rode_compression, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bus_rode\bus_rode_compression\bin\Release\bus_rode_compression.dll</HintPath>
     </Reference>

@@ -1,17 +1,56 @@
-﻿Public Class Form1
+﻿Imports System.IO
+Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        If TextBox1.Text <> "" And TextBox2.Text <> "" Then
+        If TextBox1.Text <> "" And TextBox2.Text <> "" And TextBox5.Text <> "" Then
             If RadioButton1.Checked = True Then
                 '压缩
-                bus_rode_compression.bus_rode_compression.Compress(TextBox1.Text, TextBox2.Text)
+                Dim result As Boolean = bus_rode_compression.bus_rode_compression.Compress(TextBox2.Text, TextBox1.Text, CType(TextBox5.Text, Int64))
+                If result = False Then
+                    MsgBox("compress error", 16, "error")
+                Else
+                    MsgBox("compress ok", 64, "finish")
+                End If
             Else
                 '解压缩
-                bus_rode_compression.bus_rode_compression.DeCompress(TextBox2.Text, TextBox1.Text)
+                Dim result As Boolean = bus_rode_compression.bus_rode_compression.Decompress(TextBox2.Text, TextBox1.Text, CType(TextBox5.Text, Int64))
+                If result = False Then
+                    MsgBox("decompress error", 16, "error")
+                Else
+                    MsgBox("decompress ok", 64, "finish")
+                End If
             End If
         Else
-            MsgBox("don't have folder or file", 16, "error")
+            MsgBox("don't have folder or file or version", 16, "error")
+        End If
+
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+
+        If TextBox2.Text <> "" And File.Exists(TextBox2.Text) = True Then
+            '开始读取
+            Dim into As FileStream = New FileStream(TextBox2.Text, FileMode.Open, FileAccess.Read, FileShare.Read)
+            Dim br As BinaryReader = New BinaryReader(into, System.Text.Encoding.UTF8)
+
+            '======================先读文件头，判断
+            Dim file_head As String = New String(br.ReadChars(4))
+            If file_head <> "BRSP" Then
+                '不合格，不行，退出
+                MsgBox("unknow file!!!!", 16, "error")
+                br.Dispose()
+                into.Dispose()
+                Exit Sub
+            End If
+
+            MsgBox(br.ReadInt64(), 64, "Touch Version")
+
+            br.Dispose()
+            into.Dispose()
+
+        Else
+            MsgBox("don't have file", 16, "error")
         End If
 
     End Sub
