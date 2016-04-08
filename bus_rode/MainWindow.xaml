@@ -356,7 +356,7 @@
 
 
             <!-- 线路界面-->
-            <Grid x:Name="ui_form_line" Width="800" Height="570" Canvas.Top="0" Canvas.Left="-800">
+            <Grid x:Name="ui_form_line" Width="800" Height="570" Canvas.Top="0" Canvas.Left="0">
 
                 <Grid.RowDefinitions >
                     <!-- 空白-->
@@ -397,7 +397,7 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition x:Name="ui_form_line_form_no_down_line_width" Width="auto"/>
                         <ColumnDefinition Width="10"/>
-                        <ColumnDefinition x:Name="ui_form_line_form_re_mid_bus_width" Width="0"/>
+                        <ColumnDefinition x:Name="ui_form_line_form_re_mid_bus_width" Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
@@ -407,7 +407,7 @@
                             <SolidColorBrush x:Name="ui_form_line_select_up_line" Color="#8f0000ff"/>
                         </Grid.Background>
 
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,10,0">
                             <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="上行线路"/>
                             <TextBlock x:Name="ui_form_line_select_up_line_describe" Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="（）"/>
                         </StackPanel>
@@ -422,7 +422,7 @@
                             <SolidColorBrush x:Name="ui_form_line_select_down_line" Color="#00000000"/>
                         </Grid.Background>
 
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,10,0">
                             <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="下行线路"/>
                             <TextBlock x:Name="ui_form_line_select_down_line_describe" Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="（）"/>
                         </StackPanel>
@@ -434,7 +434,7 @@
                     <!-- 刷新-->
                     <Grid Grid.Column="4">
                         <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions >
@@ -443,13 +443,13 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Column="0" Grid.RowSpan="3">
+                        <Grid Grid.Column="0" Grid.RowSpan="3" Margin="10,0,0,0">
                             <Grid.Background >
                                 <ImageBrush ImageSource="photo\re.png"/>
                             </Grid.Background>
                         </Grid>
 
-                        <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" Background="#00000000" FontSize="15" Text="正在刷新实时车辆数据"/>
+                        <TextBlock x:Name="ui_form_line_re_bus_describe" Grid.Column="1" Grid.Row="1" Foreground="White" Background="#00000000" FontSize="15" Text="最后刷新时间：无"/>
 
                     </Grid>
 

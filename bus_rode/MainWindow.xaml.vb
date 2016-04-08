@@ -190,17 +190,23 @@ Public Class MainWindow
         '刷新车辆状态
 
         ui_form_line_have_stop_list.ItemsSource = Nothing
-        ui_form_line_form_re_mid_bus_width.Width = GridLength.Auto
+        'ui_form_line_form_re_mid_bus_width.Width = GridLength.Auto
 
-        read_mid_bus()
+        '确认没有问题再执行防止无端消耗资源
+        If read_mid_bus_word <> "" Then
+            read_mid_bus()
+        End If
 
-        ui_form_line_form_re_mid_bus_width.Width = New GridLength(0)
+        'ui_form_line_form_re_mid_bus_width.Width = New GridLength(0)
         If up_or_down_line = True Then
             ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_up
         Else
             ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_down
         End If
         ui_form_line_have_stop_list.ItemsSource = ui_connet_core_form_line_have_sotp_list_show
+
+        '显示信息
+        ui_form_line_re_bus_describe.Text = "最后刷新时间：" & read_mid_bus_word_last_update
 
     End Sub
 
@@ -367,7 +373,7 @@ Public Class MainWindow
             If System.IO.File.Exists(Environment.CurrentDirectory + "\bus_rode_mod.dll") = True Then
                 connect_dll_get_resources_td.Start()
             Else
-                '没有资源，强制把实时关掉
+                '没有资源，或者未连接到网络，强制把实时关掉
                 get_bus_addr = False
             End If
             If get_bus_addr = False Then

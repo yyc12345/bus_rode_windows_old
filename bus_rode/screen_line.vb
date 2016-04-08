@@ -92,6 +92,10 @@
     ''' [内核][screen_line]read_mid_bus所需要检测并分析的String表达式
     ''' </summary>
     Public read_mid_bus_word As String = ""
+    ''' <summary>
+    ''' [内核][screen_line]read_mid_bus_word最后更新时间
+    ''' </summary>
+    Public read_mid_bus_word_last_update As String = "无"
 
     ''' <summary>
     ''' [内核][screen_line]界面上行线路走向的描述

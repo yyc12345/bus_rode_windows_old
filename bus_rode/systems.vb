@@ -302,8 +302,16 @@
         '获取循环
         '先获取一次
         Dim result As Object
-        result = out.Invoke(instance, Nothing)
-        read_mid_bus_word = result.ToString
+        '尝试获取
+        Try
+            result = out.Invoke(instance, Nothing)
+            read_mid_bus_word = result.ToString
+            read_mid_bus_word_last_update = DateTime.Now.TimeOfDay.ToString
+        Catch ex As Exception
+            '获取失败不停止获取，但返回空
+            read_mid_bus_word = ""
+        End Try
+
 
         '循环
         Do
@@ -322,8 +330,15 @@
             prop_3.SetValue(instance, bus)
 
             If connect_dll_get_resources_always_stop = False Then
-                result = out.Invoke(instance, Nothing)
-                read_mid_bus_word = result.ToString
+                '尝试获取
+                Try
+                    result = out.Invoke(instance, Nothing)
+                    read_mid_bus_word = result.ToString
+                    read_mid_bus_word_last_update = DateTime.Now.TimeOfDay.ToString
+                Catch ex As Exception
+                    '获取失败不停止获取，但返回空
+                    read_mid_bus_word = ""
+                End Try
 
             End If
 
