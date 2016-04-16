@@ -164,7 +164,7 @@
         <Canvas Grid.Row="1" Background="#5f000000" x:Name="ui_user_area">
 
             <!-- 开始界面-->
-            <Grid x:Name="ui_form_start" Width="800" Height="570" Canvas.Top="0" Canvas.Left="0">
+            <Grid x:Name="ui_form_start" Width="800" Height="570" Canvas.Top="0" Canvas.Left="-800">
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="100"/>
@@ -356,7 +356,7 @@
 
 
             <!-- 线路界面-->
-            <Grid x:Name="ui_form_line" Width="800" Height="570" Canvas.Top="0" Canvas.Left="0">
+            <Grid x:Name="ui_form_line" Width="800" Height="570" Canvas.Top="0" Canvas.Left="-800">
 
                 <Grid.RowDefinitions >
                     <!-- 空白-->
@@ -592,7 +592,13 @@
                         </Grid>
 
                         <!-- 线路列表-->
-                        <ListBox x:Name="ui_form_line_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_line_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0"/>
+                        <ListBox x:Name="ui_form_line_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_line_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
 
 
                     </Grid>
@@ -632,7 +638,13 @@
                         </Grid>
 
                         <!-- 搜索站台列表-->
-                        <ListBox x:Name="ui_form_line_stop_search_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_line_search_stop_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0"/>
+                        <ListBox x:Name="ui_form_line_stop_search_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_line_search_stop_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
 
 
                     </Grid>
@@ -667,52 +679,51 @@
 
                 <TextBlock x:Name="ui_form_stop_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="没有描述" x:FieldModifier="public"/>
 
-                <Grid Grid.Column="1" Grid.Row="3">
+                <Grid Grid.Column="1" Grid.Row="3" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="*"/>
+                        <!-- 圆角拐弯-->
                         <ColumnDefinition Width="20"/>
+                        <!-- 内容-->
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="*"/>
                         <RowDefinition Height="20"/>
-
-                        <!-- 文字区-->
+                        <!-- 基本站台-->
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
+                        <!-- 中间间隔-->
+                        <RowDefinition Height="100"/>
+                        <!-- 圆角拐弯-->
+                        <RowDefinition Height="20"/>
+                        <!-- 内容-->
+                        <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
 
                     <!-- 站点-->
-                    <Ellipse Grid.Column="2" Grid.Row="1" Fill="white"/>
+                    <Ellipse Fill="white" Grid.Row="1" Grid.Column="0" StrokeThickness="0"/>
+                    <TextBlock x:Name="ui_form_stop_middle_stop_name" Foreground="white" FontSize="15" Text="没有站台名" Grid.Column="1" Margin="5,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
 
                     <!-- 连线-->
-                    <Grid Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1">
-                        <Grid.RowDefinitions >
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="5"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                    <Grid Grid.Row="1" Grid.RowSpan="3" Margin="0,10,0,20" HorizontalAlignment="Center" Background="White" Width="5"/>
+                    <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" VerticalAlignment="Center" Background="White" Height="5"/>
 
-                        <Grid Grid.Row="1" Background="white"/>
-                    </Grid>
+                    <!-- 圆角-->
+                    <Ellipse Fill="#00000000" Margin="8,0,0,8" StrokeThickness="5" Stroke="White" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                             Width="20" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                        <Ellipse.Clip>
+                            <RectangleGeometry Rect="0,8,12,12"/>
+                        </Ellipse.Clip>
+                    </Ellipse>
 
-                    <!-- 中央站台文字-->
-                    <Grid Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
-                        <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width=" auto"/>
-                            <ColumnDefinition Width=" *"/>
-                        </Grid.ColumnDefinitions>
+                    <!-- 列表-->
+                    <ListBox x:Name="ui_form_stop_cross_line_list" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Background="#00000000" ItemTemplate="{StaticResource ui_temp_form_stop_cross_line_list}" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0" BorderBrush="White" ScrollViewer.VerticalScrollBarVisibility ="Hidden" Margin="10,0,0,0">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
 
-                        <TextBlock x:Name="ui_form_stop_middle_stop_name" Foreground="white" FontSize="15" Text="没有站台名" Grid.Column="1"/>
-                    </Grid>
-
-                    <!-- 左侧列表-->
-                    <ListBox x:Name="ui_form_stop_left_cross_line_list" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Background="#00000000" ItemTemplate="{StaticResource ui_temp_form_stop_cross_line_list}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0,0,3,0" BorderBrush="White" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
-                    <!-- 右侧列表-->
-                    <ListBox x:Name="ui_form_stop_right_cross_line_list" Grid.Column="4" Grid.Row="0" Grid.RowSpan="4" Background="#00000000" ItemTemplate="{StaticResource ui_temp_form_stop_cross_line_list}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="3,0,0,0" BorderBrush="White" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
                 </Grid>
 
             </Grid>
@@ -842,7 +853,13 @@
                         </Grid>
 
                         <!-- 站台列表-->
-                        <ListBox x:Name="ui_form_stop_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_stop_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0"/>
+                        <ListBox x:Name="ui_form_stop_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_stop_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
 
 
                     </Grid>
@@ -1063,7 +1080,7 @@
 
 
             <!-- 设置界面-->
-            <Grid x:Name="ui_form_contorl" Width="800" Height="570" Canvas.Top="0" Canvas.Left="-800">
+            <Grid x:Name="ui_form_contorl" Width="800" Height="570" Canvas.Top="0" Canvas.Left="0">
                 <Grid.RowDefinitions >
                     <RowDefinition Height="40"/>
                     <RowDefinition Height=" *"/>
@@ -2553,67 +2570,42 @@
 
                                         <!-- 颜色值-->
                                         <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
-                                            <Grid.ColumnDefinitions >
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions >
                                                 <RowDefinition Height="*"/>
-                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
 
-
-                                            <!-- R-->
-                                            <Grid Grid.Column="0" Grid.Row="0">
-                                                <Grid.RowDefinitions >
-                                                    <RowDefinition Height=" *"/>
-                                                    <RowDefinition Height="auto"/>
-                                                    <RowDefinition Height=" *"/>
-                                                </Grid.RowDefinitions>
+                                            <Grid>
                                                 <Grid.ColumnDefinitions >
-                                                    <ColumnDefinition Width=" *"/>
-                                                    <ColumnDefinition Width=" auto"/>
-                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="红色值"/>
-                                            </Grid>
-                                            <TextBox x:Name="ui_form_contorl_r_value" Foreground="white" FontSize="15" Grid.Column="0" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+                                                <TextBlock Foreground="White" FontSize="15" Text="R" VerticalAlignment="Center"/>
+                                                <Slider x:Name="ui_form_contorl_r_value" Value="0" Margin="5,0,0,0" Grid.Column="1" Maximum="255" Minimum="0" VerticalAlignment="Center" SmallChange="0"/>
 
-                                            <!-- G-->
-                                            <Grid Grid.Column="1" Grid.Row="0">
-                                                <Grid.RowDefinitions >
-                                                    <RowDefinition Height=" *"/>
-                                                    <RowDefinition Height="auto"/>
-                                                    <RowDefinition Height=" *"/>
-                                                </Grid.RowDefinitions>
+                                            </Grid>
+                                            <Grid Grid.Row="1">
                                                 <Grid.ColumnDefinitions >
-                                                    <ColumnDefinition Width=" *"/>
-                                                    <ColumnDefinition Width=" auto"/>
-                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="绿色值"/>
-                                            </Grid>
-                                            <TextBox x:Name="ui_form_contorl_g_value" Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
+                                                <TextBlock Foreground="White" FontSize="15" Text="G" VerticalAlignment="Center"/>
+                                                <Slider x:Name="ui_form_contorl_g_value" Value="0" Margin="5,0,0,0" Grid.Column="1" Maximum="255" Minimum="0" VerticalAlignment="Center" SmallChange="0"/>
 
-                                            <!-- B-->
-                                            <Grid Grid.Column="2" Grid.Row="0">
-                                                <Grid.RowDefinitions >
-                                                    <RowDefinition Height=" *"/>
-                                                    <RowDefinition Height="auto"/>
-                                                    <RowDefinition Height=" *"/>
-                                                </Grid.RowDefinitions>
+                                            </Grid>
+                                            <Grid Grid.Row="2">
                                                 <Grid.ColumnDefinitions >
-                                                    <ColumnDefinition Width=" *"/>
-                                                    <ColumnDefinition Width=" auto"/>
-                                                    <ColumnDefinition Width=" *"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="蓝色值"/>
+                                                <TextBlock Foreground="White" FontSize="15" Text="B" VerticalAlignment="Center"/>
+                                                <Slider x:Name="ui_form_contorl_b_value" Value="0" Margin="5,0,0,0" Grid.Column="1" Maximum="255" Minimum="0" VerticalAlignment="Center" SmallChange="0"/>
+
                                             </Grid>
-                                            <TextBox x:Name="ui_form_contorl_b_value" Foreground="white" FontSize="15" Grid.Column="2" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
 
                                         </Grid>
 
@@ -2631,11 +2623,16 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Grid Grid.Column="1" Grid.Row="1">
-                                                <Grid.Background >
+
+                                                <Ellipse x:Name="ui_form_contorl_color_lookover" Stroke="white"/>
+
+
+                                                <!-- 按钮图标-->
+                                                <Grid>
+                                                     <Grid.Background >
                                                     <ImageBrush ImageSource="photo\right.png"/>
                                                 </Grid.Background>
-
-                                                <Ellipse Fill="#00000000" Stroke="white"/>
+                                                </Grid>
 
                                                 <!-- 提示-->
                                                 <Grid.ToolTip>
@@ -2671,6 +2668,7 @@
                                             </Grid.Triggers>
 
                                         </Grid>
+                                    
                                     </Grid>
 
                                 </StackPanel>

@@ -175,13 +175,9 @@
 
                         talk_man_file(Replace(cross_stop, vbCrLf, ","))
 
-                        talk_man_file("当前站点进站车次方向是，")
-                        For a = 0 To bus_stop_line_before_list - 1
-                            talk_man_file(bus_stop_line_before(a, 1) & "从" & bus_stop_line_before(a, 0) & "开到此站")
-                        Next
-                        talk_man_file("当前站点出站车次方向是，")
-                        For a = 0 To bus_stop_line_last_list - 1
-                            talk_man_file(bus_stop_line_last(a, 1) & "开往" + bus_stop_line_last(a, 0))
+                        talk_man_file("当前站点附近站点有，")
+                        For a = 0 To bus_stop_line_list - 1
+                            talk_man_file(bus_stop_line(a, 1) & "从" & bus_stop_line(a, 0) & "开到此站")
                         Next
                     Case 3
                         talk_man_file("共有常规设置，实时设置，资源设置，个性化设置，这4种设置,")

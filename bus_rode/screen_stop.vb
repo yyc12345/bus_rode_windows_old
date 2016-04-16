@@ -22,28 +22,38 @@
     ''' <remarks></remarks>
     Public cross_stop As String = ""
 
-    '
+    '==============================已过时，现在只显示一边站台=================================
+    '''' <summary>
+    '''' [内核][screen_stop]站台中显示交汇的数组-----之前的站台-第一个数字指示是第几个线路，第二个数字0=站台名 1=经过的车辆的组
+    '''' </summary>
+    '''' <remarks></remarks>
+    'Public bus_stop_line_before(10, 2) As String
+    '''' <summary>
+    '''' [内核][screen_stop]站台中显示交汇的数组-----之前的站台所包含的项的数目
+    '''' </summary>
+    '''' <remarks></remarks>
+    'Public bus_stop_line_before_list As Integer = 0
+    ''
+    '''' <summary>
+    '''' [内核][screen_stop]站台中显示交汇的数组-----之后的站台-第一个数字指示是第几个线路，第二个数字0=站台名 1=经过的车辆的组
+    '''' </summary>
+    '''' <remarks></remarks>
+    'Public bus_stop_line_last(10, 2) As String
+    '''' <summary>
+    '''' [内核][screen_stop]站台中显示交汇的数组-----之后的站台所包含的项的数目
+    '''' </summary>
+    '''' <remarks></remarks>
+    'Public bus_stop_line_last_list As Integer = 0
     ''' <summary>
-    ''' [内核][screen_stop]站台中显示交汇的数组-----之前的站台-第一个数字指示是第几个线路，第二个数字0=站台名 1=经过的车辆的组
+    ''' [内核][screen_stop]站台中显示交汇的数组-----第一个数字指示是第几个线路，第二个数字0=站台名 1=经过的车辆的组
     ''' </summary>
     ''' <remarks></remarks>
-    Public bus_stop_line_before(10, 2) As String
+    Public bus_stop_line(50, 2) As String
     ''' <summary>
     ''' [内核][screen_stop]站台中显示交汇的数组-----之前的站台所包含的项的数目
     ''' </summary>
     ''' <remarks></remarks>
-    Public bus_stop_line_before_list As Integer = 0
-    '
-    ''' <summary>
-    ''' [内核][screen_stop]站台中显示交汇的数组-----之后的站台-第一个数字指示是第几个线路，第二个数字0=站台名 1=经过的车辆的组
-    ''' </summary>
-    ''' <remarks></remarks>
-    Public bus_stop_line_last(10, 2) As String
-    ''' <summary>
-    ''' [内核][screen_stop]站台中显示交汇的数组-----之后的站台所包含的项的数目
-    ''' </summary>
-    ''' <remarks></remarks>
-    Public bus_stop_line_last_list As Integer = 0
+    Public bus_stop_line_list As Integer = 0
 
     '******************************************************最短路径**************************************************
     ''' <summary>
@@ -141,12 +151,10 @@
         Dim file As New System.IO.StreamReader(Environment.CurrentDirectory + "\library\stop.txt", System.Text.Encoding.UTF8)
 
         '清空
-        bus_stop_line_before_list = 0
-        bus_stop_line_last_list = 0
-        For a = 0 To 10
+        bus_stop_line_list = 0
+        For a = 0 To 50
             For b = 0 To 2
-                bus_stop_line_before(a, b) = ""
-                bus_stop_line_last(a, b) = ""
+                bus_stop_line(a, b) = ""
             Next
         Next
 
@@ -198,20 +206,13 @@
         file_2.Dispose()
 
         '输出ui
-        ui_connet_core_form_stop_left_cross_line_list.Clear()
-        ui_connet_core_form_stop_right_cross_line_list.Clear()
+        ui_connet_core_form_stop_cross_line_list.Clear()
         'describe由外部代码实现
         Dim d As New ui_depend_stop_cross_line_list
-        For f = 0 To bus_stop_line_before_list - 1
-            d.ui_stop_name = bus_stop_line_before(f, 0)
-            d.ui_cross_line = bus_stop_line_before(f, 1)
-            ui_connet_core_form_stop_left_cross_line_list.Add(d)
-            d = New ui_depend_stop_cross_line_list
-        Next
-        For g = 0 To bus_stop_line_last_list - 1
-            d.ui_stop_name = bus_stop_line_last(g, 0)
-            d.ui_cross_line = bus_stop_line_last(g, 1)
-            ui_connet_core_form_stop_right_cross_line_list.Add(d)
+        For f = 0 To bus_stop_line_list - 1
+            d.ui_stop_name = bus_stop_line(f, 0)
+            d.ui_cross_line = bus_stop_line(f, 1)
+            ui_connet_core_form_stop_cross_line_list.Add(d)
             d = New ui_depend_stop_cross_line_list
         Next
 
@@ -261,23 +262,16 @@
     ''' <summary>
     ''' [内核][screen_stop]获取站台交汇情况的主函数
     ''' </summary>
-    ''' <param name="word">输入经过中心站台的车辆字符串---按照 车辆组 字符串模式编码</param>
+    ''' <param name="word">输入经过中心站台的车辆字符串---按照 车辆组 字符串模式编码，即按空格分隔</param>
     ''' <remarks></remarks>
     Public Sub get_bus_stop_line(ByVal word As String)
         Dim list As Integer = 1
 
-        Do
-            If Mid(word, list, 1) = "" Then
-                Exit Do
-            End If
-            If Mid(word, list, 1) = " " Then
-                get_bus_stop_line_ex(Mid(word, 1, list - 1))
-                word = Mid(word, list + 1)
-                list = 1
-            Else
-                list = list + 1
-            End If
-        Loop
+        Dim word_arr() As String = word.Split(" ")
+
+        For a = 0 To word_arr.Count - 1
+            If word_arr(a) <> "" Then get_bus_stop_line_ex(word_arr(a))
+        Next
 
     End Sub
 
@@ -345,141 +339,74 @@ again:
 
                         '开始写入***********************************************
                         If before_word = "" Then
-                            '没有上一站
-                            If check_item_before_stop(last_word) <> -1 Then
-                                If check_item_stop_have_bus(bus_stop_line_before(check_item_before_stop(last_word), 1), bus_name) = False Then
+
+                            '没有上一站，写下站
+                            If check_item_stop(last_word) <> -1 Then
+                                '列表存在这个站台，写数据
+
+                                If check_item_stop_have_bus(bus_stop_line(check_item_stop(last_word), 1), bus_name) = False Then
                                     '在找到的项目中没有这个车次，写入，找到了不写
-                                    bus_stop_line_before(check_item_before_stop(last_word), 1) = bus_stop_line_before(check_item_before_stop(last_word), 1) + bus_name + " "
+                                    bus_stop_line(check_item_stop(last_word), 1) &= bus_name + " "
                                 End If
                             Else
-                                If check_item_last_stop(last_word) <> -1 Then
-                                    If check_item_stop_have_bus(bus_stop_line_last(check_item_last_stop(last_word), 1), bus_name) = False Then
-                                        '在找到的项目中没有这个车次，写入，找到了不写
-                                        bus_stop_line_last(check_item_last_stop(last_word), 1) = bus_stop_line_last(check_item_last_stop(last_word), 1) + bus_name + " "
-                                    End If
-
-                                Else
-                                    If bus_stop_line_last_list >= bus_stop_line_before_list Then
-                                        bus_stop_line_before(bus_stop_line_before_list, 0) = last_word
-                                        bus_stop_line_before(bus_stop_line_before_list, 1) = bus_stop_line_before(bus_stop_line_before_list, 1) + bus_name + " "
-                                        bus_stop_line_before_list = bus_stop_line_before_list + 1
-                                    Else
-                                        bus_stop_line_last(bus_stop_line_last_list, 0) = last_word
-                                        bus_stop_line_last(bus_stop_line_last_list, 1) = bus_stop_line_last(bus_stop_line_last_list, 1) + bus_name + " "
-                                        bus_stop_line_last_list = bus_stop_line_last_list + 1
-                                    End If
-
-                                End If
+                                '列表不存在，写站台，写数据
+                                bus_stop_line(bus_stop_line_list, 0) = last_word
+                                bus_stop_line(bus_stop_line_list, 1) = bus_name + " "
+                                bus_stop_line_list += 1
                             End If
+
                         Else
                             If last_word = "" Then
-                                '没有下一站
-                                If check_item_before_stop(before_word) <> -1 Then
-                                    If check_item_stop_have_bus(bus_stop_line_before(check_item_before_stop(before_word), 1), bus_name) = False Then
+
+                                '没有下一站，写下站
+                                If check_item_stop(before_word) <> -1 Then
+                                    '列表存在这个站台，写数据
+
+                                    If check_item_stop_have_bus(bus_stop_line(check_item_stop(before_word), 1), bus_name) = False Then
                                         '在找到的项目中没有这个车次，写入，找到了不写
-                                        bus_stop_line_before(check_item_before_stop(before_word), 1) = bus_stop_line_before(check_item_before_stop(before_word), 1) + bus_name + " "
+                                        bus_stop_line(check_item_stop(before_word), 1) &= bus_name + " "
                                     End If
                                 Else
-                                    If check_item_last_stop(before_word) <> -1 Then
-                                        If check_item_stop_have_bus(bus_stop_line_last(check_item_last_stop(before_word), 1), bus_name) = False Then
-                                            '在找到的项目中没有这个车次，写入，找到了不写
-                                            bus_stop_line_last(check_item_last_stop(before_word), 1) = bus_stop_line_last(check_item_last_stop(before_word), 1) + bus_name + " "
-                                        End If
-                                    Else
-                                        If bus_stop_line_last_list >= bus_stop_line_before_list Then
-                                            bus_stop_line_before(bus_stop_line_before_list, 0) = before_word
-                                            bus_stop_line_before(bus_stop_line_before_list, 1) = bus_stop_line_before(bus_stop_line_before_list, 1) + bus_name + " "
-                                            bus_stop_line_before_list = bus_stop_line_before_list + 1
-                                        Else
-                                            bus_stop_line_last(bus_stop_line_last_list, 0) = before_word
-                                            bus_stop_line_last(bus_stop_line_last_list, 1) = bus_stop_line_last(bus_stop_line_last_list, 1) + bus_name + " "
-                                            bus_stop_line_last_list = bus_stop_line_last_list + 1
-                                        End If
-
-                                    End If
+                                    '列表不存在，写站台，写数据
+                                    bus_stop_line(bus_stop_line_list, 0) = before_word
+                                    bus_stop_line(bus_stop_line_list, 1) = bus_name + " "
+                                    bus_stop_line_list += 1
                                 End If
+
                             Else
-                                '上下站都有
-                                If check_item_before_stop(before_word) <> -1 Then
-                                    '前在左？
-                                    If check_item_stop_have_bus(bus_stop_line_before(check_item_before_stop(before_word), 1), bus_name) = False Then
+                                '上下站都有，都写
+
+                                '===============上站
+                                If check_item_stop(before_word) <> -1 Then
+                                    '列表存在这个站台，写数据
+
+                                    If check_item_stop_have_bus(bus_stop_line(check_item_stop(before_word), 1), bus_name) = False Then
                                         '在找到的项目中没有这个车次，写入，找到了不写
-                                        bus_stop_line_before(check_item_before_stop(before_word), 1) = bus_stop_line_before(check_item_before_stop(before_word), 1) + bus_name + " "
-                                    End If
-                                    If check_item_last_stop(last_word) <> -1 Then
-                                        If check_item_stop_have_bus(bus_stop_line_last(check_item_last_stop(last_word), 1), bus_name) = False Then
-                                            '在找到的项目中没有这个车次，写入，找到了不写
-                                            bus_stop_line_last(check_item_last_stop(last_word), 1) = bus_stop_line_last(check_item_last_stop(last_word), 1) + bus_name + " "
-                                        End If
-                                    Else
-                                        bus_stop_line_last(bus_stop_line_last_list, 0) = last_word
-                                        bus_stop_line_last(bus_stop_line_last_list, 1) = bus_stop_line_last(bus_stop_line_last_list, 1) + bus_name + " "
-                                        bus_stop_line_last_list = bus_stop_line_last_list + 1
+                                        bus_stop_line(check_item_stop(before_word), 1) &= bus_name + " "
                                     End If
                                 Else
-                                    If check_item_last_stop(before_word) <> -1 Then
-                                        '前在右
-                                        If check_item_stop_have_bus(bus_stop_line_last(check_item_last_stop(before_word), 1), bus_name) = False Then
-                                            '在找到的项目中没有这个车次，写入，找到了不写
-                                            bus_stop_line_last(check_item_last_stop(before_word), 1) = bus_stop_line_last(check_item_last_stop(before_word), 1) + bus_name + " "
-                                        End If
-                                        If check_item_before_stop(last_word) <> -1 Then
-                                            If check_item_stop_have_bus(bus_stop_line_before(check_item_before_stop(last_word), 1), bus_name) = False Then
-                                                '在找到的项目中没有这个车次，写入，找到了不写
-                                                bus_stop_line_before(check_item_before_stop(last_word), 1) = bus_stop_line_before(check_item_before_stop(last_word), 1) + bus_name + " "
-                                            End If
-                                        Else
-                                            bus_stop_line_before(bus_stop_line_before_list, 0) = last_word
-                                            bus_stop_line_before(bus_stop_line_before_list, 1) = bus_stop_line_before(bus_stop_line_before_list, 1) + bus_name + " "
-                                            bus_stop_line_before_list = bus_stop_line_before_list + 1
-                                        End If
-                                    Else
-                                        If check_item_before_stop(last_word) <> -1 Then
-                                            '后在左？
-                                            If check_item_stop_have_bus(bus_stop_line_before(check_item_before_stop(last_word), 1), bus_name) = False Then
-                                                '在找到的项目中没有这个车次，写入，找到了不写
-                                                bus_stop_line_before(check_item_before_stop(last_word), 1) = bus_stop_line_before(check_item_before_stop(last_word), 1) + bus_name + " "
-                                            End If
-                                            If check_item_last_stop(before_word) <> -1 Then
-                                                If check_item_stop_have_bus(bus_stop_line_last(check_item_last_stop(before_word), 1), bus_name) = False Then
-                                                    '在找到的项目中没有这个车次，写入，找到了不写
-                                                    bus_stop_line_last(check_item_last_stop(before_word), 1) = bus_stop_line_last(check_item_last_stop(before_word), 1) + bus_name + " "
-                                                End If
-                                            Else
-                                                bus_stop_line_last(bus_stop_line_last_list, 0) = before_word
-                                                bus_stop_line_last(bus_stop_line_last_list, 1) = bus_stop_line_last(bus_stop_line_last_list, 1) + bus_name + " "
-                                                bus_stop_line_last_list = bus_stop_line_last_list + 1
-                                            End If
-                                        Else
-                                            If check_item_last_stop(last_word) <> -1 Then
-                                                '后在右？
-                                                If check_item_stop_have_bus(bus_stop_line_last(check_item_last_stop(last_word), 1), bus_name) = False Then
-                                                    '在找到的项目中没有这个车次，写入，找到了不写
-                                                    bus_stop_line_last(check_item_last_stop(last_word), 1) = bus_stop_line_last(check_item_last_stop(last_word), 1) + bus_name + " "
-                                                End If
-                                                If check_item_before_stop(before_word) <> -1 Then
-                                                    If check_item_stop_have_bus(bus_stop_line_before(check_item_before_stop(before_word), 1), bus_name) = False Then
-                                                        '在找到的项目中没有这个车次，写入，找到了不写
-                                                        bus_stop_line_before(check_item_before_stop(before_word), 1) = bus_stop_line_before(check_item_before_stop(before_word), 1) + bus_name + " "
-                                                    End If
-                                                Else
-                                                    bus_stop_line_before(bus_stop_line_before_list, 0) = before_word
-                                                    bus_stop_line_before(bus_stop_line_before_list, 1) = bus_stop_line_before(bus_stop_line_before_list, 1) + bus_name + " "
-                                                    bus_stop_line_before_list = bus_stop_line_before_list + 1
-                                                End If
-                                            Else
-                                                '老老实实写前在左，后在右
-                                                bus_stop_line_before(bus_stop_line_before_list, 0) = before_word
-                                                bus_stop_line_before(bus_stop_line_before_list, 1) = bus_stop_line_before(bus_stop_line_before_list, 1) + bus_name + " "
-                                                bus_stop_line_before_list = bus_stop_line_before_list + 1
-
-                                                bus_stop_line_last(bus_stop_line_last_list, 0) = last_word
-                                                bus_stop_line_last(bus_stop_line_last_list, 1) = bus_stop_line_last(bus_stop_line_last_list, 1) + bus_name + " "
-                                                bus_stop_line_last_list = bus_stop_line_last_list + 1
-                                            End If
-                                        End If
-                                    End If
+                                    '列表不存在，写站台，写数据
+                                    bus_stop_line(bus_stop_line_list, 0) = before_word
+                                    bus_stop_line(bus_stop_line_list, 1) = bus_name + " "
+                                    bus_stop_line_list += 1
                                 End If
+
+                                '===============下站
+                                If check_item_stop(last_word) <> -1 Then
+                                    '列表存在这个站台，写数据
+
+                                    If check_item_stop_have_bus(bus_stop_line(check_item_stop(last_word), 1), bus_name) = False Then
+                                        '在找到的项目中没有这个车次，写入，找到了不写
+                                        bus_stop_line(check_item_stop(last_word), 1) &= bus_name + " "
+                                    End If
+                                Else
+                                    '列表不存在，写站台，写数据
+                                    bus_stop_line(bus_stop_line_list, 0) = last_word
+                                    bus_stop_line(bus_stop_line_list, 1) = bus_name + " "
+                                    bus_stop_line_list += 1
+                                End If
+
+
                             End If
                         End If
                         '结束写入*************************************************
@@ -521,16 +448,16 @@ end_fx:
 
 
     ''' <summary>
-    ''' [内核][screen_stop]检索在指定交汇--左侧，中是否有指定项，有返回项的索引，否则返回-1，仅供get_bus_stop_line_ex调用
+    ''' [内核][screen_stop]检索在指定交汇，中是否有指定项，有返回项的索引，否则返回-1，仅供get_bus_stop_line_ex调用
     ''' </summary>
     ''' <param name="name">要检索的之前站台的名称</param>
     ''' <returns>返回项的索引</returns>
     ''' <remarks></remarks>
-    Public Function check_item_before_stop(ByVal name As String)
+    Public Function check_item_stop(ByVal name As String)
         Dim yes As Integer = -1
 
-        For a = 0 To bus_stop_line_before_list - 1
-            If bus_stop_line_before(a, 0) = name Then
+        For a = 0 To bus_stop_line_list - 1
+            If bus_stop_line(a, 0) = name Then
                 '在列表中有
                 yes = a
             End If
@@ -540,28 +467,9 @@ end_fx:
     End Function
 
     ''' <summary>
-    ''' [内核][screen_stop]检索在指定交汇--右侧，中是否有指定项，有返回项的索引，否则返回-1，仅供get_bus_stop_line_ex调用
+    ''' [内核][screen_stop]检索指定前后区块中某个站台内是否含有指定的车辆名，仅供get_bus_stop_line_ex调用
     ''' </summary>
-    ''' <param name="name">要检索的之后站台的名称</param>
-    ''' <returns>返回项的索引</returns>
-    ''' <remarks></remarks>
-    Public Function check_item_last_stop(ByVal name As String)
-        Dim yes As Integer = -1
-
-        For a = 0 To bus_stop_line_last_list - 1
-            If bus_stop_line_last(a, 0) = name Then
-                '在列表中有
-                yes = a
-            End If
-        Next
-
-        Return yes
-    End Function
-
-    ''' <summary>
-    ''' 检索指定前后区块中某个站台内是否含有指定的车辆名，仅供get_bus_stop_line_ex调用
-    ''' </summary>
-    ''' <param name="name">查找的字符</param>
+    ''' <param name="name">要查找的字符</param>
     ''' <param name="bus_name">查找的车辆名</param>
     ''' <returns></returns>
     Public Function check_item_stop_have_bus(ByVal name As String, ByVal bus_name As String)

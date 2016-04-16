@@ -419,8 +419,7 @@ Public Class MainWindow
                 ui_form_stop_list.ItemsSource = ui_connet_core_form_stop_list
             End If
 
-            ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
-            ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+            ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
 
         End If
 
@@ -457,9 +456,9 @@ Public Class MainWindow
             ui_form_contorl_check_background_color_3_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
         End If
 
-        ui_form_contorl_r_value.Text = form_color.R
-        ui_form_contorl_g_value.Text = form_color.G
-        ui_form_contorl_b_value.Text = form_color.B
+        ui_form_contorl_r_value.Value = form_color.R
+        ui_form_contorl_g_value.Value = form_color.G
+        ui_form_contorl_b_value.Value = form_color.B
 
 
         '设置界面文本
@@ -1761,8 +1760,7 @@ Public Class MainWindow
             Dim linshi_1 As Integer = return_check_stop_list_nopage(word)
             If linshi_1 <> -1 Then
                 '清除旧的
-                ui_form_stop_left_cross_line_list.ItemsSource = Nothing
-                ui_form_stop_right_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_cross_line_list.ItemsSource = Nothing
 
                 now_stop = linshi_1
                 refsh_stop()
@@ -1772,8 +1770,7 @@ Public Class MainWindow
                 ui_form_stop_describe.Text = cross_stop
                 ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
-                ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
-                ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+                ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
 
                 '**************************动画跳转
                 Dim stb_1
@@ -1842,7 +1839,49 @@ Public Class MainWindow
         If ui_form_line_contorl_left_form_textbox.Text <> "" Then
             Dim a As Integer = return_bus_list(ui_form_line_contorl_left_form_textbox.Text)
             If a <> -1 Then
-                ui_form_line_list.SelectedIndex = a
+                '==============跳转，代码复制。。。
+                ui_form_line_have_stop_list.ItemsSource = Nothing
+                ui_form_line_subway_list.ItemsSource = Nothing
+
+                clear()
+                up_or_down_line = True
+                bus = have_bus(a)
+                read_bus()
+                read_mid_bus_word = ""
+                read_mid_bus()
+                look_bus_date()
+
+                ui_form_line_select_up_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
+                ui_form_line_select_down_line.Color = Color.FromArgb(0, 0, 0, 0)
+                '设置上下行文本，控制操作
+                ui_form_line_select_up_line_describe.Text = "（" & bus_up_line_describe & "）"
+                If bus_down_line_describe = "" Then
+                    '没有下行线路，封掉
+                    ui_form_line_select_down_line_describe.Text = ""
+                    ui_form_line_form_no_down_line_width.Width = New GridLength(0)
+                Else
+                    '有，写入
+                    ui_form_line_select_down_line_describe.Text = "（" & bus_down_line_describe & "）"
+                    ui_form_line_form_no_down_line_width.Width = GridLength.Auto
+                End If
+
+                '设置文本
+                If bus_or_subway = 0 Then
+                    '公交
+                    ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：公交" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
+                Else
+                    '地铁
+                    ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：地铁" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
+                End If
+
+                select_stop_point = 0
+
+                '设置上行线路
+                ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_up
+                ui_form_line_have_stop_list.ItemsSource = ui_connet_core_form_line_have_sotp_list_show
+                ui_form_line_subway_list.ItemsSource = ui_connet_core_form_line_subway_list
+
+                '====================消除数据
                 ui_form_line_contorl_left_form_textbox.Text = ""
             Else
                 message_ex_ex("搜索", "没有找到车次：" + ui_form_line_contorl_left_form_textbox.Text)
@@ -1977,8 +2016,7 @@ Public Class MainWindow
     ''' <remarks></remarks>
     Private Sub ui_form_stop_list_function(sender As Object, e As SelectionChangedEventArgs) Handles ui_form_stop_list.SelectionChanged
         If ui_form_stop_list.SelectedIndex <> -1 And ui_form_stop_contorl_left_form_textbox.Text = "" Then
-            ui_form_stop_left_cross_line_list.ItemsSource = Nothing
-            ui_form_stop_right_cross_line_list.ItemsSource = Nothing
+            ui_form_stop_cross_line_list.ItemsSource = Nothing
 
             now_stop = ui_form_stop_list.SelectedIndex
             refsh_stop()
@@ -1987,8 +2025,7 @@ Public Class MainWindow
             ui_form_stop_describe.Text = cross_stop
             ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
-            ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
-            ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+            ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
 
         Else
             If ui_form_stop_list.SelectedIndex <> -1 Then
@@ -1998,8 +2035,7 @@ Public Class MainWindow
 
                 If list <> -1 Then
                     '找到项目，切换
-                    ui_form_stop_left_cross_line_list.ItemsSource = Nothing
-                    ui_form_stop_right_cross_line_list.ItemsSource = Nothing
+                    ui_form_stop_cross_line_list.ItemsSource = Nothing
 
                     now_stop = list
                     refsh_stop()
@@ -2008,8 +2044,7 @@ Public Class MainWindow
                     ui_form_stop_describe.Text = cross_stop
                     ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
-                    ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
-                    ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+                    ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
 
 
                     '还原自动填充
@@ -2023,22 +2058,21 @@ Public Class MainWindow
     End Sub
 
     ''' <summary>
-    ''' [系统][ui]站台-左侧列表跳转到新站点的函数
+    ''' [系统][ui]站台-附近站台列表跳转到新站点的函数
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub ui_form_stop_left_cross_line_list_jump_to_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_left_cross_line_list.MouseDoubleClick
+    Private Sub ui_form_stop_cross_line_list_jump_to_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_cross_line_list.MouseDoubleClick
 
-        If ui_form_stop_left_cross_line_list.SelectedIndex <> -1 Then
+        If ui_form_stop_cross_line_list.SelectedIndex <> -1 Then
 
             '获取名字
-            Dim list_name As String = ui_connet_core_form_stop_left_cross_line_list.Item(ui_form_stop_left_cross_line_list.SelectedIndex).ui_stop_name
+            Dim list_name As String = ui_connet_core_form_stop_cross_line_list.Item(ui_form_stop_cross_line_list.SelectedIndex).ui_stop_name
             Dim list As Integer = return_check_stop_list_nopage(list_name)
 
             If list <> -1 Then
                 '找到项目，切换
-                ui_form_stop_left_cross_line_list.ItemsSource = Nothing
-                ui_form_stop_right_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_cross_line_list.ItemsSource = Nothing
 
                 now_stop = list
                 refsh_stop()
@@ -2047,48 +2081,7 @@ Public Class MainWindow
                 ui_form_stop_describe.Text = cross_stop
                 ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
-                ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
-                ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
-
-
-                '还原自动填充
-                ui_form_stop_contorl_left_form_textbox.Text = ""
-            Else
-                '出现错误
-                Environment.Exit(6)
-            End If
-
-        End If
-
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]站台-右侧列表跳转到新站点的函数
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_stop_right_cross_line_list_jump_to_stop(sender As Object, e As MouseButtonEventArgs) Handles ui_form_stop_right_cross_line_list.MouseDoubleClick
-
-        If ui_form_stop_right_cross_line_list.SelectedIndex <> -1 Then
-
-            '获取名字
-            Dim list_name As String = ui_connet_core_form_stop_right_cross_line_list.Item(ui_form_stop_right_cross_line_list.SelectedIndex).ui_stop_name
-            Dim list As Integer = return_check_stop_list_nopage(list_name)
-
-            If list <> -1 Then
-                '找到项目，切换
-                ui_form_stop_left_cross_line_list.ItemsSource = Nothing
-                ui_form_stop_right_cross_line_list.ItemsSource = Nothing
-
-                now_stop = list
-                refsh_stop()
-
-                '设置文本
-                ui_form_stop_describe.Text = cross_stop
-                ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
-
-                ui_form_stop_left_cross_line_list.ItemsSource = ui_connet_core_form_stop_left_cross_line_list
-                ui_form_stop_right_cross_line_list.ItemsSource = ui_connet_core_form_stop_right_cross_line_list
+                ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
 
 
                 '还原自动填充
@@ -2158,7 +2151,19 @@ Public Class MainWindow
         If ui_form_stop_contorl_left_form_textbox.Text <> "" Then
             Dim a As Integer = return_check_stop_list_nopage(ui_form_stop_contorl_left_form_textbox.Text)
             If a <> -1 Then
-                ui_form_stop_list.SelectedIndex = a
+                '跳转
+                ui_form_stop_cross_line_list.ItemsSource = Nothing
+
+                now_stop = a
+                refsh_stop()
+
+                '设置文本
+                ui_form_stop_describe.Text = cross_stop
+                ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
+
+                ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
+
+                '还原
                 ui_form_stop_contorl_left_form_textbox.Text = ""
             Else
                 message_ex_ex("搜索", "没有找到车站：" + ui_form_stop_contorl_left_form_textbox.Text)
@@ -2638,9 +2643,9 @@ Public Class MainWindow
         Dim new_color_g As Integer = 0
         Dim new_color_b As Integer = 0
         Try
-            new_color_r = Int(ui_form_contorl_r_value.Text)
-            new_color_g = Int(ui_form_contorl_g_value.Text)
-            new_color_b = Int(ui_form_contorl_b_value.Text)
+            new_color_r = Int(ui_form_contorl_r_value.Value)
+            new_color_g = Int(ui_form_contorl_g_value.Value)
+            new_color_b = Int(ui_form_contorl_b_value.Value)
 
             If 0 <= new_color_r And new_color_r <= 255 Then
                 If 0 <= new_color_g And new_color_g <= 255 Then
@@ -2691,63 +2696,40 @@ Public Class MainWindow
                         save_user_contorl()
                     Else
                         message_ex_ex("数值", "数值非法")
-                        ui_form_contorl_r_value.Text = form_color.R
-                        ui_form_contorl_g_value.Text = form_color.G
-                        ui_form_contorl_b_value.Text = form_color.B
+                        ui_form_contorl_r_value.Value = form_color.R
+                        ui_form_contorl_g_value.Value = form_color.G
+                        ui_form_contorl_b_value.Value = form_color.B
                     End If
                 Else
                     message_ex_ex("数值", "数值非法")
-                    ui_form_contorl_r_value.Text = form_color.R
-                    ui_form_contorl_g_value.Text = form_color.G
-                    ui_form_contorl_b_value.Text = form_color.B
+                    ui_form_contorl_r_value.Value = form_color.R
+                    ui_form_contorl_g_value.Value = form_color.G
+                    ui_form_contorl_b_value.Value = form_color.B
                 End If
             Else
                 message_ex_ex("数值", "数值非法")
-                ui_form_contorl_r_value.Text = form_color.R
-                ui_form_contorl_g_value.Text = form_color.G
-                ui_form_contorl_b_value.Text = form_color.B
+                ui_form_contorl_r_value.Value = form_color.R
+                ui_form_contorl_g_value.Value = form_color.G
+                ui_form_contorl_b_value.Value = form_color.B
             End If
         Catch ex As Exception
             '输入文本类型错误
             message_ex_ex("数值", "数值非法")
-            ui_form_contorl_r_value.Text = form_color.R
-            ui_form_contorl_g_value.Text = form_color.G
-            ui_form_contorl_b_value.Text = form_color.B
+            ui_form_contorl_r_value.Value = form_color.R
+            ui_form_contorl_g_value.Value = form_color.G
+            ui_form_contorl_b_value.Value = form_color.B
         End Try
     End Sub
     ''' <summary>
-    ''' [系统][ui]设置面板颜色textbox数值更改
+    ''' [系统][ui]设置-颜色更改的预览
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ui_form_contorl_value_change(sender As Object, e As TextChangedEventArgs) Handles ui_form_contorl_r_value.TextChanged, ui_form_contorl_g_value.TextChanged, ui_form_contorl_b_value.TextChanged
-        Dim new_color_r As Integer = 0
-        Dim new_color_g As Integer = 0
-        Dim new_color_b As Integer = 0
-        Try
-            new_color_r = Int(ui_form_contorl_r_value.Text)
-            new_color_g = Int(ui_form_contorl_g_value.Text)
-            new_color_b = Int(ui_form_contorl_b_value.Text)
-
-            If 0 <= new_color_r And new_color_r <= 255 Then
-                If 0 <= new_color_g And new_color_g <= 255 Then
-                    If 0 <= new_color_b And new_color_b <= 255 Then
-                        '符合条件
-                    Else
-                        'MsgBox("数值非法")
-                    End If
-                Else
-                    'MsgBox("数值非法")
-                End If
-            Else
-                'MsgBox("数值非法")
-            End If
-        Catch ex As Exception
-            '输入文本类型错误
-            'MsgBox("数值非法")
-        End Try
+    Private Sub ui_form_contorl_color_number_change(sender As Object, e As RoutedPropertyChangedEventArgs(Of Double)) Handles ui_form_contorl_r_value.ValueChanged, ui_form_contorl_g_value.ValueChanged, ui_form_contorl_b_value.ValueChanged
+        ui_form_contorl_color_lookover.Fill = New SolidColorBrush(Color.FromArgb(255, ui_form_contorl_r_value.Value, ui_form_contorl_g_value.Value, ui_form_contorl_b_value.Value))
     End Sub
+
+
 
     ''' <summary>
     ''' [系统][ui]打开 打开背景图片 对话框函数
@@ -2770,12 +2752,14 @@ Public Class MainWindow
             System.IO.File.Delete(Environment.CurrentDirectory + "\temp.jpg")
             System.IO.File.Copy(ui_form_contorl_background_path.Text, Environment.CurrentDirectory + "\temp.jpg")
             Dim command As String = app_build_number * 10 + 1
-            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command )
+            Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command)
             Environment.Exit(3)
         Else
             message_ex_ex("替换背景", "没有找到背景文件：" + ui_form_contorl_background_path.Text)
         End If
     End Sub
+
+
 
 #End Region
 
@@ -2861,8 +2845,8 @@ Public Class MainWindow
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub ui_form_stop_left_cross_line_list_mouse_enter(sender As Object, e As MouseEventArgs) Handles ui_form_stop_left_cross_line_list.MouseEnter
-        ScrollViewer.SetVerticalScrollBarVisibility(ui_form_stop_left_cross_line_list, ScrollBarVisibility.Auto)
+    Private Sub ui_form_stop_cross_line_list_mouse_enter(sender As Object, e As MouseEventArgs) Handles ui_form_stop_cross_line_list.MouseEnter
+        ScrollViewer.SetHorizontalScrollBarVisibility(ui_form_stop_cross_line_list, ScrollBarVisibility.Auto)
     End Sub
 
     ''' <summary>
@@ -2870,32 +2854,9 @@ Public Class MainWindow
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub ui_form_stop_left_cross_line_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_stop_left_cross_line_list.MouseLeave
-        ScrollViewer.SetVerticalScrollBarVisibility(ui_form_stop_left_cross_line_list, ScrollBarVisibility.Hidden)
+    Private Sub ui_form_stop_cross_line_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_stop_cross_line_list.MouseLeave
+        ScrollViewer.SetHorizontalScrollBarVisibility(ui_form_stop_cross_line_list, ScrollBarVisibility.Hidden)
     End Sub
-
-    '**********************************************
-
-    ''' <summary>
-    ''' [系统][ui]站台-右侧车次列表移入鼠标显示滚动条
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_stop_right_cross_line_list_mouse_enter(sender As Object, e As MouseEventArgs) Handles ui_form_stop_right_cross_line_list.MouseEnter
-        ScrollViewer.SetVerticalScrollBarVisibility(ui_form_stop_right_cross_line_list, ScrollBarVisibility.Auto)
-    End Sub
-
-    ''' <summary>
-    ''' [系统][ui]站台-右侧车次列表移出鼠标不显示滚动条
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ui_form_stop_right_cross_line_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_stop_right_cross_line_list.MouseLeave
-        ScrollViewer.SetVerticalScrollBarVisibility(ui_form_stop_right_cross_line_list, ScrollBarVisibility.Hidden)
-    End Sub
-
-
-
 
 #End Region
 
