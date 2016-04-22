@@ -1,6 +1,6 @@
 # bus\_rode Release Setup
-In some project. When you release a app, but you find it isn't work. Why? Bucause you must set some file in release folder. Then, your app can run.  
-This document can tech you how to set file which app need in every project.
+In some projects. When you release a app, but you find it isn't work. Why? Bucause you must set some files in release folder. Then, your app can run.  
+This document can teach you how to set files which app need in every project.
 
 *TIPS:  
 All releasing application have been deleted. It is necessary that rebuild it.*

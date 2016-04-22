@@ -288,8 +288,8 @@
                         '是当前选中车的信息
                         If word_arr_arr(0) = bus Then
 
-                            '判断上下行
-                            If word_arr_arr(1) = "上行" Then
+                            '判断上下行，0=上行，1=下行
+                            If word_arr_arr(1) = "0" Then
 
                                 '判断pass还是站名
                                 If check_is_number(word_arr_arr(2)) = True Then

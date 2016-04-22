@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
+
+
         <!-- 重要===设定listbox item的选中色样式-->
         <Style TargetType="ListBoxItem">
             <Style.Resources>
@@ -81,62 +83,47 @@
 
         <!-- 线路模块中显示当前地铁线路含有出口的模板-->
         <DataTemplate x:Key="ui_temp_form_line_subway_list">
-            <Grid Width="80" Height="100" Background="#00000000">
+            <Grid Height="100" Background="#00000000" Margin="10,0,10,0">
                 <Grid.RowDefinitions >
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width=" *"/>
-                    <ColumnDefinition Width=" 2"/>
-                </Grid.ColumnDefinitions>
 
-                <!-- 边框-->
-                <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="white"/>
+                <!-- 标题-->
+                <Ellipse Height="30" Width="30" Grid.Row="0" Stroke="White" StrokeThickness="1" HorizontalAlignment="Left"/>
+                <Grid Height="30" Width="30" Grid.Row="0" HorizontalAlignment="Left">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="photo\stop.png"/>
+                    </Grid.Background>
+                </Grid>
 
                 <!-- 出口名-->
-                <Grid Grid.Row="0" Background="#00000000">
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-
-                    <TextBlock Grid.Row="1" Foreground="white" FontSize="15" Text="{Binding ui_exit_name}" >
+                <TextBlock Grid.Row="1" Foreground="white" FontSize="15" Text="{Binding ui_exit_name}" VerticalAlignment="Center">
                         <!-- 防止名称过长看不完特加提示框-->
-                        <TextBlock.ToolTip>
-                            <ToolTip Background="white">
-                                <Grid >
-                                    <TextBlock Foreground="black" FontSize="15" Text="{Binding ui_exit_name}"/>
-                                </Grid>
-                            </ToolTip>
-                        </TextBlock.ToolTip>
-                    </TextBlock>
+                    <TextBlock.ToolTip>
+                        <ToolTip Background="white">
+                            <Grid >
+                                <TextBlock Foreground="black" FontSize="15" Text="{Binding ui_exit_name}"/>
+                            </Grid>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+                </TextBlock>
 
-                </Grid>
 
                 <!-- 出口通向-->
-                <Grid Grid.Row="1" Background="#00000000">
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-
-                    <TextBlock Grid.Row="1" Foreground="white" FontSize="15" Text="{Binding ui_go_to}" >
+                <TextBlock Grid.Row="2" Foreground="white" FontSize="15" Text="{Binding ui_go_to}" VerticalAlignment="Center">
                         <!-- 防止名称过长看不完特加提示框-->
-                        <TextBlock.ToolTip>
-                            <ToolTip Background="white">
-                                <Grid >
-                                    <TextBlock Foreground="black" FontSize="15" Text="{Binding ui_go_to}"/>
-                                </Grid>
-                            </ToolTip>
-                        </TextBlock.ToolTip>
-                    </TextBlock>
+                    <TextBlock.ToolTip>
+                        <ToolTip Background="white">
+                            <Grid >
+                                <TextBlock Foreground="black" FontSize="15" Text="{Binding ui_go_to}"/>
+                            </Grid>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+               </TextBlock>
 
-                </Grid>
+
 
 
 
@@ -154,7 +141,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- 边框-->
-                <Grid Grid.Row="3" Background="white"/>
+                <Grid Grid.Row="3" Background="white" Opacity="0.5"/>
 
                 <TextBlock Grid.Row="1" Foreground="white" FontSize="15" Text="{Binding ui_line_name}" >
                         <!-- 防止名称过长看不完特加提示框-->
@@ -176,17 +163,17 @@
             <Grid Width="260" Height="50" Background="#00000000">
                 <Grid.RowDefinitions >
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
                     <RowDefinition Height="2"/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
 
                 <!-- 边框-->
-                <Grid Grid.Row="5" Background="white"/>
+                <Grid Grid.Row="5" Grid.ColumnSpan="2" Background="white" Opacity="0.5"/>
 
-                <TextBlock Grid.Row="1" Foreground="white" FontSize="15" Text="{Binding ui_line_of_stop_name}" >
+                <TextBlock Grid.Column="0" Foreground="white" FontSize="15" Text="{Binding ui_line_of_stop_name}" >
                         <!-- 防止名称过长看不完特加提示框-->
                     <TextBlock.ToolTip>
                         <ToolTip Background="white">
@@ -197,7 +184,7 @@
                     </TextBlock.ToolTip>
                 </TextBlock>
 
-                <TextBlock Grid.Row="3" Foreground="white" FontSize="12" Text="{Binding ui_line_of_stop_name_on_where}" >
+                <TextBlock Grid.Column="1" Foreground="white" FontSize="12" Text="{Binding ui_line_of_stop_name_on_where}" >
                         <!-- 防止名称过长看不完特加提示框-->
                     <TextBlock.ToolTip>
                         <ToolTip Background="white">
@@ -233,7 +220,7 @@
                 </Grid>
 
                 <!-- 文字-->
-                <Grid Grid.Row="1" Margin="5,0,0,0">
+                <Grid Grid.Row="1">
                     <Grid.RowDefinitions >
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
@@ -320,7 +307,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- 边框-->
-                <Grid Grid.Row="3" Background="white"/>
+                <Grid Grid.Row="3" Background="white" Opacity="0.5"/>
 
                 <TextBlock Grid.Row="1" Foreground="white" FontSize="15" Text="{Binding ui_stop_name}" >
                         <!-- 防止名称过长看不完特加提示框-->
@@ -352,7 +339,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- 边框-->
-                <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="white"/>
+                <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="white" Opacity="0.5"/>
 
                 <!-- 标题-->
                 <TextBlock Foreground="white" FontSize="20" Text="{Binding ui_msg_title}" >
@@ -1247,7 +1234,7 @@
         <Style TargetType="{x:Type Slider}">
             <Setter Property="Template" Value="{StaticResource SliderControlTemplate}"/>
         </Style>
-        
+
 
 
     </Application.Resources>
