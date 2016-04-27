@@ -84,22 +84,16 @@ Module screen
     Public ui_connet_core_form_line_search_stop_list As New List(Of ui_depend_line_search_stop_list)
 
     '************************************************************************************************
-    '========================已过时，改为只显示一种站台============================
-    '''' <summary>
-    '''' 车站界面中左侧站台经过车次列表中项的集合
-    '''' </summary>
-    '''' <remarks></remarks>
-    'Public ui_connet_core_form_stop_left_cross_line_list As New List(Of ui_depend_stop_cross_line_list)
-    '''' <summary>
-    '''' 车站界面中右侧站台经过车次列表中项的集合
-    '''' </summary>
-    '''' <remarks></remarks>
-    'Public ui_connet_core_form_stop_right_cross_line_list As New List(Of ui_depend_stop_cross_line_list)
     ''' <summary>
     ''' 车站界面中附近站台经过车次列表中项的集合
     ''' </summary>
     ''' <remarks></remarks>
     Public ui_connet_core_form_stop_cross_line_list As New List(Of ui_depend_stop_cross_line_list)
+    ''' <summary>
+    ''' 车站界面中真实站台列表中项的集合
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public ui_connet_core_form_stop_realistic_stop_list As New List(Of ui_depend_stop_realistic_stop_list)
     ''' <summary>
     ''' 车站界面中车站列表中项的集合
     ''' </summary>

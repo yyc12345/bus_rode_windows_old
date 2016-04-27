@@ -464,29 +464,6 @@
 
     '**********************************************************服务函数********************************************************
     ''' <summary>
-    ''' [内核][screen_line]检查当前加载的线路含有车站中是否有指定车站
-    ''' </summary>
-    ''' <param name="key">要搜索的站台名称</param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function check_bus_stop_have(ByVal key As String)
-        Dim yes As Boolean = False
-
-        For test1 = 0 To 200
-            If bus_stop_up(test1) = key Then
-                yes = True
-                Exit For
-            End If
-            If bus_stop_down(test1) = key Then
-                yes = True
-                Exit For
-            End If
-        Next
-
-        Return yes
-    End Function
-
-    ''' <summary>
     ''' [内核][screen_line]返回当前加载的线路含有车站中指定车站的序数，从0起始，没有返回-1
     ''' </summary>
     ''' <param name="key">要搜索的站台名称</param>
@@ -625,5 +602,166 @@
         Next
 
     End Sub
+
+    '**********************************************************辅助函数********************************************************
+    ''' <summary>
+    ''' [内核][screen_line]获取一个线路的起始，终到站，用-分割始末站点（如果环线还要返回第二站），用,分割上下行的站点；返回指定站名在上下行中的位置序号，没找到显示-1
+    ''' </summary>
+    ''' <param name="line">要获取的线路名</param>
+    ''' <param name="find_stop">要寻找的站台名</param>
+    ''' <returns></returns>
+    Public Function get_start_and_end_stop_in_line(ByVal line As String, ByVal find_stop As String)
+        Dim up_line_list As Integer = -1
+        Dim down_line_list As Integer = -1
+
+        Dim file_line As New System.IO.StreamReader(Environment.CurrentDirectory + "\library\bus.txt", System.Text.Encoding.UTF8)
+        Dim word As String = ""
+        Dim before_word As String = ""
+        Dim list As Integer = 0
+        '存储内容
+        Dim up_line_start_stop As String = ""
+        Dim up_line_end_stop As String = ""
+        Dim up_line_secound_stop As String = ""
+        Dim up_line_secound_stop_flag As Boolean = False
+        Dim down_line_start_stop As String = ""
+        Dim down_line_end_stop As String = ""
+        Dim down_line_secound_stop As String = ""
+        Dim down_line_secound_stop_flag As Boolean = False
+
+
+        Do
+            word = file_line.ReadLine
+            If word = "ENDDATE" Then
+                '返回错误
+                Return ""
+                Exit Do
+            End If
+
+            If word = line Then
+                '跳过无用的值
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+
+                '========================上行
+                Do
+                    word = file_line.ReadLine
+                    If word = "ENDLINE" Then
+                        '结束，读取最后一站
+                        up_line_end_stop = before_word
+                        Exit Do
+                    End If
+
+                    '尝试索引
+                    If word = find_stop Then up_line_list = list
+
+                    '读取第一站和第二站
+                    If up_line_start_stop = "" Then
+                        up_line_start_stop = word
+                    Else
+                        If up_line_secound_stop_flag = False Then
+                            up_line_secound_stop = word
+                            up_line_secound_stop_flag = True
+                        End If
+                    End If
+
+                    before_word = word
+                    list += 1
+                Loop
+
+                '=====================下行
+                before_word = ""
+                word = ""
+                list = 0
+
+                Do
+                    word = file_line.ReadLine
+                    If word = "END" Then
+                        '结束，读取最后一站
+                        down_line_end_stop = before_word
+                        Exit Do
+                    End If
+
+                    '尝试索引
+                    If word = find_stop Then down_line_list = list
+
+                    '读取第一站和第二站
+                    If down_line_start_stop = "" Then
+                        down_line_start_stop = word
+                    Else
+                        If down_line_secound_stop_flag = False Then
+                            down_line_secound_stop = word
+                            down_line_secound_stop_flag = True
+                        End If
+                    End If
+
+                    before_word = word
+                    list += 1
+                Loop
+
+                '退出
+                Exit Do
+
+            Else
+                '不是的
+                '跳过无用的值
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                file_line.ReadLine()
+                '刷完站台
+                Do
+                    word = file_line.ReadLine
+
+                    If word = "END" Then
+                        Exit Do
+                    End If
+
+                Loop
+            End If
+        Loop
+
+        '==================================返回
+        Dim up_line_word As String = ""
+        If up_line_start_stop <> "" Then
+            If up_line_start_stop <> up_line_end_stop Then
+                up_line_word = "（" & up_line_start_stop & "-" & up_line_end_stop & "）"
+            Else
+                up_line_word = "（" & up_line_start_stop & "-" & up_line_secound_stop & "-" & up_line_end_stop & "）"
+            End If
+        Else
+            up_line_word = "（无）"
+        End If
+
+        Dim down_line_word As String = ""
+        If down_line_start_stop <> "" Then
+            If down_line_start_stop <> down_line_end_stop Then
+                down_line_word = "（" & down_line_start_stop & "-" & down_line_end_stop & "）"
+            Else
+                down_line_word = "（" & down_line_start_stop & "-" & down_line_secound_stop & "-" & down_line_end_stop & "）"
+            End If
+        Else
+            down_line_word = "（无）"
+        End If
+
+        Return up_line_word & "," & down_line_word & "," & up_line_list.ToString & "," & down_line_list.ToString
+
+    End Function
+
 
 End Module

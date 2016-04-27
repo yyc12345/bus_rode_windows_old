@@ -92,6 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="mod_loader.vb" />
     <Compile Include="screen.vb" />
     <Compile Include="screen_line.vb" />
     <Compile Include="screen_setting.vb" />

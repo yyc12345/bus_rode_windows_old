@@ -226,128 +226,6 @@
 
     '********************************************************************************************************************************
     ''' <summary>
-    ''' [系统]设置为true可以强制获取一次在线资源
-    ''' </summary>
-    Public connect_dll_get_resources_urgent As Boolean = False
-    ''' <summary>
-    ''' [系统]设置为true可使往复调用插件获取实时资源线程始终阻塞，优先级高于urgent
-    ''' </summary>
-    Public connect_dll_get_resources_always_stop As Boolean = False
-    ''' <summary>
-    ''' [系统]线程往复调用插件获取实时资源
-    ''' </summary>
-    Public Sub connect_dll_get_resources()
-
-        '检测插件
-        Try
-            Dim ass1 As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory & "\bus_rode_mod.dll")
-            Dim tp1 As Type = ass1.GetType("bus_rode_dll.main_dll", True)
-
-            If tp1 <> Nothing Then
-                Dim instance_check As Object = Activator.CreateInstance(tp1)
-
-                Dim prop_1_check As Reflection.FieldInfo = tp1.GetField("DllDependBusRodeVersion")
-                Dim prop_2_check As Reflection.FieldInfo = tp1.GetField("DllRegoin")
-                Dim prop_3_check As Reflection.FieldInfo = tp1.GetField("DllUseBusLineName")
-                Dim prop_4_check As Reflection.FieldInfo = tp1.GetField("DllGetTick")
-
-                '获取主函数
-                Dim out_check As Reflection.MethodInfo = tp1.GetMethod("GetResources", Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance)
-
-            End If
-
-            GC.Collect()
-        Catch ex As Exception
-            MsgBox("无法读取插件的相关信息，这可能是由于插件损坏或者插件不完整没有通过CHMOSGroup的认证", 16, "错误")
-            Exit Sub
-        End Try
-
-        '**********************************************开始执行
-        Dim ass As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory & "\bus_rode_mod.dll")
-        Dim tp As Type = ass.GetType("bus_rode_dll.main_dll", True)
-
-        Dim instance As Object = Activator.CreateInstance(tp)
-
-        Dim prop_1 As Reflection.FieldInfo = tp.GetField("DllDependBusRodeVersion")
-        Dim linshi As Integer = 0
-        linshi = CType(prop_1.GetValue(instance), Integer)
-        If linshi <> app_build_number Then
-            '版本不和
-            MsgBox("插件所需要的bus_rode版本和当前使用的bus_rode版本号不同，无法加载，请选择一个合适的插件", 16, "插件加载错误")
-            Exit Sub
-        End If
-
-        Dim prop_2 As Reflection.FieldInfo = tp.GetField("DllRegoin")
-        Dim linshi2 As String = ""
-        linshi2 = CType(prop_2.GetValue(instance), String)
-        If linshi2 <> set_address Then
-            '地区不和
-            MsgBox("插件所应用的地区与当前加载资源所表示的地区不同，无法加载，请选择一个合适的插件", 16, "插件加载错误")
-            Exit Sub
-        End If
-
-        '设置信息
-        Dim prop_3 As Reflection.FieldInfo = tp.GetField("DllUseBusLineName")
-        prop_3.SetValue(instance, bus)
-
-        '获取以500毫秒为基础的循环次数
-        Dim prop_4 As Reflection.FieldInfo = tp.GetField("DllGetTick")
-        Dim get_tick As Integer = 0
-        get_tick = CType(prop_4.GetValue(instance), Integer)
-        Dim round_number As Integer = Int(get_tick / 500) + 1
-
-        '获取主函数
-        Dim out As Reflection.MethodInfo = tp.GetMethod("GetResources", Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance)
-
-        '获取循环
-        '先获取一次
-        Dim result As Object
-        '尝试获取
-        Try
-            result = out.Invoke(instance, Nothing)
-            read_mid_bus_word = result.ToString
-            read_mid_bus_word_last_update = DateTime.Now.TimeOfDay.ToString
-        Catch ex As Exception
-            '获取失败不停止获取，但返回空
-            read_mid_bus_word = ""
-        End Try
-
-
-        '循环
-        Do
-            '等待刷新
-            For a = 0 To round_number
-                '判断紧急情况
-                If connect_dll_get_resources_urgent = True Then
-                    connect_dll_get_resources_urgent = False
-                    Exit For
-                Else
-                    System.Threading.Thread.Sleep(500)
-                End If
-            Next
-
-            '刷新
-            prop_3.SetValue(instance, bus)
-
-            If connect_dll_get_resources_always_stop = False Then
-                '尝试获取
-                Try
-                    result = out.Invoke(instance, Nothing)
-                    read_mid_bus_word = result.ToString
-                    read_mid_bus_word_last_update = DateTime.Now.TimeOfDay.ToString
-                Catch ex As Exception
-                    '获取失败不停止获取，但返回空
-                    read_mid_bus_word = ""
-                End Try
-
-            End If
-
-        Loop
-
-    End Sub
-
-    '********************************************************************************************************************************
-    ''' <summary>
     ''' [系统]检查一串字符串是不是全是数字
     ''' </summary>
     ''' <param name="word">要检查的字符串</param>
@@ -381,6 +259,66 @@
 
         Return yes
     End Function
+
+    ''' <summary>
+    ''' [系统]返回比指定数临近的两个最小的数，返回他们的差值，若没有，返回-1
+    ''' </summary>
+    ''' <param name="number_group">要检索的数组，用,分割</param>
+    ''' <param name="check_number">寻找的数</param>
+    ''' <param name="first_nearly">第一小数的差值</param>
+    ''' <param name="secound_nearly">第二小数的差值</param>
+    Public Sub return_nearly_number(ByVal number_group As String, ByVal check_number As Integer, ByRef first_nearly As Integer, ByRef secound_nearly As Integer)
+        Dim number_group_sp() As String = number_group.Split(",")
+        Dim n_group As New ArrayList
+
+        Dim max_item As Integer = number_group.Count - 1
+        For a = 0 To max_item
+            n_group.Add(CType(number_group_sp(a), Integer))
+        Next
+
+        If n_group.Count < 2 Then
+            '不需要排序
+        Else
+            For i = 1 To max_item
+                For j = i To 1 Step -1
+                    If CType(n_group.Item(j), Integer) < CType(n_group.Item(j - 1), Integer) Then
+                        Dim temp As Integer = CType(n_group.Item(j), Integer)
+                        n_group.Item(j) = CType(n_group.Item(j - 1), Integer)
+                        n_group.Item(j - 1) = temp
+                    Else
+                        Exit For
+                    End If
+                Next
+            Next
+        End If
+
+        '=============================获取最小值
+        Dim min_list As Integer = -1
+        For a = 0 To max_item
+            If CType(n_group.Item(a), Integer) >= check_number Then
+                min_list = a - 1
+                Exit For
+            End If
+        Next
+
+        If min_list = -1 Then
+            '没有最小值
+            first_nearly = -1
+            secound_nearly = -1
+        Else
+            If min_list = 0 Then
+                '只有一个最小值
+                first_nearly = CType(n_group.Item(0), Integer) - check_number
+                secound_nearly = -1
+            Else
+                '都有
+                first_nearly = CType(n_group.Item(min_list), Integer) - check_number
+                secound_nearly = CType(n_group.Item(min_list - 1), Integer) - check_number
+            End If
+        End If
+
+
+    End Sub
 
 
 End Module

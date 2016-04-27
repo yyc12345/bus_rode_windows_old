@@ -124,6 +124,68 @@ Public Class ui_depend_stop_cross_line_list
 
 End Class
 ''' <summary>
+''' [ui]车站区块中真实站台列表中每项对应数据类
+''' </summary>
+''' <remarks></remarks>
+Public Class ui_depend_stop_realistic_stop_list
+
+    ''' <summary>
+    ''' 线路的名称
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property ui_line_name As String
+    '==================================================
+    ''' <summary>
+    ''' 上行线路方向，格式：（起始-[第二站]-终到）仅在环线时标明第二站
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property ui_up_line_toward As String
+
+    ''' <summary>
+    ''' 上行线路描述1-最近车辆
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property ui_up_line_describe_1 As String
+    ''' <summary>
+    ''' 上行线路描述2-第二近车辆
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property ui_up_line_describe_2 As String
+
+    '==================================================
+    ''' <summary>
+    ''' 下行线路方向，格式：（起始-[第二站]-终到）仅在环线时标明第二站
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property ui_down_line_toward As String
+
+    ''' <summary>
+    ''' 下行线路描述1-最近车辆
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property ui_down_line_describe_1 As String
+    ''' <summary>
+    ''' 下行线路描述2-第二近车辆
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property ui_down_line_describe_2 As String
+
+End Class
+''' <summary>
 ''' [ui]车站区块中车站列表中每项对应数据类
 ''' </summary>
 ''' <remarks></remarks>

@@ -23,27 +23,6 @@
     Public cross_stop As String = ""
 
     '==============================已过时，现在只显示一边站台=================================
-    '''' <summary>
-    '''' [内核][screen_stop]站台中显示交汇的数组-----之前的站台-第一个数字指示是第几个线路，第二个数字0=站台名 1=经过的车辆的组
-    '''' </summary>
-    '''' <remarks></remarks>
-    'Public bus_stop_line_before(10, 2) As String
-    '''' <summary>
-    '''' [内核][screen_stop]站台中显示交汇的数组-----之前的站台所包含的项的数目
-    '''' </summary>
-    '''' <remarks></remarks>
-    'Public bus_stop_line_before_list As Integer = 0
-    ''
-    '''' <summary>
-    '''' [内核][screen_stop]站台中显示交汇的数组-----之后的站台-第一个数字指示是第几个线路，第二个数字0=站台名 1=经过的车辆的组
-    '''' </summary>
-    '''' <remarks></remarks>
-    'Public bus_stop_line_last(10, 2) As String
-    '''' <summary>
-    '''' [内核][screen_stop]站台中显示交汇的数组-----之后的站台所包含的项的数目
-    '''' </summary>
-    '''' <remarks></remarks>
-    'Public bus_stop_line_last_list As Integer = 0
     ''' <summary>
     ''' [内核][screen_stop]站台中显示交汇的数组-----第一个数字指示是第几个线路，第二个数字0=站台名 1=经过的车辆的组
     ''' </summary>
@@ -54,6 +33,16 @@
     ''' </summary>
     ''' <remarks></remarks>
     Public bus_stop_line_list As Integer = 0
+
+    '==================================真实站台内容====================================================
+    ''' <summary>
+    ''' [内核][screen_stop]站台中真实站台内容（序号，0=线路名 1=上行描述1 2=上行描述2 3=上行方向 4=上行的当前选中站台的所在序列数 5=下行描述1 6=下行描述2 7=下行方向 8=下行的当前选中站台所在序列数）
+    ''' </summary>
+    Public realistic_stop(50, 8) As String
+    ''' <summary>
+    ''' [内核][screen_stop]站台中真实站台内容的个数
+    ''' </summary>
+    Public realistic_stop_list As Integer = 0
 
     '******************************************************最短路径**************************************************
     ''' <summary>
@@ -167,6 +156,8 @@
 
                 '输出下端交汇列表
                 get_bus_stop_line(linshi)
+                '读取真实站台
+                get_realistic_stop(linshi)
                 Exit Do
             Else
                 file.ReadLine()
@@ -265,7 +256,6 @@
     ''' <param name="word">输入经过中心站台的车辆字符串---按照 车辆组 字符串模式编码，即按空格分隔</param>
     ''' <remarks></remarks>
     Public Sub get_bus_stop_line(ByVal word As String)
-        Dim list As Integer = 1
 
         Dim word_arr() As String = word.Split(" ")
 
@@ -446,7 +436,87 @@ end_fx:
         file.Dispose()
     End Sub
 
+    '===================================================================================
+    ''' <summary>
+    ''' 获取真实站台内容
+    ''' </summary>
+    ''' <param name="cross_line">经过的车次</param>
+    Public Sub get_realistic_stop(ByVal cross_line As String)
 
+        '清空
+        If realistic_stop_list <> 0 Then
+            For a = 0 To realistic_stop_list - 1
+                For b = 0 To 8
+                    realistic_stop(a, b) = ""
+                Next
+            Next
+            realistic_stop_list = 0
+        End If
+
+
+        '读入
+        Dim word_arr() As String = cross_line.Split(" ")
+
+        For a = 0 To word_arr.Count - 1
+            If word_arr(a) <> "" Then
+                If check_realistic_stop_have_item(word_arr(a)) = False Then
+                    realistic_stop(realistic_stop_list, 0) = word_arr(a)
+                    '获取有关数据
+                    Dim str As String = get_start_and_end_stop_in_line(word_arr(a), bus_stop_stop(now_stop))
+                    If str <> "" Then
+                        Dim str_sp() As String = str.Split(",")
+                        realistic_stop(realistic_stop_list, 3) = str_sp(0)
+                        realistic_stop(realistic_stop_list, 7) = str_sp(1)
+                        realistic_stop(realistic_stop_list, 4) = str_sp(2)
+                        realistic_stop(realistic_stop_list, 8) = str_sp(3)
+                    Else
+                        realistic_stop(realistic_stop_list, 3) = "（无）"
+                        realistic_stop(realistic_stop_list, 7) = "（无）"
+                        realistic_stop(realistic_stop_list, 4) = "-1"
+                        realistic_stop(realistic_stop_list, 8) = "-1"
+                    End If
+
+                    realistic_stop_list += 1
+                End If
+            End If
+        Next
+
+        '先写入内容
+        ui_connet_core_form_stop_realistic_stop_list.Clear()
+        Dim linshi As ui_depend_stop_realistic_stop_list = New ui_depend_stop_realistic_stop_list
+        For a = 0 To realistic_stop_list - 1
+            linshi.ui_line_name = realistic_stop(a, 0)
+            linshi.ui_up_line_toward = realistic_stop(a, 3)
+            linshi.ui_up_line_describe_1 = ""
+            linshi.ui_up_line_describe_2 = ""
+            linshi.ui_down_line_toward = realistic_stop(a, 7)
+            linshi.ui_down_line_describe_1 = ""
+            linshi.ui_down_line_describe_2 = ""
+
+
+            ui_connet_core_form_stop_realistic_stop_list.Add(linshi)
+            linshi = New ui_depend_stop_realistic_stop_list
+        Next
+
+        ''启动获取task，可取消版
+        'If get_bus_addr = False Then Exit Sub
+
+    End Sub
+
+    ''' <summary>
+    ''' 检测realistic_stop里是否含有某些项
+    ''' </summary>
+    ''' <param name="name"></param>
+    ''' <returns></returns>
+    Public Function check_realistic_stop_have_item(ByVal name As String) As Boolean
+        For a = 0 To 50
+            If realistic_stop(a, 0) = "" Then Exit For
+            If realistic_stop(a, 0) = name Then Return True
+        Next
+        Return False
+    End Function
+
+    '===================================================================================
     ''' <summary>
     ''' [内核][screen_stop]检索在指定交汇，中是否有指定项，有返回项的索引，否则返回-1，仅供get_bus_stop_line_ex调用
     ''' </summary>

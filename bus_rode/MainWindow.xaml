@@ -665,7 +665,7 @@
                     <!-- 空白-->
                     <RowDefinition Height="20"/>
                     <!-- 下部显示区-->
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="4*"/>
 
                     <!-- 空白-->
                     <RowDefinition Height="20"/>
@@ -687,11 +687,18 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
+                        <!-- 圆角拐弯-->
                         <RowDefinition Height="20"/>
+                        <!-- 内容-->
+                        <RowDefinition Height="150"/>
+                        <!-- 中间间隔-->
+                        <RowDefinition Height="40"/>
+                        <!-- ===================上部====================-->
                         <!-- 基本站台-->
                         <RowDefinition Height="auto"/>
+                        <!-- ===================下部====================-->
                         <!-- 中间间隔-->
-                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="40"/>
                         <!-- 圆角拐弯-->
                         <RowDefinition Height="20"/>
                         <!-- 内容-->
@@ -699,15 +706,44 @@
                     </Grid.RowDefinitions>
 
                     <!-- 站点-->
-                    <Ellipse Fill="white" Grid.Row="1" Grid.Column="0" StrokeThickness="0"/>
-                    <TextBlock x:Name="ui_form_stop_middle_stop_name" Foreground="white" FontSize="15" Text="没有站台名" Grid.Column="1" Margin="5,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+                    <Ellipse Fill="white" Grid.Row="3" Grid.Column="0" StrokeThickness="0">
+                        <Ellipse.Effect >
+                            <DropShadowEffect BlurRadius="10" Color="#FFffffff" ShadowDepth="0" Direction="0" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <TextBlock x:Name="ui_form_stop_middle_stop_name" Foreground="white" FontSize="15" Text="没有站台名" Grid.Column="1" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
 
+                    <!-- ============================================上部内容-真实站台===============================================-->
                     <!-- 连线-->
-                    <Grid Grid.Row="1" Grid.RowSpan="3" Margin="0,10,0,20" HorizontalAlignment="Center" Background="White" Width="5"/>
-                    <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" VerticalAlignment="Center" Background="White" Height="5"/>
+                    <Grid Grid.Row="0" Grid.RowSpan="4" Margin="0,20,0,10" HorizontalAlignment="Center" Background="White" Width="5"/>
+                    <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="20,0,0,0" VerticalAlignment="Center" Background="White" Height="5"/>
 
                     <!-- 圆角-->
-                    <Ellipse Fill="#00000000" Margin="8,0,0,8" StrokeThickness="5" Stroke="White" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                    <Ellipse Fill="#00000000" Margin="8,8,0,0" StrokeThickness="5" Stroke="White" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                             Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Ellipse.Clip>
+                            <RectangleGeometry Rect="0,0,12,12"/>
+                        </Ellipse.Clip>
+                    </Ellipse>
+
+                    <!-- 列表-->
+                    <ListBox x:Name="ui_form_stop_realistic_stop_list" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="#00000000" ItemTemplate="{StaticResource ui_temp_form_stop_realistic_stop_list}" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0" BorderBrush="White" ScrollViewer.VerticalScrollBarVisibility ="Hidden" Margin="10,0,0,0">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+
+                    <!-- ============================================下部内容-附近站台===============================================-->
+
+                    <!-- 连线-->
+                    <Grid Grid.Row="3" Grid.RowSpan="3" Margin="0,10,0,20" HorizontalAlignment="Center" Background="White" Width="5"/>
+                    <Grid Grid.Row="5" Grid.ColumnSpan="2" Margin="20,0,0,0" VerticalAlignment="Center" Background="White" Height="5"/>
+
+                    <!-- 圆角-->
+                    <Ellipse Fill="#00000000" Margin="8,0,0,8" StrokeThickness="5" Stroke="White" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="2"
                              Width="20" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                         <Ellipse.Clip>
                             <RectangleGeometry Rect="0,8,12,12"/>
@@ -715,7 +751,7 @@
                     </Ellipse>
 
                     <!-- 列表-->
-                    <ListBox x:Name="ui_form_stop_cross_line_list" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Background="#00000000" ItemTemplate="{StaticResource ui_temp_form_stop_cross_line_list}" 
+                    <ListBox x:Name="ui_form_stop_cross_line_list" Grid.Column="1" Grid.Row="5" Grid.RowSpan="2" Background="#00000000" ItemTemplate="{StaticResource ui_temp_form_stop_cross_line_list}" 
                              ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0" BorderBrush="White" ScrollViewer.VerticalScrollBarVisibility ="Hidden" Margin="10,0,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -2629,9 +2665,9 @@
 
                                                 <!-- 按钮图标-->
                                                 <Grid>
-                                                     <Grid.Background >
-                                                    <ImageBrush ImageSource="photo\right.png"/>
-                                                </Grid.Background>
+                                                    <Grid.Background >
+                                                        <ImageBrush ImageSource="photo\right.png"/>
+                                                    </Grid.Background>
                                                 </Grid>
 
                                                 <!-- 提示-->
@@ -2668,7 +2704,7 @@
                                             </Grid.Triggers>
 
                                         </Grid>
-                                    
+
                                     </Grid>
 
                                 </StackPanel>

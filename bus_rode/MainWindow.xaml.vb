@@ -47,6 +47,12 @@ Public Class MainWindow
     Public get_resource_timer As New Windows.Threading.DispatcherTimer
 
     ''' <summary>
+    ''' [系统]获取真实站台的计时器
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public get_realistic_stop_timer As New Windows.Threading.DispatcherTimer
+
+    ''' <summary>
     ''' 打开资源文件的打开框
     ''' </summary>
     Public open_resources_file As New Microsoft.Win32.OpenFileDialog
@@ -69,7 +75,12 @@ Public Class MainWindow
     ''' <summary>
     ''' 获取实时资源的线程
     ''' </summary>
-    Public connect_dll_get_resources_td As New System.Threading.Thread(AddressOf connect_dll_get_resources)
+    Public connect_dll_get_resources_td As New System.Threading.Thread(AddressOf connect_dll_screen_line_get_resources)
+
+    ''' <summary>
+    ''' 获取真实站台的线程
+    ''' </summary>
+    Public connect_dll_get_realistic_stop_td As New System.Threading.Thread(AddressOf connect_dll_screen_stop_get_resources)
 
 #End Region
 
@@ -188,6 +199,8 @@ Public Class MainWindow
     Public Sub get_resource_timer_function(ByVal sender As Object, ByVal e As EventArgs)
 
         '刷新车辆状态
+        '确认要不要刷
+        If screens <> 1 Then Exit Sub
 
         ui_form_line_have_stop_list.ItemsSource = Nothing
         'ui_form_line_form_re_mid_bus_width.Width = GridLength.Auto
@@ -195,18 +208,53 @@ Public Class MainWindow
         '确认没有问题再执行防止无端消耗资源
         If read_mid_bus_word <> "" Then
             read_mid_bus()
+
+            'ui_form_line_form_re_mid_bus_width.Width = New GridLength(0)
+            If up_or_down_line = True Then
+                ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_up
+            Else
+                ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_down
+            End If
+            ui_form_line_have_stop_list.ItemsSource = ui_connet_core_form_line_have_sotp_list_show
+
+            '显示信息
+            ui_form_line_re_bus_describe.Text = "最后刷新时间：" & read_mid_bus_word_last_update
         End If
 
-        'ui_form_line_form_re_mid_bus_width.Width = New GridLength(0)
-        If up_or_down_line = True Then
-            ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_up
-        Else
-            ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_down
-        End If
-        ui_form_line_have_stop_list.ItemsSource = ui_connet_core_form_line_have_sotp_list_show
+    End Sub
+
+    ''' <summary>
+    ''' [系统]获取真实站台的计时器刷新函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Public Sub get_realistic_stop_timer_function(ByVal sender As Object, ByVal e As EventArgs)
+
+        '刷新状态
+        '确认要不要刷
+        If screens <> 2 Then Exit Sub
+
+        ui_form_stop_realistic_stop_list.ItemsSource = Nothing
+
+        ui_connet_core_form_stop_realistic_stop_list.Clear()
+        '写入内容
+        Dim linshi As ui_depend_stop_realistic_stop_list = New ui_depend_stop_realistic_stop_list
+        For a = 0 To realistic_stop_list - 1
+            linshi.ui_line_name = realistic_stop(a, 0)
+            linshi.ui_up_line_toward = realistic_stop(a, 3)
+            linshi.ui_up_line_describe_1 = realistic_stop(a, 1)
+            linshi.ui_up_line_describe_2 = realistic_stop(a, 2)
+            linshi.ui_down_line_toward = realistic_stop(a, 7)
+            linshi.ui_down_line_describe_1 = realistic_stop(a, 5)
+            linshi.ui_down_line_describe_2 = realistic_stop(a, 6)
+
+            ui_connet_core_form_stop_realistic_stop_list.Add(linshi)
+            linshi = New ui_depend_stop_realistic_stop_list
+        Next
 
         '显示信息
-        ui_form_line_re_bus_describe.Text = "最后刷新时间：" & read_mid_bus_word_last_update
+        ui_form_stop_realistic_stop_list.ItemsSource = ui_connet_core_form_stop_realistic_stop_list
 
     End Sub
 
@@ -223,6 +271,36 @@ Public Class MainWindow
     ''' <remarks></remarks>
     Private Sub app_start(sender As Object, e As RoutedEventArgs) Handles ui_bus_rode_main_window.Loaded
         '***********************************************************正式启动*********************************************************************************
+
+        '检测和初始环境
+        app_start_part_check()
+        app_start_part_enviroment()
+
+        '如果有资源
+        If no_resource = False Then
+
+            app_start_part_basic_resources()
+
+        End If
+
+        '加载线程
+        app_start_part_thunder()
+
+        '加载无关紧要的
+        app_start_part_another()
+
+
+        '测试调试范围
+
+
+
+
+    End Sub
+
+    ''' <summary>
+    ''' [系统]初始化-检查
+    ''' </summary>
+    Public Sub app_start_part_check()
 
         '检测环境
         '定义变量确定检测结果
@@ -263,19 +341,6 @@ Public Class MainWindow
             Environment.Exit(3)
         End If
 
-        '初始化托盘
-        app_desktop_icon.Visible = True
-        app_desktop_icon.Icon = New System.Drawing.Icon("bus_rode_icon.dat")
-        app_desktop_icon.Text = app_name
-
-        '按操作系统修改ui
-        If Environment.OSVersion.Version.Major > 6 Or (Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor >= 2) Then
-            'win8以上
-            ui_title_msg_column_1.Width = New GridLength(0)
-            ui_title_msg_column_2.Width = New GridLength(0)
-            ui_title_msg_column_3.Width = New GridLength(0)
-        End If
-
         '检测文件
         Dim linshi_word As String = ""
         If bus_rode_check.bus_rode_check.check_file(Environment.CurrentDirectory + "\", linshi_word) = False Then
@@ -301,6 +366,11 @@ Public Class MainWindow
             ui_form_message_no_msg_title.Opacity = 0
             ui_window_title.Text = ui_window_title.Text + "(32Bit)"
         End If
+    End Sub
+    ''' <summary>
+    ''' [系统]初始化-环境设置
+    ''' </summary>
+    Public Sub app_start_part_enviroment()
 
         '接受命令行
         If Command() <> "" Then
@@ -325,103 +395,93 @@ Public Class MainWindow
             Loop
         End If
 
+        '初始化托盘
+        app_desktop_icon.Visible = True
+        app_desktop_icon.Icon = New System.Drawing.Icon("bus_rode_icon.dat")
+        app_desktop_icon.Text = app_name
+
+        '按操作系统修改ui
+        If Environment.OSVersion.Version.Major > 6 Or (Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor >= 2) Then
+            'win8以上
+            ui_title_msg_column_1.Width = New GridLength(0)
+            ui_title_msg_column_2.Width = New GridLength(0)
+            ui_title_msg_column_3.Width = New GridLength(0)
+        End If
+
         '尝试加载背景
         If System.IO.File.Exists(Environment.CurrentDirectory + "\background.jpg") Then
             '有背景
             Dim bk As New ImageBrush(New BitmapImage(New Uri(Environment.CurrentDirectory + "\background.jpg")))
             ui_bus_rode_main_window.Background = bk
         End If
+    End Sub
+    ''' <summary>
+    ''' [系统]初始化-基本资源加载设置
+    ''' </summary>
+    Public Sub app_start_part_basic_resources()
+
+        '设置控件
+        ui_form_line_have_stop_list.ItemsSource = Nothing
+        ui_form_line_subway_list.ItemsSource = Nothing
 
 
-        '刷新时间，启动时间计时器
-        If Minute(Now) < 10 Then
-            ui_title_time.Text = Hour(Now()) & ":0" & Minute(Now())
+        '加载文件
+        start()
+        add_system()
+
+        '设置默认上行
+        ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_up
+        ui_form_line_have_stop_list.ItemsSource = ui_connet_core_form_line_have_sotp_list_show
+        ui_form_line_subway_list.ItemsSource = ui_connet_core_form_line_subway_list
+
+        '==========================================================line
+        '设置文本
+        If bus_or_subway = 0 Then
+            '公交
+            ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：公交" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
         Else
-            ui_title_time.Text = Hour(Now()) & ":" & Minute(Now())
+            '地铁
+            ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：地铁" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
         End If
 
-        date_timer = New Windows.Threading.DispatcherTimer
-        date_timer.Interval = TimeSpan.FromSeconds(5)
-        AddHandler date_timer.Tick, AddressOf date_timer_function
-        date_timer.Start()
-
-        If no_resource = False Then
-            '启动获取资源的计时器
-            get_resource_timer = New Windows.Threading.DispatcherTimer
-            get_resource_timer.Interval = TimeSpan.FromSeconds(10)
-            AddHandler get_resource_timer.Tick, AddressOf get_resource_timer_function
-            get_resource_timer.Start()
-
-
-            '启动最短路径线程
-            main_calc_td.Start()
-            '启动讲述人线程
-            talk_man_main_td.Start()
-
-            '加载文件
-            start()
-            ui_form_line_have_stop_list.ItemsSource = Nothing
-            ui_form_line_subway_list.ItemsSource = Nothing
-            add_system()
-            '设置默认上行
-            ui_connet_core_form_line_have_sotp_list_show = ui_connet_core_form_line_have_sotp_list_up
-            ui_form_line_have_stop_list.ItemsSource = ui_connet_core_form_line_have_sotp_list_show
-            ui_form_line_subway_list.ItemsSource = ui_connet_core_form_line_subway_list
-
-            '修改计时器状态
-            '设置获取实时资源的线程状态
-            If System.IO.File.Exists(Environment.CurrentDirectory + "\bus_rode_mod.dll") = True Then
-                connect_dll_get_resources_td.Start()
-            Else
-                '没有资源，或者未连接到网络，强制把实时关掉
-                get_bus_addr = False
-            End If
-            If get_bus_addr = False Then
-                get_resource_timer.Stop()
-                connect_dll_get_resources_always_stop = True
-            End If
-
-            '设置文本
-            If bus_or_subway = 0 Then
-                '公交
-                ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：公交" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
-            Else
-                '地铁
-                ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：地铁" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
-            End If
-            '设置上下行文本，控制操作
-            ui_form_line_select_up_line_describe.Text = "（" & bus_up_line_describe & "）"
-            If bus_down_line_describe = "" Then
-                '没有下行线路，封掉
-                ui_form_line_select_down_line_describe.Text = ""
-                ui_form_line_form_no_down_line_width.Width = New GridLength(0)
-            Else
-                '有，写入
-                ui_form_line_select_down_line_describe.Text = "（" & bus_down_line_describe & "）"
-                ui_form_line_form_no_down_line_width.Width = GridLength.Auto
-            End If
-
-            ui_form_stop_describe.Text = cross_stop
-            ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
-
-            '关联控件
-
-            '初始化line
-            ui_form_line_list.ItemsSource = ui_connet_core_form_line_list
-            ui_form_line_stop_search_list.ItemsSource = ui_connet_core_form_line_search_stop_list
-
-            '初始化stop
-            If ui_connet_core_form_stop_list.Count > 500 Then
-                '太多了不显示，若显示会炸内存
-                ui_form_stop_list.ItemsSource = Nothing
-                ui_form_stop_contorl_full_list.Opacity = 1
-            Else
-                ui_form_stop_list.ItemsSource = ui_connet_core_form_stop_list
-            End If
-
-            ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
-
+        '设置上下行文本，控制操作
+        ui_form_line_select_up_line_describe.Text = "（" & bus_up_line_describe & "）"
+        If bus_down_line_describe = "" Then
+            '没有下行线路，封掉
+            ui_form_line_select_down_line_describe.Text = ""
+            ui_form_line_form_no_down_line_width.Width = New GridLength(0)
+        Else
+            '有，写入
+            ui_form_line_select_down_line_describe.Text = "（" & bus_down_line_describe & "）"
+            ui_form_line_form_no_down_line_width.Width = GridLength.Auto
         End If
+
+        ui_form_stop_describe.Text = cross_stop
+        ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
+
+        '关联控件
+        ui_form_line_list.ItemsSource = ui_connet_core_form_line_list
+        ui_form_line_stop_search_list.ItemsSource = ui_connet_core_form_line_search_stop_list
+
+
+        '==========================================================stop
+        '初始化stop
+        If ui_connet_core_form_stop_list.Count > 500 Then
+            '太多了不显示，若显示会炸内存
+            ui_form_stop_list.ItemsSource = Nothing
+            ui_form_stop_contorl_full_list.Opacity = 1
+        Else
+            ui_form_stop_list.ItemsSource = ui_connet_core_form_stop_list
+        End If
+
+        ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
+        ui_form_stop_realistic_stop_list.ItemsSource = ui_connet_core_form_stop_realistic_stop_list
+
+    End Sub
+    ''' <summary>
+    ''' [系统]初始化-界面其余设置
+    ''' </summary>
+    Public Sub app_start_part_another()
 
         '加载无关紧要的设置
         add_setting()
@@ -460,7 +520,6 @@ Public Class MainWindow
         ui_form_contorl_g_value.Value = form_color.G
         ui_form_contorl_b_value.Value = form_color.B
 
-
         '设置界面文本
         Dim describe As String = ""
         describe = "Programmer : Wiliam Tad" & vbCrLf &
@@ -492,9 +551,6 @@ Public Class MainWindow
         ui_window_title.Text = app_name
         Me.Title = app_name
 
-        '测试调试范围
-
-
         '关联控件
         '初始化消息列表
         ui_form_message_list.ItemsSource = ui_connet_core_form_message_list
@@ -505,6 +561,70 @@ Public Class MainWindow
         open_mod_file.Filter = "bus_rode插件|*.dll"
 
     End Sub
+    ''' <summary>
+    ''' [系统]初始化-线程
+    ''' </summary>
+    Public Sub app_start_part_thunder()
+        '==============================================================时间
+        '刷新时间，启动时间计时器
+        If Minute(Now) < 10 Then
+            ui_title_time.Text = Hour(Now()) & ":0" & Minute(Now())
+        Else
+            ui_title_time.Text = Hour(Now()) & ":" & Minute(Now())
+        End If
+
+        date_timer = New Windows.Threading.DispatcherTimer
+        date_timer.Interval = TimeSpan.FromSeconds(5)
+        AddHandler date_timer.Tick, AddressOf date_timer_function
+        date_timer.Start()
+
+        '==============================================================初始化资源部分
+        If System.IO.File.Exists(Environment.CurrentDirectory + "\bus_rode_mod.dll") = True Then
+            '初始化
+            connect_dll_init()
+        Else
+            '没有资源，或者未连接到网络，强制把实时关掉
+            get_bus_addr = False
+        End If
+
+        If no_resource = False Then
+
+            '==============================================================计时器
+
+            '启动获取资源的计时器
+            get_resource_timer = New Windows.Threading.DispatcherTimer
+            get_resource_timer.Interval = TimeSpan.FromSeconds(10)
+            AddHandler get_resource_timer.Tick, AddressOf get_resource_timer_function
+            get_resource_timer.Start()
+
+            '启动获取真是站台的计时器
+            get_realistic_stop_timer = New Windows.Threading.DispatcherTimer
+            get_realistic_stop_timer.Interval = TimeSpan.FromSeconds(10)
+            AddHandler get_realistic_stop_timer.Tick, AddressOf get_realistic_stop_timer_function
+            get_realistic_stop_timer.Start()
+
+
+            '设置获取实时资源的线程状态
+            If get_bus_addr = False Then
+                connect_dll_get_resources_always_stop = True
+            End If
+
+            '==============================================================线程启动
+
+            '启动
+            connect_dll_get_resources_td.Start()
+
+            connect_dll_get_realistic_stop_td.Start()
+
+        End If
+        '==============================================================最短路径，讲述人
+        '启动最短路径线程
+        main_calc_td.Start()
+        '启动讲述人线程
+        talk_man_main_td.Start()
+
+    End Sub
+
 
     ''' <summary>
     ''' 发送消息的附属函数
@@ -1435,10 +1555,8 @@ Public Class MainWindow
                 '============================================设置界面
                 get_bus_addr = Not (get_bus_addr)
                 If get_bus_addr = True Then
-                    get_resource_timer.Start()
                     connect_dll_get_resources_always_stop = False
                 Else
-                    get_resource_timer.Stop()
                     connect_dll_get_resources_always_stop = True
                 End If
                 '清空
@@ -1761,6 +1879,7 @@ Public Class MainWindow
             If linshi_1 <> -1 Then
                 '清除旧的
                 ui_form_stop_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_realistic_stop_list.ItemsSource = Nothing
 
                 now_stop = linshi_1
                 refsh_stop()
@@ -1771,6 +1890,7 @@ Public Class MainWindow
                 ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
                 ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
+                ui_form_stop_realistic_stop_list.ItemsSource = ui_connet_core_form_stop_realistic_stop_list
 
                 '**************************动画跳转
                 Dim stb_1
@@ -2017,6 +2137,7 @@ Public Class MainWindow
     Private Sub ui_form_stop_list_function(sender As Object, e As SelectionChangedEventArgs) Handles ui_form_stop_list.SelectionChanged
         If ui_form_stop_list.SelectedIndex <> -1 And ui_form_stop_contorl_left_form_textbox.Text = "" Then
             ui_form_stop_cross_line_list.ItemsSource = Nothing
+            ui_form_stop_realistic_stop_list.ItemsSource = Nothing
 
             now_stop = ui_form_stop_list.SelectedIndex
             refsh_stop()
@@ -2026,6 +2147,7 @@ Public Class MainWindow
             ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
             ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
+            ui_form_stop_realistic_stop_list.ItemsSource = ui_connet_core_form_stop_realistic_stop_list
 
         Else
             If ui_form_stop_list.SelectedIndex <> -1 Then
@@ -2036,6 +2158,7 @@ Public Class MainWindow
                 If list <> -1 Then
                     '找到项目，切换
                     ui_form_stop_cross_line_list.ItemsSource = Nothing
+                    ui_form_stop_realistic_stop_list.ItemsSource = Nothing
 
                     now_stop = list
                     refsh_stop()
@@ -2045,6 +2168,7 @@ Public Class MainWindow
                     ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
                     ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
+                    ui_form_stop_realistic_stop_list.ItemsSource = ui_connet_core_form_stop_realistic_stop_list
 
 
                     '还原自动填充
@@ -2073,6 +2197,7 @@ Public Class MainWindow
             If list <> -1 Then
                 '找到项目，切换
                 ui_form_stop_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_realistic_stop_list.ItemsSource = Nothing
 
                 now_stop = list
                 refsh_stop()
@@ -2082,7 +2207,7 @@ Public Class MainWindow
                 ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
                 ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
-
+                ui_form_stop_realistic_stop_list.ItemsSource = ui_connet_core_form_stop_realistic_stop_list
 
                 '还原自动填充
                 ui_form_stop_contorl_left_form_textbox.Text = ""
@@ -2153,6 +2278,7 @@ Public Class MainWindow
             If a <> -1 Then
                 '跳转
                 ui_form_stop_cross_line_list.ItemsSource = Nothing
+                ui_form_stop_realistic_stop_list.ItemsSource = Nothing
 
                 now_stop = a
                 refsh_stop()
@@ -2162,6 +2288,7 @@ Public Class MainWindow
                 ui_form_stop_middle_stop_name.Text = bus_stop_stop(now_stop)
 
                 ui_form_stop_cross_line_list.ItemsSource = ui_connet_core_form_stop_cross_line_list
+                ui_form_stop_realistic_stop_list.ItemsSource = ui_connet_core_form_stop_realistic_stop_list
 
                 '还原
                 ui_form_stop_contorl_left_form_textbox.Text = ""
@@ -2841,7 +2968,7 @@ Public Class MainWindow
     '**********************************************
 
     ''' <summary>
-    ''' [系统][ui]站台-左侧车次列表移入鼠标显示滚动条
+    ''' [系统][ui]站台-车次列表移入鼠标显示滚动条
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
@@ -2850,12 +2977,30 @@ Public Class MainWindow
     End Sub
 
     ''' <summary>
-    ''' [系统][ui]站台-左侧车次列表移出鼠标不显示滚动条
+    ''' [系统][ui]站台-车次列表移出鼠标不显示滚动条
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub ui_form_stop_cross_line_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_stop_cross_line_list.MouseLeave
         ScrollViewer.SetHorizontalScrollBarVisibility(ui_form_stop_cross_line_list, ScrollBarVisibility.Hidden)
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]站台-真实站台列表移入鼠标不显示滚动条
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_stop_realistic_stop_list_mouse_enter(sender As Object, e As MouseEventArgs) Handles ui_form_stop_realistic_stop_list.MouseEnter
+        ScrollViewer.SetHorizontalScrollBarVisibility(ui_form_stop_realistic_stop_list, ScrollBarVisibility.Auto)
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]站台-真实站台列表移入鼠标显示滚动条
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_stop_realistic_stop_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_stop_realistic_stop_list.MouseLeave
+        ScrollViewer.SetHorizontalScrollBarVisibility(ui_form_stop_realistic_stop_list, ScrollBarVisibility.Hidden)
     End Sub
 
 #End Region
