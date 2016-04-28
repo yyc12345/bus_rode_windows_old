@@ -291,54 +291,24 @@
                             '判断上下行，0=上行，1=下行
                             If word_arr_arr(1) = "0" Then
 
-                                '判断pass还是站名
-                                If check_is_number(word_arr_arr(2)) = True Then
-                                    'pass,直接写入
-                                    If Int(word_arr_arr(2)) <= 200 Then
-                                        mid_bus(0, Int(word_arr_arr(2))).number = mid_bus(0, Int(word_arr_arr(2))).number + 1
-                                        mid_bus(0, Int(word_arr_arr(2))).message_1 = mid_bus(0, Int(word_arr_arr(2))).message_1 & word_arr_arr(3)
-                                        mid_bus(0, Int(word_arr_arr(2))).message_2 = mid_bus(0, Int(word_arr_arr(2))).message_2 & word_arr_arr(4)
-                                        mid_bus(0, Int(word_arr_arr(2))).message_3 = mid_bus(0, Int(word_arr_arr(2))).message_3 & word_arr_arr(5)
-                                    End If
-
-                                Else
-                                    '站点
-                                    For d = 0 To 200
-                                        If word_arr_arr(2) = bus_stop_up(d) Then
-                                            mid_bus(0, d).number = mid_bus(0, d).number + 1
-                                            mid_bus(0, d).message_1 = mid_bus(0, d).message_1 & word_arr_arr(3)
-                                            mid_bus(0, d).message_2 = mid_bus(0, d).message_2 & word_arr_arr(4)
-                                            mid_bus(0, d).message_3 = mid_bus(0, d).message_3 & word_arr_arr(5)
-                                            Exit For
-                                        End If
-                                    Next
-
+                                '没有站名选项了，必须是pass station
+                                'pass,直接写入
+                                If Int(word_arr_arr(2)) <= 200 Then
+                                    mid_bus(0, Int(word_arr_arr(2))).number = mid_bus(0, Int(word_arr_arr(2))).number + 1
+                                    mid_bus(0, Int(word_arr_arr(2))).message_1 = mid_bus(0, Int(word_arr_arr(2))).message_1 & word_arr_arr(3)
+                                    mid_bus(0, Int(word_arr_arr(2))).message_2 = mid_bus(0, Int(word_arr_arr(2))).message_2 & word_arr_arr(4)
+                                    mid_bus(0, Int(word_arr_arr(2))).message_3 = mid_bus(0, Int(word_arr_arr(2))).message_3 & word_arr_arr(5)
                                 End If
 
                             Else
 
-                                '判断pass还是站名
-                                If check_is_number(word_arr_arr(2)) = True Then
-                                    'pass,直接写入
-                                    If Int(word_arr_arr(2)) <= 200 Then
-                                        mid_bus(1, Int(word_arr_arr(2))).number = mid_bus(1, Int(word_arr_arr(2))).number + 1
-                                        mid_bus(1, Int(word_arr_arr(2))).message_1 = mid_bus(1, Int(word_arr_arr(2))).message_1 & word_arr_arr(3)
-                                        mid_bus(1, Int(word_arr_arr(2))).message_2 = mid_bus(1, Int(word_arr_arr(2))).message_2 & word_arr_arr(4)
-                                        mid_bus(1, Int(word_arr_arr(2))).message_3 = mid_bus(1, Int(word_arr_arr(2))).message_3 & word_arr_arr(5)
-                                    End If
-
-                                Else
-                                    '站点
-                                    For d = 0 To 200
-                                        If word_arr_arr(2) = bus_stop_up(d) Then
-                                            mid_bus(1, d).number = mid_bus(1, d).number + 1
-                                            mid_bus(1, d).message_1 = mid_bus(1, d).message_1 & word_arr_arr(3)
-                                            mid_bus(1, d).message_2 = mid_bus(1, d).message_2 & word_arr_arr(4)
-                                            mid_bus(1, d).message_3 = mid_bus(1, d).message_3 & word_arr_arr(5)
-                                            Exit For
-                                        End If
-                                    Next
-
+                                '没有站名选项了，必须是pass station
+                                'pass,直接写入
+                                If Int(word_arr_arr(2)) <= 200 Then
+                                    mid_bus(1, Int(word_arr_arr(2))).number = mid_bus(1, Int(word_arr_arr(2))).number + 1
+                                    mid_bus(1, Int(word_arr_arr(2))).message_1 = mid_bus(1, Int(word_arr_arr(2))).message_1 & word_arr_arr(3)
+                                    mid_bus(1, Int(word_arr_arr(2))).message_2 = mid_bus(1, Int(word_arr_arr(2))).message_2 & word_arr_arr(4)
+                                    mid_bus(1, Int(word_arr_arr(2))).message_3 = mid_bus(1, Int(word_arr_arr(2))).message_3 & word_arr_arr(5)
                                 End If
 
                             End If

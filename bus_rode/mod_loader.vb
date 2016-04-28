@@ -61,18 +61,7 @@
         Dim out As Reflection.MethodInfo = tp.GetMethod("GetResources", Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance)
 
         '获取循环
-        '先获取一次
         Dim result As Object
-        '尝试获取
-        Try
-            result = out.Invoke(connect_dll_screen_line_use_object, Nothing)
-            read_mid_bus_word = result.ToString
-            read_mid_bus_word_last_update = DateTime.Now.TimeOfDay.ToString
-        Catch ex As Exception
-            '获取失败不停止获取，但返回空
-            read_mid_bus_word = ""
-        End Try
-
 
         '循环
         Do
@@ -115,6 +104,119 @@
     ''' [系统][MOD]线程往复调用插件获取真实站台
     ''' </summary>
     Public Sub connect_dll_screen_stop_get_resources()
+
+        '==========执行判断===========
+        If connect_dll_screen_stop_use_object_can_use = False Then Exit Sub
+
+        '**********************************************开始执行
+        '获取反射
+        Dim ass As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory & "\bus_rode_mod.dll")
+        Dim tp As Type = ass.GetType("bus_rode_dll.main_dll", True)
+
+        '获取主函数
+        Dim out As Reflection.MethodInfo = tp.GetMethod("GetResources", Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance)
+
+        '获取循环
+        Dim result As Object
+        Dim line_group As ArrayList = New ArrayList
+
+        '循环
+        Do
+            '等待刷新
+            For a = 0 To connect_dll_screen_stop_use_object_round_number
+                '判断紧急情况
+                If connect_dll_get_resources_urgent = True Then
+                    connect_dll_get_resources_urgent = False
+                    Exit For
+                Else
+                    System.Threading.Thread.Sleep(500)
+                End If
+            Next
+
+            '刷新
+            '仅在站台界面中刷新，减少消耗
+            If screens = 2 And connect_dll_get_resources_always_stop = False Then
+                '先读取所有车辆
+                For a = 0 To realistic_stop_list - 1
+                    line_group.Add(realistic_stop(a, 0))
+                Next
+
+                '循环获取
+                For a = 0 To realistic_stop_list - 1
+                    connect_dll_screen_stop_use_object_prop_bus_name.SetValue(connect_dll_screen_stop_use_object, line_group.Item(a).ToString)
+
+                    '尝试获取
+                    Try
+                        result = out.Invoke(connect_dll_screen_stop_use_object, Nothing)
+                        line_group.Item(a) = result.ToString
+                    Catch ex As Exception
+                        '获取失败不停止获取，但返回空
+                        line_group.Item(a) = ""
+                    End Try
+                Next
+
+                Dim up_line_word As String = ""
+                Dim down_line_word As String = ""
+                For a = 0 To realistic_stop_list - 1
+                    '没有内容
+                    If line_group.Item(a).ToString = "" Then
+                        realistic_stop(a, 1) = "-1"
+                        realistic_stop(a, 2) = "-1"
+                        realistic_stop(a, 5) = "-1"
+                        realistic_stop(a, 6) = "-1"
+                        '开始新循环
+                        GoTo begin_new_circle
+                    End If
+
+                    '拆分
+                    Dim word_sp() As String = line_group.Item(a).ToString.Split("@")
+                    For b = 0 To word_sp.Count - 1
+                        Dim bus_sp() As String = word_sp(b).Split("#")
+                        If bus_sp(1) = "0" Then
+                            '上行
+                            If up_line_word = "" Then
+                                up_line_word = bus_sp(2)
+                            Else
+                                up_line_word = up_line_word & "," & bus_sp(2)
+                            End If
+                        Else
+                            '下行
+                            If down_line_word = "" Then
+                                down_line_word = bus_sp(2)
+                            Else
+                                down_line_word = down_line_word & "," & bus_sp(2)
+                            End If
+                        End If
+                    Next
+
+                    '尝试返回
+                    If up_line_word = "" Or realistic_stop(a, 4) = "-1" Then
+                        realistic_stop(a, 1) = "-1"
+                        realistic_stop(a, 2) = "-1"
+                    Else
+                        return_nearly_number(up_line_word, realistic_stop(a, 4), realistic_stop(a, 1), realistic_stop(a, 2))
+                    End If
+                    If down_line_word = "" Or realistic_stop(a, 8) = "-1" Then
+                        realistic_stop(a, 1) = "-1"
+                        realistic_stop(a, 2) = "-1"
+                    Else
+                        return_nearly_number(down_line_word, realistic_stop(a, 8), realistic_stop(a, 5), realistic_stop(a, 6))
+                    End If
+
+begin_new_circle:
+                    '还原
+                    up_line_word = ""
+                    down_line_word = ""
+
+                Next
+
+
+
+            End If
+
+            line_group.Clear()
+
+        Loop
 
     End Sub
 

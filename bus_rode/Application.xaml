@@ -316,7 +316,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0" Background="White" Grid.Row="0" Grid.RowSpan="2" Margin="0,8,0,10" HorizontalAlignment="Center" Width="5"/>
-                    <Ellipse Grid.Column="0" Fill="White" StrokeThickness="0" Grid.Row="1" Width="20" Height="20"/>
+                    <Ellipse Grid.Column="0" Fill="white" StrokeThickness="0" Grid.Row="1" Width="20" Height="20"/>
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ui_line_name}" FontSize="15" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left"/>
                 </Grid>
 
@@ -337,16 +337,17 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <Ellipse StrokeThickness="0" Fill="White" Width="5" Height="5" VerticalAlignment="Center"/>
+                            <Ellipse StrokeThickness="0" Fill="{Binding ui_up_bk_color}" Width="10" Height="10" VerticalAlignment="Center"/>
                             <TextBlock Grid.Row="1" Text="上行线路" FontSize="12" Foreground="White" Margin="5,0,0,0"/>
                             <TextBlock Grid.Row="1" Text="{Binding ui_up_line_toward}" FontSize="12" Foreground="White" />
                         </StackPanel>
                         <TextBlock Grid.Row="2" Text="{Binding ui_up_line_describe_1}" FontSize="12" Foreground="White" />
-                        <TextBlock Grid.Row="2" Text="{Binding ui_up_line_describe_2}" FontSize="12" Foreground="White" />
+                        <TextBlock Grid.Row="3" Text="{Binding ui_up_line_describe_2}" FontSize="12" Foreground="White" />
                     </Grid>
 
                     <!-- down-->
@@ -355,16 +356,17 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <Ellipse StrokeThickness="0" Fill="White" Width="5" Height="5" VerticalAlignment="Center"/>
+                            <Ellipse StrokeThickness="0" Fill="{Binding ui_down_bk_color}" Width="10" Height="10" VerticalAlignment="Center"/>
                             <TextBlock Grid.Row="1" Text="下行线路" FontSize="12" Foreground="White" Margin="5,0,0,0"/>
                             <TextBlock Grid.Row="1" Text="{Binding ui_down_line_toward}" FontSize="12" Foreground="White" />
                         </StackPanel>
                         <TextBlock Grid.Row="2" Text="{Binding ui_down_line_describe_1}" FontSize="12" Foreground="White" />
-                        <TextBlock Grid.Row="2" Text="{Binding ui_down_line_describe_2}" FontSize="12" Foreground="White" />
+                        <TextBlock Grid.Row="3" Text="{Binding ui_down_line_describe_2}" FontSize="12" Foreground="White" />
                     </Grid>
 
                 </Grid>

@@ -136,6 +136,18 @@ Public Class ui_depend_stop_realistic_stop_list
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Property ui_line_name As String
+
+    ''' <summary>
+    ''' 在真实站台上行中的线路谁离得最近 6站以上或没车：RGB：255，255，255     5站：RGB：255，204，204     4站：RGB：255，153，153     3站：RGB：255，102，102     2站：RGB：255，51，51     1站：RGB：255，0，0
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property ui_up_bk_color As SolidColorBrush
+    ''' <summary>
+    ''' 在真实站台中下行的线路谁离得最近 6站以上或没车：RGB：255，255，255     5站：RGB：255，204，204     4站：RGB：255，153，153     3站：RGB：255，102，102     2站：RGB：255，51，51     1站：RGB：255，0，0
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property ui_down_bk_color As SolidColorBrush
+
     '==================================================
     ''' <summary>
     ''' 上行线路方向，格式：（起始-[第二站]-终到）仅在环线时标明第二站

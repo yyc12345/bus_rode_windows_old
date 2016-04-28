@@ -267,11 +267,11 @@
     ''' <param name="check_number">寻找的数</param>
     ''' <param name="first_nearly">第一小数的差值</param>
     ''' <param name="secound_nearly">第二小数的差值</param>
-    Public Sub return_nearly_number(ByVal number_group As String, ByVal check_number As Integer, ByRef first_nearly As Integer, ByRef secound_nearly As Integer)
+    Public Sub return_nearly_number(ByVal number_group As String, ByVal check_number As String, ByRef first_nearly As String, ByRef secound_nearly As String)
         Dim number_group_sp() As String = number_group.Split(",")
         Dim n_group As New ArrayList
 
-        Dim max_item As Integer = number_group.Count - 1
+        Dim max_item As Integer = number_group_sp.Count - 1
         For a = 0 To max_item
             n_group.Add(CType(number_group_sp(a), Integer))
         Next
@@ -295,25 +295,29 @@
         '=============================获取最小值
         Dim min_list As Integer = -1
         For a = 0 To max_item
-            If CType(n_group.Item(a), Integer) >= check_number Then
+            If CType(n_group.Item(a), Integer) >= CType(check_number, Integer) Then
                 min_list = a - 1
                 Exit For
+            End If
+            If a = max_item And min_list = -1 Then
+                '全部都是在下面的，写最高值
+                min_list = max_item
             End If
         Next
 
         If min_list = -1 Then
             '没有最小值
-            first_nearly = -1
-            secound_nearly = -1
+            first_nearly = "-1"
+            secound_nearly = "-1"
         Else
             If min_list = 0 Then
                 '只有一个最小值
-                first_nearly = CType(n_group.Item(0), Integer) - check_number
-                secound_nearly = -1
+                first_nearly = Math.Abs(CType(n_group.Item(0), Integer) - CType(check_number, Integer))
+                secound_nearly = "-1"
             Else
                 '都有
-                first_nearly = CType(n_group.Item(min_list), Integer) - check_number
-                secound_nearly = CType(n_group.Item(min_list - 1), Integer) - check_number
+                first_nearly = Math.Abs(CType(n_group.Item(min_list), Integer) - CType(check_number, Integer))
+                secound_nearly = Math.Abs(CType(n_group.Item(min_list - 1), Integer) - CType(check_number, Integer))
             End If
         End If
 

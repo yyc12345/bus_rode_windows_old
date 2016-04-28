@@ -36,7 +36,7 @@
 
     '==================================真实站台内容====================================================
     ''' <summary>
-    ''' [内核][screen_stop]站台中真实站台内容（序号，0=线路名 1=上行描述1 2=上行描述2 3=上行方向 4=上行的当前选中站台的所在序列数 5=下行描述1 6=下行描述2 7=下行方向 8=下行的当前选中站台所在序列数）
+    ''' [内核][screen_stop]站台中真实站台内容（序号，0=线路名 1=上行最近车差距 2=上行第二近车差距 3=上行方向 4=上行的当前选中站台的所在序列数 5=下行最近车差距 6=下行第二近车差距 7=下行方向 8=下行的当前选中站台所在序列数）差距为空或为-1，没有
     ''' </summary>
     Public realistic_stop(50, 8) As String
     ''' <summary>
@@ -487,12 +487,14 @@ end_fx:
         For a = 0 To realistic_stop_list - 1
             linshi.ui_line_name = realistic_stop(a, 0)
             linshi.ui_up_line_toward = realistic_stop(a, 3)
-            linshi.ui_up_line_describe_1 = ""
-            linshi.ui_up_line_describe_2 = ""
+            linshi.ui_up_line_describe_1 = "没有最近的车"
+            linshi.ui_up_line_describe_2 = "没有第二近的车"
             linshi.ui_down_line_toward = realistic_stop(a, 7)
-            linshi.ui_down_line_describe_1 = ""
-            linshi.ui_down_line_describe_2 = ""
+            linshi.ui_down_line_describe_1 = "没有最近的车"
+            linshi.ui_down_line_describe_2 = "没有第二近的车"
 
+            linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+            linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
 
             ui_connet_core_form_stop_realistic_stop_list.Add(linshi)
             linshi = New ui_depend_stop_realistic_stop_list

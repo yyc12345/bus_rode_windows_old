@@ -242,12 +242,64 @@ Public Class MainWindow
         Dim linshi As ui_depend_stop_realistic_stop_list = New ui_depend_stop_realistic_stop_list
         For a = 0 To realistic_stop_list - 1
             linshi.ui_line_name = realistic_stop(a, 0)
+
+            '上行
             linshi.ui_up_line_toward = realistic_stop(a, 3)
-            linshi.ui_up_line_describe_1 = realistic_stop(a, 1)
-            linshi.ui_up_line_describe_2 = realistic_stop(a, 2)
+            If realistic_stop(a, 1) = "" Or realistic_stop(a, 1) = "-1" Then
+                linshi.ui_up_line_describe_1 = "没有最近的车"
+                linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+            Else
+                '分析颜色
+                linshi.ui_up_line_describe_1 = "最近的车还有" & realistic_stop(a, 1) & "站"
+                Select Case realistic_stop(a, 1)
+                    Case "1"
+                        linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 0, 0))
+                    Case "2"
+                        linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 51, 51))
+                    Case "3"
+                        linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 102, 102))
+                    Case "4"
+                        linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 153, 153))
+                    Case "5"
+                        linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 204, 204))
+                    Case Else
+                        linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+                End Select
+            End If
+            If realistic_stop(a, 2) = "" Or realistic_stop(a, 2) = "-1" Then
+                linshi.ui_up_line_describe_2 = "没有第二近的车"
+            Else
+                linshi.ui_up_line_describe_2 = "第二近的车还有" & realistic_stop(a, 2) & "站"
+            End If
+
+            '下行
             linshi.ui_down_line_toward = realistic_stop(a, 7)
-            linshi.ui_down_line_describe_1 = realistic_stop(a, 5)
-            linshi.ui_down_line_describe_2 = realistic_stop(a, 6)
+            If realistic_stop(a, 5) = "" Or realistic_stop(a, 5) = "-1" Then
+                linshi.ui_down_line_describe_1 = "没有最近的车"
+                linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+            Else
+                '分析颜色
+                linshi.ui_down_line_describe_1 = "最近的车还有" & realistic_stop(a, 5) & "站"
+                Select Case realistic_stop(a, 5)
+                    Case "1"
+                        linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 0, 0))
+                    Case "2"
+                        linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 51, 51))
+                    Case "3"
+                        linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 102, 102))
+                    Case "4"
+                        linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 153, 153))
+                    Case "5"
+                        linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 204, 204))
+                    Case Else
+                        linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
+                End Select
+            End If
+            If realistic_stop(a, 6) = "" Or realistic_stop(a, 6) = "-1" Then
+                linshi.ui_down_line_describe_2 = "没有第二近的车"
+            Else
+                linshi.ui_down_line_describe_2 = "第二近的车还有" & realistic_stop(a, 6) & "站"
+            End If
 
             ui_connet_core_form_stop_realistic_stop_list.Add(linshi)
             linshi = New ui_depend_stop_realistic_stop_list
