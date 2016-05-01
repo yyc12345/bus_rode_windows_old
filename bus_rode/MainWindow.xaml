@@ -167,190 +167,286 @@
             <Grid x:Name="ui_form_start" Width="800" Height="570" Canvas.Top="0" Canvas.Left="0">
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions >
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+
+                <!-- 界面按钮-->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- 线路-->
+                    <Grid Grid.Row="1" Margin="20">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="线路" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                        <Grid Grid.Column="0" x:Name="ui_form_start_btn_1_goto" Width="40" Height="40">
+
+                            <Ellipse Stroke="white" Width="40" Height="40" HorizontalAlignment="Left">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush x:Name="ui_color_5" Color="#6f0000ff"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Width="40" Height="40" HorizontalAlignment="Left" >
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\line.png"/>
+                                </Grid.Background>
+                            </Grid>
+
+                            <!-- 动画-->
+                            <Grid.Effect >
+                                <DropShadowEffect x:Name="ui_contorl_btn_light_11" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                            </Grid.Effect>
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard >
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard >
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+
+                            </Grid.Triggers>
+
+                        </Grid>
+                    </Grid>
+
+                    <!-- 车站-->
+                    <Grid Grid.Row="2" Margin="20">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="车站" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Grid Grid.Column="0" x:Name="ui_form_start_btn_2_goto" Width="40" Height="40">
+
+                            <Ellipse Stroke="white" Width="40" Height="40">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush x:Name="ui_color_6" Color="#6f0000ff"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Width="40" Height="40">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\stop.png"/>
+                                </Grid.Background>
+                            </Grid>
+
+
+                            <!-- 动画-->
+                            <Grid.Effect >
+                                <DropShadowEffect x:Name="ui_contorl_btn_light_12" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                            </Grid.Effect>
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard >
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard >
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+
+                            </Grid.Triggers>
+
+                        </Grid>
+
+
+                    </Grid>
+
+                    <!-- 设置-->
+                    <Grid Grid.Row="3" Margin="20">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="设置" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Grid Grid.Column="0" x:Name="ui_form_start_btn_3_goto" Width="40" Height="40">
+
+                            <Ellipse Stroke="white" Width="40" Height="40">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush x:Name="ui_color_7" Color="#6f0000ff"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Width="40" Height="40">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\contorl.png"/>
+                                </Grid.Background>
+                            </Grid>
+
+
+                            <!-- 动画-->
+                            <Grid.Effect >
+                                <DropShadowEffect x:Name="ui_contorl_btn_light_13" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                            </Grid.Effect>
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard >
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard >
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+
+                            </Grid.Triggers>
+
+
+                        </Grid>
+
+                    </Grid>
+
+                    <!-- 关于-->
+                    <Grid Grid.Row="4" Margin="20">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="关于" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Grid Grid.Column="0" x:Name="ui_form_start_btn_4_goto" Width="40" Height="40">
+
+                            <Ellipse Stroke="white" Width="40" Height="40">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush x:Name="ui_color_8" Color="#6f0000ff"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Width="40" Height="40">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\about.png"/>
+                                </Grid.Background>
+                            </Grid>
+
+
+                            <!-- 动画-->
+                            <Grid.Effect >
+                                <DropShadowEffect x:Name="ui_contorl_btn_light_14" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                            </Grid.Effect>
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard >
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard >
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+
+                            </Grid.Triggers>
+
+
+                        </Grid>
+
+                    </Grid>
+
+
+                </Grid>
+                
+                <!-- 提醒-->
+                <Grid Grid.Column="2" Margin="0,40,40,40">
+
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Width="40" Height="40">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="photo\ring.png"/>
+                            </Grid.Background>
+                        </Grid>
+
+                        <TextBlock Margin="10,0,0,0" Text="提醒" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <Grid Width="30" Height="30">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\unpin.png"/>
+                                </Grid.Background>
+                            </Grid>
+
+                            <TextBlock Grid.Row="2" Text="解绑线路" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                            <Grid Width="30" Height="30">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\unpin.png"/>
+                                </Grid.Background>
+                            </Grid>
+
+                            <TextBlock Grid.Row="2" Text="解绑站台" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Grid.Row="2" Text="没有提醒哦，去添加一个吧" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                </Grid>
 
                 <!-- 不发行版本标示-->
-                <TextBlock x:Name="ui_form_start_secreat_text" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="9" Width="300" Foreground="white" FontSize="15" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-
-                <!-- 线路-->
-                <TextBlock Grid.Row="2" Grid.Column="1" Foreground="White" FontSize="25" Text="线路" TextAlignment="Center"/>
-                <Grid Grid.Row="1" Grid.Column="1" x:Name="ui_form_start_btn_1_goto">
-
-                    <Ellipse Stroke="white" Margin="25,25,25,25">
-                        <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_5" Color="#6f0000ff"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-
-                    <Grid Margin="25,25,25,25">
-                        <Grid.Background>
-                            <ImageBrush ImageSource="photo\line.png"/>
-                        </Grid.Background>
-                    </Grid>
-
-                    <!-- 动画-->
-                    <Grid.Effect >
-                        <DropShadowEffect x:Name="ui_contorl_btn_light_11" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                    </Grid.Effect>
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard >
-                                <Storyboard >
-                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard >
-                                <Storyboard >
-                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-
-                    </Grid.Triggers>
-
-                </Grid>
-                <!-- 车站-->
-                <TextBlock Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="25" Text="车站" TextAlignment="Center"/>
-                <Grid Grid.Row="1" Grid.Column="3" x:Name="ui_form_start_btn_2_goto">
-
-                    <Ellipse Stroke="white" Margin="25,25,25,25">
-                        <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_6" Color="#6f0000ff"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-
-                    <Grid Margin="25,25,25,25">
-                        <Grid.Background>
-                            <ImageBrush ImageSource="photo\stop.png"/>
-                        </Grid.Background>
-                    </Grid>
-
-
-                    <!-- 动画-->
-                    <Grid.Effect >
-                        <DropShadowEffect x:Name="ui_contorl_btn_light_12" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                    </Grid.Effect>
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard >
-                                <Storyboard >
-                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard >
-                                <Storyboard >
-                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-
-                    </Grid.Triggers>
-
-                </Grid>
-                <!-- 设置-->
-                <TextBlock Grid.Row="2" Grid.Column="5" Foreground="White" FontSize="25" Text="设置" TextAlignment="Center"/>
-                <Grid Grid.Row="1" Grid.Column="5" x:Name="ui_form_start_btn_3_goto">
-
-                    <Ellipse Stroke="white" Margin="25,25,25,25">
-                        <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_7" Color="#6f0000ff"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-
-                    <Grid Margin="25,25,25,25">
-                        <Grid.Background>
-                            <ImageBrush ImageSource="photo\contorl.png"/>
-                        </Grid.Background>
-                    </Grid>
-
-
-                    <!-- 动画-->
-                    <Grid.Effect >
-                        <DropShadowEffect x:Name="ui_contorl_btn_light_13" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                    </Grid.Effect>
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard >
-                                <Storyboard >
-                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard >
-                                <Storyboard >
-                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-
-                    </Grid.Triggers>
-
-
-                </Grid>
-                <!-- 关于-->
-                <TextBlock Grid.Row="2" Grid.Column="7" Foreground="White" FontSize="25" Text="关于" TextAlignment="Center"/>
-                <Grid Grid.Row="1" Grid.Column="7" x:Name="ui_form_start_btn_4_goto">
-
-                    <Ellipse Stroke="white" Margin="25,25,25,25">
-                        <Ellipse.Fill>
-                            <SolidColorBrush x:Name="ui_color_8" Color="#6f0000ff"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-
-                    <Grid Margin="25,25,25,25">
-                        <Grid.Background>
-                            <ImageBrush ImageSource="photo\about.png"/>
-                        </Grid.Background>
-                    </Grid>
-
-
-                    <!-- 动画-->
-                    <Grid.Effect >
-                        <DropShadowEffect x:Name="ui_contorl_btn_light_14" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                    </Grid.Effect>
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard >
-                                <Storyboard >
-                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard >
-                                <Storyboard >
-                                    <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-
-                    </Grid.Triggers>
-
-
-                </Grid>
+                <TextBlock x:Name="ui_form_start_secreat_text" Grid.Column="0" Grid.ColumnSpan="3" Width="300" Foreground="white" FontSize="15" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
             </Grid>
 
@@ -360,7 +456,7 @@
 
                 <Grid.RowDefinitions >
                     <!-- 空白-->
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
                     <!-- 车辆描述-->
                     <RowDefinition Height="*"/>
                     <!-- 空白-->
@@ -389,6 +485,20 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="ui_form_line_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="没有描述" x:FieldModifier="public"/>
+
+                <!-- 绑定-->
+                <Grid Width="30" Height="30" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="photo\pin.png"/>
+                    </Grid.Background>
+                    <Grid.ToolTip>
+                        <ToolTip Background="white">
+                            <Grid >
+                                <TextBlock Foreground="black" FontSize="15" Text="绑定当前线路到提醒"/>
+                            </Grid>
+                        </ToolTip>
+                    </Grid.ToolTip>
+                </Grid>
 
                 <!-- 切换上下行-->
                 <Grid Grid.Column="1" Grid.Row="3">
@@ -679,6 +789,20 @@
 
                 <TextBlock x:Name="ui_form_stop_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="没有描述" x:FieldModifier="public"/>
 
+                <!-- 绑定-->
+                <Grid Width="30" Height="30" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="photo\pin.png"/>
+                    </Grid.Background>
+                    <Grid.ToolTip>
+                        <ToolTip Background="white">
+                            <Grid >
+                                <TextBlock Foreground="black" FontSize="15" Text="绑定当前站台到提醒"/>
+                            </Grid>
+                        </ToolTip>
+                    </Grid.ToolTip>
+                </Grid>
+                
                 <Grid Grid.Column="1" Grid.Row="3" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <!-- 圆角拐弯-->

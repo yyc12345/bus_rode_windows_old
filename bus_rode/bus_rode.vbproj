@@ -224,5 +224,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="photo\pin.png" />
+    <Resource Include="photo\ring.png" />
+    <Resource Include="photo\unpin.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

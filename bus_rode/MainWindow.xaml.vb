@@ -70,7 +70,7 @@ Public Class MainWindow
     ''' <summary>
     ''' 托盘图标
     ''' </summary>
-    Public app_desktop_icon = New System.Windows.Forms.NotifyIcon
+    Public app_desktop_icon As System.Windows.Forms.NotifyIcon = New System.Windows.Forms.NotifyIcon
 
     ''' <summary>
     ''' 获取实时资源的线程
@@ -94,6 +94,10 @@ Public Class MainWindow
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub window_exit(sender As Object, e As MouseButtonEventArgs)
+
+        app_desktop_icon.Visible = False
+        app_desktop_icon.Dispose()
+
         Environment.Exit(0)
     End Sub
 
@@ -138,8 +142,10 @@ Public Class MainWindow
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub app_shutdown(sender As Object, e As EventArgs) Handles ui_bus_rode_main_window.Closed
-        '结束所有线程
+
         '退出
+        app_desktop_icon.Visible = False
+        app_desktop_icon.Dispose()
         Environment.Exit(0)
 
     End Sub
@@ -202,11 +208,12 @@ Public Class MainWindow
         '确认要不要刷
         If screens <> 1 Then Exit Sub
 
-        ui_form_line_have_stop_list.ItemsSource = Nothing
-        'ui_form_line_form_re_mid_bus_width.Width = GridLength.Auto
-
         '确认没有问题再执行防止无端消耗资源
         If read_mid_bus_word <> "" Then
+
+            ui_form_line_have_stop_list.ItemsSource = Nothing
+            'ui_form_line_form_re_mid_bus_width.Width = GridLength.Auto
+
             read_mid_bus()
 
             'ui_form_line_form_re_mid_bus_width.Width = New GridLength(0)
