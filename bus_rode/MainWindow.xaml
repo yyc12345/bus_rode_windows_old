@@ -175,210 +175,220 @@
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions >
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- 线路-->
-                    <Grid Grid.Row="1" Margin="20">
-                        <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1" Grid.RowSpan="4" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="线路" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <!-- 线路-->
+                        <Grid Grid.Row="0" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0" x:Name="ui_form_start_btn_1_goto" Width="40" Height="40">
+                            <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="{DynamicResource lang_form_start_btn_line}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
 
-                            <Ellipse Stroke="white" Width="40" Height="40" HorizontalAlignment="Left">
-                                <Ellipse.Fill>
-                                    <SolidColorBrush x:Name="ui_color_5" Color="#6f0000ff"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
+                            <Grid Grid.Column="0" x:Name="ui_form_start_btn_1_goto" Width="40" Height="40">
 
-                            <Grid Width="40" Height="40" HorizontalAlignment="Left" >
-                                <Grid.Background>
-                                    <ImageBrush ImageSource="photo\line.png"/>
-                                </Grid.Background>
+                                <Ellipse Stroke="white" Width="40" Height="40" HorizontalAlignment="Left">
+                                    <Ellipse.Fill>
+                                        <SolidColorBrush x:Name="ui_color_5" Color="#6f0000ff"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+
+                                <Grid Width="40" Height="40" HorizontalAlignment="Left" >
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="photo\line.png"/>
+                                    </Grid.Background>
+                                </Grid>
+
+                                <!-- 动画-->
+                                <Grid.Effect >
+                                    <DropShadowEffect x:Name="ui_contorl_btn_light_11" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                </Grid.Effect>
+                                <Grid.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard >
+                                            <Storyboard >
+                                                <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard >
+                                            <Storyboard >
+                                                <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+
+
+                                </Grid.Triggers>
+
                             </Grid>
-
-                            <!-- 动画-->
-                            <Grid.Effect >
-                                <DropShadowEffect x:Name="ui_contorl_btn_light_11" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                            </Grid.Effect>
-                            <Grid.Triggers>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard >
-                                        <Storyboard >
-                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseLeave">
-                                    <BeginStoryboard >
-                                        <Storyboard >
-                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_11" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-
-
-                            </Grid.Triggers>
-
-                        </Grid>
-                    </Grid>
-
-                    <!-- 车站-->
-                    <Grid Grid.Row="2" Margin="20">
-                        <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="车站" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Grid Grid.Column="0" x:Name="ui_form_start_btn_2_goto" Width="40" Height="40">
-
-                            <Ellipse Stroke="white" Width="40" Height="40">
-                                <Ellipse.Fill>
-                                    <SolidColorBrush x:Name="ui_color_6" Color="#6f0000ff"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-
-                            <Grid Width="40" Height="40">
-                                <Grid.Background>
-                                    <ImageBrush ImageSource="photo\stop.png"/>
-                                </Grid.Background>
-                            </Grid>
-
-
-                            <!-- 动画-->
-                            <Grid.Effect >
-                                <DropShadowEffect x:Name="ui_contorl_btn_light_12" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                            </Grid.Effect>
-                            <Grid.Triggers>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard >
-                                        <Storyboard >
-                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseLeave">
-                                    <BeginStoryboard >
-                                        <Storyboard >
-                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-
-
-                            </Grid.Triggers>
-
                         </Grid>
 
+                        <!-- 车站-->
+                        <Grid Grid.Row="1" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                    </Grid>
+                            <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="{DynamicResource lang_form_start_btn_stop}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                            <Grid Grid.Column="0" x:Name="ui_form_start_btn_2_goto" Width="40" Height="40">
 
-                    <!-- 设置-->
-                    <Grid Grid.Row="3" Margin="20">
-                        <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                                <Ellipse Stroke="white" Width="40" Height="40">
+                                    <Ellipse.Fill>
+                                        <SolidColorBrush x:Name="ui_color_6" Color="#6f0000ff"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
 
-                        <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="设置" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Grid Grid.Column="0" x:Name="ui_form_start_btn_3_goto" Width="40" Height="40">
+                                <Grid Width="40" Height="40">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="photo\stop.png"/>
+                                    </Grid.Background>
+                                </Grid>
 
-                            <Ellipse Stroke="white" Width="40" Height="40">
-                                <Ellipse.Fill>
-                                    <SolidColorBrush x:Name="ui_color_7" Color="#6f0000ff"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
 
-                            <Grid Width="40" Height="40">
-                                <Grid.Background>
-                                    <ImageBrush ImageSource="photo\contorl.png"/>
-                                </Grid.Background>
+                                <!-- 动画-->
+                                <Grid.Effect >
+                                    <DropShadowEffect x:Name="ui_contorl_btn_light_12" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                </Grid.Effect>
+                                <Grid.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard >
+                                            <Storyboard >
+                                                <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard >
+                                            <Storyboard >
+                                                <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_12" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+
+
+                                </Grid.Triggers>
+
                             </Grid>
-
-
-                            <!-- 动画-->
-                            <Grid.Effect >
-                                <DropShadowEffect x:Name="ui_contorl_btn_light_13" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                            </Grid.Effect>
-                            <Grid.Triggers>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard >
-                                        <Storyboard >
-                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseLeave">
-                                    <BeginStoryboard >
-                                        <Storyboard >
-                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-
-
-                            </Grid.Triggers>
 
 
                         </Grid>
 
-                    </Grid>
+                        <!-- 设置-->
+                        <Grid Grid.Row="2" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                    <!-- 关于-->
-                    <Grid Grid.Row="4" Margin="20">
-                        <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="{DynamicResource lang_form_start_btn_contorl}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                            <Grid Grid.Column="0" x:Name="ui_form_start_btn_3_goto" Width="40" Height="40">
 
-                        <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="关于" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Grid Grid.Column="0" x:Name="ui_form_start_btn_4_goto" Width="40" Height="40">
+                                <Ellipse Stroke="white" Width="40" Height="40">
+                                    <Ellipse.Fill>
+                                        <SolidColorBrush x:Name="ui_color_7" Color="#6f0000ff"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
 
-                            <Ellipse Stroke="white" Width="40" Height="40">
-                                <Ellipse.Fill>
-                                    <SolidColorBrush x:Name="ui_color_8" Color="#6f0000ff"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
+                                <Grid Width="40" Height="40">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="photo\contorl.png"/>
+                                    </Grid.Background>
+                                </Grid>
 
-                            <Grid Width="40" Height="40">
-                                <Grid.Background>
-                                    <ImageBrush ImageSource="photo\about.png"/>
-                                </Grid.Background>
+
+                                <!-- 动画-->
+                                <Grid.Effect >
+                                    <DropShadowEffect x:Name="ui_contorl_btn_light_13" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                </Grid.Effect>
+                                <Grid.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard >
+                                            <Storyboard >
+                                                <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard >
+                                            <Storyboard >
+                                                <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_13" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+
+
+                                </Grid.Triggers>
+
+
                             </Grid>
 
+                        </Grid>
 
-                            <!-- 动画-->
-                            <Grid.Effect >
-                                <DropShadowEffect x:Name="ui_contorl_btn_light_14" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
-                            </Grid.Effect>
-                            <Grid.Triggers>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard >
-                                        <Storyboard >
-                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseLeave">
-                                    <BeginStoryboard >
-                                        <Storyboard >
-                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+                        <!-- 关于-->
+                        <Grid Grid.Row="3" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="{DynamicResource lang_form_start_btn_about}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                            <Grid Grid.Column="0" x:Name="ui_form_start_btn_4_goto" Width="40" Height="40">
+
+                                <Ellipse Stroke="white" Width="40" Height="40">
+                                    <Ellipse.Fill>
+                                        <SolidColorBrush x:Name="ui_color_8" Color="#6f0000ff"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+
+                                <Grid Width="40" Height="40">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="photo\about.png"/>
+                                    </Grid.Background>
+                                </Grid>
 
 
-                            </Grid.Triggers>
+                                <!-- 动画-->
+                                <Grid.Effect >
+                                    <DropShadowEffect x:Name="ui_contorl_btn_light_14" BlurRadius="40" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                </Grid.Effect>
+                                <Grid.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard >
+                                            <Storyboard >
+                                                <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard >
+                                            <Storyboard >
+                                                <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_14" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
 
+
+                                </Grid.Triggers>
+
+
+                            </Grid>
 
                         </Grid>
 
@@ -386,7 +396,7 @@
 
 
                 </Grid>
-                
+
                 <!-- 提醒-->
                 <Grid Grid.Column="2" Margin="0,40,40,40">
 
@@ -396,7 +406,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid Grid.Row="0" Margin="0,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
@@ -408,40 +418,19 @@
                             </Grid.Background>
                         </Grid>
 
-                        <TextBlock Margin="10,0,0,0" Text="提醒" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+                        <TextBlock Margin="10,0,0,0" Text="{DynamicResource lang_form_start_ring}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
 
                     </Grid>
+                    
+                    <StackPanel Grid.Row="0" Margin="0,0,0,10" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Grid Width="30" Height="30">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="photo\unpin.png"/>
+                            </Grid.Background>
+                        </Grid>
 
-                    <Grid Grid.Row="1" Margin="0,0,0,20">
-                        <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="10"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <Grid Width="30" Height="30">
-                                <Grid.Background>
-                                    <ImageBrush ImageSource="photo\unpin.png"/>
-                                </Grid.Background>
-                            </Grid>
-
-                            <TextBlock Grid.Row="2" Text="解绑线路" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <Grid Width="30" Height="30">
-                                <Grid.Background>
-                                    <ImageBrush ImageSource="photo\unpin.png"/>
-                                </Grid.Background>
-                            </Grid>
-
-                            <TextBlock Grid.Row="2" Text="解绑站台" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Grid>
-
-                    <TextBlock Grid.Row="2" Text="没有提醒哦，去添加一个吧" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Text="{DynamicResource lang_form_start_unpin}" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+                    </StackPanel>
 
                 </Grid>
 
@@ -484,21 +473,7 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="ui_form_line_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="没有描述" x:FieldModifier="public"/>
-
-                <!-- 绑定-->
-                <Grid Width="30" Height="30" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-                    <Grid.Background>
-                        <ImageBrush ImageSource="photo\pin.png"/>
-                    </Grid.Background>
-                    <Grid.ToolTip>
-                        <ToolTip Background="white">
-                            <Grid >
-                                <TextBlock Foreground="black" FontSize="15" Text="绑定当前线路到提醒"/>
-                            </Grid>
-                        </ToolTip>
-                    </Grid.ToolTip>
-                </Grid>
+                <TextBlock x:Name="ui_form_line_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="Nothing" x:FieldModifier="public"/>
 
                 <!-- 切换上下行-->
                 <Grid Grid.Column="1" Grid.Row="3">
@@ -518,7 +493,7 @@
                         </Grid.Background>
 
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,10,0">
-                            <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="上行线路"/>
+                            <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="{DynamicResource lang_form_line_up_line_describe}"/>
                             <TextBlock x:Name="ui_form_line_select_up_line_describe" Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="（）"/>
                         </StackPanel>
 
@@ -533,7 +508,7 @@
                         </Grid.Background>
 
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,10,0">
-                            <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="下行线路"/>
+                            <TextBlock Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="{DynamicResource lang_form_line_down_line_describe}"/>
                             <TextBlock x:Name="ui_form_line_select_down_line_describe" Grid.Row="1" FontSize="15" Foreground="White" TextAlignment="Center" Text="（）"/>
                         </StackPanel>
 
@@ -559,7 +534,7 @@
                             </Grid.Background>
                         </Grid>
 
-                        <TextBlock x:Name="ui_form_line_re_bus_describe" Grid.Column="1" Grid.Row="1" Foreground="White" Background="#00000000" FontSize="15" Text="最后刷新时间：无"/>
+                        <TextBlock x:Name="ui_form_line_re_bus_describe" Grid.Column="1" Grid.Row="1" Foreground="White" Background="#00000000" FontSize="15" Text="{DynamicResource lang_form_line_update_nothing_describe}"/>
 
                     </Grid>
 
@@ -637,7 +612,7 @@
                         <RowDefinition Height=" *"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="线路列表"/>
+                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_line_contorl_left_grid_title}"/>
                 </Grid>
                 <Grid Grid.Column="2" Grid.Row="0" MouseDown="ui_function_line_contorl_right_btn">
                     <Grid.ColumnDefinitions >
@@ -651,7 +626,7 @@
                         <RowDefinition Height=" *"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="搜索站台"/>
+                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_line_contorl_right_grid_title}"/>
                 </Grid>
 
                 <Grid x:Name="ui_form_line_contorl_left_grid" Grid.Column="1" Grid.Row="1">
@@ -787,7 +762,7 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="ui_form_stop_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="没有描述" x:FieldModifier="public"/>
+                <TextBlock x:Name="ui_form_stop_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="Nothing" x:FieldModifier="public"/>
 
                 <!-- 绑定-->
                 <Grid Width="30" Height="30" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
@@ -797,12 +772,12 @@
                     <Grid.ToolTip>
                         <ToolTip Background="white">
                             <Grid >
-                                <TextBlock Foreground="black" FontSize="15" Text="绑定当前站台到提醒"/>
+                                <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_stop_pin}"/>
                             </Grid>
                         </ToolTip>
                     </Grid.ToolTip>
                 </Grid>
-                
+
                 <Grid Grid.Column="1" Grid.Row="3" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <!-- 圆角拐弯-->
@@ -835,7 +810,7 @@
                             <DropShadowEffect BlurRadius="10" Color="#FFffffff" ShadowDepth="0" Direction="0" />
                         </Ellipse.Effect>
                     </Ellipse>
-                    <TextBlock x:Name="ui_form_stop_middle_stop_name" Foreground="white" FontSize="15" Text="没有站台名" Grid.Column="1" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="ui_form_stop_middle_stop_name" Foreground="white" FontSize="15" Text="Unknow stop" Grid.Column="1" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
 
                     <!-- ============================================上部内容-真实站台===============================================-->
                     <!-- 连线-->
@@ -928,7 +903,7 @@
                         <RowDefinition Height=" *"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="站台列表"/>
+                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_stop_contorl_left_grid_title}"/>
                 </Grid>
                 <Grid Grid.Column="2" Grid.Row="0" MouseDown="ui_function_stop_contorl_right_btn">
                     <Grid.ColumnDefinitions >
@@ -942,7 +917,7 @@
                         <RowDefinition Height=" *"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="换乘规划"/>
+                    <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_stop_contorl_right_grid_title}"/>
                 </Grid>
 
                 <Grid x:Name="ui_form_stop_contorl_left_grid" Grid.Column="1" Grid.Row="1">
@@ -1007,8 +982,8 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel x:Name="ui_form_stop_contorl_full_list" Grid.Column="1" Grid.Row="1">
-                                <TextBlock Foreground="white" FontSize="15" Text="站台数目过多不能显示" TextAlignment="Center"/>
-                                <TextBlock Foreground="white" FontSize="15" Text="请在搜索框内输入文字查找站台" TextAlignment="Center"/>
+                                <TextBlock Foreground="white" FontSize="15" Text="{DynamicResource lang_form_stop_contorl_stop_list_full_1}" TextAlignment="Center"/>
+                                <TextBlock Foreground="white" FontSize="15" Text="{DynamicResource lang_form_stop_contorl_stop_list_full_2}" TextAlignment="Center"/>
                             </StackPanel>
                         </Grid>
 
@@ -1070,7 +1045,7 @@
                                         <RowDefinition Height=" *"/>
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Foreground="White" FontSize=" 15" Grid.Column="1" Grid.Row="1" Text="本地规划"/>
+                                    <TextBlock Foreground="White" FontSize=" 15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_stop_contorl_local_calc}"/>
                                 </Grid>
                             </Grid>
 
@@ -1101,7 +1076,7 @@
                                         <RowDefinition Height=" *"/>
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Foreground="White" FontSize=" 15" Grid.Column="1" Grid.Row="1" Text="联网规划"/>
+                                    <TextBlock Foreground="White" FontSize=" 15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_stop_contorl_web_calc}"/>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -1123,7 +1098,7 @@
                                     <RowDefinition Height=" *"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Text="出发站" Background="#00000000" Foreground="white" FontSize="15" Grid.Row="1"/>
+                                <TextBlock Text="{DynamicResource lang_form_stop_contorl_start_stop}" Background="#00000000" Foreground="white" FontSize="15" Grid.Row="1"/>
                             </Grid>
 
                             <Grid Grid.Column="2">
@@ -1161,7 +1136,7 @@
                                     <RowDefinition Height=" *"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Text="到达站" Background="#00000000" Foreground="white" FontSize="15" Grid.Row="1"/>
+                                <TextBlock Text="{DynamicResource lang_form_stop_contorl_end_stop}" Background="#00000000" Foreground="white" FontSize="15" Grid.Row="1"/>
                             </Grid>
 
                             <Grid  Grid.Column="2">
@@ -1228,7 +1203,7 @@
                             </Grid>
 
                             <!-- 每一步的乘车描述-->
-                            <TextBlock x:Name="ui_form_stop_contorl_step_describe" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="第一次使用本地的 换乘规划 可能需要一些时间，请耐心等待" Foreground="white" FontSize="15" TextWrapping="Wrap"/>
+                            <TextBlock x:Name="ui_form_stop_contorl_step_describe" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource lang_form_stop_contorl_first_use}" Foreground="white" FontSize="15" TextWrapping="Wrap"/>
 
                         </Grid>
 
@@ -1254,7 +1229,7 @@
 
                 <TabControl Grid.Column="1" Grid.Row="1" Background="#00000000" BorderThickness="0">
 
-                    <TabItem Header="常规" IsSelected="True">
+                    <TabItem Header="{DynamicResource lang_form_contorl_normal_title}" IsSelected="True">
 
                         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
                             <Grid >
@@ -1284,12 +1259,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="讲述人" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_normal_speaker_title}" Grid.Row="1">
                             <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="讲述人"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_speaker_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1302,12 +1277,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_speaker_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_speaker_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1376,12 +1351,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="新对话框" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_normal_dialog_title}" Grid.Row="1">
                                                 <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="新对话框"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_dialog_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1394,12 +1369,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="打开以使用新式对话框而不是旧式对话框" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_dialog_contant}" Grid.Row="1">
                                                 <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="打开以使用新式对话框而不是旧式对话框"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_dialog_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1450,6 +1425,174 @@
                                         </Grid>
                                     </Grid>
 
+                                    <!-- 语言-->
+                                    <Grid Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_normal_language_title}" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_language_title}"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_language_contant}" Grid.Row="1">
+                             <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_language_contant}"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                        </TextBlock>
+                                        </Grid>
+
+                                        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_language_now}" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="ui_form_contorl_select_language_text" Foreground="White" FontSize="15" Text="en-US" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                              
+                                            <!-- 浏览按钮 MouseDown="ui_form_contorl_throw_rs_file"-->
+                                        <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1" MouseDown="ui_form_contorl_throw_lang_file">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\search.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_language_btn_search}"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_18" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_18" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_18" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+
+                                        </Grid>
+
+                                        <!-- 右按钮 MouseDown="ui_contorl_list_2_function"-->
+                                        <Grid Grid.Column="3" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width=" 30"/>
+                                                <ColumnDefinition Width=" *"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="1" Grid.Row="1" MouseDown="ui_contorl_list_10_function">
+                                                <Grid.Background >
+                                                    <ImageBrush ImageSource="photo\right.png"/>
+                                                </Grid.Background>
+
+                                                <Ellipse Fill="#00000000" Stroke="white"/>
+
+                                                <!-- 提示-->
+                                                <Grid.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_language_btn_run}"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </Grid.ToolTip>
+                                            </Grid>
+
+                                            <!-- 动画-->
+                                            <Grid.Effect >
+                                                <DropShadowEffect x:Name="ui_contorl_btn_light_17" BlurRadius="20" Color="#FFffffff" Direction="0" ShadowDepth="0" Opacity="0"/>
+                                            </Grid.Effect>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_17" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                    <BeginStoryboard >
+                                                        <Storyboard >
+                                                            <DoubleAnimation Storyboard.TargetName="ui_contorl_btn_light_17" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+
+                                            </Grid.Triggers>
+
+                                        </Grid>
+                                    </Grid>
+
                                     <!-- 重启程序-->
                                     <Grid Height="120">
                                         <Grid.ColumnDefinitions >
@@ -1468,12 +1611,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="重新启动应用程序" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_normal_restart_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="重新启动应用程序"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_restart_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1486,12 +1629,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="重启解决一些偶然性问题" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_restart_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="重启解决一些偶然性问题"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_restart_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1522,7 +1665,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="重新启动"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_restart_btn_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -1562,7 +1705,7 @@
 
                     </TabItem>
 
-                    <TabItem Header="实时">
+                    <TabItem Header="{DynamicResource lang_form_contorl_runtime_title}">
                         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
                             <Grid >
                                 <Grid.RowDefinitions>
@@ -1574,7 +1717,7 @@
                                 <StackPanel Orientation="Vertical" Grid.Row="1">
 
                                     <!-- 车辆跟踪-->
-                                    <Grid Grid.Row="1" Height="120">
+                                    <Grid Height="120">
                                         <Grid.ColumnDefinitions >
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="100"/>
@@ -1591,12 +1734,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="车辆跟踪" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_runtime_bus_title}" Grid.Row="1">
                             <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_bus_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1609,12 +1752,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="对处在运营状态的车次到达站次显示在线路图上" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_bus_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="对处在运营状态的车次到达站次显示在线路图上"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_bus_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1665,7 +1808,7 @@
                                     </Grid>
 
                                     <!-- 车辆跟踪加载的插件-->
-                                    <Grid Grid.Row="2" Height="120">
+                                    <Grid Height="120">
                                         <Grid.ColumnDefinitions >
                                             <ColumnDefinition Width="2*"/>
                                             <ColumnDefinition Width="*"/>
@@ -1684,12 +1827,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="车辆跟踪插件" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_runtime_mod_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪插件"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_mod_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1702,12 +1845,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_mod_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="车辆跟踪插件可以方便地安全地获取到你所在城市的实时公交信息并显示在bus_rode上"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_mod_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1733,7 +1876,7 @@
                                                     <ColumnDefinition Width=" *"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="车辆跟踪插件路径"/>
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_contorl_runtime_mod_path_describe}"/>
                                             </Grid>
                                             <TextBox x:Name="ui_form_contorl_mod_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
 
@@ -1764,7 +1907,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="浏览车辆跟踪插件"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_mod_btn_search}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -1821,7 +1964,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="启用"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_mod_btn_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -1854,7 +1997,7 @@
                                     </Grid>
 
                                     <!-- 车辆跟踪插件删除-->
-                                    <Grid Grid.Row="3" Height="120">
+                                    <Grid Height="120">
                                         <Grid.ColumnDefinitions >
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="100"/>
@@ -1872,12 +2015,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="删除插件" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_runtime_del_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="删除插件"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_del_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1890,12 +2033,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="删除当前加载的插件" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_del_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="删除当前加载的插件"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_del_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1926,7 +2069,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="删除"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_del_btn_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -1959,7 +2102,7 @@
                                     </Grid>
 
                                     <!-- 资源信息MouseDown="ui_contorl_list_3_function-->
-                                    <Grid Grid.Row="3" Height="120">
+                                    <Grid Height="120">
                                         <Grid.ColumnDefinitions >
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="100"/>
@@ -1976,12 +2119,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="插件信息" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_runtime_msg_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="插件信息"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_msg_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -1994,12 +2137,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="显示当前车辆跟踪插件的信息" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_msg_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="显示当前车辆跟踪插件的信息"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_msg_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2030,7 +2173,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="查看"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_runtime_msg_btn_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -2069,7 +2212,7 @@
 
                     </TabItem>
 
-                    <TabItem Header="资源">
+                    <TabItem Header="{DynamicResource lang_form_contorl_resources_title}">
                         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
                             <Grid >
                                 <Grid.RowDefinitions>
@@ -2100,12 +2243,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="替换资源" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_resources_replace_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="替换资源"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_replace_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2118,12 +2261,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="替换加载的资源，便于切换到其他城市进行指引" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_replace_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="替换加载的资源，便于切换到其他城市进行指引"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_replace_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2149,7 +2292,7 @@
                                                     <ColumnDefinition Width=" *"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="资源路径"/>
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_contorl_resources_replace_path_describe}"/>
                                             </Grid>
                                             <TextBox x:Name="ui_form_contorl_resource_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
 
@@ -2180,7 +2323,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="浏览文件"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_replace_btn_search}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -2235,7 +2378,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="替换"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_replace_btn_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -2285,12 +2428,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="删除加载的资源" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_resources_del_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="删除加载的资源"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_del_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2303,12 +2446,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="删除当前加载的资源" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_del_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="删除当前加载的资源"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_del_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2339,7 +2482,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="删除"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_del_btn_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -2389,12 +2532,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="资源信息" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_resources_msg_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="资源信息"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_msg_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2407,12 +2550,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="显示当前资源的信息" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_msg_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="显示当前资源的信息"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_msg_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2443,7 +2586,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="查看"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_resources_msg_btn_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -2482,7 +2625,7 @@
 
                     </TabItem>
 
-                    <TabItem Header="个性化">
+                    <TabItem Header="{DynamicResource lang_form_contorl_style_title}">
                         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
                             <Grid >
                                 <Grid.RowDefinitions>
@@ -2513,12 +2656,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="替换背景" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_style_bk_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="替换背景"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_style_bk_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2531,12 +2674,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="选用一张新的背景图片作为背景" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_style_bk_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="选用一张新的背景图片作为背景"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_style_bk_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2562,7 +2705,7 @@
                                                     <ColumnDefinition Width=" *"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="背景路径"/>
+                                                <TextBlock Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{DynamicResource lang_form_contorl_style_bk_path_describe}"/>
                                             </Grid>
                                             <TextBox x:Name="ui_form_contorl_background_path" Foreground="white" FontSize="15" Grid.Row="1" Background="#00000000" BorderThickness="0,0,0,1" BorderBrush="white" TextAlignment="Center"/>
 
@@ -2592,7 +2735,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="浏览文件"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_style_bk_btn_search}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -2647,7 +2790,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="替换"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_style_bk_btn_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -2698,12 +2841,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="25" Text="更改配色" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_style_color_title}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="更改配色"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_style_color_title}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2716,12 +2859,12 @@
                                                 <RowDefinition Height=" *"/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Foreground="White" FontSize="15" Text="输入一组新的颜色值来替换现有颜色" Grid.Row="1">
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_style_color_contant}" Grid.Row="1">
                              <!-- 防止过长看不完特加提示框-->
                                                 <TextBlock.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid>
-                                                            <TextBlock Foreground="black" FontSize="15" Text="输入一组新的颜色值来替换现有颜色"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_style_color_contant}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
@@ -2798,7 +2941,7 @@
                                                 <Grid.ToolTip>
                                                     <ToolTip Background="white">
                                                         <Grid >
-                                                            <TextBlock Foreground="black" FontSize="15" Text="更改颜色"/>
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_style_color_run}"/>
                                                         </Grid>
                                                     </ToolTip>
                                                 </Grid.ToolTip>
@@ -2861,7 +3004,7 @@
                     <TextBlock x:Name="ui_form_about_describe" Foreground="white" FontSize="15" Grid.Column="1" Grid.Row="1" Text=""/>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Grid.Row="8" Grid.Column="1" Foreground="White" FontSize="15" Text="开源地址（Github）："/>
+                        <TextBlock Grid.Row="8" Grid.Column="1" Foreground="White" FontSize="15" Text="Github path："/>
                         <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff0040ff" FontSize="15" Text="https://github.com/yyc12345/bus_rode_all" MouseDown="ui_form_about_github"/>
                     </StackPanel>
 
@@ -2907,7 +3050,7 @@
                         <RowDefinition Height=" *"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="17" Text="消息中心"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="17" Text="{DynamicResource lang_form_msg_center_title}"/>
                 </Grid>
                 <!-- 清空-->
                 <Grid x:Name="ui_form_message_clear" Grid.Row="1" Grid.Column="1" MouseDown="ui_form_message_function" Opacity="0">
@@ -2921,7 +3064,7 @@
                         <RowDefinition Height=" *"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="15" Text="清空消息"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="15" Text="{DynamicResource lang_form_msg_clear}"/>
                 </Grid>
                 <Grid x:Name="ui_form_message_up_line" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="white" Opacity="0"/>
 
@@ -2937,7 +3080,7 @@
                         <RowDefinition Height=" *"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="15" Text="没有消息"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="15" Text="{DynamicResource lang_form_msg_nothing}"/>
                 </Grid>
 
                 <ListBox x:Name="ui_form_message_list" Grid.Column="1" Grid.Row="4" ItemTemplate="{StaticResource ui_temp_form_message_list}" Background="#00000000" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>

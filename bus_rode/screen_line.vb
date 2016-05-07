@@ -75,12 +75,12 @@
     ''' [内核][screen_line]运营状态
     ''' </summary>
     ''' <remarks></remarks>
-    Public bus_run As String = "未知"
+    Public bus_run As String = "Unknow"
     ''' <summary>
     ''' [内核][screen_line]当前公交等待难易度
     ''' </summary>
     ''' <remarks></remarks>
-    Public bus_wait_hard As String = "适中"
+    Public bus_wait_hard As String = "Unknow"
 
     ''' <summary>
     ''' [内核][screen_line]指示当前选中的车次是公交还是地铁0=公交 1=地铁
@@ -95,7 +95,7 @@
     ''' <summary>
     ''' [内核][screen_line]read_mid_bus_word最后更新时间
     ''' </summary>
-    Public read_mid_bus_word_last_update As String = "无"
+    Public read_mid_bus_word_last_update As String = "Nothing"
 
     ''' <summary>
     ''' [内核][screen_line]界面上行线路走向的描述
@@ -158,17 +158,17 @@
                 '读取等待难易程度
                 Select Case file.ReadLine
                     Case "0"
-                        bus_wait_hard = "极难等"
+                        bus_wait_hard = read_resources_describe_into_memory("lang_code_line_wait_grade_1")
                     Case "1"
-                        bus_wait_hard = "难等"
+                        bus_wait_hard = read_resources_describe_into_memory("lang_code_line_wait_grade_2")
                     Case "2"
-                        bus_wait_hard = "适中"
+                        bus_wait_hard = read_resources_describe_into_memory("lang_code_line_wait_grade_3")
                     Case "3"
-                        bus_wait_hard = "易等"
+                        bus_wait_hard = read_resources_describe_into_memory("lang_code_line_wait_grade_4")
                     Case "4"
-                        bus_wait_hard = "极易等"
+                        bus_wait_hard = read_resources_describe_into_memory("lang_code_line_wait_grade_5")
                     Case Else
-                        bus_wait_hard = "适中"
+                        bus_wait_hard = read_resources_describe_into_memory("lang_code_line_wait_grade_3")
                 End Select
 
                 '读取运营时间
@@ -412,9 +412,9 @@
             '夜班
             If bus_date_end_hours > system_date_hours Or (bus_date_end_hours = system_date_hours And bus_date_end_min >= system_date_min) Or
                 bus_date_start_hours < system_date_hours Or (bus_date_start_hours = system_date_hours And bus_date_start_min <= system_date_min) Then
-                bus_run = "车次在正常情况处于运营状态，可以乘坐。"
+                bus_run = read_resources_describe_into_memory("lang_code_line_run_state_yes")
             Else
-                bus_run = "有坐不到该车次的风险，该车次此时此刻已经停止发车！"
+                bus_run =read_resources_describe_into_memory("lang_code_line_run_state_no")
             End If
 
         Else
@@ -422,9 +422,9 @@
             '检查是否到达首班车
             If (bus_date_end_hours > system_date_hours Or (bus_date_end_hours = system_date_hours And bus_date_end_min >= system_date_min)) And
                 (bus_date_start_hours < system_date_hours Or (bus_date_start_hours = system_date_hours And bus_date_start_min <= system_date_min)) Then
-                bus_run = "车次在正常情况处于运营状态，可以乘坐。"
+                   bus_run = read_resources_describe_into_memory("lang_code_line_run_state_yes")
             Else
-                bus_run = "有坐不到该车次的风险，该车次此时此刻已经停止发车！"
+                bus_run =read_resources_describe_into_memory("lang_code_line_run_state_no")
             End If
         End If
 
@@ -710,23 +710,23 @@
         Dim up_line_word As String = ""
         If up_line_start_stop <> "" Then
             If up_line_start_stop <> up_line_end_stop Then
-                up_line_word = "（" & up_line_start_stop & "-" & up_line_end_stop & "）"
+                up_line_word = up_line_start_stop & "-" & up_line_end_stop
             Else
-                up_line_word = "（" & up_line_start_stop & "-" & up_line_secound_stop & "-" & up_line_end_stop & "）"
+                up_line_word = up_line_start_stop & "-" & up_line_secound_stop & "-" & up_line_end_stop
             End If
         Else
-            up_line_word = "（无）"
+            up_line_word = read_resources_describe_into_memory("lang_code_nothing")
         End If
 
         Dim down_line_word As String = ""
         If down_line_start_stop <> "" Then
             If down_line_start_stop <> down_line_end_stop Then
-                down_line_word = "（" & down_line_start_stop & "-" & down_line_end_stop & "）"
+                down_line_word = down_line_start_stop & "-" & down_line_end_stop
             Else
-                down_line_word = "（" & down_line_start_stop & "-" & down_line_secound_stop & "-" & down_line_end_stop & "）"
+                down_line_word = down_line_start_stop & "-" & down_line_secound_stop & "-" & down_line_end_stop
             End If
         Else
-            down_line_word = "（无）"
+            down_line_word = read_resources_describe_into_memory("lang_code_nothing")
         End If
 
         Return up_line_word & "," & down_line_word & "," & up_line_list.ToString & "," & down_line_list.ToString

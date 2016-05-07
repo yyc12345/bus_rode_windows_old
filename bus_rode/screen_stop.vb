@@ -152,7 +152,7 @@
             word = file.ReadLine
             If word = bus_stop_stop(now_stop) Then
                 Dim linshi As String = file.ReadLine()
-                cross_stop = "当前站台：" + bus_stop_stop(now_stop) + vbCrLf + "经过车次：" + linshi
+                cross_stop = read_resources_describe_into_memory("lang_code_stop_now_stop") + bus_stop_stop(now_stop) + vbCrLf + read_resources_describe_into_memory("lang_code_stop_cross_line") + linshi
 
                 '输出下端交汇列表
                 get_bus_stop_line(linshi)
@@ -181,7 +181,7 @@
             End If
             If word = bus_stop_stop(now_stop) Then
                 how_station = True
-                cross_stop = cross_stop + vbCrLf + "以当前站为起点终点的" + file_2.ReadLine + vbCrLf + file_2.ReadLine + vbCrLf + file_2.ReadLine + vbCrLf + file_2.ReadLine + vbCrLf + file_2.ReadLine
+                cross_stop = cross_stop + vbCrLf + read_resources_describe_into_memory("lang_code_stop_station_describe") + file_2.ReadLine + vbCrLf + file_2.ReadLine + vbCrLf + file_2.ReadLine + vbCrLf + file_2.ReadLine + vbCrLf + file_2.ReadLine
 
                 Exit Do
             End If
@@ -470,8 +470,8 @@ end_fx:
                         realistic_stop(realistic_stop_list, 4) = str_sp(2)
                         realistic_stop(realistic_stop_list, 8) = str_sp(3)
                     Else
-                        realistic_stop(realistic_stop_list, 3) = "（无）"
-                        realistic_stop(realistic_stop_list, 7) = "（无）"
+                        realistic_stop(realistic_stop_list, 3) = read_resources_describe_into_memory("lang_code_nothing")
+                        realistic_stop(realistic_stop_list, 7) = read_resources_describe_into_memory("lang_code_nothing")
                         realistic_stop(realistic_stop_list, 4) = "-1"
                         realistic_stop(realistic_stop_list, 8) = "-1"
                     End If
@@ -487,11 +487,11 @@ end_fx:
         For a = 0 To realistic_stop_list - 1
             linshi.ui_line_name = realistic_stop(a, 0)
             linshi.ui_up_line_toward = realistic_stop(a, 3)
-            linshi.ui_up_line_describe_1 = "没有最近的车"
-            linshi.ui_up_line_describe_2 = "没有第二近的车"
+            linshi.ui_up_line_describe_1 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_first_nothing")
+            linshi.ui_up_line_describe_2 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_secound_nothing")
             linshi.ui_down_line_toward = realistic_stop(a, 7)
-            linshi.ui_down_line_describe_1 = "没有最近的车"
-            linshi.ui_down_line_describe_2 = "没有第二近的车"
+            linshi.ui_down_line_describe_1 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_first_nothing")
+            linshi.ui_down_line_describe_2 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_secound_nothing")
 
             linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
             linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))

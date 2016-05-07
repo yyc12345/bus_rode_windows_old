@@ -9,7 +9,58 @@
 
     Public Const app_use_baidu_ak As String = "GyEb8Gs7DYaCuiKEsb5GIs9N"
 
+    Public Const app_supported_language As String = "en-US,zh-CN"
 
+    Public use_resources As ResourceDictionary = Nothing
+
+    ''' <summary>
+    ''' 将当前加载的资源的一些需要在非ui界面使用的资源读取到程序内部
+    ''' </summary>
+    ''' <param name="key">寻找的键值</param>
+    ''' <returns></returns>
+    Public Function read_resources_describe_into_memory(ByVal key As String) As String
+
+        Try
+            If use_resources Is Nothing Then
+                Return CType(Application.Current.Resources(key), String)
+            Else
+                Return CType(use_resources(key), String)
+            End If
+        Catch ex As Exception
+            Return ""
+        End Try
+
+    End Function
+
+    ''' <summary>
+    ''' 将当前加载的资源的一些需要在非ui界面使用的资源读取到程序内部，并且替换其中指定的字符串
+    ''' </summary>
+    ''' <param name="key">寻找的键值</param>
+    ''' <param name="replace_word">替换的字符串列表，按顺序写入，例：第0项替换{0}等。。。</param>
+    ''' <returns></returns>
+    Public Function read_resources_describe_into_memory_replace(ByVal key As String, ByVal replace_word As ArrayList) As String
+
+        Dim get_word As String = ""
+        Try
+            If use_resources Is Nothing Then
+                get_word = CType(Application.Current.Resources(key), String)
+            Else
+                get_word = CType(use_resources(key), String)
+            End If
+        Catch ex As Exception
+            Return ""
+        End Try
+
+        If replace_word.Count = 0 Then Return get_word
+        If get_word = "" Then Return ""
+        For a = 0 To replace_word.Count
+            If get_word.IndexOf("{" & a & "}") <= -1 Then Exit For
+            get_word.Replace("{" & a & "}", replace_word.Item(a).ToString)
+        Next
+
+        Return get_word
+
+    End Function
     '************************************************************************文件读取部分************************************************************
 
     ''' <summary>
@@ -174,6 +225,9 @@
 
         '自动加载背景函数写在内部
 
+        '加载语言
+        interface_language = file_7.ReadLine
+
         file_7.Dispose()
     End Sub
 
@@ -218,7 +272,7 @@
             System.Media.SystemSounds.Beep.Play()
         Else
             '新式的
-            window_dialogs_show(title, word, 1, False, "确认", "", win)
+            window_dialogs_show(title, word, 1, False, read_resources_describe_into_memory("lang_code_MainWindow_ok"), "", win)
         End If
 
 

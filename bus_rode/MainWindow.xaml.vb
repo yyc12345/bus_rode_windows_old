@@ -225,7 +225,7 @@ Public Class MainWindow
             ui_form_line_have_stop_list.ItemsSource = ui_connet_core_form_line_have_sotp_list_show
 
             '显示信息
-            ui_form_line_re_bus_describe.Text = "最后刷新时间：" & read_mid_bus_word_last_update
+            ui_form_line_re_bus_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_get_resources_timer_function") & read_mid_bus_word_last_update
         End If
 
     End Sub
@@ -253,11 +253,11 @@ Public Class MainWindow
             '上行
             linshi.ui_up_line_toward = realistic_stop(a, 3)
             If realistic_stop(a, 1) = "" Or realistic_stop(a, 1) = "-1" Then
-                linshi.ui_up_line_describe_1 = "没有最近的车"
+                linshi.ui_up_line_describe_1 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_first_nothing")
                 linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
             Else
                 '分析颜色
-                linshi.ui_up_line_describe_1 = "最近的车还有" & realistic_stop(a, 1) & "站"
+                linshi.ui_up_line_describe_1 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_first_have_1") & realistic_stop(a, 1) & read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_first_have_2")
                 Select Case realistic_stop(a, 1)
                     Case "1"
                         linshi.ui_up_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 0, 0))
@@ -274,19 +274,19 @@ Public Class MainWindow
                 End Select
             End If
             If realistic_stop(a, 2) = "" Or realistic_stop(a, 2) = "-1" Then
-                linshi.ui_up_line_describe_2 = "没有第二近的车"
+                linshi.ui_up_line_describe_2 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_secound_nothing")
             Else
-                linshi.ui_up_line_describe_2 = "第二近的车还有" & realistic_stop(a, 2) & "站"
+                linshi.ui_up_line_describe_2 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_secound_have_1") & realistic_stop(a, 2) & read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_secound_have_2")
             End If
 
             '下行
             linshi.ui_down_line_toward = realistic_stop(a, 7)
             If realistic_stop(a, 5) = "" Or realistic_stop(a, 5) = "-1" Then
-                linshi.ui_down_line_describe_1 = "没有最近的车"
+                linshi.ui_down_line_describe_1 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_first_nothing")
                 linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 255, 255))
             Else
                 '分析颜色
-                linshi.ui_down_line_describe_1 = "最近的车还有" & realistic_stop(a, 5) & "站"
+                linshi.ui_down_line_describe_1 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_first_have_1") & realistic_stop(a, 5) & read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_first_have_2")
                 Select Case realistic_stop(a, 5)
                     Case "1"
                         linshi.ui_down_bk_color = New SolidColorBrush(Color.FromArgb(255, 255, 0, 0))
@@ -303,9 +303,9 @@ Public Class MainWindow
                 End Select
             End If
             If realistic_stop(a, 6) = "" Or realistic_stop(a, 6) = "-1" Then
-                linshi.ui_down_line_describe_2 = "没有第二近的车"
+                linshi.ui_down_line_describe_2 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_secound_nothing")
             Else
-                linshi.ui_down_line_describe_2 = "第二近的车还有" & realistic_stop(a, 6) & "站"
+                linshi.ui_down_line_describe_2 = read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_secound_have_1") & realistic_stop(a, 6) & read_resources_describe_into_memory("lang_code_MainWindow_get_realistic_stop_timer_function_secound_have_2")
             End If
 
             ui_connet_core_form_stop_realistic_stop_list.Add(linshi)
@@ -391,24 +391,24 @@ Public Class MainWindow
 
         Else
             '错误，退出
-            MsgBox("很抱歉,bus_rode无法运行在当前环境下,这可能由于下列情况:" + vbCrLf +
-                    "1.操作系统版本过低,我们需要Windows 7(NT 6.1)及以上操作系统" + vbCrLf +
-                    "您可以访问 https://insider.windows.com/ 来获取最新的操作系统,这将保障程序正常的运行" + vbCrLf +
-                    "2.检测到非法进程,对于此种情况,我们建议您卸载可能导致程序无法启动的应用程序" + vbCrLf + vbCrLf +
-                    "程序即将退出,我们深感抱歉." + vbCrLf +
-                    "CHMOSGroup Programmer", 48, "拒绝启动")
+            MsgBox("Sorry,bus_rode isn't run in this enviroment.Here are some reasons:" + vbCrLf +
+                    "1.Your OS version so low.bus_rode can run in Windows 7(NT 6.1) or higer version" + vbCrLf +
+                    "You can visit https://insider.windows.com/ . Then you can get the latest OS" + vbCrLf +
+                    "2.bus_rode check some worry process in this enviroment. Please uninstall some application which avoid running bus_rode" + vbCrLf + vbCrLf +
+                    "bus_rode will exit." + vbCrLf +
+                    "CHMOSGroup Programmer", 48, "Avoid Starting")
             Environment.Exit(3)
         End If
 
         '检测文件
         Dim linshi_word As String = ""
         If bus_rode_check.bus_rode_check.check_file(Environment.CurrentDirectory + "\", linshi_word) = False Then
-            MsgBox(linshi_word, 16, "缺少启动文件")
+            MsgBox(linshi_word, 16, "Lost some file on which bus_rode is run depend")
             Environment.Exit(4)
         End If
 
         If bus_rode_check.bus_rode_check.have_file(Environment.CurrentDirectory + "\library\") = 4 Then
-            message_ex_ex("错误", "没有找到资源文件，您应该先安装资源文件！你可以在程序的设置中安装资源")
+            message_ex_ex("Error", "Can't find resources files. You must install some resources files in Setting panel when app has run.")
             ui_form_message_clear.Opacity = 1
             ui_form_message_up_line.Opacity = 1
             ui_form_message_no_msg_title.Opacity = 0
@@ -419,7 +419,7 @@ Public Class MainWindow
 
         '确定程序能否更好地工作
         If System.Environment.Is64BitProcess = False And System.Environment.Is64BitOperatingSystem = True Then
-            message_ex_ex("程序可以更好地工作", "你的操作系统是64Bit,你可以使用64Bit的bus_rode")
+            message_ex_ex("Application can get more encourgement", "You are running 32-Bit bus_rode in 64-Bit OS")
             ui_form_message_clear.Opacity = 1
             ui_form_message_up_line.Opacity = 1
             ui_form_message_no_msg_title.Opacity = 0
@@ -497,10 +497,12 @@ Public Class MainWindow
         '设置文本
         If bus_or_subway = 0 Then
             '公交
-            ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：公交" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
+            ui_form_line_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_1") + bus + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_2") + vbCrLf + 
+			bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_4") + bus_wait_hard
         Else
             '地铁
-            ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：地铁" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
+            ui_form_line_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_1") + bus + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_3") + vbCrLf + 
+			bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_4") + bus_wait_hard
         End If
 
         '设置上下行文本，控制操作
@@ -595,9 +597,9 @@ Public Class MainWindow
 "" & vbCrLf &
 "CHMOSGroup Copyright 2012-2016" & vbCrLf &
 "" & vbCrLf &
-"感谢您使用bus_rode，bus_rode是一个开源软件，使用MIT开源协议，在下面会有开源地址" & vbCrLf &
-"您可以加入这个工程，帮助我们变得更好，也可以在下面这个地址反馈错我，我们将会将其" & vbCrLf &
-"标记并在将来消除这个问题"
+read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_describe_1") & vbCrLf &
+read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_describe_2") & vbCrLf &
+read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_describe_3")
         ui_form_about_describe.Text = describe
 
         describe = ""
@@ -610,14 +612,34 @@ Public Class MainWindow
         ui_window_title.Text = app_name
         Me.Title = app_name
 
-        '关联控件
+        '====================================设置语言
+        Dim langRd As ResourceDictionary = Nothing
+        If interface_language <> "en-US" Then
+            '检测文件存在
+            Try
+                If System.IO.File.Exists(Environment.CurrentDirectory & "\language\" & interface_language & ".xaml") = True Then langRd = Application.LoadComponent(New Uri("language\" & interface_language & ".xaml", UriKind.Relative))
+            Catch ex As Exception
+            End Try
+
+            If langRd IsNot Nothing Then
+                Me.Resources.MergedDictionaries.Clear()
+                Me.Resources.MergedDictionaries.Add(langRd)
+                use_resources = langRd
+                ui_form_contorl_select_language_text.Text = interface_language
+            Else
+                use_resources = Nothing
+                ui_form_contorl_select_language_text.Text = "en-US"
+            End If
+        End If
+
+        '====================================关联控件
         '初始化消息列表
         ui_form_message_list.ItemsSource = ui_connet_core_form_message_list
 
         '初始化打开文件窗口
-        open_resources_file.Filter = app_name & "资源文件|*.brs"
-        open_background_file.Filter = "JPG/JPEG图像文件|*.jpg"
-        open_mod_file.Filter = "bus_rode插件|*.dll"
+        open_resources_file.Filter = app_name & read_resources_describe_into_memory("lang_code_MainWindow_init_file_dialogs_1") & "|*.brs"
+        open_background_file.Filter = read_resources_describe_into_memory("lang_code_MainWindow_init_file_dialogs_2") & "|*.jpg"
+        open_mod_file.Filter = read_resources_describe_into_memory("lang_code_MainWindow_init_file_dialogs_3") & "|*.dll"
 
     End Sub
     ''' <summary>
@@ -698,7 +720,7 @@ Public Class MainWindow
                 app_desktop_icon.ShowBalloonTip(5000, title, text, System.Windows.Forms.ToolTipIcon.Info)
             Else
                 '新式的
-                window_dialogs_show(title, text, 1, False, "确认", "", Me)
+                window_dialogs_show(title, text, 1, False, read_resources_describe_into_memory("lang_code_MainWindow_message_ex_ex") , "", Me)
             End If
 
         Else
@@ -873,7 +895,7 @@ Public Class MainWindow
                 ui_title_back_btn_color.Color = Color.FromArgb(180, 255, 0, 0)
                 ui_title_menu_btn_color.Color = Color.FromArgb(180, 143, 143, 143)
             Case Else
-                message_ex_ex("灾难性错误", "bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！")
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_re_window_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_re_window_error_2"))
                 Environment.Exit(1)
         End Select
 
@@ -1016,7 +1038,7 @@ Public Class MainWindow
             '刷新
             re_window()
         Else
-            message_ex_ex("资源", "当前没有安装资源！")
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_open_panel_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_open_panel_error_2"))
         End If
 
 
@@ -1057,7 +1079,7 @@ Public Class MainWindow
             '刷新
             re_window()
         Else
-            message_ex_ex("资源", "当前没有安装资源！")
+                        message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_open_panel_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_open_panel_error_2"))
         End If
 
     End Sub
@@ -1284,7 +1306,7 @@ Public Class MainWindow
                 screens = 0
 
             Case Else
-                message_ex_ex("灾难性错误", "bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！")
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_re_window_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_re_window_error_2"))
                 Environment.Exit(1)
         End Select
 
@@ -1371,7 +1393,7 @@ Public Class MainWindow
             Case 4
 
             Case Else
-                message_ex_ex("灾难性错误", "bus_rode的核心变量值被篡改， 程序将在点击确定后立即关闭！")
+ message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_re_window_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_re_window_error_2"))
 
                 Environment.Exit(1)
         End Select
@@ -1628,11 +1650,11 @@ Public Class MainWindow
                 re_window()
 
             Else
-                message_ex_ex("未找到模块", "未找到指定模块，可能是未安装模块")
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_runtime_set_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_runtime_set_error_2"))
             End If
 
         Else
-            message_ex_ex("资源", "当前没有安装资源！")
+             message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_open_panel_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_open_panel_error_2"))
         End If
 
     End Sub
@@ -1817,12 +1839,14 @@ Public Class MainWindow
 
             '设置文本
             If bus_or_subway = 0 Then
-                '公交
-                ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：公交" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
-            Else
-                '地铁
-                ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：地铁" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
-            End If
+            '公交
+				ui_form_line_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_1") + bus + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_2") + vbCrLf + 
+				bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_4") + bus_wait_hard
+			Else
+            '地铁
+				ui_form_line_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_1") + bus + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_3") + vbCrLf + 
+				bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_4") + bus_wait_hard
+			End If
 
             select_stop_point = 0
 
@@ -1869,12 +1893,14 @@ Public Class MainWindow
 
                     '设置文本
                     If bus_or_subway = 0 Then
-                        '公交
-                        ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：公交" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
-                    Else
-                        '地铁
-                        ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：地铁" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
-                    End If
+            '公交
+            ui_form_line_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_1") + bus + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_2") + vbCrLf + 
+			bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_4") + bus_wait_hard
+        Else
+            '地铁
+            ui_form_line_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_1") + bus + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_3") + vbCrLf + 
+			bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_4") + bus_wait_hard
+        End If
 
                     select_stop_point = 0
 
@@ -2046,12 +2072,14 @@ Public Class MainWindow
 
                 '设置文本
                 If bus_or_subway = 0 Then
-                    '公交
-                    ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：公交" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
-                Else
-                    '地铁
-                    ui_form_line_describe.Text = "当前车次：" + bus + vbCrLf + "类别：地铁" + vbCrLf + bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + "等待该车的难度:" + bus_wait_hard
-                End If
+            '公交
+            ui_form_line_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_1") + bus + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_2") + vbCrLf + 
+			bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_4") + bus_wait_hard
+        Else
+            '地铁
+            ui_form_line_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_1") + bus + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_3") + vbCrLf + 
+			bus_msg(0) + vbCrLf + bus_msg(1) + vbCrLf + bus_msg(2) + vbCrLf + bus_msg(3) + vbCrLf + bus_msg(4) + vbCrLf + bus_run + vbCrLf + read_resources_describe_into_memory("lang_code_MainWindow_init_screen_line_describe_4") + bus_wait_hard
+        End If
 
                 select_stop_point = 0
 
@@ -2063,7 +2091,7 @@ Public Class MainWindow
                 '====================消除数据
                 ui_form_line_contorl_left_form_textbox.Text = ""
             Else
-                message_ex_ex("搜索", "没有找到车次：" + ui_form_line_contorl_left_form_textbox.Text)
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_line_not_found")+ ui_form_line_contorl_left_form_textbox.Text)
             End If
         End If
     End Sub
@@ -2084,7 +2112,7 @@ Public Class MainWindow
                 ui_form_line_have_stop_list.SelectedIndex = a
 
             Else
-                message_ex_ex("搜索", "没有在该线路中找到站台：" + ui_form_line_contorl_right_form_textbox.Text)
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_stop_in_line_not_found") + ui_form_line_contorl_right_form_textbox.Text)
             End If
 
         End If
@@ -2153,7 +2181,7 @@ Public Class MainWindow
                 Else
                     '找到了
                     a.ui_line_of_stop_name = bus_stop_up(test1)
-                    a.ui_line_of_stop_name_on_where = "上行线路"
+                    a.ui_line_of_stop_name_on_where = read_resources_describe_into_memory("lang_code_MainWindow_line_up_line")
                     ui_connet_core_form_line_search_stop_list.Add(a)
                     a = New ui_depend_line_search_stop_list
                 End If
@@ -2172,7 +2200,7 @@ Public Class MainWindow
                 Else
                     '找到了
                     a.ui_line_of_stop_name = bus_stop_down(test1)
-                    a.ui_line_of_stop_name_on_where = "下行线路"
+                    a.ui_line_of_stop_name_on_where = read_resources_describe_into_memory("lang_code_MainWindow_line_down_line")
                     ui_connet_core_form_line_search_stop_list.Add(a)
                     a = New ui_depend_line_search_stop_list
                 End If
@@ -2352,7 +2380,7 @@ Public Class MainWindow
                 '还原
                 ui_form_stop_contorl_left_form_textbox.Text = ""
             Else
-                message_ex_ex("搜索", "没有找到车站：" + ui_form_stop_contorl_left_form_textbox.Text)
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_stop_not_found") + ui_form_stop_contorl_left_form_textbox.Text)
             End If
         End If
     End Sub
@@ -2397,7 +2425,7 @@ Public Class MainWindow
 
             'ui设置
             short_line_can_page = True
-            ui_form_stop_contorl_step_describe.Text = "正在计算换乘路线，请稍候。如果是第一次使用这个功能，可能需要更多时间。"
+            ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory("lang_code_MainWindow_short_rode_calcing")
 
             toword_local = True
 
@@ -2415,14 +2443,14 @@ Public Class MainWindow
                     If toword(0, 0) = "" Then
                         '没有可以到的线路
                         short_line_can_page = True
-
+'TODO:
                         ui_form_stop_contorl_step_describe.Text = "由 " & stamp_start_stop & " 至 " & stamp_end_stop & " 的换乘不能进行" & vbCrLf &
                             "因为换乘线路过长，或者是根本无法换乘，对此，我们感到十分抱歉"
 
                         ui_form_stop_contorl_left_page.Opacity = 0
                         ui_form_stop_contorl_right_page.Opacity = 0
 
-                        ui_form_stop_contorl_page.Text = "步骤"
+                        ui_form_stop_contorl_page.Text = read_resources_describe_into_memory("lang_code_MainWindow_short_rode_step")
                     Else
                         ui_form_stop_contorl_page.Text = "步骤1"
 
@@ -2463,10 +2491,10 @@ Public Class MainWindow
 
         If stamp_start_stop <> "" And stamp_end_stop <> "" Then
             If stamp_start_stop = stamp_end_stop Then
-                message_ex_ex("换乘规划站点错误", "起点和终点不能相同！")
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_short_rode_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_short_rode_error_2"))
             Else
                 If check_stop_list(stamp_start_stop) = False Or check_stop_list(stamp_end_stop) = False Then
-                    message_ex_ex("换乘规划站点错误", "没有找到指定车站，请确认车站存在！")
+                    message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_short_rode_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_short_rode_error_3"))
                 Else
                     '先确认是否是不同类别的
                     If mode = Nothing Then
@@ -2477,7 +2505,7 @@ Public Class MainWindow
                         '选择项相同,直接保持不变
                         If (mode = True And short_rode_calc_mode = True) Or (mode = False And short_rode_calc_mode = False) Then
                             '不能执行
-                            message_ex_ex("换乘规划", "结果已经计算完成，无需再次计算！")
+                            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_short_rode_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_short_rode_error_4"))
                         Else
                             yes = True
                         End If
@@ -2487,7 +2515,7 @@ Public Class MainWindow
                 End If
             End If
         Else
-            message_ex_ex("换乘规划站点错误", "起点和终点不能为空！")
+ message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_short_rode_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_short_rode_error_5"))
         End If
 
         Return yes
@@ -2506,6 +2534,7 @@ Public Class MainWindow
                 '拒绝
             Else
                 step_number += 1
+				'TODO:
                 ui_form_stop_contorl_page.Text = "步骤" & (step_number + 1)
 
                 If toword_local = True Then
@@ -2597,7 +2626,7 @@ Public Class MainWindow
         stamp_end_stop = ui_form_stop_contorl_right_form_textbox_2.Text
 
         If My.Computer.Network.IsAvailable = False Then
-            message_ex_ex("没有网络", "联网规划需要有效的网络连接才能进行，没有网络时请使用本地规划")
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_short_rode_web_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_short_rode_web_error_2"))
         Else
 
             If ui_form_stop_short_line_check(True) = True Then
@@ -2633,6 +2662,7 @@ Public Class MainWindow
                     short_rode_calc_mode = True
 
                     '设置ui
+					'TODO:
                     ui_form_stop_contorl_page.Text = "步骤1"
 
                     ui_form_stop_contorl_step_describe.Text = toword(0, 0)
@@ -2672,6 +2702,110 @@ Public Class MainWindow
         Environment.Exit(3)
     End Sub
 
+    ''' <summary>
+    ''' [系统][ui]浏览可用语言
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_contorl_throw_lang_file(sender As Object, e As MouseButtonEventArgs)
+
+        '=============================================给定相关语言
+        '给对话框选定
+        Dim aaa As New ui_depend_window_select_item_list
+        ui_connect_window_select_item_list.Clear()
+        ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge")
+
+        '输入内容
+        Dim lang_sp() As String = app_supported_language.Split(",")
+        For a = 0 To lang_sp.Count - 1
+
+            aaa.pro_title = lang_sp(a)
+            aaa.pro_text = lang_sp(a)
+            aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+
+            ui_connect_window_select_item_list.Add(aaa)
+            aaa = New ui_depend_window_select_item_list
+        Next
+
+        '显示对话框
+
+        Dim linshi = New Window_select_item
+        ui_connect_window_select_item_list_select_index = -1
+        linshi.Owner = Application.Current.MainWindow()
+        linshi.ShowDialog()
+
+        '执行
+        If ui_connect_window_select_item_list_select_index <> -1 Then
+
+            '写入
+            '英语直接写入
+            If lang_sp(ui_connect_window_select_item_list_select_index) = "en-US" Then
+                ui_form_contorl_select_language_text.Text = "en-US"
+                Exit Sub
+            End If
+
+            '检测文件存在再写入
+            If System.IO.File.Exists(Environment.CurrentDirectory & "\language\" & lang_sp(ui_connect_window_select_item_list_select_index) & ".xaml") = True Then
+                ui_form_contorl_select_language_text.Text = lang_sp(ui_connect_window_select_item_list_select_index)
+            Else
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge_error_2"))
+            End If
+
+        Else
+            '返回空值，取消
+            Exit Sub
+        End If
+
+
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]应用语言
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_contorl_list_10_function(sender As Object, e As MouseButtonEventArgs)
+
+        If ui_form_contorl_select_language_text.Text = "en-US" Then
+            '英语只要清除内容就好
+            Me.Resources.MergedDictionaries.Clear()
+
+            use_resources = Nothing
+
+            '保存设置
+            interface_language = ui_form_contorl_select_language_text.Text
+            save_user_contorl()
+
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge_succeeded_1"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge_succeeded_2"))
+
+            Exit Sub
+        End If
+
+        '====================================设置语言
+        Dim langRd As ResourceDictionary = Nothing
+        '检测文件存在
+        Try
+            If System.IO.File.Exists(Environment.CurrentDirectory & "\language\" & ui_form_contorl_select_language_text.Text & ".xaml") = True Then langRd = Application.LoadComponent(New Uri("language\" & ui_form_contorl_select_language_text.Text & ".xaml", UriKind.Relative))
+        Catch ex As Exception
+        End Try
+
+        If langRd IsNot Nothing Then
+            Me.Resources.MergedDictionaries.Clear()
+            Me.Resources.MergedDictionaries.Add(langRd)
+            use_resources = langRd
+
+            '保存设置
+            interface_language = ui_form_contorl_select_language_text.Text
+            save_user_contorl()
+
+             message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge_succeeded_1"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge_succeeded_2"))
+        Else
+            ui_form_contorl_select_language_text.Text = interface_language
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge_fail_1"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge_fail_2"))
+        End If
+
+    End Sub
+
     '===============================实时====================================
 
     ''' <summary>
@@ -2699,7 +2833,7 @@ Public Class MainWindow
             Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command)
             Environment.Exit(3)
         Else
-            message_ex_ex("替换资源", "没有找到车辆跟踪插件文件：" + ui_form_contorl_mod_path.Text)
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_replace_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_file_not_found") + ui_form_contorl_mod_path.Text)
         End If
     End Sub
 
@@ -2719,20 +2853,20 @@ Public Class MainWindow
                 Dim instance As Object = Activator.CreateInstance(tp)
 
                 Dim prop_1 As Reflection.FieldInfo = tp.GetField("DllDependBusRodeVersion")
-                out_word = "插件依赖的bus_rode版本号：" & CType(prop_1.GetValue(instance), String) & vbCrLf
+                out_word = read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_info_1") & CType(prop_1.GetValue(instance), String) & vbCrLf
                 Dim prop_2 As Reflection.FieldInfo = tp.GetField("DllWriter")
-                out_word = out_word & "插件作者：" & CType(prop_2.GetValue(instance), String) & vbCrLf
+                out_word = out_word & read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_info_2") & CType(prop_2.GetValue(instance), String) & vbCrLf
                 Dim prop_3 As Reflection.FieldInfo = tp.GetField("DllRegoin")
-                out_word = out_word & "插件适用的城市：" & CType(prop_3.GetValue(instance), String) & vbCrLf
+                out_word = out_word & read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_info_3") & CType(prop_3.GetValue(instance), String) & vbCrLf
                 Dim prop_4 As Reflection.FieldInfo = tp.GetField("DllVersion")
-                out_word = out_word & "插件版本号：" & CType(prop_4.GetValue(instance), String)
+                out_word = out_word & read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_info_4") & CType(prop_4.GetValue(instance), String)
 
-                message_ex_ex("插件信息", out_word)
+                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_info_5"), out_word)
             End If
         Catch ex As Exception
-            message_ex_ex("错误", "无法读取插件的相关信息，这可能是由于：" & vbCrLf &
-                   "1、没有安装插件" & vbCrLf &
-                   "2、插件损坏或者插件不完整没有通过CHMOSGroup的认证")
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_1") & vbCrLf &
+                   read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_2") & vbCrLf &
+                   read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_3"))
         End Try
 
     End Sub
@@ -2744,7 +2878,7 @@ Public Class MainWindow
     ''' <param name="e"></param>
     Private Sub ui_contorl_list_1_function(sender As Object, e As MouseButtonEventArgs)
 
-        window_dialogs_show("删除插件", "确认删除插件？", 2, False, "确定", "取消", Me)
+        window_dialogs_show(read_resources_describe_into_memory("lang_code_MainWindow_ok_or_not"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_del_word"), 2, False, read_resources_describe_into_memory("lang_code_MainWindow_ok"), read_resources_describe_into_memory("lang_code_MainWindow_cancel"), Me)
 
         If window_dialogs_select_btn = 0 Then
             Dim command As String = app_build_number * 10 + 3
@@ -2764,9 +2898,9 @@ Public Class MainWindow
     ''' <remarks></remarks>
     Private Sub ui_contorl_list_3_function(sender As Object, e As MouseButtonEventArgs)
         If no_resource = False Then
-            message_ex_ex("资源属性/自述", System.IO.File.ReadAllText(Environment.CurrentDirectory + "\library\readme.txt"))
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_resources_describe"), System.IO.File.ReadAllText(Environment.CurrentDirectory + "\library\readme.txt"))
         Else
-            message_ex_ex("资源", "当前没有安装资源！")
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_open_panel_error_1"), read_resources_describe_into_memory("lang_code_MainWindow_open_panel_error_2"))
         End If
     End Sub
 
@@ -2794,7 +2928,7 @@ Public Class MainWindow
             Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command)
             Environment.Exit(3)
         Else
-            message_ex_ex("替换资源", "没有找到资源文件：" + ui_form_contorl_resource_path.Text)
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_replace_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_file_not_found") + ui_form_contorl_resource_path.Text)
         End If
     End Sub
 
@@ -2805,7 +2939,7 @@ Public Class MainWindow
     ''' <param name="e"></param>
     Private Sub ui_contorl_list_9_function(sender As Object, e As MouseButtonEventArgs)
 
-        window_dialogs_show("删除资源", "确认删除资源？", 2, False, "确定", "取消", Me)
+        window_dialogs_show(read_resources_describe_into_memory("lang_code_MainWindow_ok_or_not"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_del_word"), 2, False, read_resources_describe_into_memory("lang_code_MainWindow_ok"), read_resources_describe_into_memory("lang_code_MainWindow_cancel"), Me)
 
         If window_dialogs_select_btn = 0 Then
             Dim command As String = app_build_number * 10 + 4
@@ -2881,26 +3015,26 @@ Public Class MainWindow
                         '保存设置
                         save_user_contorl()
                     Else
-                        message_ex_ex("数值", "数值非法")
+                        message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
                         ui_form_contorl_r_value.Value = form_color.R
                         ui_form_contorl_g_value.Value = form_color.G
                         ui_form_contorl_b_value.Value = form_color.B
                     End If
                 Else
-                    message_ex_ex("数值", "数值非法")
+ message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
                     ui_form_contorl_r_value.Value = form_color.R
                     ui_form_contorl_g_value.Value = form_color.G
                     ui_form_contorl_b_value.Value = form_color.B
                 End If
             Else
-                message_ex_ex("数值", "数值非法")
+ message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
                 ui_form_contorl_r_value.Value = form_color.R
                 ui_form_contorl_g_value.Value = form_color.G
                 ui_form_contorl_b_value.Value = form_color.B
             End If
         Catch ex As Exception
             '输入文本类型错误
-            message_ex_ex("数值", "数值非法")
+ message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
             ui_form_contorl_r_value.Value = form_color.R
             ui_form_contorl_g_value.Value = form_color.G
             ui_form_contorl_b_value.Value = form_color.B
@@ -2941,7 +3075,7 @@ Public Class MainWindow
             Process.Start(Environment.CurrentDirectory + "\bus_rode_add.exe", command)
             Environment.Exit(3)
         Else
-            message_ex_ex("替换背景", "没有找到背景文件：" + ui_form_contorl_background_path.Text)
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_replace_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_file_not_found")  + ui_form_contorl_background_path.Text)
         End If
     End Sub
 
@@ -2974,7 +3108,7 @@ Public Class MainWindow
         If e.Key = Key.F1 And talk_man = True Then
             If run_talk_flag = True Then
                 '不予执行
-                message_ex_ex("讲述人", "讲述人正在朗读，请等待朗诵完毕再按下F1")
+                message_ex_ex(read_resources_describe_into_memory("lang_form_contorl_normal_speaker_title"), read_resources_describe_into_memory("lang_code_MainWindow_speaker_now"))
             Else
                 run_talk_flag = True
             End If
@@ -3061,6 +3195,7 @@ Public Class MainWindow
     Private Sub ui_form_stop_realistic_stop_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_stop_realistic_stop_list.MouseLeave
         ScrollViewer.SetHorizontalScrollBarVisibility(ui_form_stop_realistic_stop_list, ScrollBarVisibility.Hidden)
     End Sub
+
 
 #End Region
 

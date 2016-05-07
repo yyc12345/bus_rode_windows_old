@@ -31,6 +31,11 @@
     Public setting_group_3 As Boolean = False
 
     ''' <summary>
+    ''' 界面的语言
+    ''' </summary>
+    Public interface_language As String = "en-US"
+
+    ''' <summary>
     ''' 窗口的颜色,不包含透明度
     ''' </summary>
     ''' <remarks></remarks>
@@ -76,6 +81,8 @@
         file.WriteLine(form_color.G)
         file.WriteLine(form_color.B)
 
+        file.WriteLine(interface_language)
+
         file.Dispose()
 
     End Sub
@@ -97,6 +104,7 @@
     Public Sub talk_man_main()
 
         '无限循环
+		'TODO:讲述人的问题
         Do
             Do
                 If run_talk_flag = True Then
@@ -197,7 +205,7 @@
                         End If
                         talk_man_file("设置项3，重新启动应用程序，重启解决一些偶然性问题，")
                         '===================================================
-                        talk_man_file("实时设置下共有4个设置项目，“)
+                        talk_man_file("实时设置下共有4个设置项目，")
                         talk_man_file("设置项1，车辆跟踪，对处在运营状态的车次到达站次显示在线路图上，")
                         If get_bus_addr = True Then
                             talk_man_file("当前车辆跟踪选项是开启的")

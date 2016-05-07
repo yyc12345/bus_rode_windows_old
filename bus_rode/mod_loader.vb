@@ -245,7 +245,8 @@ begin_new_circle:
 
             GC.Collect()
         Catch ex As Exception
-            MsgBox("无法读取插件的相关信息，这可能是由于插件损坏或者插件不完整没有通过CHMOSGroup的认证", 16, "错误")
+            MsgBox(read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_1") & read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_2") & 
+			read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_3"), 16, read_resources_describe_into_memory("lang_code_MainWindow_error_title"))
             Exit Sub
         End Try
 
@@ -262,7 +263,7 @@ begin_new_circle:
         linshi = CType(prop_1.GetValue(instance), Integer)
         If linshi <> app_build_number Then
             '版本不和
-            MsgBox("插件所需要的bus_rode版本和当前使用的bus_rode版本号不同，无法加载，请选择一个合适的插件", 16, "插件加载错误")
+            MsgBox(read_resources_describe_into_memory("lang_code_mod_loader_check_version_error"), 16, read_resources_describe_into_memory("lang_code_MainWindow_error_title"))
             Exit Sub
         End If
 
@@ -271,7 +272,7 @@ begin_new_circle:
         linshi2 = CType(prop_2.GetValue(instance), String)
         If linshi2 <> set_address Then
             '地区不和
-            MsgBox("插件所应用的地区与当前加载资源所表示的地区不同，无法加载，请选择一个合适的插件", 16, "插件加载错误")
+            MsgBox(read_resources_describe_into_memory("lang_code_mod_loader_check_regoin_error"), 16, read_resources_describe_into_memory("lang_code_MainWindow_error_title"))
             Exit Sub
         End If
 

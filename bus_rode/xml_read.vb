@@ -71,11 +71,12 @@ Module xml_read
         '给对话框选定
         Dim aaa As New ui_depend_window_select_item_list
         ui_connect_window_select_item_list.Clear()
-        ui_connect_window_select_item_list_title = "选择一个合适的方案"
+        ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_solution")
 
         '输入内容
         For a = 0 To scheme_list.Count - 1
 
+		'TODO
             aaa.pro_title = "方案" & (a + 1)
             aaa.pro_text = "路程：" & scheme_list(a).SelectSingleNode("distance").InnerText & "米 需要时间：" & scheme_list(a).SelectSingleNode("duration").InnerText & "秒"
             aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
@@ -160,7 +161,7 @@ Module xml_read
             '给对话框选定
             Dim aaa As New ui_depend_window_select_item_list
             ui_connect_window_select_item_list.Clear()
-            ui_connect_window_select_item_list_title = "选择更为详尽的起点"
+            ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_start")
             Dim content_list As XmlNodeList = origin_list(0).SelectNodes("content")
 
             '输入内容
@@ -201,7 +202,7 @@ Module xml_read
             '给对话框选定
             Dim bbb As New ui_depend_window_select_item_list
             ui_connect_window_select_item_list.Clear()
-            ui_connect_window_select_item_list_title = "选择更为详尽的终点"
+            ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_end")
             Dim content_list As XmlNodeList = destination_list(0).SelectNodes("content")
 
             '输入内容
