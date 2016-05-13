@@ -76,9 +76,10 @@ Module xml_read
         '输入内容
         For a = 0 To scheme_list.Count - 1
 
-		'TODO
-            aaa.pro_title = "方案" & (a + 1)
-            aaa.pro_text = "路程：" & scheme_list(a).SelectSingleNode("distance").InnerText & "米 需要时间：" & scheme_list(a).SelectSingleNode("duration").InnerText & "秒"
+            'TODO
+            aaa.pro_title = read_resources_describe_into_memory_replace("lang_code_xml_read_plan", (a + 1))
+            aaa.pro_text = read_resources_describe_into_memory_replace("lang_code_xml_read_plan_describe", scheme_list(a).SelectSingleNode("distance").InnerText &
+                                                        "," & scheme_list(a).SelectSingleNode("duration").InnerText)
             aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
 
             ui_connect_window_select_item_list.Add(aaa)
@@ -110,8 +111,10 @@ Module xml_read
                     word = Replace(word, "<font color=" & Chr(34) & "#7a7c80" & Chr(34) & ">", "")
                     word = Replace(word, "</font>", "")
 
-                    toword(a, 0) = word & vbCrLf & vbCrLf & "有关 " & info_list(a).SelectSingleNode("vehicle/name").InnerText &
-                " 运营时间的信息：" & info_list(a).SelectSingleNode("vehicle/start_time").InnerText & "-" & info_list(a).SelectSingleNode("vehicle/end_time").InnerText
+                    toword(a, 0) = word & vbCrLf & vbCrLf & read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have_runtime",
+                                                                                                        info_list(a).SelectSingleNode("vehicle/name").InnerText & "," &
+                                                                                                       info_list(a).SelectSingleNode("vehicle/start_time").InnerText & "-" & info_list(a).SelectSingleNode("vehicle/end_time").InnerText)
+
                 Else
                     toword(a, 0) = info_list(a).SelectSingleNode("stepInstruction").InnerText
                 End If
@@ -131,10 +134,13 @@ Module xml_read
                     '是的
                     Dim word As String = info_list(a).SelectSingleNode("stepInstruction").InnerText
                     word = Replace(word, "<font color=" & Chr(34) & "#313233" & Chr(34) & ">", "")
+                    word = Replace(word, "<font color=" & Chr(34) & "#7a7c80" & Chr(34) & ">", "")
                     word = Replace(word, "</font>", "")
 
-                    toword(a, 0) = word & vbCrLf & vbCrLf & "有关 " & info_list(a).SelectSingleNode("vehicle/name").InnerText &
-                    " 运营时间的信息：" & info_list(a).SelectSingleNode("vehicle/start_time").InnerText & "-" & info_list(a).SelectSingleNode("vehicle/end_time").InnerText
+                    toword(a, 0) = word & vbCrLf & vbCrLf & read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have_runtime",
+                                                                                                        info_list(a).SelectSingleNode("vehicle/name").InnerText & "," &
+                                                                                                       info_list(a).SelectSingleNode("vehicle/start_time").InnerText & "-" & info_list(a).SelectSingleNode("vehicle/end_time").InnerText)
+
                 Else
                     toword(a, 0) = info_list(a).SelectSingleNode("stepInstruction").InnerText
                 End If
@@ -168,7 +174,8 @@ Module xml_read
             For a = 0 To content_list.Count - 1
 
                 aaa.pro_title = content_list(a).SelectSingleNode("name").InnerText
-                aaa.pro_text = "经度坐标：" & content_list(a).SelectSingleNode("location/lng").InnerText & " 纬度坐标：" & content_list(a).SelectSingleNode("location/lat").InnerText
+                aaa.pro_text = read_resources_describe_into_memory_replace("lang_code_xml_read_plan_vauge_describe", content_list(a).SelectSingleNode("location/lng").InnerText &
+                                                        "," & content_list(a).SelectSingleNode("location/lat").InnerText)
                 aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
 
                 ui_connect_window_select_item_list.Add(aaa)
@@ -209,7 +216,8 @@ Module xml_read
             For a = 0 To content_list.Count - 1
 
                 bbb.pro_title = content_list(a).SelectSingleNode("name").InnerText
-                bbb.pro_text = "经度坐标：" & content_list(a).SelectSingleNode("location/lng").InnerText & " 纬度坐标：" & content_list(a).SelectSingleNode("location/lat").InnerText
+                bbb.pro_text = read_resources_describe_into_memory_replace("lang_code_xml_read_plan_vauge_describe", content_list(a).SelectSingleNode("location/lng").InnerText &
+                                                        "," & content_list(a).SelectSingleNode("location/lat").InnerText)
                 bbb.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
 
                 ui_connect_window_select_item_list.Add(bbb)

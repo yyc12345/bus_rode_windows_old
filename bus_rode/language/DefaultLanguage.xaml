@@ -3,6 +3,8 @@
     xmlns:local="clr-namespace:bus_rode"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+	<!-- ==========================================================================ui area-->
+	<!-- ==============================start-->
     <sys:String x:Key="lang_form_start_btn_line">线路</sys:String>
 	<sys:String x:Key="lang_form_start_btn_stop">车站</sys:String>
 	<sys:String x:Key="lang_form_start_btn_contorl">设置</sys:String>
@@ -10,15 +12,19 @@
 	<sys:String x:Key="lang_form_start_ring">提醒</sys:String>
 	<sys:String x:Key="lang_form_start_unpin">解除提醒</sys:String>
 	
+	<!-- ==============================line-->
 	<sys:String x:Key="lang_form_line_up_line_describe">上行</sys:String>
 	<sys:String x:Key="lang_form_line_down_line_describe">下行</sys:String>
 	<sys:String x:Key="lang_form_line_update_nothing_describe">最后刷新时间：无</sys:String>
 	
+	<!-- ==============================line control-->
 	<sys:String x:Key="lang_form_line_contorl_left_grid_title">线路列表</sys:String>
 	<sys:String x:Key="lang_form_line_contorl_right_grid_title">搜索站台</sys:String>
 	
+	<!-- ==============================stop-->
 	<sys:String x:Key="lang_form_stop_pin">设定提醒</sys:String>
 	
+	<!-- ==============================stop control-->
 	<sys:String x:Key="lang_form_stop_contorl_left_grid_title">站台列表</sys:String>
 	<sys:String x:Key="lang_form_stop_contorl_right_grid_title">换乘规划</sys:String>
 	<sys:String x:Key="lang_form_stop_contorl_stop_list_full_1">站台数目过多不能显示</sys:String>
@@ -29,6 +35,7 @@
 	<sys:String x:Key="lang_form_stop_contorl_end_stop">到达站</sys:String>
 	<sys:String x:Key="lang_form_stop_contorl_first_use">第一次使用本地的 换乘规划 可能需要一些时间，请耐心等待</sys:String>
 
+	<!-- ==============================setting-->
     <sys:String x:Key="lang_form_contorl_normal_title">常规</sys:String>
     <sys:String x:Key="lang_form_contorl_normal_speaker_title">讲述人</sys:String>
 	<sys:String x:Key="lang_form_contorl_normal_speaker_contant">帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）</sys:String>
@@ -81,12 +88,14 @@
 	<sys:String x:Key="lang_form_contorl_style_color_contant">输入一组新的颜色值来替换现有颜色</sys:String>
 	<sys:String x:Key="lang_form_contorl_style_color_run">更改颜色</sys:String>
 	
+	<!-- ==============================message-->
 	<sys:String x:Key="lang_form_msg_center_title">消息中心</sys:String>
 	<sys:String x:Key="lang_form_msg_clear">清空消息</sys:String>
 	<sys:String x:Key="lang_form_msg_nothing">没有消息</sys:String>
 
     <!-- ==========================================================================code area-->
     
+	<!-- ==============================timer core-->
 	<sys:String x:Key="lang_code_MainWindow_get_resources_timer_function">最后刷新时间：</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_get_realistic_stop_timer_function_first_nothing">没有最近的车</sys:String>
 	<!-- have_1 {0} have_2-->
@@ -96,51 +105,62 @@
 	<sys:String x:Key="lang_code_MainWindow_get_realistic_stop_timer_function_secound_nothing">没有第二近的车</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_get_realistic_stop_timer_function_secound_have_1">第二近的车还有</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_get_realistic_stop_timer_function_secound_have_2">站</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_init_screen_line_describe_1">当前车次：</sys:String>
+	
+	<!-- ==============================init-->
+    <sys:String x:Key="lang_code_MainWindow_init_error_enviroment_title">启动失败</sys:String>
+    <!-- {1,2,3,4}chr(13)-->
+    <sys:String x:Key="lang_code_MainWindow_init_error_enviroment_contant">抱歉，bus_rode在此环境启动失败，有以下原因：{0}1.你的操作系统版本过低，bus_rode需要运行在Windows 7(NT 6.1)或以上操作系统中{1}你可以访问https://insider.windows.com/获得最新的操作系统{2}2.bus_rode检测到一些非法进程，拒绝启动，请卸载阻止bus_rode启动的软件{3}程序即将退出，深感抱歉{4}CHMOSGroup Programmer</sys:String>
+
+    <sys:String x:Key="lang_code_MainWindow_init_error_lost_file">丢失以下程序必须文件</sys:String>
+    <sys:String x:Key="lang_code_MainWindow_init_error_lost_resources">当前没有安装资源，可以在程序打开后到设置界面安装资源</sys:String>
+    <sys:String x:Key="lang_code_MainWindow_init_error_good_run_title">程序可以更好地工作</sys:String>
+    <sys:String x:Key="lang_code_MainWindow_init_error_good_run_contant">当前，你正在64位OS上运行32位的bus_rode</sys:String>
+    
+    <sys:String x:Key="lang_code_MainWindow_init_screen_line_describe_1">当前车次：</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_init_screen_line_describe_2">类别：公交</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_init_screen_line_describe_3">类别：地铁</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_init_screen_line_describe_4">等待该车的难度:</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_init_screen_about_describe_1">感谢您使用bus_rode，bus_rode是一个开源软件，使用MIT开源协议，在下面会有开源地址</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_init_screen_about_describe_2">您可以加入这个工程，帮助我们变得更好，也可以在下面这个地址反馈错我，我们将会将其</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_init_screen_about_describe_3">标记并在将来消除这个问题</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_init_file_dialogs_1">资源文件</sys:String>
+
+    <sys:String x:Key="lang_code_MainWindow_init_screen_about_describe">感谢您使用bus_rode，bus_rode是一个开源软件，使用MIT开源协议，在下面会有开源地址{0}您可以加入这个工程，帮助我们变得更好，也可以在下面这个地址反馈错我，我们将会将其{1}标记并在将来消除这个问题</sys:String>
+    <sys:String x:Key="lang_code_MainWindow_init_file_dialogs_1">资源文件</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_init_file_dialogs_2">JPG/JPEG图像文件</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_init_file_dialogs_3">bus_rode插件</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_ok">确认</sys:String>
+
+	<!-- ==============================ui update core-->
 	<sys:String x:Key="lang_code_MainWindow_re_window_error_1">灾难性错误</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_re_window_error_2">bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_open_panel_error_1">资源</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_open_panel_error_2">当前没有安装资源！</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_runtime_set_error_1">未找到模块</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_runtime_set_error_2">未找到指定模块，可能是未安装模块</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_contorl_search">搜索</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_line_not_found">没有找到车次：</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_stop_in_line_not_found">没有在该线路中找到站台：</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_line_up_line">上行线路</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_line_down_line">下行线路</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_stop_not_found">没有找到车站：</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_calcing">正在计算换乘路线，请稍候。如果是第一次使用这个功能，可能需要更多时间。</sys:String>
-	<!-- 1 {start} 2 {end} 3 {chr 13} 4-->
-	<!--<sys:String x:Key="lang_code_MainWindow_short_rode_transform_nothing_1">由</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_transform_nothing_2">至</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_transform_nothing_3">的换乘不能进行</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_transform_nothing_4">因为换乘线路过长，或者是根本无法换乘，对此，我们感到十分抱歉</sys:String>-->
-	<!-- 1 {transform_start} 2 {line} 3 {toward} 4 {transform_end} 5 or 6-->
-	<!--<sys:String x:Key="lang_code_MainWindow_short_rode_transform_have_1">在</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_transform_have_2">乘坐</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_transform_have_3">(</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_transform_have_4">方向)</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_transform_have_5">下车，准备下一个换乘</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_transform_have_6">下车结束换乘，祝您旅途愉快，再见</sys:String>-->
 	
-	<sys:String x:Key="lang_code_MainWindow_short_rode_step">步骤</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_short_rode_error_1">换乘规划</sys:String>
+	<!-- ==============================short rode core-->
+	<sys:String x:Key="lang_code_MainWindow_short_rode_calcing">正在计算换乘路线，请稍候。如果是第一次使用这个功能，可能需要更多时间。</sys:String>
+    <!-- {0}start stop {1}end stop {3}chr(13)-->
+    <sys:String x:Key="lang_code_MainWindow_short_rode_transform_nothing">由 {0} 至 {1} 的换乘不能进行{2}因为换乘线路过长，或者是根本无法换乘，对此，我们感到十分抱</sys:String>
+    <!-- {0}start stop {1}line name {2}toward {3}chr(13) {4}end stop-->
+    <sys:String x:Key="lang_code_MainWindow_short_rode_transform_have">在 {0} 乘坐 {1} ({2} 方向){3}在 {4} 下车，准备下一个换乘</sys:String>
+    <sys:String x:Key="lang_code_MainWindow_short_rode_transform_have_end">在 {0} 乘坐 {1} ({2} 方向){3}在 {4} 下车结束换乘，祝您旅途愉快，再见</sys:String>
+    <!-- {0}line name {1}run time message-->
+    <sys:String x:Key="lang_code_MainWindow_short_rode_transform_have_runtime">有关 {0} 运营时间的信息 {1}</sys:String>
+    <!-- {0}step number-->
+    <sys:String x:Key="lang_code_MainWindow_short_rode_step_have_number">步骤{0}</sys:String>
+    <sys:String x:Key="lang_code_MainWindow_short_rode_step">步骤</sys:String>
+    <sys:String x:Key="lang_code_MainWindow_short_rode_error_1">换乘规划</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_short_rode_error_2">起点和终点不能相同！</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_short_rode_error_3">没有找到指定车站，请确认车站存在！</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_short_rode_error_4">结果已经计算完成，无需再次计算！</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_short_rode_error_5">起点和终点不能为空！</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_short_rode_web_error_1">没有网络</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_short_rode_web_error_2">联网规划需要有效的网络连接才能进行，没有网络时请使用本地规划</sys:String>
+	
+	<!-- ==============================control core-->
+	<!-- language-->
 	<sys:String x:Key="lang_code_MainWindow_contorl_langauge">选择语言</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_langauge_error_1">没有文件</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_langauge_error_2">找不到对应资源文件，无法选择该语言</sys:String>
@@ -148,27 +168,30 @@
 	<sys:String x:Key="lang_code_MainWindow_contorl_langauge_succeeded_2">成功设置语言</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_langauge_fail_1">设置失败</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_langauge_fail_2">可能在资源获取方面出了一点问题以至于加载语言失败</sys:String>
+	<!-- instaed file-->
 	<sys:String x:Key="lang_code_MainWindow_contorl_replace_title">替换</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_file_not_found">没有找到文件：</sys:String>
+	<!-- mod-->
 	<sys:String x:Key="lang_code_MainWindow_contorl_mod_info_1">插件依赖的bus_rode版本号：</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_mod_info_2">插件作者：</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_mod_info_3">插件适用的城市：</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_mod_info_4">插件版本号：</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_contorl_mod_info_5">插件信息</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_error_title">错误</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_contorl_mod_error_1">无法读取插件的相关信息，这可能是由于：</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_contorl_mod_error_2">1、没有安装插件</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_contorl_mod_error_3">2、插件损坏或者插件不完整没有通过CHMOSGroup的认证</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_ok_or_not">确认操作</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_cancel">取消</sys:String>
-	<sys:String x:Key="lang_code_MainWindow_contorl_del_word">确认删除？</sys:String>
+    <!-- {0,1}chr(13)-->
+    <sys:String x:Key="lang_code_MainWindow_contorl_mod_error">无法读取插件的相关信息，这可能是由于：{0}1、没有安装插件{1}2、插件损坏或者插件不完整没有通过CHMOSGroup的认证</sys:String>
+    <!-- resources-->
 	<sys:String x:Key="lang_code_MainWindow_contorl_resources_describe">资源自述</sys:String>
+	<!-- color selector-->
 	<sys:String x:Key="lang_code_MainWindow_contorl_value_error">数值非法</sys:String>
+	
+	<!-- ==============================speech thread-->
 	<sys:String x:Key="lang_code_MainWindow_speaker_now">讲述人正在朗读，请等待朗诵完毕再按下F1</sys:String>
 	
+	<!-- ==============================mod loader core-->
 	<sys:String x:Key="lang_code_mod_loader_check_version_error">插件所需要的bus_rode版本和当前使用的bus_rode版本号不同，无法加载，请选择一个合适的插件</sys:String>
     <sys:String x:Key="lang_code_mod_loader_check_regoin_error">插件所应用的地区与当前加载资源所表示的地区不同，无法加载，请选择一个合适的插件</sys:String>
 
+	<!-- ==============================line core-->
     <sys:String x:Key="lang_code_line_wait_grade_1">极难等</sys:String>
 	<sys:String x:Key="lang_code_line_wait_grade_2">难等</sys:String>
 	<sys:String x:Key="lang_code_line_wait_grade_3">适中</sys:String>
@@ -176,14 +199,40 @@
 	<sys:String x:Key="lang_code_line_wait_grade_5">极易等</sys:String>
 	<sys:String x:Key="lang_code_line_run_state_yes">车次在正常情况处于运营状态，可以乘坐。</sys:String>
 	<sys:String x:Key="lang_code_line_run_state_no">有坐不到该车次的风险，该车次此时此刻已经停止发车！</sys:String>
-	<sys:String x:Key="lang_code_nothing">无</sys:String>
-	
+
+	<!-- ==============================stop core-->
 	<sys:String x:Key="lang_code_stop_now_stop">当前站台：</sys:String>
 	<sys:String x:Key="lang_code_stop_cross_line">经过车次：</sys:String>
 	<sys:String x:Key="lang_code_stop_station_describe">以当前站为起点终点的</sys:String>
 	
-	<sys:String x:Key="lang_code_xml_read_select_solution">选择一个合适的方案</sys:String>
+	<!-- ==============================xml reader-->
+    <!-- {0}plan number-->
+    <sys:String x:Key="lang_code_xml_read_plan">方案{0}</sys:String>
+    <!-- {0}distance {1}spend time-->
+    <sys:String x:Key="lang_code_xml_read_plan_describe">路程：{0}米，需要时间{1}秒</sys:String>
+    <!-- {0}lon {1}lat-->
+    <sys:String x:Key="lang_code_xml_read_plan_vauge_describe">经度坐标：{0} 纬度坐标：{1}</sys:String>
+    <sys:String x:Key="lang_code_xml_read_select_solution">选择一个合适的方案</sys:String>
 	<sys:String x:Key="lang_code_xml_read_select_start">选择更为详尽的起点</sys:String>
 	<sys:String x:Key="lang_code_xml_read_select_end">选择更为详尽的终点</sys:String>
 
+	
+	 <!-- ==========================================================================global area-->
+	<sys:String x:Key="lang_global_nothing">无</sys:String>
+	<sys:String x:Key="lang_global_ok">确认</sys:String>	
+	<sys:String x:Key="lang_global_cancel">取消</sys:String>	
+	<sys:String x:Key="lang_global_ok_or_not">确认操作</sys:String>
+	<sys:String x:Key="lang_global_del_permission">确认删除</sys:String>
+	<sys:String x:Key="lang_global_error">错误</sys:String>
+	<sys:String x:Key="lang_global_search">搜索</sys:String>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 </ResourceDictionary>

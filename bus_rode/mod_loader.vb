@@ -245,8 +245,8 @@ begin_new_circle:
 
             GC.Collect()
         Catch ex As Exception
-            MsgBox(read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_1") & read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_2") & 
-			read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_3"), 16, read_resources_describe_into_memory("lang_code_MainWindow_error_title"))
+            window_dialogs_show(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory_replace("lang_code_MainWindow_contorl_mod_error", vbCrLf & "," & vbCrLf), 1,
+                                False, read_resources_describe_into_memory("lang_global_ok"), "")
             Exit Sub
         End Try
 
@@ -263,7 +263,8 @@ begin_new_circle:
         linshi = CType(prop_1.GetValue(instance), Integer)
         If linshi <> app_build_number Then
             '版本不和
-            MsgBox(read_resources_describe_into_memory("lang_code_mod_loader_check_version_error"), 16, read_resources_describe_into_memory("lang_code_MainWindow_error_title"))
+            window_dialogs_show(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory("lang_code_mod_loader_check_version_error"), 1,
+                                False, read_resources_describe_into_memory("lang_global_ok"), "")
             Exit Sub
         End If
 
@@ -272,7 +273,8 @@ begin_new_circle:
         linshi2 = CType(prop_2.GetValue(instance), String)
         If linshi2 <> set_address Then
             '地区不和
-            MsgBox(read_resources_describe_into_memory("lang_code_mod_loader_check_regoin_error"), 16, read_resources_describe_into_memory("lang_code_MainWindow_error_title"))
+            window_dialogs_show(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory("lang_code_mod_loader_check_regoin_error"), 1,
+                                False, read_resources_describe_into_memory("lang_global_ok"), "")
             Exit Sub
         End If
 

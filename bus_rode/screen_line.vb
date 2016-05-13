@@ -715,7 +715,7 @@
                 up_line_word = up_line_start_stop & "-" & up_line_secound_stop & "-" & up_line_end_stop
             End If
         Else
-            up_line_word = read_resources_describe_into_memory("lang_code_nothing")
+            up_line_word = read_resources_describe_into_memory("lang_global_nothing")
         End If
 
         Dim down_line_word As String = ""
@@ -726,7 +726,7 @@
                 down_line_word = down_line_start_stop & "-" & down_line_secound_stop & "-" & down_line_end_stop
             End If
         Else
-            down_line_word = read_resources_describe_into_memory("lang_code_nothing")
+            down_line_word = read_resources_describe_into_memory("lang_global_nothing")
         End If
 
         Return up_line_word & "," & down_line_word & "," & up_line_list.ToString & "," & down_line_list.ToString

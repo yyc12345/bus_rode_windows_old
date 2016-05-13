@@ -20,14 +20,14 @@
         End If
         If System.IO.File.Exists(library_path + "bus_rode_compression.dll") = False Then
             end_result = False
-            describe = describe + "bus_rode_compression.dll---严重错误" + vbCrLf
+            describe = describe + "bus_rode_compression.dll" + vbCrLf
         End If
         If System.IO.File.Exists(library_path + "bus_rode_add.exe") = False Then
             end_result = False
-            describe = describe + "bus_rode_add.exe---严重错误" + vbCrLf
+            describe = describe + "bus_rode_add.exe" + vbCrLf
         End If
 
-        describe = return_word + "缺失以上文件，导致程序无法启动，请检查相关文件是否完整，如若不确定，请重新安装"
+        describe = return_word
         Return end_result
     End Function
 

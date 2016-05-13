@@ -36,9 +36,12 @@
     ''' 将当前加载的资源的一些需要在非ui界面使用的资源读取到程序内部，并且替换其中指定的字符串
     ''' </summary>
     ''' <param name="key">寻找的键值</param>
-    ''' <param name="replace_word">替换的字符串列表，按顺序写入，例：第0项替换{0}等。。。</param>
+    ''' <param name="replace_word_string">替换的字符串，按顺序写入，用,分割 替换例：第0项替换{0}等。。。</param>
     ''' <returns></returns>
-    Public Function read_resources_describe_into_memory_replace(ByVal key As String, ByVal replace_word As ArrayList) As String
+    Public Function read_resources_describe_into_memory_replace(ByVal key As String, ByVal replace_word_string As String) As String
+
+        Dim replace_word As New ArrayList
+
 
         Dim get_word As String = ""
         Try
@@ -51,16 +54,23 @@
             Return ""
         End Try
 
+        Dim repl_word_sp() As String = replace_word_string.Split(",")
+        If repl_word_sp.Count = 0 Then Return get_word
+        For a = 0 To repl_word_sp.Count - 1
+            replace_word.Add(repl_word_sp(a))
+        Next
+
         If replace_word.Count = 0 Then Return get_word
         If get_word = "" Then Return ""
-        For a = 0 To replace_word.Count
+        For a = 0 To replace_word.Count - 1
             If get_word.IndexOf("{" & a & "}") <= -1 Then Exit For
-            get_word.Replace("{" & a & "}", replace_word.Item(a).ToString)
+            get_word = get_word.Replace("{" & a & "}", replace_word.Item(a).ToString)
         Next
 
         Return get_word
 
     End Function
+
     '************************************************************************文件读取部分************************************************************
 
     ''' <summary>
@@ -229,53 +239,6 @@
         interface_language = file_7.ReadLine
 
         file_7.Dispose()
-    End Sub
-
-    '********************************************************************************************************************************
-    ''' <summary>
-    ''' [系统]向消息列表添加一个消息
-    ''' </summary>
-    ''' <param name="title">消息标题</param>
-    ''' <param name="word">消息内容</param>
-    ''' <remarks></remarks>
-    Public Sub message_ex(ByVal title As String, ByVal word As String, ByRef win As Window)
-
-        If use_new_dialogs = False Then
-            '旧式的
-            '计算当前时间
-            Dim time_word As String = ""
-            Dim clock_hour As Integer = Hour(Now)
-            Dim clock_min As Integer = Minute(Now)
-            If clock_hour <= 12 Then
-                If clock_min < 10 Then
-                    time_word = clock_hour & ":0" & clock_min & " AM"
-                Else
-                    time_word = clock_hour & ":" & clock_min & " AM"
-                End If
-            Else
-                If clock_min < 10 Then
-                    time_word = clock_hour & ":0" & clock_min & " PM"
-                Else
-                    time_word = clock_hour & ":" & clock_min & " PM"
-                End If
-            End If
-
-            '添加ui
-            Dim a As New ui_depend_message_list
-            a.ui_msg_title = title
-            a.ui_msg_text = word
-            a.ui_msg_date = time_word
-
-            ui_connet_core_form_message_list.Add(a)
-
-            '响铃
-            System.Media.SystemSounds.Beep.Play()
-        Else
-            '新式的
-            window_dialogs_show(title, word, 1, False, read_resources_describe_into_memory("lang_code_MainWindow_ok"), "", win)
-        End If
-
-
     End Sub
 
     '********************************************************************************************************************************

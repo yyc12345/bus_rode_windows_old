@@ -76,9 +76,8 @@
     ''' <param name="show_input">窗口是否需要接受输入的数据</param>
     ''' <param name="left_btn_text">窗口左侧按钮文本</param>
     ''' <param name="right_btn_text">窗口右侧按钮文本</param>
-    ''' <param name="owner">传递的主窗体</param>
     Public Sub window_dialogs_show(ByVal title As String, ByVal message As String, ByVal btn_count As Byte,
-                                   ByVal show_input As Boolean, ByVal left_btn_text As String, ByVal right_btn_text As String, ByRef owner As Window)
+                                   ByVal show_input As Boolean, ByVal left_btn_text As String, ByVal right_btn_text As String)
 
         '<param name="owner">传递的主窗体</param>
         'Public Sub window_dialogs_show(ByVal title As String, ByVal message As String, ByVal msg_state As Byte, ByVal btn_count As Byte,
@@ -94,7 +93,11 @@
         window_dialogs_right_btn_text = right_btn_text
 
         Dim linshi As New Window_dialogs
-        linshi.Owner = owner
+        Try
+            linshi.Owner = Application.Current.MainWindow
+        Catch ex As Exception
+            linshi.Owner = Nothing
+        End Try
 
         linshi.ShowDialog()
 

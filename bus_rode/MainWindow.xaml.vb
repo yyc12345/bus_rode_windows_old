@@ -331,6 +331,29 @@ Public Class MainWindow
     Private Sub app_start(sender As Object, e As RoutedEventArgs) Handles ui_bus_rode_main_window.Loaded
         '***********************************************************正式启动*********************************************************************************
 
+        '首先的，必要的
+        '====================================设置语言
+        Dim langRd As ResourceDictionary = Nothing
+        If interface_language <> "en-US" Then
+            '检测文件存在
+            Try
+                If System.IO.File.Exists(Environment.CurrentDirectory & "\language\" & interface_language & ".xaml") = True Then langRd = Application.LoadComponent(New Uri("language\" & interface_language & ".xaml", UriKind.Relative))
+            Catch ex As Exception
+            End Try
+
+            If langRd IsNot Nothing Then
+                Me.Resources.MergedDictionaries.Clear()
+                Me.Resources.MergedDictionaries.Add(langRd)
+                use_resources = langRd
+                ui_form_contorl_select_language_text.Text = interface_language
+            Else
+                use_resources = Nothing
+                ui_form_contorl_select_language_text.Text = "en-US"
+            End If
+        End If
+
+        '=================================================
+
         '检测和初始环境
         app_start_part_check()
         app_start_part_enviroment()
@@ -391,24 +414,20 @@ Public Class MainWindow
 
         Else
             '错误，退出
-            MsgBox("Sorry,bus_rode isn't run in this enviroment.Here are some reasons:" + vbCrLf +
-                    "1.Your OS version so low.bus_rode can run in Windows 7(NT 6.1) or higer version" + vbCrLf +
-                    "You can visit https://insider.windows.com/ . Then you can get the latest OS" + vbCrLf +
-                    "2.bus_rode check some worry process in this enviroment. Please uninstall some application which avoid running bus_rode" + vbCrLf + vbCrLf +
-                    "bus_rode will exit." + vbCrLf +
-                    "CHMOSGroup Programmer", 48, "Avoid Starting")
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_init_error_enviroment_title"), read_resources_describe_into_memory_replace("lang_code_MainWindow_init_error_enviroment_contant", vbCrLf & "," & vbCrLf & "," & vbCrLf & "," & vbCrLf))
+
             Environment.Exit(3)
         End If
 
         '检测文件
         Dim linshi_word As String = ""
         If bus_rode_check.bus_rode_check.check_file(Environment.CurrentDirectory + "\", linshi_word) = False Then
-            MsgBox(linshi_word, 16, "Lost some file on which bus_rode is run depend")
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_init_error_lost_file"), linshi_word)
             Environment.Exit(4)
         End If
 
         If bus_rode_check.bus_rode_check.have_file(Environment.CurrentDirectory + "\library\") = 4 Then
-            message_ex_ex("Error", "Can't find resources files. You must install some resources files in Setting panel when app has run.")
+            message_ex_ex(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory("lang_code_MainWindow_init_error_lost_resources"))
             ui_form_message_clear.Opacity = 1
             ui_form_message_up_line.Opacity = 1
             ui_form_message_no_msg_title.Opacity = 0
@@ -419,7 +438,7 @@ Public Class MainWindow
 
         '确定程序能否更好地工作
         If System.Environment.Is64BitProcess = False And System.Environment.Is64BitOperatingSystem = True Then
-            message_ex_ex("Application can get more encourgement", "You are running 32-Bit bus_rode in 64-Bit OS")
+            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_init_error_good_run_title"), read_resources_describe_into_memory("lang_code_MainWindow_init_error_good_run_contant"))
             ui_form_message_clear.Opacity = 1
             ui_form_message_up_line.Opacity = 1
             ui_form_message_no_msg_title.Opacity = 0
@@ -597,9 +616,7 @@ Public Class MainWindow
 "" & vbCrLf &
 "CHMOSGroup Copyright 2012-2016" & vbCrLf &
 "" & vbCrLf &
-read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_describe_1") & vbCrLf &
-read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_describe_2") & vbCrLf &
-read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_describe_3")
+read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_about_describe", vbCrLf & "," & vbCrLf)
         ui_form_about_describe.Text = describe
 
         describe = ""
@@ -611,26 +628,6 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
 
         ui_window_title.Text = app_name
         Me.Title = app_name
-
-        '====================================设置语言
-        Dim langRd As ResourceDictionary = Nothing
-        If interface_language <> "en-US" Then
-            '检测文件存在
-            Try
-                If System.IO.File.Exists(Environment.CurrentDirectory & "\language\" & interface_language & ".xaml") = True Then langRd = Application.LoadComponent(New Uri("language\" & interface_language & ".xaml", UriKind.Relative))
-            Catch ex As Exception
-            End Try
-
-            If langRd IsNot Nothing Then
-                Me.Resources.MergedDictionaries.Clear()
-                Me.Resources.MergedDictionaries.Add(langRd)
-                use_resources = langRd
-                ui_form_contorl_select_language_text.Text = interface_language
-            Else
-                use_resources = Nothing
-                ui_form_contorl_select_language_text.Text = "en-US"
-            End If
-        End If
 
         '====================================关联控件
         '初始化消息列表
@@ -713,25 +710,76 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
     ''' <param name="title"></param>
     ''' <param name="text"></param>
     Public Sub message_ex_ex(ByVal title As String, ByVal text As String)
-        If Environment.OSVersion.Version.Major > 6 Or (Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor >= 2) Then
-            'win8以上
-            If use_new_dialogs = False Then
-                '旧式的
-                app_desktop_icon.ShowBalloonTip(5000, title, text, System.Windows.Forms.ToolTipIcon.Info)
-            Else
-                '新式的
-                window_dialogs_show(title, text, 1, False, read_resources_describe_into_memory("lang_code_MainWindow_message_ex_ex") , "", Me)
-            End If
+
+        If use_new_dialogs = True Then
+
+            '新式的
+            window_dialogs_show(title, text, 1, False, read_resources_describe_into_memory("lang_global_ok"), "")
 
         Else
-            ui_form_message_list.ItemsSource = Nothing
-            message_ex(title, text, Me)
-            ui_form_message_clear.Opacity = 1
-            ui_form_message_up_line.Opacity = 1
-            ui_form_message_no_msg_title.Opacity = 0
-            ui_title_msg_count.Text = Int(ui_title_msg_count.Text) + 1
-            ui_form_message_list.ItemsSource = ui_connet_core_form_message_list
+            '旧的，分辨
+            If Environment.OSVersion.Version.Major > 6 Or (Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor >= 2) Then
+                'win8以上
+
+                Try
+                    app_desktop_icon.ShowBalloonTip(5000, title, text, System.Windows.Forms.ToolTipIcon.Info)
+                Catch ex As Exception
+                    '尝试捕获错误
+                End Try
+
+            Else
+                ui_form_message_list.ItemsSource = Nothing
+                message_ex(title, text)
+                ui_form_message_clear.Opacity = 1
+                ui_form_message_up_line.Opacity = 1
+                ui_form_message_no_msg_title.Opacity = 0
+                ui_title_msg_count.Text = Int(ui_title_msg_count.Text) + 1
+                ui_form_message_list.ItemsSource = ui_connet_core_form_message_list
+            End If
+
         End If
+
+
+    End Sub
+
+    ''' <summary>
+    ''' [系统]向消息列表添加一个消息，旧版，仅供msg_ex_ex调用
+    ''' </summary>
+    ''' <param name="title">消息标题</param>
+    ''' <param name="word">消息内容</param>
+    Public Sub message_ex(ByVal title As String, ByVal word As String)
+
+        '旧式的
+        '计算当前时间
+        Dim time_word As String = ""
+            Dim clock_hour As Integer = Hour(Now)
+            Dim clock_min As Integer = Minute(Now)
+            If clock_hour <= 12 Then
+                If clock_min < 10 Then
+                    time_word = clock_hour & ":0" & clock_min & " AM"
+                Else
+                    time_word = clock_hour & ":" & clock_min & " AM"
+                End If
+            Else
+                If clock_min < 10 Then
+                    time_word = clock_hour & ":0" & clock_min & " PM"
+                Else
+                    time_word = clock_hour & ":" & clock_min & " PM"
+                End If
+            End If
+
+            '添加ui
+            Dim a As New ui_depend_message_list
+            a.ui_msg_title = title
+            a.ui_msg_text = word
+            a.ui_msg_date = time_word
+
+            ui_connet_core_form_message_list.Add(a)
+
+            '响铃
+            System.Media.SystemSounds.Beep.Play()
+
+
     End Sub
 
     ''' <summary>
@@ -2091,7 +2139,7 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
                 '====================消除数据
                 ui_form_line_contorl_left_form_textbox.Text = ""
             Else
-                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_line_not_found")+ ui_form_line_contorl_left_form_textbox.Text)
+                message_ex_ex(read_resources_describe_into_memory("lang_global_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_line_not_found")+ ui_form_line_contorl_left_form_textbox.Text)
             End If
         End If
     End Sub
@@ -2112,7 +2160,7 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
                 ui_form_line_have_stop_list.SelectedIndex = a
 
             Else
-                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_stop_in_line_not_found") + ui_form_line_contorl_right_form_textbox.Text)
+                message_ex_ex(read_resources_describe_into_memory("lang_global_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_stop_in_line_not_found") + ui_form_line_contorl_right_form_textbox.Text)
             End If
 
         End If
@@ -2380,7 +2428,7 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
                 '还原
                 ui_form_stop_contorl_left_form_textbox.Text = ""
             Else
-                message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_stop_not_found") + ui_form_stop_contorl_left_form_textbox.Text)
+                message_ex_ex(read_resources_describe_into_memory("lang_global_search"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_stop_not_found") + ui_form_stop_contorl_left_form_textbox.Text)
             End If
         End If
     End Sub
@@ -2443,26 +2491,30 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
                     If toword(0, 0) = "" Then
                         '没有可以到的线路
                         short_line_can_page = True
-'TODO:
-                        ui_form_stop_contorl_step_describe.Text = "由 " & stamp_start_stop & " 至 " & stamp_end_stop & " 的换乘不能进行" & vbCrLf &
-                            "因为换乘线路过长，或者是根本无法换乘，对此，我们感到十分抱歉"
+                        'TODO:
+                        ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_nothing",
+                                                                                                             stamp_start_stop & "," & stamp_end_stop & "," & vbCrLf)
 
                         ui_form_stop_contorl_left_page.Opacity = 0
                         ui_form_stop_contorl_right_page.Opacity = 0
 
                         ui_form_stop_contorl_page.Text = read_resources_describe_into_memory("lang_code_MainWindow_short_rode_step")
                     Else
-                        ui_form_stop_contorl_page.Text = "步骤1"
+                        '步骤
+                        ui_form_stop_contorl_page.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_step_have_number", "1")
 
-                        ui_form_stop_contorl_step_describe.Text = "在 " & toword(step_number, 0) & " 乘坐 " & toword(step_number, 1) & " (" & toword(step_number, 2) & " 方向)" & vbCrLf & "在 "
-
+                        '描述
                         If toword(step_number + 1, 0) = "" Then
-                            ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & stamp_end_stop & " 下车结束换乘，祝您旅途愉快，再见"
+                            ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have_end",
+                                                                                                                                toword(step_number, 0) & "," & toword(step_number, 1) & "," & toword(step_number, 2) & "," &
+                                                                                                                                vbCrLf & "," & stamp_end_stop)
                         Else
-                            ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & toword(step_number + 1, 0) & " 下车，准备下一个换乘"
+                            ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have",
+                                                                                                                                toword(step_number, 0) & "," & toword(step_number, 1) & "," & toword(step_number, 2) & "," &
+                                                                                                                                vbCrLf & "," & toword(step_number + 1, 0))
                         End If
-                        ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & vbCrLf & vbCrLf & "有关 " & toword(step_number, 1) & " 运营时间的信息 " & check_bus_on_time(toword(step_number, 1))
-
+                        ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & vbCrLf & vbCrLf & read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have_runtime",
+                                                                                                                                                                           toword(step_number, 1) & "," & check_bus_on_time(toword(step_number, 1)))
                         ui_form_stop_contorl_left_page.Opacity = 0
                         If toword(1, 0) = "" Then
                             '没有下一页
@@ -2534,20 +2586,24 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
                 '拒绝
             Else
                 step_number += 1
-				'TODO:
-                ui_form_stop_contorl_page.Text = "步骤" & (step_number + 1)
+                'TODO:
+                '步骤
+                ui_form_stop_contorl_page.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_step_have_number", (step_number + 1))
 
                 If toword_local = True Then
 
-
-                    ui_form_stop_contorl_step_describe.Text = "在 " & toword(step_number, 0) & " 乘坐 " & toword(step_number, 1) & " (" & toword(step_number, 2) & " 方向)" & vbCrLf & "在 "
-
+                    '描述
                     If toword(step_number + 1, 0) = "" Then
-                        ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & stamp_end_stop & " 下车结束换乘，祝您旅途愉快，再见"
+                        ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have_end",
+                                                                                                                                toword(step_number, 0) & "," & toword(step_number, 1) & "," & toword(step_number, 2) & "," &
+                                                                                                                                vbCrLf & "," & stamp_end_stop)
                     Else
-                        ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & toword(step_number + 1, 0) & " 下车，准备下一个换乘"
+                        ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have",
+                                                                                                                                toword(step_number, 0) & "," & toword(step_number, 1) & "," & toword(step_number, 2) & "," &
+                                                                                                                                vbCrLf & "," & toword(step_number + 1, 0))
                     End If
-                    ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & vbCrLf & vbCrLf & "有关 " & toword(step_number, 1) & " 运营时间的信息 " & check_bus_on_time(toword(step_number, 1))
+                    ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & vbCrLf & vbCrLf & read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have_runtime",
+                                                                                                                                                                           toword(step_number, 1) & "," & check_bus_on_time(toword(step_number, 1)))
 
                 Else
                     ui_form_stop_contorl_step_describe.Text = toword(step_number, 0)
@@ -2580,17 +2636,23 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
         If step_number <> 0 Then
             step_number -= 1
 
-            ui_form_stop_contorl_page.Text = "步骤" & (step_number + 1)
+            '步骤
+            ui_form_stop_contorl_page.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_step_have_number", (step_number + 1))
 
             If toword_local = True Then
-                ui_form_stop_contorl_step_describe.Text = "在 " & toword(step_number, 0) & " 乘坐 " & toword(step_number, 1) & " (" & toword(step_number, 2) & " 方向)" & vbCrLf & "在 "
+                '描述
 
                 If toword(step_number + 1, 0) = "" Then
-                    ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & stamp_end_stop & " 下车结束换乘，祝您旅途愉快，再见"
+                    ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have_end",
+                                                                                                                                toword(step_number, 0) & "," & toword(step_number, 1) & "," & toword(step_number, 2) & "," &
+                                                                                                                                vbCrLf & "," & stamp_end_stop)
                 Else
-                    ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & toword(step_number + 1, 0) & " 下车，准备下一个换乘"
+                    ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have",
+                                                                                                                                toword(step_number, 0) & "," & toword(step_number, 1) & "," & toword(step_number, 2) & "," &
+                                                                                                                                vbCrLf & "," & toword(step_number + 1, 0))
                 End If
-                ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & vbCrLf & vbCrLf & "有关 " & toword(step_number, 1) & " 运营时间的信息 " & check_bus_on_time(toword(step_number, 1))
+                ui_form_stop_contorl_step_describe.Text = ui_form_stop_contorl_step_describe.Text & vbCrLf & vbCrLf & read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_have_runtime",
+                                                                                                                                                                           toword(step_number, 1) & "," & check_bus_on_time(toword(step_number, 1)))
 
             Else
                 ui_form_stop_contorl_step_describe.Text = toword(step_number, 0)
@@ -2662,8 +2724,9 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
                     short_rode_calc_mode = True
 
                     '设置ui
-					'TODO:
-                    ui_form_stop_contorl_page.Text = "步骤1"
+                    'TODO:
+                    '步骤
+                    ui_form_stop_contorl_page.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_step_have_number", "1")
 
                     ui_form_stop_contorl_step_describe.Text = toword(0, 0)
 
@@ -2864,9 +2927,7 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
                 message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_info_5"), out_word)
             End If
         Catch ex As Exception
-            message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_1") & vbCrLf &
-                   read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_2") & vbCrLf &
-                   read_resources_describe_into_memory("lang_code_MainWindow_contorl_mod_error_3"))
+            message_ex_ex(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory_replace("lang_code_MainWindow_contorl_mod_error", vbCrLf & "," & vbCrLf))
         End Try
 
     End Sub
@@ -2878,7 +2939,7 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
     ''' <param name="e"></param>
     Private Sub ui_contorl_list_1_function(sender As Object, e As MouseButtonEventArgs)
 
-        window_dialogs_show(read_resources_describe_into_memory("lang_code_MainWindow_ok_or_not"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_del_word"), 2, False, read_resources_describe_into_memory("lang_code_MainWindow_ok"), read_resources_describe_into_memory("lang_code_MainWindow_cancel"), Me)
+        window_dialogs_show(read_resources_describe_into_memory("lang_global_ok_or_not"), read_resources_describe_into_memory("lang_global_del_permission"), 2, False, read_resources_describe_into_memory("lang_global_ok"), read_resources_describe_into_memory("lang_global_cancel"))
 
         If window_dialogs_select_btn = 0 Then
             Dim command As String = app_build_number * 10 + 3
@@ -2939,7 +3000,7 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
     ''' <param name="e"></param>
     Private Sub ui_contorl_list_9_function(sender As Object, e As MouseButtonEventArgs)
 
-        window_dialogs_show(read_resources_describe_into_memory("lang_code_MainWindow_ok_or_not"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_del_word"), 2, False, read_resources_describe_into_memory("lang_code_MainWindow_ok"), read_resources_describe_into_memory("lang_code_MainWindow_cancel"), Me)
+        window_dialogs_show(read_resources_describe_into_memory("lang_global_ok_or_not"), read_resources_describe_into_memory("lang_global_del_permission"), 2, False, read_resources_describe_into_memory("lang_global_ok"), read_resources_describe_into_memory("lang_global_cancel"))
 
         If window_dialogs_select_btn = 0 Then
             Dim command As String = app_build_number * 10 + 4
@@ -3015,26 +3076,26 @@ read_resources_describe_into_memory("lang_code_MainWindow_init_screen_about_desc
                         '保存设置
                         save_user_contorl()
                     Else
-                        message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
+                        message_ex_ex(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
                         ui_form_contorl_r_value.Value = form_color.R
                         ui_form_contorl_g_value.Value = form_color.G
                         ui_form_contorl_b_value.Value = form_color.B
                     End If
                 Else
- message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
+ message_ex_ex(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
                     ui_form_contorl_r_value.Value = form_color.R
                     ui_form_contorl_g_value.Value = form_color.G
                     ui_form_contorl_b_value.Value = form_color.B
                 End If
             Else
- message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
+ message_ex_ex(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
                 ui_form_contorl_r_value.Value = form_color.R
                 ui_form_contorl_g_value.Value = form_color.G
                 ui_form_contorl_b_value.Value = form_color.B
             End If
         Catch ex As Exception
             '输入文本类型错误
- message_ex_ex(read_resources_describe_into_memory("lang_code_MainWindow_error_title"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
+ message_ex_ex(read_resources_describe_into_memory("lang_global_error"), read_resources_describe_into_memory("lang_code_MainWindow_contorl_value_error"))
             ui_form_contorl_r_value.Value = form_color.R
             ui_form_contorl_g_value.Value = form_color.G
             ui_form_contorl_b_value.Value = form_color.B

@@ -470,8 +470,8 @@ end_fx:
                         realistic_stop(realistic_stop_list, 4) = str_sp(2)
                         realistic_stop(realistic_stop_list, 8) = str_sp(3)
                     Else
-                        realistic_stop(realistic_stop_list, 3) = read_resources_describe_into_memory("lang_code_nothing")
-                        realistic_stop(realistic_stop_list, 7) = read_resources_describe_into_memory("lang_code_nothing")
+                        realistic_stop(realistic_stop_list, 3) = read_resources_describe_into_memory("lang_global_nothing")
+                        realistic_stop(realistic_stop_list, 7) = read_resources_describe_into_memory("lang_global_nothing")
                         realistic_stop(realistic_stop_list, 4) = "-1"
                         realistic_stop(realistic_stop_list, 8) = "-1"
                     End If
