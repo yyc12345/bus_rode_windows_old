@@ -44,7 +44,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>false</DebugSymbols>
-    <DefineDebug>false</DefineDebug>
+    <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <IncrementalBuild>false</IncrementalBuild>
     <Optimize>true</Optimize>
@@ -100,6 +100,7 @@
     <Compile Include="short_rode.vb" />
     <Compile Include="systems.vb" />
     <Compile Include="ui_depend.vb" />
+    <Compile Include="screen_start.vb" />
     <Compile Include="window\window_communication.vb" />
     <Compile Include="window\Window_dialogs.xaml.vb">
       <DependentUpon>Window_dialogs.xaml</DependentUpon>

@@ -47,6 +47,7 @@ Module screen
 
 
     '************************************************************************************************
+    Public ui_connet_core_form_start_ring_list As New List(Of ui_depend_start_ring_list)
     ''' <summary>
     ''' 线路界面中线路所拥有站台的列表-上行中项的集合
     ''' </summary>
@@ -105,27 +106,12 @@ Module screen
     ''' <remarks></remarks>
     Public ui_connet_core_form_stop_list_for_search As New List(Of ui_depend_stop_list)
 
+
     '************************************************************************************************
     ''' <summary>
     ''' 消息界面中消息列表中项的集合
     ''' </summary>
     ''' <remarks></remarks>
     Public ui_connet_core_form_message_list As New List(Of ui_depend_message_list)
-
-    ''' <summary>
-    ''' 选择项界面窗口-列表项的集合
-    ''' </summary>
-    Public ui_connect_window_select_item_list As New List(Of ui_depend_window_select_item_list)
-
-    ''' <summary>
-    ''' 选择项界面窗口-列表项的集合中的选择的项序号
-    ''' </summary>
-    Public ui_connect_window_select_item_list_select_index As Integer = 0
-
-    ''' <summary>
-    ''' 选择项界面窗口-标题
-    ''' </summary>
-    Public ui_connect_window_select_item_list_title As String = ""
-
 
 End Module

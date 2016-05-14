@@ -135,7 +135,7 @@
 
             '刷新
             '仅在站台界面中刷新，减少消耗
-            If screens = 2 And connect_dll_get_resources_always_stop = False Then
+            If (screens = 2 Or screens = 0) And connect_dll_get_resources_always_stop = False Then
                 '先读取所有车辆
                 For a = 0 To realistic_stop_list - 1
                     line_group.Add(realistic_stop(a, 0))

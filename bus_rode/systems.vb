@@ -226,6 +226,12 @@
             use_new_dialogs = False
         End If
 
+        If file_7.ReadLine = "0" Then
+            auto_translate = True
+        Else
+            auto_translate = False
+        End If
+
         '加载颜色写在内部
         Dim new_color_r As Integer = Int(file_7.ReadLine)
         Dim new_color_g As Integer = Int(file_7.ReadLine)
@@ -341,5 +347,43 @@
 
     End Sub
 
+    ''' <summary>
+    ''' 开始界面提醒需要用的结构体
+    ''' </summary>
+    Public Structure obj_start_ring
+        ''' <summary>
+        ''' 线路名
+        ''' </summary>
+        Public line As String
+        ''' <summary>
+        ''' 距离站数
+        ''' </summary>
+        Public stop_number As Integer
+    End Structure
+
+    ''' <summary>
+    ''' 开始界面提醒的排序，以stop_number排序
+    ''' </summary>
+    ''' <param name="collection"></param>
+    Public Sub sort_in_obj_start_ring_by_stop(ByRef collection As ArrayList)
+
+        If collection.Count < 2 Then
+            '不需要排序
+        Else
+            For i = 1 To collection.Count - 1
+                For j = i To 1 Step -1
+                    If CType(collection.Item(j), obj_start_ring).stop_number < CType(collection.Item(j - 1), obj_start_ring).stop_number Then
+                        Dim temp1 As obj_start_ring = CType(collection.Item(j), obj_start_ring)
+                        Dim temp2 As obj_start_ring = CType(collection.Item(j - 1), obj_start_ring)
+                        collection.Item(j) = temp2
+                        collection.Item(j - 1) = temp1
+                    Else
+                        Exit For
+                    End If
+                Next
+            Next
+        End If
+
+    End Sub
 
 End Module

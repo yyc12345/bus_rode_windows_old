@@ -213,6 +213,31 @@ Public Class ui_depend_stop_list
 
 End Class
 
+''' <summary>
+''' [ui]开始通知界面的列表项
+''' </summary>
+Public Class ui_depend_start_ring_list
+
+    ''' <summary>
+    ''' 线路名
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_line As String
+
+    ''' <summary>
+    ''' 靠近的站点数
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_close_stop_number As Integer
+
+    ''' <summary>
+    ''' 靠近站点数的描述
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_close_stop_describe As String
+
+End Class
+
 
 
 ''' <summary>
@@ -266,4 +291,17 @@ Public Class ui_depend_window_select_item_list
     ''' </summary>
     ''' <returns></returns>
     Public Property pro_fill As SolidColorBrush
+
+    ''' <summary>
+    ''' 是否选中
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_is_select As Boolean
+
+    ''' <summary>
+    ''' 多选时的透明度，选中填1，未选中填0
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_opacity As Double = 0
+
 End Class

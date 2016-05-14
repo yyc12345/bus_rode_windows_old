@@ -398,7 +398,7 @@
                 </Grid>
 
                 <!-- 提醒-->
-                <Grid Grid.Column="2" Margin="0,40,40,40">
+                <Grid x:Name="ui_form_start_notice" Grid.Column="2" Margin="0,40,40,40" Opacity="1">
 
                     <Grid.RowDefinitions >
                         <RowDefinition Height="auto"/>
@@ -421,16 +421,28 @@
                         <TextBlock Margin="10,0,0,0" Text="{DynamicResource lang_form_start_ring}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
 
                     </Grid>
-                    
-                    <StackPanel Grid.Row="0" Margin="0,0,0,10" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Grid Width="30" Height="30">
-                            <Grid.Background>
-                                <ImageBrush ImageSource="photo\unpin.png"/>
-                            </Grid.Background>
-                        </Grid>
 
-                        <TextBlock Grid.Row="2" Text="{DynamicResource lang_form_start_unpin}" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+                    <StackPanel Grid.Row="0" Margin="0,0,0,10" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+
+                        <StackPanel Orientation="Vertical" MouseDown="ui_form_start_select_line">
+                            <Grid Width="30" Height="30">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="photo\add.png"/>
+                                </Grid.Background>
+                            </Grid>
+
+                            <TextBlock Grid.Row="2" Text="{DynamicResource lang_form_start_add}" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+                        </StackPanel>
+
                     </StackPanel>
+
+                    <ListBox x:Name="ui_form_start_ring_list" Grid.Row="2" ItemTemplate="{StaticResource ui_temp_form_start_ring_list}" Background="#00000000" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" IsItemsHost="True" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
 
                 </Grid>
 
@@ -763,20 +775,6 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="ui_form_stop_describe" Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="15" TextWrapping="Wrap" Text="Nothing" x:FieldModifier="public"/>
-
-                <!-- 绑定-->
-                <Grid Width="30" Height="30" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-                    <Grid.Background>
-                        <ImageBrush ImageSource="photo\pin.png"/>
-                    </Grid.Background>
-                    <Grid.ToolTip>
-                        <ToolTip Background="white">
-                            <Grid >
-                                <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_stop_pin}"/>
-                            </Grid>
-                        </ToolTip>
-                    </Grid.ToolTip>
-                </Grid>
 
                 <Grid Grid.Column="1" Grid.Row="3" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -1425,6 +1423,98 @@
                                         </Grid>
                                     </Grid>
 
+                                    <!-- 自动翻译-->
+                                    <Grid Height="120">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height=" *"/>
+                                            <RowDefinition Height=" *"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="25" Text="{DynamicResource lang_form_contorl_normal_auto_translate_title}" Grid.Row="1">
+                                                <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_auto_translate_title}"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                                            </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_auto_translate_contant}" Grid.Row="1">
+                                                <!-- 防止过长看不完特加提示框-->
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Background="white">
+                                                        <Grid >
+                                                            <TextBlock Foreground="black" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_auto_translate_contant}"/>
+                                                        </Grid>
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                                            </TextBlock>
+                                        </Grid>
+
+                                        <!-- 开关-->
+                                        <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height=" *"/>
+                                                <RowDefinition Height=" 30"/>
+                                                <RowDefinition Height=" *"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Canvas x:Name="ui_form_contorl_check_background_4" Grid.Row="1">
+
+                                                <Grid Height="30" Width="100">
+                                                    <Grid.ColumnDefinitions >
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Stroke="white">
+                                                        <Ellipse.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_4_1" Color="#ff8f8f8f"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                    <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Stroke="white">
+                                                        <Ellipse.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_4_3" Color="#ff8f8f8f"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+
+                                                    <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Stroke="white" StrokeDashArray="70 28">
+                                                        <Rectangle.Fill >
+                                                            <SolidColorBrush x:Name="ui_form_contorl_check_background_color_4_2" Color="#ff8f8f8f"/>
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+
+                                                </Grid>
+
+                                                <Ellipse x:Name="ui_form_contorl_check_btn_4" Canvas.Top="0" Canvas.Left="0" Width="30" Height="30" Fill="white"/>
+                                            </Canvas>
+
+                                        </Grid>
+                                    </Grid>
+
                                     <!-- 语言-->
                                     <Grid Height="120">
                                         <Grid.ColumnDefinitions >
@@ -1479,8 +1569,8 @@
                                             <TextBlock Foreground="White" FontSize="15" Text="{DynamicResource lang_form_contorl_normal_language_now}" Margin="0,0,0,10" HorizontalAlignment="Center"/>
                                             <TextBlock x:Name="ui_form_contorl_select_language_text" Foreground="White" FontSize="15" Text="en-US" Margin="0,0,0,10" HorizontalAlignment="Center"/>
                                         </StackPanel>
-                                              
-                                            <!-- 浏览按钮 MouseDown="ui_form_contorl_throw_rs_file"-->
+
+                                        <!-- 浏览按钮 MouseDown="ui_form_contorl_throw_rs_file"-->
                                         <Grid Grid.Column="2" Grid.RowSpan="2" Grid.Row="0">
                                             <Grid.RowDefinitions >
                                                 <RowDefinition Height=" *"/>

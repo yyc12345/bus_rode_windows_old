@@ -36,6 +36,11 @@
     Public interface_language As String = "en-US"
 
     ''' <summary>
+    ''' 是否自动翻译
+    ''' </summary>
+    Public auto_translate As Boolean = False
+
+    ''' <summary>
     ''' 窗口的颜色,不包含透明度
     ''' </summary>
     ''' <remarks></remarks>
@@ -72,6 +77,12 @@
         End If
 
         If use_new_dialogs = True Then
+            file.WriteLine("0")
+        Else
+            file.WriteLine("1")
+        End If
+
+        If auto_translate = True Then
             file.WriteLine("0")
         Else
             file.WriteLine("1")

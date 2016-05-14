@@ -70,17 +70,17 @@ Module xml_read
 
         '给对话框选定
         Dim aaa As New ui_depend_window_select_item_list
-        ui_connect_window_select_item_list.Clear()
-        ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_solution")
+        window_select_item_list_clear()
 
         '输入内容
         For a = 0 To scheme_list.Count - 1
 
-            'TODO
             aaa.pro_title = read_resources_describe_into_memory_replace("lang_code_xml_read_plan", (a + 1))
             aaa.pro_text = read_resources_describe_into_memory_replace("lang_code_xml_read_plan_describe", scheme_list(a).SelectSingleNode("distance").InnerText &
                                                         "," & scheme_list(a).SelectSingleNode("duration").InnerText)
             aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+            aaa.pro_is_select = False
+            aaa.pro_opacity = 0
 
             ui_connect_window_select_item_list.Add(aaa)
             aaa = New ui_depend_window_select_item_list
@@ -89,7 +89,8 @@ Module xml_read
         '显示对话框
 
         Dim linshi = New Window_select_item
-        ui_connect_window_select_item_list_select_index = -1
+        ui_connect_window_select_item_list_is_single = True
+        ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_solution")
         linshi.Owner = Application.Current.MainWindow()
         linshi.ShowDialog()
 
@@ -166,8 +167,7 @@ Module xml_read
         If origin_list.Count <> 0 Then
             '给对话框选定
             Dim aaa As New ui_depend_window_select_item_list
-            ui_connect_window_select_item_list.Clear()
-            ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_start")
+            window_select_item_list_clear()
             Dim content_list As XmlNodeList = origin_list(0).SelectNodes("content")
 
             '输入内容
@@ -177,6 +177,8 @@ Module xml_read
                 aaa.pro_text = read_resources_describe_into_memory_replace("lang_code_xml_read_plan_vauge_describe", content_list(a).SelectSingleNode("location/lng").InnerText &
                                                         "," & content_list(a).SelectSingleNode("location/lat").InnerText)
                 aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+                aaa.pro_is_select = False
+                aaa.pro_opacity = 0
 
                 ui_connect_window_select_item_list.Add(aaa)
                 aaa = New ui_depend_window_select_item_list
@@ -185,7 +187,8 @@ Module xml_read
             '显示对话框
 
             Dim linshi = New Window_select_item
-            ui_connect_window_select_item_list_select_index = -1
+            ui_connect_window_select_item_list_is_single = True
+            ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_start")
             linshi.Owner = Application.Current.MainWindow()
             linshi.ShowDialog()
 
@@ -208,8 +211,7 @@ Module xml_read
         If destination_list.Count <> 0 Then
             '给对话框选定
             Dim bbb As New ui_depend_window_select_item_list
-            ui_connect_window_select_item_list.Clear()
-            ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_end")
+            window_select_item_list_clear()
             Dim content_list As XmlNodeList = destination_list(0).SelectNodes("content")
 
             '输入内容
@@ -219,6 +221,8 @@ Module xml_read
                 bbb.pro_text = read_resources_describe_into_memory_replace("lang_code_xml_read_plan_vauge_describe", content_list(a).SelectSingleNode("location/lng").InnerText &
                                                         "," & content_list(a).SelectSingleNode("location/lat").InnerText)
                 bbb.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+                bbb.pro_is_select = False
+                bbb.pro_opacity = 0
 
                 ui_connect_window_select_item_list.Add(bbb)
                 bbb = New ui_depend_window_select_item_list
@@ -227,7 +231,8 @@ Module xml_read
             '显示对话框
 
             Dim linshi = New Window_select_item
-            ui_connect_window_select_item_list_select_index = -1
+            ui_connect_window_select_item_list_is_single = True
+            ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_xml_read_select_end")
             linshi.Owner = Application.Current.MainWindow()
             linshi.ShowDialog()
 

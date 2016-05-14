@@ -188,11 +188,23 @@ Public Class MainWindow
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Public Sub date_timer_function(ByVal sender As Object, ByVal e As EventArgs)
-        If Minute(Now) < 10 Then
-            ui_title_time.Text = Hour(Now()) & ":0" & Minute(Now())
-        Else
-            ui_title_time.Text = Hour(Now()) & ":" & Minute(Now())
-        End If
+
+        Dim language_sp() As String = screen_setting.interface_language.Split("-")
+
+        Try
+            Dim lang_cul As System.Globalization.CultureInfo = System.Globalization.CultureInfo.GetCultureInfo(language_sp(0))
+            If language_sp.Count <> 0 Then
+                ui_title_time.Text = Now.ToString("t", lang_cul)
+                ui_title_time.Text &= " " & Now.ToString("dddd", lang_cul)
+            Else
+                ui_title_time.Text = Now.ToString("t", System.Globalization.CultureInfo.GetCultureInfo("en"))
+                ui_title_time.Text &= " " & Now.ToString("dddd", System.Globalization.CultureInfo.GetCultureInfo("en"))
+            End If
+        Catch ex As Exception
+            ui_title_time.Text = Now.ToString("t", System.Globalization.CultureInfo.GetCultureInfo("en"))
+            ui_title_time.Text &= " " & Now.ToString("dddd", System.Globalization.CultureInfo.GetCultureInfo("en"))
+        End Try
+
 
     End Sub
 
@@ -206,6 +218,7 @@ Public Class MainWindow
 
         '刷新车辆状态
         '确认要不要刷
+        If get_bus_addr = False Then Exit Sub
         If screens <> 1 Then Exit Sub
 
         '确认没有问题再执行防止无端消耗资源
@@ -240,8 +253,11 @@ Public Class MainWindow
 
         '刷新状态
         '确认要不要刷
-        If screens <> 2 Then Exit Sub
+        If get_bus_addr = False Then Exit Sub
+        '跳过去
+        If screens <> 2 Then GoTo start_ring
 
+        '===========================================================
         ui_form_stop_realistic_stop_list.ItemsSource = Nothing
 
         ui_connet_core_form_stop_realistic_stop_list.Clear()
@@ -315,8 +331,71 @@ Public Class MainWindow
         '显示信息
         ui_form_stop_realistic_stop_list.ItemsSource = ui_connet_core_form_stop_realistic_stop_list
 
-    End Sub
+start_ring:
+        '===========================================================
 
+        If screens <> 0 Then Exit Sub
+
+        Dim find_bus_sp() As String = screen_start.ring_select_line_name.Split(",")
+        If find_bus_sp.Count = 0 Then Exit Sub
+
+        Dim linshi_arr As New ArrayList
+        Dim into As obj_start_ring
+
+        For a = 0 To 50
+            If realistic_stop(a, 0) = "" Then Exit For
+            '看是否是需要的车
+            If find_bus_sp.Contains(realistic_stop(a, 0)) = False Then GoTo next_while
+
+            '看上行
+            If realistic_stop(a, 1) = "" Or realistic_stop(a, 1) = "-1" Then
+                '空的不要
+            Else
+                into.line = realistic_stop(a, 0) & "（" & realistic_stop(a, 3) & "）"
+                into.stop_number = realistic_stop(a, 1)
+                linshi_arr.Add(into)
+            End If
+
+            into.line = ""
+            into.stop_number = 0
+
+            '看下行
+            If realistic_stop(a, 5) = "" Or realistic_stop(a, 5) = "-1" Then
+                '空的不要
+            Else
+                into.line = realistic_stop(a, 0) & "（" & realistic_stop(a, 7) & "）"
+                into.stop_number = realistic_stop(a, 5)
+                linshi_arr.Add(into)
+            End If
+
+next_while:
+            into.line = ""
+            into.stop_number = 0
+        Next
+
+        '排序
+        If linshi_arr.Count = 0 Then Exit Sub
+        sort_in_obj_start_ring_by_stop(linshi_arr)
+
+        '写入
+        ui_form_start_ring_list.ItemsSource = Nothing
+        ui_connet_core_form_start_ring_list.Clear()
+        Dim bbb As New ui_depend_start_ring_list
+        For a = 0 To linshi_arr.Count - 1
+
+            bbb.pro_line = CType(linshi_arr.Item(a), obj_start_ring).line
+            bbb.pro_close_stop_number = CType(linshi_arr.Item(a), obj_start_ring).stop_number
+            bbb.pro_close_stop_describe = read_resources_describe_into_memory_replace("lang_code_MainWindow_get_realistic_stop_timer_function_start_ring", bbb.pro_close_stop_number)
+
+            ui_connet_core_form_start_ring_list.Add(bbb)
+
+            bbb = New ui_depend_start_ring_list
+        Next
+
+        ui_form_start_ring_list.ItemsSource = ui_connet_core_form_start_ring_list
+
+
+    End Sub
 
 #End Region
 
@@ -370,6 +449,9 @@ Public Class MainWindow
 
         '加载无关紧要的
         app_start_part_another()
+
+        '刷一下界面
+        re_window()
 
 
         '测试调试范围
@@ -999,7 +1081,12 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
         End If
 
 
-
+        '开始界面通知
+        If get_bus_addr = False Then
+            ui_form_start_notice.Opacity = 0
+        Else
+            ui_form_start_notice.Opacity = 1
+        End If
 
 
         '消息面版
@@ -1046,6 +1133,42 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
             ui_form_contorl_check_background_color_3_3.Color = Color.FromArgb(255, 143, 143, 143)
             Canvas.SetLeft(ui_form_contorl_check_btn_3, 0)
         End If
+        If auto_translate = True Then
+            ui_form_contorl_check_background_color_4_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_4_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            ui_form_contorl_check_background_color_4_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
+            Canvas.SetLeft(ui_form_contorl_check_btn_4, 70)
+        Else
+            ui_form_contorl_check_background_color_4_1.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_4_2.Color = Color.FromArgb(255, 143, 143, 143)
+            ui_form_contorl_check_background_color_4_3.Color = Color.FromArgb(255, 143, 143, 143)
+            Canvas.SetLeft(ui_form_contorl_check_btn_4, 0)
+        End If
+
+        '新增颜色修改
+
+        '设置颜色 1-3透明df=223 4透明8f=143 5-8透明6f=111
+        ui_color_1.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
+        ui_color_2.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
+        ui_color_3.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
+
+        ui_color_4.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
+
+        ui_color_5.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+        ui_color_6.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+        ui_color_7.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+        ui_color_8.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
+
+        If up_or_down_line = True Then
+            '上行
+            ui_form_line_select_up_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
+            ui_form_line_select_down_line.Color = Color.FromArgb(0, 0, 0, 0)
+        Else
+            '下行
+            ui_form_line_select_up_line.Color = Color.FromArgb(0, 0, 0, 0)
+            ui_form_line_select_down_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
+        End If
+
     End Sub
 
     '===============================面板和按钮====================================
@@ -1787,6 +1910,46 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
         re_window()
     End Sub
 
+    ''' <summary>
+    ''' [系统][ui]设置面板自动翻译
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_function_contorl_check_btn_4(sender As Object, e As MouseButtonEventArgs) Handles ui_form_contorl_check_btn_4.MouseDown
+        Dim stb_1
+        storyboard_action.Stop()
+        storyboard_action.Children.Clear()
+
+        If auto_translate = True Then
+            '关闭
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(70, 0, New Duration(TimeSpan.FromSeconds(0.1)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn_4)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+
+            storyboard_action.Children.Add(stb_1)
+        Else
+            '打开
+            stb_1 = New System.Windows.Media.Animation.DoubleAnimation(0, 70, New Duration(TimeSpan.FromSeconds(0.1)))
+
+            Animation.Storyboard.SetTarget(stb_1, ui_form_contorl_check_btn_4)
+            Animation.Storyboard.SetTargetProperty(stb_1, New PropertyPath("(Canvas.Left)"))
+
+            storyboard_action.Children.Add(stb_1)
+        End If
+
+        storyboard_action.Begin()
+
+        '设置界面
+        auto_translate = Not (auto_translate)
+
+        '保存设置
+        save_user_contorl()
+
+        '刷新
+        re_window()
+    End Sub
+
     '===============================线路====================================
 
     ''' <summary>
@@ -1846,6 +2009,67 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
 #End Region
 
     '===============================界面====================================
+
+#Region "开始"
+
+    ''' <summary>
+    ''' [系统][ui]开始界面通知选择车次
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_start_select_line(sender As Object, e As MouseButtonEventArgs)
+
+        Dim aaa As New ui_depend_window_select_item_list
+        window_select_item_list_clear()
+        Dim contain_line_sp() As String = screen_start.ring_select_line_name.Split(",")
+
+        '输入内容
+        For a = 0 To 50
+            If realistic_stop(a, 0) = "" Then Exit For
+
+            aaa.pro_title = realistic_stop(a, 0)
+            aaa.pro_text = realistic_stop(a, 0)
+
+            If contain_line_sp.Contains(realistic_stop(a, 0)) = True Then
+                aaa.pro_fill = New SolidColorBrush(Color.FromArgb(255, 30, 144, 255))
+                aaa.pro_is_select = True
+                aaa.pro_opacity = 1
+            Else
+                aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+                aaa.pro_is_select = False
+                aaa.pro_opacity = 0
+            End If
+
+            ui_connect_window_select_item_list.Add(aaa)
+            aaa = New ui_depend_window_select_item_list
+        Next
+
+        '显示对话框
+
+        Dim linshi = New Window_select_item
+        ui_connect_window_select_item_list_is_single = False
+        ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_MainWindow_start_ring_select_line")
+        linshi.Owner = Application.Current.MainWindow()
+        linshi.ShowDialog()
+
+        '执行
+        If ui_connect_window_select_item_list_select_index <> -1 Then
+            screen_start.ring_select_line_name = ""
+            Dim select_sp() As String = ui_connect_windows_select_item_list_select_index_group.Split(",")
+            For a = 0 To select_sp.Count - 1
+                If screen_start.ring_select_line_name = "" Then
+                    screen_start.ring_select_line_name = ui_connect_window_select_item_list.Item(CType(select_sp(a), Integer)).pro_title
+                Else
+                    screen_start.ring_select_line_name &= "," & ui_connect_window_select_item_list.Item(CType(select_sp(a), Integer)).pro_title
+                End If
+            Next
+        Else
+            screen_start.ring_select_line_name = ""
+        End If
+
+    End Sub
+
+#End Region
 
 #Region "线路"
 
@@ -2491,7 +2715,6 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
                     If toword(0, 0) = "" Then
                         '没有可以到的线路
                         short_line_can_page = True
-                        'TODO:
                         ui_form_stop_contorl_step_describe.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_transform_nothing",
                                                                                                              stamp_start_stop & "," & stamp_end_stop & "," & vbCrLf)
 
@@ -2586,7 +2809,6 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
                 '拒绝
             Else
                 step_number += 1
-                'TODO:
                 '步骤
                 ui_form_stop_contorl_page.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_step_have_number", (step_number + 1))
 
@@ -2724,7 +2946,6 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
                     short_rode_calc_mode = True
 
                     '设置ui
-                    'TODO:
                     '步骤
                     ui_form_stop_contorl_page.Text = read_resources_describe_into_memory_replace("lang_code_MainWindow_short_rode_step_have_number", "1")
 
@@ -2775,8 +2996,7 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
         '=============================================给定相关语言
         '给对话框选定
         Dim aaa As New ui_depend_window_select_item_list
-        ui_connect_window_select_item_list.Clear()
-        ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge")
+        window_select_item_list_clear()
 
         '输入内容
         Dim lang_sp() As String = app_supported_language.Split(",")
@@ -2785,6 +3005,8 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
             aaa.pro_title = lang_sp(a)
             aaa.pro_text = lang_sp(a)
             aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+            aaa.pro_is_select = False
+            aaa.pro_opacity = 0
 
             ui_connect_window_select_item_list.Add(aaa)
             aaa = New ui_depend_window_select_item_list
@@ -2793,7 +3015,8 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
         '显示对话框
 
         Dim linshi = New Window_select_item
-        ui_connect_window_select_item_list_select_index = -1
+        ui_connect_window_select_item_list_is_single = True
+        ui_connect_window_select_item_list_title = read_resources_describe_into_memory("lang_code_MainWindow_contorl_langauge")
         linshi.Owner = Application.Current.MainWindow()
         linshi.ShowDialog()
 
@@ -3035,43 +3258,8 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
 
                         form_color = Color.FromRgb(new_color_r, new_color_g, new_color_b)
 
-                        '设置颜色 1-3透明df=223 4透明8f=143 5-8透明6f=111
-                        ui_color_1.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
-                        ui_color_2.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
-                        ui_color_3.Color = Color.FromArgb(223, form_color.R, form_color.G, form_color.B)
-
-                        ui_color_4.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
-
-                        ui_color_5.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_6.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_7.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-                        ui_color_8.Color = Color.FromArgb(111, form_color.R, form_color.G, form_color.B)
-
-                        If up_or_down_line = True Then
-                            '上行
-                            ui_form_line_select_up_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
-                            ui_form_line_select_down_line.Color = Color.FromArgb(0, 0, 0, 0)
-                        Else
-                            '下行
-                            ui_form_line_select_up_line.Color = Color.FromArgb(0, 0, 0, 0)
-                            ui_form_line_select_down_line.Color = Color.FromArgb(143, form_color.R, form_color.G, form_color.B)
-                        End If
-
-                        If get_bus_addr = True Then
-                            ui_form_contorl_check_background_color_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                        End If
-                        If talk_man = True Then
-                            ui_form_contorl_check_background_color_2_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_2_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_2_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                        End If
-                        If use_new_dialogs = True Then
-                            ui_form_contorl_check_background_color_3_1.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_3_2.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                            ui_form_contorl_check_background_color_3_3.Color = Color.FromArgb(255, form_color.R, form_color.G, form_color.B)
-                        End If
+                        '刷新
+                        re_window()
 
                         '保存设置
                         save_user_contorl()
@@ -3255,6 +3443,23 @@ read_resources_describe_into_memory_replace("lang_code_MainWindow_init_screen_ab
     ''' <param name="e"></param>
     Private Sub ui_form_stop_realistic_stop_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_stop_realistic_stop_list.MouseLeave
         ScrollViewer.SetHorizontalScrollBarVisibility(ui_form_stop_realistic_stop_list, ScrollBarVisibility.Hidden)
+    End Sub
+
+    ''' <summary>
+    ''' [系统][ui]开始界面-提醒列表移入鼠标隐藏滚动条
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_start_ring_list_mouse_leave(sender As Object, e As MouseEventArgs) Handles ui_form_start_ring_list.MouseLeave
+        ScrollViewer.SetVerticalScrollBarVisibility(ui_form_start_ring_list, ScrollBarVisibility.Hidden)
+    End Sub
+    ''' <summary>
+    ''' [系统][ui]开始界面-提醒列表移入鼠标显示滚动条
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ui_form_start_ring_list_mouse_enter(sender As Object, e As MouseEventArgs) Handles ui_form_start_ring_list.MouseEnter
+        ScrollViewer.SetVerticalScrollBarVisibility(ui_form_start_ring_list, ScrollBarVisibility.Auto)
     End Sub
 
 

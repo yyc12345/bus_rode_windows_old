@@ -106,4 +106,47 @@
 
 #End Region
 
+
+#Region "*******************************************window_select_item*****************************************************"
+
+
+    ''' <summary>
+    ''' 选择项界面窗口-列表项的集合
+    ''' </summary>
+    Public ui_connect_window_select_item_list As New List(Of ui_depend_window_select_item_list)
+
+    ''' <summary>
+    ''' 选择项界面窗口-列表项的集合中的选择的项序号
+    ''' </summary>
+    Public ui_connect_window_select_item_list_select_index As Integer = -1
+
+    ''' <summary>
+    ''' 选择项界面窗口-列表项的集合中的选择的项序号（多选时可用，用,分割，如果没选，返回""）
+    ''' </summary>
+    Public ui_connect_windows_select_item_list_select_index_group As String = ""
+
+    ''' <summary>
+    ''' 选择项界面窗口-列表项的集合是否单选，双选时选择项序号仍然可用，返回-1没选择
+    ''' </summary>
+    Public ui_connect_window_select_item_list_is_single As Boolean = True
+
+    ''' <summary>
+    ''' 选择项界面窗口-标题
+    ''' </summary>
+    Public ui_connect_window_select_item_list_title As String = ""
+
+    ''' <summary>
+    ''' 清理window_select_item
+    ''' </summary>
+    Public Sub window_select_item_list_clear()
+        ui_connect_window_select_item_list_select_index = -1
+        ui_connect_windows_select_item_list_select_index_group = ""
+        ui_connect_window_select_item_list.Clear()
+        ui_connect_window_select_item_list_is_single = True
+        ui_connect_window_select_item_list_title = ""
+    End Sub
+
+
+#End Region
+
 End Module

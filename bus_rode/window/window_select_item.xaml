@@ -25,7 +25,13 @@
 
             <TextBlock x:Name="ui_title" Foreground="Black" Text="" Grid.Row="0" FontSize="20"/>
 
-            <ListBox x:Name="ui_window_select_item_list" Background="#00000000" BorderThickness="0,0,0,1" Grid.Row="2" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
+            <ListBox x:Name="ui_window_select_item_list" Background="#00000000" BorderThickness="0,0,0,1" Grid.Row="2" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
 
 
         </Grid>
@@ -42,7 +48,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="ui_btn" Grid.Column="1" BorderThickness="0" Grid.Row="1" Content="确认" Foreground="#ff1e90ff" FontSize="15" Template="{DynamicResource ButtonControlTemplate_white}"/>
+            <Button x:Name="ui_btn" Grid.Column="1" BorderThickness="0" Grid.Row="1" Content="{DynamicResource lang_global_ok}" Foreground="#ff1e90ff" FontSize="15" Template="{DynamicResource ButtonControlTemplate_white}"/>
 
         </Grid>
 

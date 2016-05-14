@@ -8,9 +8,9 @@
     <sys:String x:Key="lang_form_start_btn_line">线路</sys:String>
 	<sys:String x:Key="lang_form_start_btn_stop">车站</sys:String>
 	<sys:String x:Key="lang_form_start_btn_contorl">设置</sys:String>
-	<sys:String x:Key="lang_form_start_btn_about">关于</sys:String>	
-	<sys:String x:Key="lang_form_start_ring">提醒</sys:String>
-	<sys:String x:Key="lang_form_start_unpin">解除提醒</sys:String>
+	<sys:String x:Key="lang_form_start_btn_about">关于</sys:String>
+    <sys:String x:Key="lang_form_start_ring">提醒</sys:String>
+    <sys:String x:Key="lang_form_start_add">选择提醒车辆</sys:String>
 	
 	<!-- ==============================line-->
 	<sys:String x:Key="lang_form_line_up_line_describe">上行</sys:String>
@@ -22,7 +22,7 @@
 	<sys:String x:Key="lang_form_line_contorl_right_grid_title">搜索站台</sys:String>
 	
 	<!-- ==============================stop-->
-	<sys:String x:Key="lang_form_stop_pin">设定提醒</sys:String>
+    
 	
 	<!-- ==============================stop control-->
 	<sys:String x:Key="lang_form_stop_contorl_left_grid_title">站台列表</sys:String>
@@ -41,7 +41,9 @@
 	<sys:String x:Key="lang_form_contorl_normal_speaker_contant">帮助视力不佳的人朗读屏幕上的内容（在任意界面按下 F1 键以朗读）</sys:String>
 	<sys:String x:Key="lang_form_contorl_normal_dialog_title">新对话框</sys:String>
 	<sys:String x:Key="lang_form_contorl_normal_dialog_contant">打开以使用新式对话框而不是旧式对话框</sys:String>
-	<sys:String x:Key="lang_form_contorl_normal_language_title">语言</sys:String>
+    <sys:String x:Key="lang_form_contorl_normal_auto_translate_title">自动翻译</sys:String>
+    <sys:String x:Key="lang_form_contorl_normal_auto_translate_contant">当使用非本地语言资源的时候，自动转换资源文本</sys:String>
+    <sys:String x:Key="lang_form_contorl_normal_language_title">语言</sys:String>
 	<sys:String x:Key="lang_form_contorl_normal_language_contant">选择显示的语言</sys:String>
 	<sys:String x:Key="lang_form_contorl_normal_language_now">当前语言</sys:String>
 	<sys:String x:Key="lang_form_contorl_normal_language_btn_search">浏览可用语言</sys:String>
@@ -105,6 +107,7 @@
 	<sys:String x:Key="lang_code_MainWindow_get_realistic_stop_timer_function_secound_nothing">没有第二近的车</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_get_realistic_stop_timer_function_secound_have_1">第二近的车还有</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_get_realistic_stop_timer_function_secound_have_2">站</sys:String>
+    <sys:String x:Key="lang_code_MainWindow_get_realistic_stop_timer_function_start_ring">还有{0}站到站</sys:String>
 	
 	<!-- ==============================init-->
     <sys:String x:Key="lang_code_MainWindow_init_error_enviroment_title">启动失败</sys:String>
@@ -126,7 +129,10 @@
 	<sys:String x:Key="lang_code_MainWindow_init_file_dialogs_2">JPG/JPEG图像文件</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_init_file_dialogs_3">bus_rode插件</sys:String>
 
-	<!-- ==============================ui update core-->
+    <!-- ==============================ui update core-->
+    <sys:String x:Key="lang_code_MainWindow_start_ring_select_line">选择需要提醒的线路</sys:String>
+
+    <!-- ==============================ui update core-->
 	<sys:String x:Key="lang_code_MainWindow_re_window_error_1">灾难性错误</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_re_window_error_2">bus_rode的核心变量值被篡改，程序将在点击确定后立即关闭！</sys:String>
 	<sys:String x:Key="lang_code_MainWindow_open_panel_error_1">资源</sys:String>
@@ -216,6 +222,8 @@
 	<sys:String x:Key="lang_code_xml_read_select_start">选择更为详尽的起点</sys:String>
 	<sys:String x:Key="lang_code_xml_read_select_end">选择更为详尽的终点</sys:String>
 
+    <!-- ==============================xml reader-->
+    <sys:String x:Key="lang_code_window_select_item_nothing">你没有选择任何项</sys:String>
 	
 	 <!-- ==========================================================================global area-->
 	<sys:String x:Key="lang_global_nothing">无</sys:String>
