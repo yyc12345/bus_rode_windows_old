@@ -9,7 +9,8 @@
 
     Public Const app_use_baidu_ak As String = "GyEb8Gs7DYaCuiKEsb5GIs9N"
 
-    Public Const app_supported_language As String = "en-US,zh-CN"
+	'英语（美国），简体中文（中国），日语（日本），德语（德国），法语（法国），西班牙语（西班牙），俄语（俄罗斯）
+    Public Const app_supported_language As String = "en-US,zh-CN,ja-JP,de-DE,fr-FR,es-ES,ru-RU"
 
     Public use_resources As ResourceDictionary = Nothing
 
